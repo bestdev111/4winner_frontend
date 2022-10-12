@@ -28,7 +28,6 @@ html * a {
   text-decoration: none !important;
   cursor: pointer;
 }
-
 .header {
   background-color: #38393c;
   min-width: 1280px;
@@ -42,7 +41,9 @@ html * a {
   width: 1280px;
   margin: auto;
 }
-
+.hide {
+  display: none;
+}
 .login_form {
   font-size: 13px;
   margin: 5px 8px 6px 8px;
@@ -198,112 +199,4 @@ html * a {
 
 .logined>div:first-child {
   border-left: 0px;
-}
-
-.betpanel {
-  font-size: 13px;
-  width: 20%;
-  background-color: #dddddd;
-  float: right;
-  margin: 20px;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-.chashoutbtn {
-  cursor: pointer;
-  width: 100%;
-  margin: 0 0 5px 0;
-  background-color: var(--primary-color);
-  height: 54px;
-  border-radius: 5px;
-  color: white;
-}
-
-.chashoutbtn>div>svg {
-  width: 15px;
-}
-
-.bettypebtn>a {
-  cursor: pointer;
-  margin: 3px 5px;
-  width: 50%;
-  background-color: white;
-  color: black;
-  padding: 7px 5px;
-  text-align: center;
-}
-
-.bet-totals>.btn-reset {
-  background-color: var(--secondary-color);
-  float: left;
-  padding: 25px 10px;
-  margin: 5px;
-  text-align: center;
-  color: #f5f5f5;
-  height: 65px;
-}
-
-.focus {
-  background-color: var(--secondary-color);
-  color: white;
-}
-
-.totals {
-  font-size: 11px !important;
-  width: 100%;
-}
-
-.totals>div {
-  line-height: 1;
-}
-
-.selected-bets {
-  margin: 5px 0;
-  padding: 5px 0;
-  background: #fff;
-  font-size: 11px;
-  min-height: 150px;
-  overflow-y: auto;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
-
-.comb {
-  font-size: 11px;
-  background-color: white;
-  padding: 3px;
-}
-
-.bet-slip .place-bet a {
-  border: 1px solid #333;
-  margin: 5px;
-  padding: 5px 10px;
-  background: #fff;
-  border-radius: 3px;
-  float: left;
-  color: #000;
-}
-
-.payingamount {
-  width: 100%;
-  text-align: right;
-}
-
-.place-bet a {
-  border: 1px solid #333;
-  margin: 5px;
-  padding: 5px 10px;
-  background: #fff;
-  border-radius: 3px;
-  float: left;
-  color: #000;
-}
-
-.btn-place-bet {
-  width: 100%;
-  background-color: var(--primary-color) !important;
-  text-align: center;
-  color: white !important;
 }

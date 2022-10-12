@@ -84,12 +84,12 @@ const RightPanel = () => {
                             <a className="btn-place-bet py-1" onClick={() => setBet(!bet) }>Place bet</a>
                         </div>
                         </div>
-                        : <div className="row">
+                        : <div className="row instead">
                             <div className="col-6">
                                 <a className="btn-place-bet py-1">Comfirm</a>
                             </div>
                             <div className="col-6">
-                                <a className="btn-place-bet py-1" onClick={() => setBet(!bet)}>Cancel</a>
+                                <a className="btn-place-bet btn-place-bet-cancel py-1" onClick={() => setBet(!bet)}>Cancel</a>
                             </div>
                         </div>
                     }
@@ -107,6 +107,7 @@ const RightPanel = () => {
                         <div className="col-6">
                             <button type="button" id="closeModal" className="btn-cancel">Cancel</button>
                         </div>
+                        <div className='clearfix'></div>
                     </div>
                 </div>
             </div>

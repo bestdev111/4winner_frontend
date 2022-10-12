@@ -1,4 +1,4 @@
-import { SystemLoadable } from 'utils';
+import { SystemLoadable } from '../../utils';
 
 export const ResultsConfig = {
     routes  : [
