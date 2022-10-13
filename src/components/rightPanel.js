@@ -27,9 +27,9 @@ const RightPanel = () => {
                 </div>
                 : <></>
             }
-            <div className="bettypebtn d-flex">
-                <a className="bettypebtn-a focus" onClick={onChange}>Single/Multiple</a>
-                <a className="bettypebtn-a" onClick={onChange}>SYSTEM</a>
+            <div className="bet-type-btn d-flex">
+                <a className="bet-type-btn-child focus" onClick={onChange}>Single/Multiple</a>
+                <a className="bet-type-btn-child" onClick={onChange}>SYSTEM</a>
             </div>
             <div className="bet-slip">
                 <div className="selected-bets selected-bets-l"></div>
