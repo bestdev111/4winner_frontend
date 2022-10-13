@@ -1,21 +1,25 @@
 .betpanel {
-    font-size: 13px;
-    width: 20%;
-    background-color: #dddddd;
     float: right;
-    margin: 20px;
+    font-size: 13px;
+    width: 100%;
+    background-color: #dddddd;
     padding: 5px;
     border-radius: 5px;
 }
 
 .chashoutbtn {
+    display: block;
     cursor: pointer;
     width: 100%;
     margin: 0 0 5px 0;
     background-color: var(--primary-color);
     height: 54px;
-    border-radius: 5px;
+    border-radius: 3px;
     color: white;
+    padding-top:  5px;
+}
+.chashoutbtn:hover {
+    color: #000;
 }
 
 .chashoutbtn>div>svg {
@@ -43,13 +47,13 @@
 }
 
 .focus {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: var(--secondary-color) !important;
+    color: white !important;
 }
 
 .totals {
     font-size: 11px !important;
-    width: 100%;
+    width: 80%;
 }
 
 .totals>div {
@@ -87,6 +91,10 @@
 .payingamount {
     width: 100%;
     text-align: right;
+    border: 1px solid grey;
+}
+.payingamount:focus {
+    border: 1px solid black !important;
 }
 
 .place-bet a {
@@ -105,11 +113,13 @@
     text-align: center;
     color: white !important;
 }
-
+.btn-place-bet:hover {
+    color: #000 !important;
+}
 .instead {
     padding-right: 3px;
 }
-.btn-place-bet-cancel {
+.cancel {
     background-color: #971f1e !important;
 }
 .clearfix {

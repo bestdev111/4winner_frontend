@@ -22,9 +22,7 @@ const Loading = (props) => {
     else if ( props.pastDelay )
     {
         return (
-            <div className="flex flex-1 flex-col items-center justify-center">
-                Loading...
-            </div>
+            <div id="block-page" class="block-page" style="display: none;">Loading...</div>
         );
     }
     else

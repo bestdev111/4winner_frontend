@@ -1,12 +1,19 @@
+import { Tabs } from 'antd';
 import React, { useState } from 'react';
-import './rightPanel.css'
+import './styles/rightPanel.css'
+
+const list = ['Single/Multiple', 'SYSTEM'];
+
 const RightPanel = () => {
-    const [isLogin, setIsLogin] = useState(false);
+    const [isLogin, setIsLogin] = useState(true);
     const [open, setOpen] = useState(false);
     const [bet, setBet] = useState(true);
     // const betClick = () => {
     //     setBet(!bet);
     // }
+    const onChange = (e) => {
+        setOpen(!open);
+    };
     return (
         <div className='betpanel'>
             {isLogin ?
@@ -21,8 +28,8 @@ const RightPanel = () => {
                 : <></>
             }
             <div className="bettypebtn d-flex">
-                <a className="">Single/Multiple</a>
-                <a className="">SYSTEM</a>
+                <a className="bettypebtn-a focus" onClick={onChange}>Single/Multiple</a>
+                <a className="bettypebtn-a" onClick={onChange}>SYSTEM</a>
             </div>
             <div className="bet-slip">
                 <div className="selected-bets selected-bets-l"></div>
@@ -89,7 +96,7 @@ const RightPanel = () => {
                                 <a className="btn-place-bet py-1">Comfirm</a>
                             </div>
                             <div className="col-6">
-                                <a className="btn-place-bet btn-place-bet-cancel py-1" onClick={() => setBet(!bet)}>Cancel</a>
+                                <a className="btn-place-bet cancel py-1" onClick={() => setBet(!bet)}>Cancel</a>
                             </div>
                         </div>
                     }
