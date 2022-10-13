@@ -12,7 +12,10 @@ const customStyles = {
     content: {
         position : 'fixed',
         border: '1px solid rgba(0,0,0,.2)',
-        width: '16%'
+        width: '16%',
+        height: '315px',
+        inset: '100px 780px',
+        padding: '10px',
     },
 };
 
