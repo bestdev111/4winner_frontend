@@ -1,9 +1,17 @@
 import React from 'react';
-import RightPanel from '../../components/rightPanel';
+import './inPlay.css'
+import { RightPanel, LeftMenu, Divider } from 'components';
 const InPlay = () => (
     <div className='container-fluid d-flex flex-column ptt'>
         <div className='row'>
-            <div className='col-3'>
+            <div className='left px-2 float-left'>
+                <LeftMenu />
+            </div>
+            <div className='center px-2 float-left'>
+                <Divider title='Highlights' />
+                <Divider title='Top Odds' />
+            </div>
+            <div className='right px-2 float-left'>
                 <RightPanel />
             </div>
         </div>
