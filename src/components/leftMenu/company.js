@@ -1,55 +1,40 @@
-import { Collapse } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import TreeView from 'react-treeview';
-import { SportsTeamList } from 'utils' 
-const dataSource = [
-    {
-        type: 'Employees',
-        collapsed: true,
-        people: [
-            { name: 'Paul Gordon', age: 29, sex: 'male', role: 'coder', collapsed: false },
-            { name: 'Sarah Lee', age: 27, sex: 'female', role: 'ocamler', collapsed: false },
-        ],
-    },
-    {
-        type: 'CEO',
-        collapsed: true,
-        people: [
-            { name: 'Drew Anderson', age: 39, sex: 'male', role: 'boss', collapsed: false },
-        ],
-    },
-];
-const collapseFunc =(i) => {
-    console.log('please collapse', i);
-}
-function Company () {
-        return (
-            <div className='menu_main'>
-                {dataSource.map((node, i) => {
-                    const type = node.type;
-                    const label = <span className="node" onClick={(i)=>collapseFunc}>{type}</span>;
-                    return (
-                        <TreeView key={type + '|' + i} nodeLabel={label} defaultCollapsed={true}>
-                            {node.people.map(person => {
-                                const label2 = <span className="node">{person.name}</span>;
-                                return (
-                                    <TreeView 
-                                        nodeLabel={label2} 
-                                        key={person.name} 
-                                        defaultCollapsed={true}
-                                        onClick={collapseFunc}
-                                    >
-                                        <div className="info">age: {person.age}</div>
-                                        <div className="info">sex: {person.sex}</div>
-                                        <div className="info">role: {person.role}</div>
-                                    </TreeView>
-                                );
-                            })}
-                        </TreeView>
-                    );
-                })}
-            </div>
-        );
+import { SportsTeamList } from 'utils'
+
+function Company() {
+    const [isCollapse, setIsCollapse] = useState(true);
+    const collapseFunc = () => {
+        isCollapse ? document.getElementsByClassName('menu-content')[0].className.replace('menu-content bordered-top scroll') : document.getElementsByClassName('menu-content')[0].className.replace('menu-content bordered-top')
+        console.log('please collapse');
+    }
+    return (
+        <div className='menu_main'>
+            {SportsTeamList.map((first, index) => {
+                const label = <span className="node" onClick={collapseFunc}><img className='sport-icon' src={first.icon}/>{first.type}</span>;
+                return (
+                    <TreeView key={first.type} 
+                        nodeLabel={label} 
+                        defaultCollapsed={isCollapse}
+                    >
+                        {first.child.map((secondChild, j) => {
+                            const label2 = <span className="node">{secondChild.type}</span>;
+                            return (
+                                <TreeView
+                                    nodeLabel={label2}
+                                    key={secondChild.type}
+                                    defaultCollapsed={isCollapse}
+                                    onClick={collapseFunc}
+                                >
+                                    {/* {secondChild.child.map(lastChild => <div className="info">{lastChild.type}</div>)} */}
+                                </TreeView>
+                            );
+                        })}
+                    </TreeView>
+                );
+            })}
+        </div>
+    );
 }
 
 export default Company;
