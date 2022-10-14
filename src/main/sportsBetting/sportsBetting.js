@@ -6,19 +6,15 @@ function SportsBetting() {
     return(
         <div className='container-fluid d-flex flex-column ptt'>
             <div className='row'>
-                <div className='col-2 pl-2 pr-4'>
+                <div className='left px-2 float-left'>
                     <LeftMenu />
                 </div>
-                <div className='col-10'>
-                    <div className='row'>
-                        <div className='col-9 pr-3 pl-0'>
-                            <Divider title='Highlights'/>
-                            <Divider title='Top Odds'/>
-                        </div>
-                        <div className='col-3 pl-0'>
-                            <RightPanel/>
-                        </div>
-                    </div>
+                <div className='center px-2 float-left'>
+                    <Divider title='Highlights'/>
+                    <Divider title='Top Odds'/>
+                </div>
+                <div className='right px-2 float-left'>
+                    <RightPanel/>
                 </div>
             </div>
         </div>

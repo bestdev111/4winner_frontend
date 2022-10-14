@@ -74,3 +74,6 @@ ol, ul {
 .ant-tree-indent {
   display: none !important;
 }
+.clearfix {
+  clear: both;
+}

@@ -13,7 +13,6 @@
     width: 100%;
     margin: 0 0 5px 0;
     background-color: var(--primary-color);
-    height: 54px;
     border-radius: 3px;
     color: white;
     padding-top:  5px;
@@ -23,12 +22,12 @@
 }
 
 .chashoutbtn>div>svg {
-    width: 15px;
+    width: 16px;
 }
 
 .bet-type-btn>p {
     cursor: pointer;
-    margin: 3px 5px;
+    margin: 5px;
     width: 50%;
     background-color: white;
     color: black;
@@ -65,7 +64,7 @@
     padding: 5px 0;
     background: #fff;
     font-size: 11px;
-    min-height: 150px;
+    min-height: 160px;
     overflow-y: auto;
     background-size: cover;
     background-repeat: no-repeat;
@@ -123,7 +122,4 @@
 }
 .cancel {
     background-color: #971f1e !important;
-}
-.clearfix {
-    clear: both;
 }

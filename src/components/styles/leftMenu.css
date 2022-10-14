@@ -8,5 +8,6 @@
 
 }
 .menu-content {
+    overflow: auto;
     height: 660px;
 }

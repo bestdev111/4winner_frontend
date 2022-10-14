@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/leftMenu.css'
-import Company from './company';
+import List from './list';
 
 function LeftMenu(props) {
     return (
@@ -9,7 +9,7 @@ function LeftMenu(props) {
                 Sports Betting
             </div>
             <div className='menu-content bordered-top'>
-                <Company />
+                <List />
             </div>
         </div>
     );
