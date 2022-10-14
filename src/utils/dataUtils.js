@@ -1,5 +1,83 @@
-import { CaretDownOutlined } from '@ant-design/icons';
+// import { CaretDownOutlined } from '@ant-design/icons';
+
 const SportsTeamList = [
+    {
+        type: 'football',
+        childrenNode: [
+            {type: 'International',
+                childrenNode: [
+                    {type: 'FIFA WM2021'},
+                    {type: 'FIFA WM2022'},
+                ]
+            },
+            {type: 'International Young', },
+            { type: 'England', },
+            { type: 'Spain', },
+            { type: 'Germany', },
+            { type: 'Italy', },
+            { type: 'France', },
+            { type: 'Turicon', },
+            { type: 'Holland', },
+            { type: 'Russia', },
+            { type: 'Portugal', },
+            { type: 'Belgium', },
+            { type: 'Algeria', },
+            { type: 'Argentina', },
+            { type: 'Australia', },
+            { type: 'Bolivia', },
+            { type: 'Brazil', },
+            { type: 'Bulgaria', },
+            { type: 'Chile', },
+            { type: 'Denmark', },
+            { type: 'Ecuador', },
+            { type: 'EI Salvador', },
+            { type: 'Finland', },
+            { type: 'Greece', },
+            { type: 'Guatemala', },
+            { type: 'India', },
+            { type: 'Iran', },
+            { type: 'Ireland', },
+            { type: 'Iceland', },
+            { type: 'Japan', },
+            { type: 'Colombia', },
+            { type: 'Croatia', },
+            { type: 'Kuwait', },
+            { type: 'Mexico', },
+            { type: 'Northem Ireland', },
+            { type: 'Norway', },
+            { type: 'Austria', },
+            { type: 'Paraguay', },
+            { type: 'Romania', },
+            { type: 'Scotland', },
+            { type: 'Sweden', },
+            { type: 'Switzerland', },
+            { type: 'Slovakia', },
+            { type: 'Slovenia', },
+            { type: 'South Korea', },
+            { type: 'Czech', },
+            { type: 'Tunisian', },
+            { type: 'Ukranie', },
+            { type: 'Hungary', },
+            { type: 'Uruguay', },
+            { type: 'USA', },
+            { type: 'Belarus', },
+            { type: 'Cyprus', },
+        ],
+    },
+    {
+        title: 'tennis',
+        childrenNode: [
+            {title: 'ATP'},
+            {title: 'WTA', },
+            { title: 'Challenger', },
+            { title: 'ITF Women', },
+            { title: 'ITF Men', },
+        ],
+    }
+];
+export default SportsTeamList;
+
+const SportsTeamList1 = [
     {
         title: 'football',
         key: '0-0',
@@ -67,7 +145,6 @@ const SportsTeamList = [
     },
 ];
 
-export default SportsTeamList;
 // const SportsTeamList = {
 //     'Football': [
 //         'International',

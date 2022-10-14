@@ -26,6 +26,10 @@ html * a {
 a:hover {
   color: black;
 }
+body p {
+  padding: 0;
+  margin: 0;
+}
 .hide {
   display: none;
 }

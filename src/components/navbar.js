@@ -67,7 +67,7 @@ function Navbar() {
                             <a
                                 key={index}
                                 href={item.url}
-                                className={(window.location.pathname == item.url) ? 'menu-item active' : window.location.pathname == '/' && index == 0 ? 'menu-item active' : 'menu-item'}
+                                className={(window.location.pathname === item.url) ? 'menu-item active' : window.location.pathname === '/' && index === 0 ? 'menu-item active' : 'menu-item'}
                                 onClick={onClick}
                             >{item.title}</a>
                         )}

@@ -1,5 +1,5 @@
 import React from 'react';
-
+const style = "display: none;"
 const Loading = (props) => {
     if ( props.error )
     {
@@ -22,7 +22,7 @@ const Loading = (props) => {
     else if ( props.pastDelay )
     {
         return (
-            <div id="block-page" class="block-page" style="display: none;">Loading...</div>
+            <div id="block-page" className='block-page'>Loading...</div>
         );
     }
     else
