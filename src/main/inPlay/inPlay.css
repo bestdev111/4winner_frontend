@@ -2,12 +2,8 @@
     padding-top: 20px;
 }
 .left {
-    width: calc(16% - 9px);
+    width: calc(81% - 39px);
     min-width: 220px;
-}
-.center {
-    width: calc(65% - 30px);
-    min-width: 780px;
 }
 .right {
     width: calc(20% + 10px);;
