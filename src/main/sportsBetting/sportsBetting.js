@@ -1,5 +1,5 @@
 import React from 'react';
-import { RightPanel, LeftMenu, Divider } from 'components';
+import { RightPanel, LeftMenu, Divider, Table } from 'components';
 import './sportsBetting.css'
 
 function SportsBetting() {
@@ -11,7 +11,13 @@ function SportsBetting() {
                 </div>
                 <div className='center px-2 float-left'>
                     <Divider title='Highlights'/>
+                    <Table 
+                        title="Highlights"
+                    />
                     <Divider title='Top Odds'/>
+                    <Table 
+                        title="Top Odds"
+                    />
                 </div>
                 <div className='right px-2 float-left'>
                     <RightPanel/>

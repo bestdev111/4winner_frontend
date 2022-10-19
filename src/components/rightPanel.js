@@ -9,7 +9,7 @@ const RightPanel = () => {
     //     setBet(!bet);
     // }
     const onChange = (e) => {
-        setOpen(!open);
+        setOpen();
     };
     return (
         <div className='betpanel'>
@@ -25,8 +25,15 @@ const RightPanel = () => {
                 : <></>
             }
             <div className="bet-type-btn d-flex">
-                <p className="bet-type-btn-child focus" onClick={onChange}>Single/Multiple</p>
-                <p className="bet-type-btn-child" onClick={onChange}>SYSTEM</p>
+                {open ? <>
+                        <p className="bet-type-btn-child" onClick={()=>setOpen(false)}>Single/Multiple</p>
+                    <p className="bet-type-btn-child focus" onClick={() => setOpen(true)}>SYSTEM</p>
+                    </>
+                    : <>
+                        <p className="bet-type-btn-child focus" onClick={() => setOpen(false)}>Single/Multiple</p>
+                        <p className="bet-type-btn-child" onClick={() => setOpen(true)}>SYSTEM</p>
+                    </>
+                }
             </div>
             <div className="bet-slip">
                 <div className="selected-bets selected-bets-l"></div>
@@ -65,25 +72,24 @@ const RightPanel = () => {
                     </div>
                 </div>
                 <div className="place-bet show">
-                    <div className='d-flex row justify-content-around'>
-                        <div>
+                    <div className='d-flex justify-content-around'>
+                        <div className=''>
                             <p>-</p>
                         </div>
-                        <div className="align-self-center">
+                        <div className="align-self-center col-8">
                             <div>
                                 <input type="text" id="PayingAmount" className="payingamount py-1" defaultValue="5.00" />
                                 <span className="text-danger"></span>
                             </div>
                         </div>
-                        <div>
+                        <div className=''>
                             <p>+</p>
                         </div>
                     </div>
 
-                    {bet ? <div>
+                    {bet ?
                         <div className="col-12">
-                            <p className="btn-place-bet py-1" onClick={() => setBet(!bet) }>Place bet</p>
-                        </div>
+                            <p className="btn-place-bet py-1" onClick={() => setBet(!bet)}>Place bet</p>
                         </div>
                         : <div className="instead d-flex">
                             <div className="col-6">
@@ -94,7 +100,7 @@ const RightPanel = () => {
                             </div>
                         </div>
                     }
-                    
+
                 </div>
 
                 <div className="hide">

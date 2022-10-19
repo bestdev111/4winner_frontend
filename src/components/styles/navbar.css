@@ -22,9 +22,11 @@
   background-color: #312c32;
   border-radius: 3px;
 }
+
 .login_form>div {
   padding-bottom: 1px;
 }
+
 .login_btn {
   padding: 3px 11px;
   text-align: center;
@@ -67,7 +69,20 @@
 
 .menu {
   float: left;
-  margin-left: 263px;
+  margin-left: 10px;
+}
+
+@media only screen and (min-width: 1430px) {
+  .menu {
+    float: left;
+    margin-left: 263px;
+  }
+
+  .dropdownbtn {
+    padding-top: 10px;
+    float: left;
+    margin-right: 40px;
+  }
 }
 
 .menu-item {
@@ -145,13 +160,16 @@
   width: 20px;
   vertical-align: middle;
 }
+
 .logoutbtn {
   cursor: pointer;
 }
+
 .logoutbtn>svg {
   width: 13px;
   margin: 0 0 3px 8px;
 }
+
 .logined>div {
   margin-top: 4px;
   padding-left: 5px;
@@ -161,6 +179,7 @@
 .logined>div:first-child {
   border-left: 0px;
 }
+
 .overlay {
   position: fixed;
   top: 0;
@@ -171,27 +190,72 @@
   /* background-color: #000;
   opacity: .6; */
 }
+
 .modal-title {
   line-height: 1.5;
   font-size: 19px;
 }
+
+.modal-footer {
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
 .cancel {
   background-color: #971f1e !important;
 }
+
 .language-list {
   margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
+
+.language-list>ul {
+  padding: 0px;
+}
+
+.language-list>ul>li>a {
+  color: #1c1c1c;
+  padding: 8px 25px 9px 31px;
+  font-weight: 700;
+  border-bottom: 1px solid #c1c1c1;
+  background: linear-gradient(180deg, #f1f1f1 0, #d7d7d7);
+  /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1", endColorstr="#d7d7d7", GradientType=0); */
+  font-size: 13px;
+  text-decoration: none;
+  display: block;
+  outline: 0;
+}
+
 .close {
   float: right;
-  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
   opacity: .5;
+  font-size: 20px;
+}
+.btn-cancel {
+  width: calc(100% - 30px);
+  text-align: center;
+  background-color: #971f1e;
+  color: #f5f5f5 !important;
+  font-size: 13px;
+  border: 1px solid #333;
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  float: left;
 }

@@ -32,6 +32,8 @@
 }
 .tree-view_item {
   cursor: pointer;
+  display: flex !important;
+  align-items: center;
 }
 
 .tree-view_item:focus {
@@ -39,27 +41,24 @@
   cursor: pointer;
 }
 
-/* style for the children nodes container */
-.tree-view_children {
-  /* margin-left: 4px; */
-}
-
 .tree-view_children-collapsed {
   height: 0px;
 }
-
 .tree-view_arrow {
-  /* cursor: pointer; */
-  margin: 6px;
-  display: inline-block;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  width: 10px;
+  height: 10px;
+  background-image: url(../images/icons/caret-down-solid.svg);
+  background-repeat: no-repeat;
+  background-size: 8px;
+  margin : 10px 10px 14px 6px;
 }
-
-.tree-view_arrow:after {
-  content: '▾';
+.tree-view_children>.tree-view>.tree-view_item>.tree-view_arrow {
+  width: 10px;
+  height: 10px;
+  background-image: url(../images/icons/caret-down-solid-white.svg);
+  background-repeat: no-repeat;
+  background-size: 8px;
+  margin: 12px 12px 12px 6px;
 }
 /* rotate the triangle to close it */
 .tree-view_arrow-collapsed {
@@ -71,6 +70,7 @@
 
 .node, .node .info {
   cursor: pointer;
+  display: flex !important;
 }
 .node {
   width: 100%;

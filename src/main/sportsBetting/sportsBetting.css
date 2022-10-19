@@ -3,11 +3,11 @@
 }
 .left {
     width: calc(16% - 9px);
-    min-width: 220px;
+    min-width: 212px;
 }
 .center {
     width: calc(65% - 30px);
-    min-width: 780px;
+    min-width: 840px;
 }
 .right {
     width: calc(20% + 10px);;

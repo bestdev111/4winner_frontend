@@ -12,12 +12,13 @@ const menu = [
 
 const customStyles = {
     content: {
-        position : 'fixed',
+        position: 'fixed',
         border: '1px solid rgba(0,0,0,.2)',
         width: '16%',
-        height: '315px',
+        height: '350px',
         inset: '100px 780px',
         padding: '10px',
+        overflow: 'unset'
     },
 };
 
@@ -34,7 +35,7 @@ function Navbar() {
         <div className='header'>
             <div className='top'>
                 <div className='logo'>
-                    <img src=''/>
+                    <img src='' />
                 </div>
                 <form
                     className='login_form'
@@ -99,8 +100,8 @@ function Navbar() {
                         </div>
                         {/* <button onClick={() => setOpenModal(false)}>close</button>
                         <div>I am a modal</div> */}
-                        <div className="modal-body overflow-auto-modal form-horizontal">
-                            <div className="col-12">
+                        <div className="modal-body form-horizontal">
+                            <div className="col-12 p-0">
                                 <div className="language-list">
                                     <ul>
                                         <li><a><img src="../assets/images/flags/de_DE.png" className="language" />Deutsch</a></li>
@@ -112,12 +113,13 @@ function Navbar() {
                                     <div className="clearfix"></div>
                                 </div>
                             </div>
-                            <div className="modal-footer">
-                                <div className="col-12 cancel border text-center" onClick={() => setOpenModal(false)}>
-                                    <a id="closeModal" className="btn-cancel">Close</a>
-                                </div>
+                        </div>
+                        <div className="modal-footer">
+                            <div className="col-12 d-flex justify-content-center text-center" onClick={() => setOpenModal(false)}>
+                                <a id="closeModal" className="btn-cancel">Close</a>
                             </div>
                         </div>
+                            <div className='clearfix'></div>
                     </Modal>
                 </div>
             </div>
