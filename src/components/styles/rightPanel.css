@@ -43,6 +43,7 @@
     color: white !important;
 }
 .bet-totals>.btn-reset {
+    cursor: pointer;
     background-color: var(--secondary-color);
     float: left;
     padding: 25px 10px;

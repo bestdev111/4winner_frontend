@@ -6,6 +6,9 @@ import './styles/leftMenu.css'
 function LeftMenu(props) {
     const [isCollapse, setIsCollapse] = useState(true);
     const collapseFunc = () => {
+        console.log('please collapse', isCollapse);
+    }
+    const collapseFunc1 = () => {
         console.log('please collapse');
     }
     return (
@@ -29,20 +32,20 @@ function LeftMenu(props) {
                                             nodeLabel={label2}
                                             key={secondChild.type}
                                             defaultCollapsed={isCollapse}
-                                            onClick={collapseFunc}
+                                            onClick={collapseFunc1}
                                         >
                                             {/* {secondChild.child.map(lastChild => {
-                                        const label3 = <span className="node_third">{lastChild.type}</span>;
-                                        return (
-                                            <TreeView
-                                                nodeLabel={label3}
-                                                key={lastChild.type}
-                                            // defaultCollapsed={isCollapse}
-                                            // onClick={collapseFunc}
-                                            >
-                                            </TreeView>
-                                        );
-                                    })} */}
+                                                const label3 = <span className="node_third">{lastChild.type}</span>;
+                                                return (
+                                                    <TreeView
+                                                        nodeLabel={label3}
+                                                        key={lastChild.type}
+                                                    // defaultCollapsed={isCollapse}
+                                                    // onClick={collapseFunc}
+                                                    >
+                                                    </TreeView>
+                                                );
+                                            })} */}
                                         </TreeView>
                                     );
                                 })}
