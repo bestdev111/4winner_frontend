@@ -1,6 +1,6 @@
 import React from "react";
-import Event from './event'
-import '../styles/table.css'
+import BetEvent from './betEvent'
+import '../styles/bettable.css'
 const Table = (props) => {
     const data = props;
     return (
@@ -12,22 +12,22 @@ const Table = (props) => {
             </div>
             <div className="table-content">
                 <div className="event-list">
-                    <Event
+                    <BetEvent
                         date='16.10'
                         time='12:20'
                         teamname='Real Madrid'
                     />
-                    <Event
+                    <BetEvent
                         date='16.10'
                         time='12:20'
                         teamname='Manchester City'
                     />
-                    <Event
+                    <BetEvent
                         date='16.10'
                         time='12:20'
                         teamname='Barcelona'
                     />
-                    <Event
+                    <BetEvent
                         date='16.10'
                         time='12:20'
                         teamname='Sampdoria Genua-AS Rom'

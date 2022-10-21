@@ -1,6 +1,6 @@
 import React from 'react';
 import './outRights.css'
-import { RightPanel, LeftMenu, Divider } from 'components';
+import { RightPanel, LeftMenu, Divider, OutTable } from 'components';
 const OutRights = () => (
     <div className='container-fluid d-flex flex-column ptt'>
         <div className='row'>
@@ -8,8 +8,10 @@ const OutRights = () => (
                 <LeftMenu />
             </div>
             <div className='center px-2 float-left'>
-                <Divider title='Highlights' />
-                <Divider title='Top Odds' />
+                <Divider title='Outlights' />
+                <OutTable 
+                    title='Football'
+                />
             </div>
             <div className='right px-2 float-left'>
                 <RightPanel />

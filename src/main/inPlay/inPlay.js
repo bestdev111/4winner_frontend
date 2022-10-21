@@ -1,16 +1,16 @@
 import React from 'react';
 import './inPlay.css'
-import { RightPanel, LeftMenu, Divider, Table } from 'components';
+import { RightPanel, LeftMenu, Divider, BetTable } from 'components';
 const InPlay = () => (
     <div className='container-fluid d-flex flex-column ptt'>
         <div className='row'>
             <div className='left px-2 float-left'>
                 <Divider title='Highlights' />
-                <Table
+                <BetTable
                     title="Highlights"
                 />
                 <Divider title='Top Odds' />
-                <Table
+                <BetTable
                     title="Top Odds"
                 />
             </div>
