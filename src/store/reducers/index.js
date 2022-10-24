@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import sports from './sports';
-// import auth from 'app/auth/store/reducers';
+import auth from 'auth/store/reducers';
 
 const createReducer = (asyncReducers) =>
     combineReducers({
-        // auth,
+        auth,
         sports,
         ...asyncReducers
     });

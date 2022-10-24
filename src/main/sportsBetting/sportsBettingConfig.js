@@ -1,7 +1,8 @@
-import { SystemLoadable } from '../../utils';
+import { authRoles } from 'auth';
+import { SystemLoadable } from 'utils';
 
 export const SportsBettingConfig = {
-    
+    auth: authRoles.admin,
     routes: [
         {
             path: '/sportsbetting',
