@@ -5,10 +5,10 @@ const SportsTeamList = [
         collapsed: true,
         child: [
             {
-                type: 'International',
+                type: 'International', collapsed: true,
                 child: [
-                    { type: 'FIFA WM2021' },
-                    { type: 'FIFA WM2022' },
+                    {type: 'FIFA WM2021'},
+                    {type: 'FIFA WM2022'},
                 ]
             },
             {

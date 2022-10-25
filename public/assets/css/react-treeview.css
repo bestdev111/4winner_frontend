@@ -15,7 +15,7 @@
   font-weight: 700;
   border-bottom: 1px solid #c1c1c1;
   background: linear-gradient(180deg, #f1f1f1 0, #d7d7d7);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1", endColorstr="#d7d7d7", GradientType=0);
+  /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1", endColorstr="#d7d7d7", GradientType=0); */
   font-size: 16px;
   text-decoration: none;
   display: block;
@@ -28,12 +28,12 @@
 }
 .menu_main>.tree-view>.tree-view_children>.tree-view {
   border-bottom: 1px solid #cbcbcb;
-  padding: 0.25rem;
 }
 .tree-view_item {
   cursor: pointer;
   display: flex !important;
   align-items: center;
+  padding: 3px;
 }
 
 .tree-view_item:focus {
@@ -78,4 +78,11 @@
 .sport-icon {
   width: 20px;
   margin-right: 7px;
+}
+.tree-view_children>.tree-view>.tree-view_children>div {
+  padding: 9px 0 9px 30px;
+  border-top : 1px solid #cbcbcb;
+}
+.node_third {
+  cursor: pointer;
 }
