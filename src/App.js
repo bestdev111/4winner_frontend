@@ -6,6 +6,7 @@ import { BrowserRouter} from 'react-router-dom';
 import { Navbar } from 'components'
 import store from './store';
 import Provider from 'react-redux/es/components/Provider';
+// import history from './history';
 function App() {
   return (
     <AppContext.Provider value={{routes}}>

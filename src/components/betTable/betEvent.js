@@ -30,28 +30,28 @@ const Event = (props) => {
             </div>
             <div className="odds">
                 <div className="treshold"><p>3.5</p></div>
-                <p className="odd">
+                <div className="odd">
                     <span className="odd-type"><p>0</p></span>
                     <span className="odd-value"><p>1.50</p></span>
-                </p>
-                <p className="odd">
+                </div>
+                <div className="odd">
                     <span className="odd-type"><p>1</p></span>
                     <span className="odd-value"><p>1.30</p></span>
-                </p>
+                </div>
             </div>
             <div className="odds">
-                <p className="odd">
+                <div className="odd">
                     <span className="odd-type"><p>1</p></span>
                     <span className="odd-value"><p>1.30</p></span>
-                </p>
-                <p className="odd">
+                </div>
+                <div className="odd">
                     <span className="odd-type"><p>1</p></span>
                     <span className="odd-value"><p>1.30</p></span>
-                </p>
-                <p className="odd">
+                </div>
+                <div className="odd">
                     <span className="odd-type"><p>1</p></span>
                     <span className="odd-value"><p>1.30</p></span>
-                </p>
+                </div>
             </div>
         </div>
     );

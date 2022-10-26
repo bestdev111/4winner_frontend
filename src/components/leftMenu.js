@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TreeView from 'react-treeview';
-import { SportsTeamList } from 'utils'
+import withReducer from 'store/withReducer';
 import './styles/leftMenu.css'
+import reducer from 'store/sports';
+
+// import * as action from 'store/actions'
+// import reducer from 'store/reducers'
+// import { SportsTeamList } from 'utils'
 
 function LeftMenu(props) {
-    
+    const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
+    console.log('sports_team_list->', sports_team_list);
+
+    const dispatch = useDispatch();
+    // useEffect(() => {
+    //     dispatch(action.sportsTeamList());
+    // }, [dispatch]);
+    // useCallback(() => {
+    //     console.log('useCallback');
+    //     dispatch(action.sportsTeamList());
+    // }, [dispatch])
     const [isCollapse1, setIsCollapse1] = useState([]);
     const [isCollapse2, setIsCollapse2] = useState([]);
-    
+
     const collapseFunc1 = (index) => {
-        if(isCollapse1[index] == undefined) {
+        if (isCollapse1[index] === undefined) {
             isCollapse1[index] = true;
         }
         let newArr = [...isCollapse1];
@@ -20,7 +36,7 @@ function LeftMenu(props) {
         setIsCollapse1(newArr);
     }
     const collapseFunc2 = (index) => {
-        if (isCollapse2[index] == undefined) {
+        if (isCollapse2[index] === undefined) {
             isCollapse2[index] = true;
         }
         let newArr = [...isCollapse2];
@@ -37,8 +53,8 @@ function LeftMenu(props) {
             </div>
             <div className='menu-content bordered-top'>
                 <div className='menu_main'>
-                    {SportsTeamList && SportsTeamList.map((first, index) => {
-                        const label = <span className="node" key={index} onClick={()=>collapseFunc1(index)}><img className='sport-icon' src={first.icon} />{first.type}</span>;
+                    {sports_team_list && sports_team_list.map((first, index) => {
+                        const label = <span className="node" key={index} onClick={() => collapseFunc1(index)}><img className='sport-icon' src={first.icon} />{first.type}</span>;
                         return (
                             <TreeView key={first.type}
                                 nodeLabel={label}
@@ -69,4 +85,4 @@ function LeftMenu(props) {
     );
 }
 
-export default LeftMenu;
+export default withReducer('teamList', reducer)(LeftMenu);

@@ -1,25 +1,9 @@
-import React from "react";
-import {injectReducer} from 'app/store';
-import {ReactReduxContext} from "react-redux";
+import { injectReducer } from 'store/index';
+import React from 'react';
+const withReducer = (key, reducer) => (WrappedComponent) => {
+  injectReducer(key, reducer);
 
-const withReducer = (key, reducer) => WrappedComponent =>
-    class extends React.PureComponent {
-        constructor(props)
-        {
-            super(props);
-            injectReducer(key, reducer);
-        };
-
-        render()
-        {
-            return (
-                <ReactReduxContext.Consumer>
-                    {({store, storeState}) => {
-                        return storeState[key] ? <WrappedComponent {...this.props} /> : null;
-                    }}
-                </ReactReduxContext.Consumer>
-            );
-        };
-    };
+  return (props) => <WrappedComponent {...props} />;
+};
 
 export default withReducer;
