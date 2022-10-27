@@ -26,8 +26,6 @@ const onClick = (e) => {
     localStorage.setItem('path', window.location.pathname);
 }
 function Navbar() {
-    console.log('here', window.location.pathname);
-
     const [isLogin, setIsLogin] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const value = { name: 'testero', amount: '95.00' };
@@ -35,7 +33,7 @@ function Navbar() {
         <div className='header'>
             <div className='top'>
                 <div className='logo'>
-                    <img src='' />
+                    <img src='' alt=''/>
                 </div>
                 <form
                     className='login_form'
@@ -75,18 +73,17 @@ function Navbar() {
                         )}
                     </div>
                     <div className='dropdownbtn'>
-                        <a
+                        <p
                             className='dropbtn1'
                             onClick={() => setOpenModal(true)}
                         >
                             <img src='./assets/images/flags/en_US.png' className='language' alt='flag' />
                             <span> English</span>
-                        </a>
+                        </p>
                     </div>
                     <div className='clearfix'></div>
                     <Modal
                         isOpen={openModal}
-                        // onAfterOpen={afterOpenModal}
                         onRequestClose={() => setOpenModal(false)}
                         style={customStyles}
                         contentLabel="Example Modal"
@@ -98,17 +95,15 @@ function Navbar() {
                             <h5 className="modal-title">LANGUAGE SELECTOR</h5>
                             <button type="button" className="close" onClick={() => setOpenModal(false)}><span>×</span></button>
                         </div>
-                        {/* <button onClick={() => setOpenModal(false)}>close</button>
-                        <div>I am a modal</div> */}
                         <div className="modal-body form-horizontal">
                             <div className="col-12 p-0">
                                 <div className="language-list">
                                     <ul>
-                                        <li><a><img src="../assets/images/flags/de_DE.png" className="language" />Deutsch</a></li>
-                                        <li><a><img src="../assets/images/flags/en_US.png" className="language" />English</a></li>
-                                        <li><a><img src="../assets/images/flags/nl_NL.png" className="language" />Dutch</a></li>
-                                        <li><a><img src="../assets/images/flags/tr_TR.png" className="language" />Türkçe</a></li>
-                                        <li><a><img src="../assets/images/flags/el_GR.png" className="language" />Ελληνικά</a></li>
+                                        <li><div><img src="../assets/images/flags/de_DE.png" className="language" alt=''/>Deutsch</div></li>
+                                        <li><div><img src="../assets/images/flags/en_US.png" className="language" alt=''/>English</div></li>
+                                        <li><div><img src="../assets/images/flags/nl_NL.png" className="language" alt=''/>Dutch</div></li>
+                                        <li><div><img src="../assets/images/flags/tr_TR.png" className="language" alt=''/>Türkçe</div></li>
+                                        <li><div><img src="../assets/images/flags/el_GR.png" className="language" alt=''/>Ελληνικά</div></li>
                                     </ul>
                                     <div className="clearfix"></div>
                                 </div>
@@ -116,10 +111,10 @@ function Navbar() {
                         </div>
                         <div className="modal-footer">
                             <div className="col-12 d-flex justify-content-center text-center" onClick={() => setOpenModal(false)}>
-                                <a id="closeModal" className="btn-cancel">Close</a>
+                                <p id="closeModal" className="btn-cancel">Close</p>
                             </div>
                         </div>
-                            <div className='clearfix'></div>
+                        <div className='clearfix'></div>
                     </Modal>
                 </div>
             </div>

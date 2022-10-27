@@ -5,9 +5,6 @@ const RightPanel = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [open, setOpen] = useState(false);
     const [bet, setBet] = useState(true);
-    // const betClick = () => {
-    //     setBet(!bet);
-    // }
     const onChange = (e) => {
         setOpen();
     };
@@ -26,9 +23,9 @@ const RightPanel = () => {
             }
             <div className="bet-type-btn d-flex">
                 {open ? <>
-                        <p className="bet-type-btn-child" onClick={()=>setOpen(false)}>Single/Multiple</p>
+                    <p className="bet-type-btn-child" onClick={() => setOpen(false)}>Single/Multiple</p>
                     <p className="bet-type-btn-child focus" onClick={() => setOpen(true)}>SYSTEM</p>
-                    </>
+                </>
                     : <>
                         <p className="bet-type-btn-child focus" onClick={() => setOpen(false)}>Single/Multiple</p>
                         <p className="bet-type-btn-child" onClick={() => setOpen(true)}>SYSTEM</p>

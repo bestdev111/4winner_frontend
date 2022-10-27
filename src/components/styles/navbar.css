@@ -223,8 +223,10 @@
 .language-list>ul {
   padding: 0px;
 }
-
-.language-list>ul>li>a {
+.language-list>ul>li, .btn-cancel {
+  cursor: pointer;
+}
+.language-list>ul>li>div {
   color: #1c1c1c;
   padding: 8px 25px 9px 31px;
   font-weight: 700;

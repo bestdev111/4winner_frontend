@@ -4,10 +4,10 @@ import sportsTeamList from 'utils/dataUtils'
 
 const teamListSlice = createSlice({
   name: 'teamList',
-  initialState: { sportsTeamList: sportsTeamList },
+  initialState: { sportsTeamList: [] },
   reducers: {
     getList: (state, action) => { 
-      state.sportsTeamList = [sportsTeamList];
+      state.sportsTeamList = [...sportsTeamList];
     },
   },
 });

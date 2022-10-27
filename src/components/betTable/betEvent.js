@@ -15,8 +15,8 @@ const Event = (props) => {
                 </div>
                     : <div className="slideout open">
                         <div className="fade-in show-in">
-                            <img src="../assets/images/icons/analytic-icon.svg"/>
-                            <img src="../assets/images/icons/chart-icon.svg"/>
+                            <img src="../assets/images/icons/analytic-icon.svg" alt="img"/>
+                            <img src="../assets/images/icons/chart-icon.svg" alt="img" />
                         </div>
                     </div>
             }
