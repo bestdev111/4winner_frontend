@@ -1,12 +1,10 @@
-import { SystemLoadable } from '../../utils';
+import { lazy } from 'react';
 
 export const OutRightsConfig = {
     routes  : [
         {
             path: '/outrights',
-            component: SystemLoadable({
-                loader: () => import('./outRights')
-            })
+            component: lazy(() => import('./outRights'))
         }
     ]
 };

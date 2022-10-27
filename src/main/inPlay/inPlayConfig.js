@@ -1,12 +1,10 @@
-import { SystemLoadable } from '../../utils';
+import { lazy } from 'react';
 
 export const InPlayConfig = {
     routes  : [
         {
             path: '/inplay',
-            component: SystemLoadable({
-                loader: () => import('./inPlay')
-            })
+            component: lazy(() => import('./inPlay')),
         }
     ]
 };

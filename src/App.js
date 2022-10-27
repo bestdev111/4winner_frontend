@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import routes from './configs/routesConfig'
 import AppContext from './appContext';
 import { renderRoutes } from 'react-router-config'
-import { BrowserRouter} from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { Navbar } from 'components'
 import store from './store';
 import Provider from 'react-redux/es/components/Provider';
-// import history from './history';
+import history from './history';
+import { MobileNavbar } from 'mobile/components'
+// import styled, { createGlobalStyle } from "styled-components";
+
 function App() {
+  const [windowDimension, setWindowDimension] = useState(null);
+
+  useEffect(() => {
+    setWindowDimension(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimension(window.innerWidth);
+      console.log(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowDimension <= 640;
+  console.log('isMobile', isMobile);
+  isMobile ? history.push({ pathname: '/m_home' }) : history.push({ pathname: '/' });
+  
   return (
-    <AppContext.Provider value={{routes}}>
+    <AppContext.Provider value={{ routes }}>
       <Provider store={store}>
-        <Navbar />
-        <BrowserRouter>
-          {renderRoutes(routes)}
-        </BrowserRouter>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router history={history}>
+            {isMobile ? <MobileNavbar/> : <Navbar /> }
+            {renderRoutes(routes)}
+          </Router>
+        </Suspense>
       </Provider>
     </AppContext.Provider>
   );
