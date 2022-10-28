@@ -8,6 +8,7 @@ import store from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
 import { MobileNavbar } from 'mobile/components'
+import {Loading}  from 'utils'
 // import styled, { createGlobalStyle } from "styled-components";
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
   return (
     <AppContext.Provider value={{ routes }}>
       <Provider store={store}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading/>}>
           <Router history={history}>
             {isMobile ? <MobileNavbar/> : <Navbar /> }
             {renderRoutes(routes)}

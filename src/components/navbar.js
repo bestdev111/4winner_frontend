@@ -14,9 +14,9 @@ const customStyles = {
     content: {
         position: 'fixed',
         border: '1px solid rgba(0,0,0,.2)',
-        width: '16%',
+        width: '300px',
         height: '350px',
-        inset: '100px 780px',
+        inset: 'calc(15%) calc(50% - 150px)',
         padding: '10px',
         overflow: 'unset'
     },

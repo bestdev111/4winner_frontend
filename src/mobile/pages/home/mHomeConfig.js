@@ -1,6 +1,5 @@
 import { authRoles } from 'auth';
 import { lazy } from 'react';
-import { SystemLoadable } from 'utils';
 
 export const MHomeConfig = {
     auth: authRoles.admin,
