@@ -3,12 +3,13 @@ import routes from './configs/routesConfig'
 import AppContext from './appContext';
 import { renderRoutes } from 'react-router-config'
 import { Router } from 'react-router-dom';
-import { Navbar } from 'components'
+import { Navbar,  } from 'components'
 import store from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
-import { MobileNavbar } from 'mobile/components'
+import { MobileNavbar, MobileFooter } from 'mobile/components'
 import {Loading}  from 'utils'
+
 // import styled, { createGlobalStyle } from "styled-components";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Router history={history}>
             {isMobile ? <MobileNavbar/> : <Navbar /> }
             {renderRoutes(routes)}
+            {isMobile ? <MobileFooter/> : <></> }
           </Router>
         </Suspense>
       </Provider>

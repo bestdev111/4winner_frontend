@@ -1,0 +1,32 @@
+.m-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    width: 100%;
+    background-color: #202124;
+    overflow: auto;
+    font-size: 15px;
+}
+.m-footer i {
+    font-size: 35px;
+}
+
+.m-footer .item {
+    float: left;
+    padding: 8px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.m-footer .login {
+    color: #33cb66;
+    border: solid 1px #33cb66;
+    text-align: center;
+    align-self: center;
+}
+
+.footer-active {
+    color: #33cb66;
+}

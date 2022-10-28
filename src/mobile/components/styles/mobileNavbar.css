@@ -1,22 +1,87 @@
-.navbar {
+.m-navbar {
     display: block;
     width: 100%;
     background-color: #202124;
     overflow: auto;
 }
-
-.navbar a {
+.m-navbar i {
+    font-size: 35px;
+}
+.m-navbar .top-nav {
     float: left;
-    padding: 12px;
+    padding: 4px;
     color: white;
-    text-decoration: none;
     font-size: 17px;
+    cursor: pointer;
 }
-
-.navbar a:hover {
-    background-color: #04AA6D;
+.m-navbar .item {
+    float: left;
+    padding: 6px 6px 0px 6px;
+    color: white;
+    cursor: pointer;
 }
-
+.m-navbar .item p {
+    font-size: 13px;
+}
+.m-navbar .item i {
+    font-size: 30px;
+}
+.item-active {
+    border-bottom: solid 2px #33cb66;
+}
+.m-navbar .login {
+    color: #33cb66;
+    border: solid 1px #33cb66;
+    text-align: center;
+    align-self: center;
+}
 .m-active {
-    background-color: #04AA6D;
+    background-color: #33cb66;
+}
+.sidenav {
+    width: 0px;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.openside {
+    width: 250px;
+}
+.sidenav p {
+    cursor: pointer;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav p:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav p {
+        font-size: 18px;
+    }
 }

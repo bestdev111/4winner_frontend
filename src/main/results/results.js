@@ -69,7 +69,7 @@ function Results() {
                 <div className='center px-2 float-left'>
                     <div className='match'>
                         <div className='match-header'>
-                            <select id="betradarSportTypes" class="sporttype">
+                            <select id="betradarSportTypes" className='sporttype'>
                                 {
                                     sportslist.map((item, index) => <option key={index} value={item.value}>{item.sportsname}</option>)
                                 }

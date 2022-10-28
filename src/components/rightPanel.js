@@ -70,7 +70,7 @@ const RightPanel = () => {
                 </div>
                 <div className="place-bet show">
                     <div className='d-flex justify-content-around'>
-                        <div className=''>
+                        <div>
                             <p>-</p>
                         </div>
                         <div className="align-self-center col-8">
@@ -79,7 +79,7 @@ const RightPanel = () => {
                                 <span className="text-danger"></span>
                             </div>
                         </div>
-                        <div className=''>
+                        <div>
                             <p>+</p>
                         </div>
                     </div>

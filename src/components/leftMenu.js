@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TreeView from 'react-treeview';
 import withReducer from 'store/withReducer';
@@ -15,10 +15,6 @@ function LeftMenu(props) {
     useEffect(() => {
         dispatch(getList());
     }, [dispatch]);
-    useCallback(() => {
-        console.log('useCallback');
-        dispatch(getList());
-    }, [dispatch])
     const [isCollapse1, setIsCollapse1] = useState([]);
     const [isCollapse2, setIsCollapse2] = useState([]);
 

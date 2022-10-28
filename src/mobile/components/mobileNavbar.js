@@ -1,44 +1,48 @@
-import React, { useState } from 'react'
-import Modal from 'react-modal';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import withReducer from 'store/withReducer';
 import './styles/mobileNavbar.css'
-const menu = [
-    { url: '/sportsbetting', title: 'Sports Betting' },
-    { url: '/inplay', title: 'In-Play' },
-    { url: '/outrights', title: 'Outrights' },
-    { url: '/results', title: 'Results' },
-    { url: '/slots', title: 'Slots' },
-    { url: '/livecasino', title: 'Live Casino' },
-]
-
-const customStyles = {
-    content: {
-        position: 'fixed',
-        border: '1px solid rgba(0,0,0,.2)',
-        width: '16%',
-        height: '350px',
-        inset: '100px 780px',
-        padding: '10px',
-        overflow: 'unset'
-    },
-};
+import reducer from 'store/sports';
+import { getList } from 'store/sports/teamListSlice'
 
 // const onClick = (e) => {
 //     localStorage.setItem('path', window.location.pathname);
 // }
+
 function MobileNavbar() {
+    const [openSide, setOpenSide] = useState(true);
+    const [itemActive, setItemActive] = useState(0);
+    const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getList());
+    }, [dispatch]);
+    
+    const itemActiveFunc = (index)=> {
+        setItemActive(index);
+    }
     return (
-        <div className="navbar">
+        <div className="m-navbar p-3">
+            <div id="mySidenav" className={openSide ? 'sidenav' : 'sidenav openside'}>
+                <p className="closebtn" onClick={() => setOpenSide(true)}>&times;</p>
+                <p>About</p>
+                <p>Services</p>
+                <p>Clients</p>
+                <p>Contact</p>
+            </div>
             <div className='d-flex justify-content-between'>
-                <a href="#"><i className="fa fa-fw fa-bars"></i></a>
-                <a href="#">Login</a>
+                <div className='top-nav' onClick={() => setOpenSide(false)}><i className="fa fa-fw fa-bars"></i></div>
+                <div className='top-nav login'>Login</div>
             </div>
             <div className='d-flex'>
-                <a href="#"><i className="fa fa-futbol-o"></i></a>
-                <a href="#"><i className="fa fa-futbol-o"></i></a>
-                <a href="#"><i className="fa fa-futbol-o"></i></a>
-                <a href="#"><i className="fa fa-futbol-o"></i></a>
+                {sports_team_list.map((item, index) =>
+                    <div className={itemActive === index ? 'item item-active': 'item'} onClick={() => itemActiveFunc(index)}>
+                        <div className='d-flex justify-content-center'><i className='fa fa-futbol-o'></i></div>
+                        <div className='d-flex justify-content-center'><p>{item.type}</p></div>
+                    </div>
+                )}
             </div>
         </div>
     );
 }
-export default MobileNavbar
+export default withReducer('teamList', reducer)(MobileNavbar)
