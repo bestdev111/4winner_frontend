@@ -1,12 +1,23 @@
-.m-navbar {
+.m-navbar,
+.m-subnavbar {
     display: block;
     width: 100%;
     background-color: #202124;
     overflow: auto;
 }
-.m-navbar i {
+
+.m-navbar i,
+.m-subnavbar i {
     font-size: 35px;
 }
+
+.m-navbar .login {
+    color: #33cb66 !important;
+    border: solid 1px #33cb66;
+    text-align: center;
+    align-self: center;
+}
+
 .m-navbar .top-nav {
     float: left;
     padding: 4px;
@@ -14,30 +25,7 @@
     font-size: 17px;
     cursor: pointer;
 }
-.m-navbar .item {
-    float: left;
-    padding: 6px 6px 0px 6px;
-    color: white;
-    cursor: pointer;
-}
-.m-navbar .item p {
-    font-size: 13px;
-}
-.m-navbar .item i {
-    font-size: 30px;
-}
-.item-active {
-    border-bottom: solid 2px #33cb66;
-}
-.m-navbar .login {
-    color: #33cb66;
-    border: solid 1px #33cb66;
-    text-align: center;
-    align-self: center;
-}
-.m-active {
-    background-color: #33cb66;
-}
+
 .sidenav {
     width: 0px;
     height: 100%;
@@ -51,9 +39,11 @@
     transition: 0.5s;
     padding-top: 60px;
 }
+
 .openside {
     width: 250px;
 }
+
 .sidenav p {
     cursor: pointer;
     padding: 8px 8px 8px 32px;
@@ -84,4 +74,33 @@
     .sidenav p {
         font-size: 18px;
     }
+}
+
+.m-subnavbar {
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.m-subnavbar::-webkit-scrollbar {
+    display: none;
+}
+
+.m-subnavbar .item {
+    float: left;
+    padding: 6px 6px 0px 6px;
+    color: white;
+    cursor: pointer;
+    margin: 0px 4px 0px 4px;
+}
+
+.m-subnavbar .item p {
+    font-size: 13px;
+}
+
+.m-subnavbar .item i {
+    font-size: 30px;
+}
+
+.item-active {
+    border-bottom: solid 2px #33cb66;
 }
