@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import routes from './configs/routesConfig'
 import AppContext from './appContext';
 import { renderRoutes } from 'react-router-config'
@@ -7,46 +7,26 @@ import { Navbar, } from 'components'
 import store from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
-import { MobileNavbar, MobileFooter, SubMobileNavbar } from 'mobile/components'
+import { MobileNavbar} from 'mobile/components'
 import { Loading } from 'utils'
-// import styled, { createGlobalStyle } from "styled-components";
-
+import { useMediaQuery } from 'usehooks-ts'
 function App() {
-  const [windowDimension, setWindowDimension] = useState(null);
-
-  useEffect(() => {
-    setWindowDimension(window.innerWidth);
-  }, []);
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowDimension(window.innerWidth);
-      console.log(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const isMobile = windowDimension <= 640;
-  console.log('isMobile', isMobile);
-  isMobile ? history.push({ pathname: '/m_home' }) : history.push({ pathname: '/' });
+  const matches = useMediaQuery('(min-width: 640px)')
+  matches ? history.push({ pathname: '/' }) : history.push({ pathname: '/m_home' });
 
   return (
     <AppContext.Provider value={{ routes }}>
       <Provider store={store}>
         <Suspense fallback={<Loading />}>
           <Router history={history}>
-            {isMobile ?
+            {matches ?
               <>
-                <MobileNavbar />
-                <SubMobileNavbar />
+                <Navbar />
                 {renderRoutes(routes)}
-                <MobileFooter />
               </>
               :
               <>
-                <Navbar />
+                <MobileNavbar />
                 {renderRoutes(routes)}
               </>
             }
