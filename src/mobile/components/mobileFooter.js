@@ -14,7 +14,7 @@ function MobileFooter() {
         setNumActive(index);
     }
     return (
-        <div className="m-footer p-3">
+        <div className="m-footer pl-5 pr-5">
             <div className='d-flex justify-content-between'>
                 {
                     mFooterList.map((item, index) =>

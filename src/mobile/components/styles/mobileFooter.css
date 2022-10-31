@@ -4,12 +4,12 @@
     left: 0;
     width: 100%;
     width: 100%;
-    background-color: #202124;
+    background-color: #000000;
     overflow: auto;
-    font-size: 15px;
+    font-size: 13px;
 }
 .m-footer i {
-    font-size: 35px;
+    font-size: 32px;
 }
 
 .m-footer .item {
@@ -17,16 +17,16 @@
     padding: 8px;
     color: white;
     text-decoration: none;
-    cursor: pointer;
+    cursor: default;
 }
 
 .m-footer .login {
-    color: #33cb66;
-    border: solid 1px #33cb66;
+    color: #25851f;
+    border: solid 1px #25851f;
     text-align: center;
     align-self: center;
 }
 
 .footer-active {
-    color: #33cb66;
+    color: #25851f;
 }
