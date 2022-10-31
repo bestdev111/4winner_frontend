@@ -7,27 +7,29 @@ import { Navbar, } from 'components'
 import store from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
-import { MobileNavbar} from 'mobile/components'
+// import { MobileNavbar, SubMobileNavbar, MobileFooter } from 'mobile/components'
 import { Loading } from 'utils'
 import { useMediaQuery } from 'usehooks-ts'
 function App() {
   const matches = useMediaQuery('(min-width: 640px)')
-  matches ? history.push({ pathname: '/' }) : history.push({ pathname: '/m_home' });
-
+  // matches ? history.push({ pathname: '/' }) : history.push({ pathname: '/m_home' });
+  const real_routes = routes();
   return (
-    <AppContext.Provider value={{ routes }}>
+    <AppContext.Provider value={{ real_routes }}>
       <Provider store={store}>
         <Suspense fallback={<Loading />}>
           <Router history={history}>
             {matches ?
               <>
                 <Navbar />
-                {renderRoutes(routes)}
+                {renderRoutes(real_routes)}
               </>
               :
               <>
-                <MobileNavbar />
-                {renderRoutes(routes)}
+                {/* <MobileNavbar /> */}
+                {/* <SubMobileNavbar /> */}
+                {renderRoutes(real_routes)}
+                {/* <MobileFooter /> */}
               </>
             }
           </Router>

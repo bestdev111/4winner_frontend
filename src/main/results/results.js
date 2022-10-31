@@ -1,7 +1,6 @@
 import React from 'react';
 import './results.css'
 import { RightPanel } from 'components';
-import { matchRoutes } from 'react-router-config';
 const sportslist = [
     { sportsname: 'Football', value: 1 },
     { sportsname: 'Basketball', value: 2 },

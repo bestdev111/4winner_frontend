@@ -1,17 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import withReducer from 'store/withReducer';
-import reducer from 'store/sports';
-import { getList } from 'store/sports/teamListSlice'
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 function SideNav(props) {
     const ref = useRef(null);
     const { onClickOutside } = props;
     const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getList());
-    }, [dispatch]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

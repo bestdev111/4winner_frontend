@@ -1,9 +1,11 @@
 import React from 'react';
-import { MobileFooter, SubMobileNavbar } from 'mobile/components'
+import { MobileNavbar, SubMobileNavbar, MobileFooter } from 'mobile/components'
 function MHome() {
     return (
         <div>
+            <MobileNavbar />
             <SubMobileNavbar />
+            <>content</>
             <MobileFooter />
         </div>
     );

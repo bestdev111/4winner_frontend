@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Utils } from 'utils';
+import { useMediaQuery } from 'usehooks-ts'
+//desktop view
 import { SportsBettingConfig } from 'main/sportsBetting/sportsBettingConfig'
 import { InPlayConfig } from 'main/inPlay/inPlayConfig'
 import { OutRightsConfig } from 'main/outRights/outRightsConfig'
@@ -15,24 +17,27 @@ const routeConfigs = [
     OutRightsConfig,
     ResultsConfig,
     ErrorsConfig,
-//mobile
+];
+//mobile case
+const m_routeConfigs = [
     MHomeConfig,
-];
+]
+function customRoutes() {
+    const matches = useMediaQuery('(min-width: 640px)')
+    return ([
+        ...Utils.generateRoutesFromConfigs(matches ? routeConfigs : m_routeConfigs),
+        {
+            path: '/',
+            component: () => matches ? <Redirect to="/sportsbetting" /> : <Redirect to="/m_home" />
 
-const routes = [
-    ...Utils.generateRoutesFromConfigs(routeConfigs),
-    {
-        path     : '/',
-        exact    : true,
-        component: () => <Redirect to="/sportsbetting"/>
+        },
+        {
+            component: () => <Redirect to="/error404" />
+        },
+        {
+            component: () => <Redirect to="/error500" />
+        }
+    ])
+}
 
-    },
-    {
-        component: () => <Redirect to="/error404"/>
-    },
-    {
-        component: () => <Redirect to="/error500"/>
-    }
-];
-
-export default routes;
+export default customRoutes;

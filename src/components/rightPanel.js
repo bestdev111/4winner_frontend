@@ -5,9 +5,7 @@ const RightPanel = () => {
     const [isLogin, setIsLogin] = useState(true);
     const [open, setOpen] = useState(false);
     const [bet, setBet] = useState(true);
-    const onChange = (e) => {
-        setOpen();
-    };
+
     return (
         <div className='betpanel'>
             {isLogin ?
