@@ -80,6 +80,11 @@
 .m-subnavbar .leagues {
     color: #000000;
     min-width: 100px;
+    background-color: white;
+    color: #000000;
+    display: inline-grid;
+    padding: 3px 4px;
+    margin-bottom: 2px;
 }
 
 .m-subnavbar .leagues img {
@@ -184,62 +189,37 @@
     font-size: 22px;
 }
 
-/* sports custom menu list */
-.tree-view {
-    /* border-bottom: solid 1px #b1b1b1; */
-    font-weight: unset !important;
+.tip-types {
+    padding: 10px 0 10px 5px;
 }
 
-.tree-view_arrow-collapsed {
-    background-image: none !important;
-    margin: 0px !important;
-    width: 0px !important;
+.tip-types>div {
+    display: flex;
 }
 
-.tree-view_item {
-    padding: 0px;
+.tip-types .tip-type {
+    display: inline-block;
+    width: 14%;
+    text-align: center;
 }
 
-.tree-view .tree-view_item .node,
-.node_second,
-.node_third {
-    cursor: default;
-    padding: 9px 0px 9px 0px;
-    /* text-decoration: none; */
-    font-size: 20px;
-    color: #ebebeb;
-    display: block;
-    /* transition: 0.3s; */
-    border-bottom: solid 1px #b1b1b1;
+.tip-types .tip-type p {
     width: 100%;
+    font-size: 12px;
+    padding: 5px;
+    display: inline-block;
+    border-radius: 3px;
+    border: solid 1px #bbb;
+    background: linear-gradient(180deg, #fff 0, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6);
 }
 
-.node_second {
-    padding: 9px 0px 9px 0px;
-    margin-left: 13px;
-    width: calc(100% - 13px);
-}
-
-.node_third {
-    padding: 9px 0px 9px 0px;
-    margin-left: 26px;
-    width: calc(100% - 26px)
-}
-
-.tree-view_arrow {
-    margin: 0px;
-    width: 0px !important;
-}
-
-.tree-view_children>.tree-view>.tree-view_item>.tree-view_arrow {
-    margin: 0px;
+.selected {
+    font-weight: 700;
+    color: #fff;
+    background: #25851f !important;
+    border: 1px solid #25851f !important;
 }
 
 .collapse {
     color: #25851f !important;
-}
-
-.tree-view_children>.tree-view>.tree-view_children>div {
-    padding: 0px;
-    border-top: unset;
 }

@@ -80,7 +80,6 @@ function SideNav(props) {
             <div className='sidenav_lists'>
                 <p>Outrights</p>
                 <p>Highrights</p>
-                {/* {sports_team_list.map((item, index) => <p key={index}>{item.type}</p>)} */}
 
                 {sports_team_list && sports_team_list.map((first, index) => {
                     const label = <span className={isCollapse1[index] === undefined || isCollapse1[index] ? 'node' : 'node collapse'} key={index} onClick={() => collapseFunc1(index)}>{first.type}</span>;
@@ -92,7 +91,7 @@ function SideNav(props) {
                             onClick={() => collapseFunc1(index)}
                         >
                             {first.child && first.child.map((secondChild, i) => {
-                                const label2 = <span className={isCollapse2[i] === undefined || isCollapse2[i] ? 'node_second' : 'node_second collapse'} onClick={() => collapseFunc2(i)}>{secondChild.type}</span>;
+                                const label2 = <span className={isCollapse2[i] === undefined || isCollapse2[i] ? 'node_second' : 'node_second collapse'} key={i} onClick={() => collapseFunc2(i)}>{secondChild.type}</span>;
                                 return (
                                     <TreeView
                                         nodeLabel={label2}

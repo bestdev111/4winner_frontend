@@ -25,12 +25,12 @@ const m_routeConfigs = [
     MHomeConfig,
 ]
 function customRoutes() {
-    const matches = useMediaQuery('(min-width: 640px)')
+    const isMobile = useMediaQuery('(min-width: 640px)')
     return ([
-        ...Utils.generateRoutesFromConfigs(matches ? routeConfigs : m_routeConfigs),
+        ...Utils.generateRoutesFromConfigs(isMobile ? routeConfigs : m_routeConfigs),
         {
             path: '/',
-            component: () => matches ? <Redirect to="/sportsbetting" /> : <Redirect to="/m_home" />
+            component: () => isMobile ? <Redirect to="/sportsbetting" /> : <Redirect to="/m_home" />
 
         },
         {

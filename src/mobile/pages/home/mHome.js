@@ -4,7 +4,8 @@ function MHome() {
     return (
         <>
             <SubMobileNavbar />
-            <div className='d-flex justify-content-center'></div>
+            <div className='d-flex justify-content-center'>
+            </div>
             <MobileFooter />
         </>
     );

@@ -26,16 +26,24 @@
     animation-duration: 1.3s;
 }
 
-.m_load_content {
-    width: 56px;
-    height: 56px;
+.m_load_style {
     position: fixed;
-    inset: calc(50% - 28px);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: #00000096;
+}
+
+.m_load_content {
+    width: 200px;
+    height: 200px;
+    position: fixed;
+    inset: calc(50% - 100px);
     border: 1px solid rgba(0 0 0 0.2);
-    background: rgb(255 255 255);
     overflow: unset;
     border-radius: 3px;
     outline: none;
-    padding: 10px;
     z-index: 1000;
 }

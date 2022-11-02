@@ -26,9 +26,11 @@
   background-color: #007219;
   color: #f5f5f5;
 }
+
 .menu_main>.tree-view>.tree-view_children>.tree-view {
   border-bottom: 1px solid #cbcbcb;
 }
+
 .tree-view_item {
   cursor: pointer;
   display: flex !important;
@@ -44,14 +46,16 @@
 .tree-view_children-collapsed {
   height: 0px;
 }
+
 .tree-view_arrow {
   width: 10px;
   height: 10px;
   background-image: url(../images/icons/caret-down-solid.svg);
   background-repeat: no-repeat;
   background-size: 8px;
-  margin : 10px 10px 14px 6px;
+  margin: 10px 10px 14px 6px;
 }
+
 .tree-view_children>.tree-view>.tree-view_item>.tree-view_arrow {
   width: 10px;
   height: 10px;
@@ -60,6 +64,7 @@
   background-size: 8px;
   margin: 12px 12px 12px 6px;
 }
+
 /* rotate the triangle to close it */
 .tree-view_arrow-collapsed {
   -webkit-transform: rotate(-90deg);
@@ -68,21 +73,84 @@
   transform: rotate(-90deg);
 }
 
-.node, .node .info {
+.node,
+.node .info {
   cursor: pointer;
   display: flex !important;
 }
+
 .node {
   width: 100%;
 }
+
 .sport-icon {
   width: 20px;
   margin-right: 7px;
 }
+
 .tree-view_children>.tree-view>.tree-view_children>div {
   padding: 9px 0 9px 30px;
-  border-top : 1px solid #cbcbcb;
+  border-top: 1px solid #cbcbcb;
 }
+
 .node_third {
   cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+  .tree-view {
+    font-weight: unset !important;
+  }
+
+  .tree-view_arrow-collapsed {
+    background-image: none !important;
+    margin: 0px !important;
+    width: 0px !important;
+  }
+
+  .tree-view_item {
+    padding: 0px;
+  }
+
+  .tree-view .tree-view_item .node,
+  .node_second,
+  .node_third {
+    cursor: default;
+    padding: 9px 0px 9px 0px;
+    font-size: 20px;
+    color: #ebebeb;
+    display: block;
+    border-bottom: solid 1px #b1b1b1;
+    width: 100%;
+  }
+
+  .node_second {
+    padding: 9px 0px 9px 0px;
+    margin-left: 13px;
+    width: calc(100% - 13px);
+  }
+
+  .node_third {
+    padding: 9px 0px 9px 0px;
+    margin-left: 26px;
+    width: calc(100% - 26px)
+  }
+
+  .tree-view_arrow {
+    margin: 0px;
+    width: 0px !important;
+  }
+
+  .tree-view_children>.tree-view>.tree-view_item>.tree-view_arrow {
+    margin: 0px;
+  }
+
+  .collapse {
+    color: #25851f !important;
+  }
+
+  .tree-view_children>.tree-view>.tree-view_children>div {
+    padding: 0px;
+    border-top: unset;
+  }
 }
