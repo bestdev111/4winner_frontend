@@ -49,13 +49,13 @@
     display: none;
 }
 
-.m-subnavbar>div:last-child>div {
+/* .m-subnavbar>div:last-child>div {
     background-color: white;
     color: #000000;
     display: inline-grid;
     padding: 3px 4px;
     margin-bottom: 2px;
-}
+} */
 
 .m-subnavbar .item {
     float: left;

@@ -76,7 +76,7 @@ function MobileNavbar(props) {
                         </div>
                     </div>
                 </>
-                : <div>any</div>
+                : <></>
             }
         </div>
     );
