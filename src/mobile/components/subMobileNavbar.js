@@ -26,7 +26,7 @@ const leagues_list = [
     { m_icon: '', type: 'World Cup Group H' },
 ]
 const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];
-function MobileNavbar() {
+function MobileNavbar(props) {
     const [sportActive, setSportActive] = useState(0);
     const [leagueActive, setLeagueActive] = useState(0);
     const [selected, setSelected] = useState(0);
@@ -42,6 +42,10 @@ function MobileNavbar() {
     const leagueActiveFunc = (index) => {
         setLeagueActive(index);
     }
+    const tipTypes = (index) => {
+        setSelected(index);
+    }
+    props.parentCallback(selected);
     return (
         <div className="m-subnavbar">
             <div className='d-flex'>
@@ -68,7 +72,7 @@ function MobileNavbar() {
                     </div>
                     <div className='tip-types '>
                         <div className='d-flex'>
-                            {tip_types.map((item, i) => <div className='tip-type px-1'><p onClick={()=> setSelected(i)} className={selected === i ? 'selected' : ''}>{item}</p></div>)}
+                            {tip_types.map((item, i) => <div className='tip-type px-1' key={i}><p onClick={() => tipTypes(i)} className={selected === i ? 'selected' : ''}>{item}</p></div>)}
                         </div>
                     </div>
                 </>

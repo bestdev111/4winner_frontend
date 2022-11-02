@@ -54,7 +54,7 @@ function LeftMenu(props) {
                                 onClick={() => collapseFunc1(index)}
                             >
                                 {first.child && first.child.map((secondChild, i) => {
-                                    const label2 = <span className="node_second" onClick={() => collapseFunc2(i)}>{secondChild.type}</span>;
+                                    const label2 = <span className="node_second" onClick={() => collapseFunc2(i)} key={i}>{secondChild.type}</span>;
                                     return (
                                         <TreeView
                                             nodeLabel={label2}

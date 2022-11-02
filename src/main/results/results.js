@@ -80,8 +80,8 @@ function Results() {
                             </select>
                         </div>
                         <div className='match-content'>
-                            {leagues.map((item) =>
-                                <div className='league-table'>
+                            {leagues.map((item, index) =>
+                                <div className='league-table' key={index}>
                                     <div className='league-title'>{item.title}</div>
                                     {
                                         item.matches.map((match, key) =>

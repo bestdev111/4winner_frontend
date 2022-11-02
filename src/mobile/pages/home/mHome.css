@@ -1,0 +1,14 @@
+.m_header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.m_header .odds {
+    display: flex;
+    justify-content: space-around;
+    width: 55%;
+}
+.m_header .odds p {
+    font-size: 18px;
+}
