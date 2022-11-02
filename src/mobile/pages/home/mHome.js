@@ -1,13 +1,12 @@
 import React from 'react';
-import { MobileNavbar, SubMobileNavbar, MobileFooter } from 'mobile/components'
+import { SubMobileNavbar, MobileFooter } from 'mobile/components'
 function MHome() {
     return (
-        <div>
-            <MobileNavbar />
+        <>
             <SubMobileNavbar />
-            <>content</>
+            <div className='d-flex justify-content-center'></div>
             <MobileFooter />
-        </div>
+        </>
     );
 };
 export default MHome;

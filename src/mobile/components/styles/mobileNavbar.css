@@ -1,29 +1,39 @@
 .m-navbar,
-.m-subnavbar > div:first-child {
+.m-subnavbar>div:first-child {
     display: block;
     width: 100%;
     background-color: #000000;
     overflow: auto;
+    height: 50px;
+    padding-bottom: 3px;
 }
 
 .m-navbar i,
 .m-subnavbar i {
-    font-size: 35px;
+    font-size: 28px;
 }
 
 .m-navbar .login {
-    font-size: 17px;
-    color: #25851f !important;
     border: solid 1px #25851f;
+}
+
+.m-navbar .login a {
     text-align: center;
     align-self: center;
+    font-size: 13px;
+    color: #25851f !important;
+    font-weight: 800;
+}
+
+.sidenav .login a {
+    width: 100%;
 }
 
 .m-navbar .top-nav {
     float: left;
-    padding: 4px;
+    padding: 2px 6px 2px 6px;
     color: #bbbbbb;
-    font-size: 17px;
+    font-size: 15px;
     cursor: default;
 }
 
@@ -41,59 +51,127 @@
 }
 
 .openside {
-    width: 55%;
+    width: 60%;
     overflow-y: scroll;
 }
 
 .sidenav p {
     cursor: default;
-    padding: 12px;
+    padding: 9px 9px 9px 0px;
     text-decoration: none;
-    font-size: 25px;
-    color: #dbdbdb;
+    font-size: 20px;
+    color: #ebebeb;
     display: block;
     transition: 0.3s;
-    border-bottom: solid 1px #b1b1b1;
+    border-bottom: solid 2px #b1b1b1;
 }
-.sidenav > .pan {
+
+.sidenav>.pan {
     color: #999999;
     background-color: #0f0f0f;
 }
-.m-subnavbar > div {
+
+.sidenav>.pan>div {
+    font-size: 11px;
+    padding: 4px;
+}
+
+.sidenav .sidenav_lists {
+    padding-left: 8px;
+    margin-bottom: 10px;
+}
+
+.sidenav .sidenav_lists .lang_list {
+    display: none;
+}
+
+.sidenav .sidenav_lists .lang_list p {
+    border: 0px;
+}
+
+.sidenav .sidenav_lists .lang_list div {
+    border-bottom: solid 2px #b1b1b1;
+}
+
+.selected_lang {
+    height: 20px;
+    padding-right: 10px;
+}
+
+.sidenav .sidenav_lists .lang_list img {
+    height: 20px;
+    padding: 0px 10px 0px 10px;
+}
+
+.lang_list_expand {
+    display: block !important;
+}
+
+.expand {
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.m-subnavbar>div {
     overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.m-subnavbar > div::-webkit-scrollbar {
+
+.m-subnavbar>div::-webkit-scrollbar {
     display: none;
 }
-.m-subnavbar > div:last-child > div {
+
+.m-subnavbar>div:last-child>div {
     background-color: white;
     color: #000000;
-    display: -webkit-box !important;
-    margin: 5px;
+    display: inline-grid;
+    padding: 3px 4px;
 }
+
 .m-subnavbar .item {
     float: left;
+    display: inline-grid;
     padding: 6px 6px 0px 6px;
     color: white;
     cursor: default;
     margin: 0px 4px 0px 4px;
+    width: max-content;
+    text-align: center;
 }
+
+.m-subnavbar .item img,
+.m-subnavbar .leagues img {
+    margin: auto;
+}
+
+.m-subnavbar .item img {
+    width: 25px;
+}
+
 .m-subnavbar .leagues {
     color: #000000;
-    width: 25%;
+    min-width: 110px;
+}
+
+.m-subnavbar .leagues img {
+    margin: auto;
+    height: 25px;
+}
+
+.league-active {
+    border-bottom: solid 2px #25851f;
+}
+
+.m-subnavbar .leagues .font {
+    font-size: 12px;
 }
 
 .m-subnavbar p {
-    font-size: 12px;
+    margin: auto;
+    width: max-content;
+    font-size: 10px;
     text-align: center;
-}
-.m-subnavbar .item i {
-    font-size: 30px;
-}
-.m-subnavbar .leagues i {
-    font-size: 28px;
 }
 
 .item-active {

@@ -7,7 +7,7 @@ import { Navbar, } from 'components'
 import store from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
-// import { MobileNavbar, SubMobileNavbar, MobileFooter } from 'mobile/components'
+import { MobileNavbar } from 'mobile/components'
 import { Loading } from 'utils'
 import { useMediaQuery } from 'usehooks-ts'
 function App() {
@@ -26,10 +26,8 @@ function App() {
               </>
               :
               <>
-                {/* <MobileNavbar /> */}
-                {/* <SubMobileNavbar /> */}
+                <MobileNavbar />
                 {renderRoutes(real_routes)}
-                {/* <MobileFooter /> */}
               </>
             }
           </Router>

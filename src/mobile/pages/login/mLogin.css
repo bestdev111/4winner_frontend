@@ -1,0 +1,32 @@
+.login_header {
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 3px;
+}
+
+.login_header>div {
+    font-size: 13px;
+}
+
+.login_header i {
+    color: white;
+    font-size: 17px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.form-group input {
+    font-size: 14px;
+}
+
+.form .m_login_btn {
+    color: #fff;
+    background-color: #5cb85c;
+    border: solid 2px #4cae4c;
+    width: 100%;
+    padding: 6px;
+    font-size: 14px;
+}

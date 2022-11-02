@@ -6,56 +6,65 @@ import { getList } from 'store/sports/teamListSlice'
 import './styles/mobileNavbar.css'
 
 function MobileNavbar() {
-    const [itemActive, setItemActive] = useState(0);
+    const [sportActive, setSportActive] = useState(0);
+    const [leagueActive, setLeagueActive] = useState(0);
     const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getList());
     }, [dispatch]);
 
-    const itemActiveFunc = (index) => {
-        setItemActive(index);
+    const sportActiveFunc = (index) => {
+        setSportActive(index);
+    }
+    const leagueActiveFunc = (index) => {
+        setLeagueActive(index);
     }
     const leagues_list = [
-        { icon: 'fa fa-futbol-o', type: 'CHAMPIONS LEAGUE' },
-        { icon: 'fa fa-futbol-o', type: 'EUROPA LEAGUE' },
-        { icon: 'fa fa-futbol-o', type: 'PREMIER LEAGUE' },
-        { icon: 'fa fa-futbol-o', type: 'LA LIGA' },
-        { icon: 'fa fa-futbol-o', type: '1.BUNDESLIGA' },
-        { icon: 'fa fa-futbol-o', type: 'SERIE A' },
-        { icon: 'fa fa-futbol-o', type: 'LEAGUE 1' },
-        { icon: 'fa fa-futbol-o', type: 'SUPER LIG' },
-        { icon: 'fa fa-futbol-o', type: 'EREDIVISIE' },
-        { icon: 'fa fa-futbol-o', type: 'LIGA PORTUGAL' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group A' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group B' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group C' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group D' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group E' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group F' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group G' },
-        { icon: 'fa fa-futbol-o', type: 'World Cup Group H' },
+        { m_icon: 'assets/images/micons/champions_league1.png', type: 'CHAMPIONS LEAGUE' },
+        { m_icon: 'assets/images/micons/europe_league.png', type: 'EUROPA LEAGUE' },
+        { m_icon: 'assets/images/micons/premier_league.png', type: 'PREMIER LEAGUE' },
+        { m_icon: 'assets/images/micons/la_liga.png', type: 'LA LIGA' },
+        { m_icon: 'assets/images/micons/bundesliga.png', type: '1.BUNDESLIGA' },
+        { m_icon: 'assets/images/micons/serie_a.png', type: 'SERIE A' },
+        { m_icon: 'assets/images/micons/league_1.png', type: 'LEAGUE 1' },
+        { m_icon: 'assets/images/micons/super_lig.png', type: 'SUPER LIG' },
+        { m_icon: 'assets/images/micons/eredivisie.png', type: 'EREDIVISIE' },
+        { m_icon: 'assets/images/micons/liga_portugal.png', type: 'LIGA PORTUGAL' },
+        { m_icon: '', type: 'World Cup Group A' },
+        { m_icon: '', type: 'World Cup Group B' },
+        { m_icon: '', type: 'World Cup Group C' },
+        { m_icon: '', type: 'World Cup Group D' },
+        { m_icon: '', type: 'World Cup Group E' },
+        { m_icon: '', type: 'World Cup Group F' },
+        { m_icon: '', type: 'World Cup Group G' },
+        { m_icon: '', type: 'World Cup Group H' },
     ]
     return (
         <div className="m-subnavbar">
-            <div className='d-flex p-2'>
+            <div className='d-flex'>
                 {sports_team_list.map((item, index) =>
-                    <div className={itemActive === index ? 'item item-active' : 'item'} key={index} onClick={() => itemActiveFunc(index)}>
-                        <div className='d-flex justify-content-center'><i className='fa fa-futbol-o'></i></div>
-                        <div className='d-flex justify-content-center'><p>{item.type}</p></div>
+                    <div className={sportActive === index ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveFunc(index)}>
+                        <img src={item.m_icon ? item.m_icon : ''} alt='' />
+                        <p>{item.type}</p>
                     </div>
                 )}
             </div>
-            <div>
-                <div>
+            {sportActive === 0 ?
+                <div className='d-flex'>
                     {leagues_list.map((item, index) =>
-                        <div className='leagues' key={index}>
-                            <div className='d-flex justify-content-center'><i className='fa fa-futbol-o'></i></div>
-                            <div className='d-flex justify-content-center'><p>{item.type}</p></div>
+                        <div
+                            className={leagueActive === index ? 'leagues league-active ml-2 mr-2' : 'leagues ml-2 mr-2'}
+                            key={index}
+                            onClick={() => leagueActiveFunc(index)}
+                        >
+                            {item.m_icon ? <img src={item.m_icon} alt='' /> : <></>}
+                            <p className={!item.m_icon ? 'font' : ''}>{item.type}</p>
                         </div>
                     )}
                 </div>
-            </div>
+                : <div>any</div>
+            }
         </div>
     );
 }

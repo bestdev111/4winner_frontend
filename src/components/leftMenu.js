@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TreeView from 'react-treeview';
 import withReducer from 'store/withReducer';
-import './styles/leftMenu.css'
 import reducer from 'store/sports';
 import { getList } from 'store/sports/teamListSlice'
-// import * as action from 'store/actions'
-// import reducer from 'store/reducers'
-// import { SportsTeamList } from 'utils'
+import './styles/leftMenu.css'
 
 function LeftMenu(props) {
     const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);

@@ -10,6 +10,7 @@ import { ResultsConfig } from 'main/results/resultsConfig'
 import { ErrorsConfig } from 'main/errors/errorsConfig'
 // mobile view
 import { MHomeConfig } from 'mobile/pages/home/mHomeConfig'
+import { MLoginConfig } from 'mobile/pages/login/mLoginConfig'
 
 const routeConfigs = [
     SportsBettingConfig,
@@ -20,6 +21,7 @@ const routeConfigs = [
 ];
 //mobile case
 const m_routeConfigs = [
+    MLoginConfig,
     MHomeConfig,
 ]
 function customRoutes() {

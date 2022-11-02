@@ -1,7 +1,6 @@
 import React from 'react';
 import { RightPanel, LeftMenu, Divider, BetTable } from 'components';
 import './sportsBetting.css'
-
 function SportsBetting() {
     return(
         <div className='container-fluid d-flex flex-column ptt'>
