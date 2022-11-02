@@ -4,7 +4,7 @@
     width: 100%;
     background-color: #000000;
     overflow: auto;
-    height: 50px;
+    height: 53px;
     padding-bottom: 3px;
 }
 
@@ -37,6 +37,78 @@
     cursor: default;
 }
 
+/* subnavbar */
+
+.m-subnavbar>div {
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.m-subnavbar>div::-webkit-scrollbar {
+    display: none;
+}
+
+.m-subnavbar>div:last-child>div {
+    background-color: white;
+    color: #000000;
+    display: inline-grid;
+    padding: 3px 4px;
+    margin-bottom: 2px;
+}
+
+.m-subnavbar .item {
+    float: left;
+    display: inline-grid;
+    padding: 6px 6px 3px 6px;
+    color: white;
+    cursor: default;
+    margin: 0px 4px 3px 4px;
+    width: max-content;
+    text-align: center;
+}
+
+.m-subnavbar .item img,
+.m-subnavbar .leagues img {
+    margin: auto;
+}
+
+.m-subnavbar .item img {
+    width: 25px;
+}
+
+.m-subnavbar .leagues {
+    color: #000000;
+    min-width: 100px;
+}
+
+.m-subnavbar .leagues img {
+    margin: auto;
+    height: 25px;
+}
+
+.league-active {
+    border-bottom: solid 2px #25851f;
+    margin-bottom: 0px !important;
+}
+
+.m-subnavbar .leagues .font {
+    font-size: 12px;
+}
+
+.m-subnavbar p {
+    margin: auto;
+    width: max-content;
+    font-size: 10px;
+    text-align: center;
+}
+
+.item-active {
+    border-bottom: solid 3px #25851f;
+    margin-bottom: 0px;
+}
+
+/* side navbar */
 .sidenav {
     width: 0px;
     height: 100%;
@@ -63,7 +135,7 @@
     color: #ebebeb;
     display: block;
     transition: 0.3s;
-    border-bottom: solid 2px #b1b1b1;
+    border-bottom: solid 1px #b1b1b1;
 }
 
 .sidenav>.pan {
@@ -90,7 +162,7 @@
 }
 
 .sidenav .sidenav_lists .lang_list div {
-    border-bottom: solid 2px #b1b1b1;
+    border-bottom: solid 1px #b1b1b1;
 }
 
 .selected_lang {
@@ -107,73 +179,67 @@
     display: block !important;
 }
 
-.expand {
+.expand_icon {
     font-weight: 800;
     font-size: 22px;
 }
 
-.m-subnavbar>div {
-    overflow-x: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+/* sports custom menu list */
+.tree-view {
+    /* border-bottom: solid 1px #b1b1b1; */
+    font-weight: unset !important;
 }
 
-.m-subnavbar>div::-webkit-scrollbar {
-    display: none;
+.tree-view_arrow-collapsed {
+    background-image: none !important;
+    margin: 0px !important;
+    width: 0px !important;
 }
 
-.m-subnavbar>div:last-child>div {
-    background-color: white;
-    color: #000000;
-    display: inline-grid;
-    padding: 3px 4px;
+.tree-view_item {
+    padding: 0px;
 }
 
-.m-subnavbar .item {
-    float: left;
-    display: inline-grid;
-    padding: 6px 6px 0px 6px;
-    color: white;
+.tree-view .tree-view_item .node,
+.node_second,
+.node_third {
     cursor: default;
-    margin: 0px 4px 0px 4px;
-    width: max-content;
-    text-align: center;
+    padding: 9px 0px 9px 0px;
+    /* text-decoration: none; */
+    font-size: 20px;
+    color: #ebebeb;
+    display: block;
+    /* transition: 0.3s; */
+    border-bottom: solid 1px #b1b1b1;
+    width: 100%;
 }
 
-.m-subnavbar .item img,
-.m-subnavbar .leagues img {
-    margin: auto;
+.node_second {
+    padding: 9px 0px 9px 0px;
+    margin-left: 13px;
+    width: calc(100% - 13px);
 }
 
-.m-subnavbar .item img {
-    width: 25px;
+.node_third {
+    padding: 9px 0px 9px 0px;
+    margin-left: 26px;
+    width: calc(100% - 26px)
 }
 
-.m-subnavbar .leagues {
-    color: #000000;
-    min-width: 110px;
+.tree-view_arrow {
+    margin: 0px;
+    width: 0px !important;
 }
 
-.m-subnavbar .leagues img {
-    margin: auto;
-    height: 25px;
+.tree-view_children>.tree-view>.tree-view_item>.tree-view_arrow {
+    margin: 0px;
 }
 
-.league-active {
-    border-bottom: solid 2px #25851f;
+.collapse {
+    color: #25851f !important;
 }
 
-.m-subnavbar .leagues .font {
-    font-size: 12px;
-}
-
-.m-subnavbar p {
-    margin: auto;
-    width: max-content;
-    font-size: 10px;
-    text-align: center;
-}
-
-.item-active {
-    border-bottom: solid 3px #25851f;
+.tree-view_children>.tree-view>.tree-view_children>div {
+    padding: 0px;
+    border-top: unset;
 }

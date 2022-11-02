@@ -7,7 +7,7 @@ import './styles/mobileNavbar.css'
 function MobileNavbar() {
     const [openSide, setOpenSide] = useState(false);
     return (
-        <div className="m-navbar p-2">
+        <div className="m-navbar px-2 pt-3 pb-0">
             <SideNav show={openSide} onClickOutside={() => setOpenSide(false)} />
             <div className='d-flex justify-content-between'>
                 <div className='top-nav' onClick={() => setOpenSide(true)}><i className="fa fa-fw fa-bars"></i></div>
