@@ -1,0 +1,122 @@
+.league-content {
+    background-color: #bebebe;
+    font-size: 10px;
+    color: #fff;
+    padding: 2px 12px 2px 8px;
+    margin-left: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.m_body .match {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px;
+}
+
+.m_body .match .m_teams {
+    width: 45%;
+    font-size: 12px;
+}
+.m_body .match .m_teams .team {
+    font-weight: 700;
+}
+.m_body .match .m_teams .time {
+    display: flex;
+    font-size: 10px;
+    color: #777;
+    margin-left: -10px;
+}
+
+.m_body .match .m_teams .time .halftime,
+.m_body .match .m_teams .time .live {
+    color: #fff;
+    padding: 1px 8px;
+}
+
+.m_body .match .m_teams .time .live {
+    background-color: #25851f;
+}
+.m_body .match .m_teams .time .halftime {
+    background-color: #337ab7;
+}
+.m_body .match .m_teams .time .live-time {
+    background-color: #333;
+    color: #fff;
+    padding: 1px 12px 1px 8px;
+    margin-left: -5px;
+    border-radius: 0 8px 8px 0;
+}
+
+.m_body .match .m_teams .team {}
+
+.m_body .match .m_teams .team .team_name {
+    display: flex;
+    width: calc(100% - 30px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.m_body .match .m_teams .team .team_name .red-card {
+    padding: 0 2px;
+    background-color: red;
+    margin-left: 2px;
+    color: #fff;
+    border-radius: 8px 8px;
+}
+.m_body .match .m_teams .team .team_name .yellow-card {
+    padding: 0 2px;
+    background-color: #cdcd0f;
+    margin-left: 2px;
+    color: #fff;
+    border-radius: 8px 8px;
+}
+
+.m_body .match .m_teams .team .wrapper .score {
+    float: right;
+    width: 20px;
+    font-weight: 700;
+}
+
+.m_body .match .odds {
+    display: flex;
+    justify-content: space-around;
+    width: 55%;
+}
+.match .odds .o3,
+.match .odds .o4 {
+    float: left;
+    text-align: center;
+    padding: 0 3px;
+}
+.match .odds .o3 .changeable-odd {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+    padding: 15px;
+    color: #000;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    background: linear-gradient(180deg, #fff 0, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6);
+}
+
+.match .odds .o3 {
+    width: 33%;
+}
+
+.match .m_teams .time>.not-will-live,
+.will-live {
+    color: #fff;
+    padding: 2px 12px 2px 8px;
+    border-radius: 0 8px 8px 0;
+}
+.match .m_teams .time>.not-will-live {
+    background-color: #444;
+}
+.will-live {
+    background-color: #25851f;
+}
