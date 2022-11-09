@@ -133,7 +133,7 @@ function MHome() {
                     </div>
                 </div>
                 <div className='m_body'>
-                    {leagueContentData.map((leaguesData, index)=> 
+                    {leagueContentData && leagueContentData.map((leaguesData, index)=> 
                         <>
                             <div key={index} className="league-content">{leaguesData.title}</div>
                             {leaguesData.leagues.map((leagues, i)=> 

@@ -212,7 +212,9 @@
     border: solid 1px #bbb;
     background: linear-gradient(180deg, #fff 0, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6);
 }
-
+.sportstypes ul {
+    padding-left: 20px;
+}
 .selected {
     font-weight: 700;
     color: #fff;
@@ -222,4 +224,7 @@
 
 .collapse {
     color: #25851f !important;
+}
+.match-count {
+    float: right;
 }

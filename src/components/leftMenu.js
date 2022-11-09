@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import TreeView from 'react-treeview';
 import withReducer from 'store/withReducer';
 import reducer from 'store/sports';
-import { getList } from 'store/sports/teamListSlice'
+import { getTypeList } from 'store/sports/teamListSlice'
 import './styles/leftMenu.css'
 
 function LeftMenu(props) {
     const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getList());
+        dispatch(getTypeList());
     }, [dispatch]);
     const [isCollapse1, setIsCollapse1] = useState([]);
     const [isCollapse2, setIsCollapse2] = useState([]);
