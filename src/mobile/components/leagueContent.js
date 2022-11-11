@@ -6,10 +6,8 @@ function LeagueContent(props) {
         switch (matchData.status) {
             case 0:
                 return <span className="not-will-live">Today 09:00</span>
-                break;
             case 1:
                 return <span className="will-live">Today 09:00</span>
-                break;
             case 2:
                 return (
                     <>
@@ -17,7 +15,6 @@ function LeagueContent(props) {
                         <span className="live-time">1Half</span>
                     </>
                 )
-                break;
             case 3:
                 return (
                     <>
@@ -25,7 +22,6 @@ function LeagueContent(props) {
                         <span className="live-time">2. Half 70'</span>
                     </>
                 )
-                break;
             default:
                 break;
         }

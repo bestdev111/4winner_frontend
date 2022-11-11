@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import withReducer from 'store/withReducer';
-import reducer from 'store/sports';
-import { getTypeList, getAllMatches, getMatches } from 'store/sports/teamListSlice'
-import TreeView from 'react-treeview';
+import { getTypeList, getAllMatches, getMatches } from 'store/actions/sportsActions'
 
 const lang_list = [
     { id: 0, name: 'de_DE', icon: 'assets/images/flags/de_DE.png', title: 'Deutsch' },
@@ -14,37 +11,7 @@ const lang_list = [
     { id: 5, name: 'el_GR', icon: 'assets/images/flags/el_GR.png', title: 'Ελληνικά' },
     { id: 6, name: 'bu_BU', icon: 'assets/images/flags/bu_BU.png', title: 'български' },
 ]
-const sportTypeList = [
-    { sportTypeId: 1, name: 'Football' },
-    { sportTypeId: 2, name: 'Handball' },
-    { sportTypeId: 3, name: 'xxx' },
-    { sportTypeId: 4, name: 'Basketball' },
-    { sportTypeId: 5, name: 'Volleyball' },
-    { sportTypeId: 6, name: 'Futsal' },
-    { sportTypeId: 7, name: 'xxx' },
-    { sportTypeId: 8, name: 'xxx' },
-    { sportTypeId: 9, name: 'xxx' },
-    { sportTypeId: 10, name: 'Tennis' },
-    { sportTypeId: 11, name: 'xxx' },
-    { sportTypeId: 12, name: 'Darts' },
-    { sportTypeId: 13, name: 'xxx' },
-    { sportTypeId: 14, name: 'xxx' },
-    { sportTypeId: 15, name: 'xxx' },
-    { sportTypeId: 16, name: 'IceHockey' },
-    { sportTypeId: 17, name: 'xxx' },
-    { sportTypeId: 18, name: 'xxx' },
-    { sportTypeId: 19, name: 'Boxing' },
-    { sportTypeId: 20, name: 'xxx' },
-    { sportTypeId: 21, name: 'xxx' },
-    { sportTypeId: 22, name: 'American Football' },
-    { sportTypeId: 23, name: 'Snooker' },
-    { sportTypeId: 24, name: 'xxx' },
-    { sportTypeId: 25, name: 'xxx' },
-    { sportTypeId: 26, name: 'xxx' },
-    { sportTypeId: 27, name: 'xxx' },
-    { sportTypeId: 28, name: 'xxx' },
-    { sportTypeId: 29, name: 'Rugby' },
-]
+
 function SideNav(props) {
     const [langOpen, setLangOpen] = useState(false);
     const [siteLang, setSiteLang] = useState(1);
@@ -55,14 +22,14 @@ function SideNav(props) {
     const { onClickOutside } = props;
     const ref = useRef(null);
     const dispatch = useDispatch();
-    const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
-    const get_AllMatches = useSelector(({ teamList }) => teamList.teamList.getAllMatches);
-    const get_Matches = useSelector(({ teamList }) => teamList.teamList.getMatches);
+    const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
+    const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
+    // const get_Matches = useSelector(state => state.sportsReducers.getMatches);
 
     useEffect(() => {
         dispatch(getTypeList());
         dispatch(getAllMatches());
-        dispatch(getMatches());
+        // getMatches();
     }, [dispatch]);
 
     useEffect(() => {
@@ -105,19 +72,17 @@ function SideNav(props) {
         setIsCollapse3(undefined);
     }
     const availableSportTypes = get_AllMatches.data.availableSportTypes;
-    
-    // console.log('here1', get_AllMatches.data.outrightBetCompetitions);
-    // console.log('here2', get_Matches.data);
-    console.log('here1', get_AllMatches.data);
-
-    const filterSportList = (index) => {
-        sportTypeList.forEach(item => {
-            if(item.id == index){
-                console.log('name:',item.name);
-                return <p>{item.name}</p>
+    function getLeagueMatchCount(params) {
+        let sum = 0;
+        get_AllMatches.data.leagues.forEach(element => {
+            if (element.betradarSportId === params) {
+                sum = sum + element.leagueMatchCount
             }
         });
+        return sum;
     }
+    // console.log('here1', get_AllMatches.data);
+
     return (
         <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
             <div className='p-3'>
@@ -127,19 +92,29 @@ function SideNav(props) {
                 <div>Bets</div>
             </div>
             <div className='sidenav_lists'>
-                <p>Outrights</p>
-                <p>Highrights</p>
-                {availableSportTypes.map((availableSportType, index1) =>
+                <p>
+                    Outrights
+                    <span className="match-count">
+                        {get_AllMatches.data.totalOutrightsCount}
+                    </span>
+                </p>
+                <p>
+                    Highrights
+                    <span className="match-count">
+                        {get_AllMatches.data.totalHighLightsCount}
+                    </span>
+                </p>
+                {availableSportTypes && availableSportTypes.map((availableSportType, index1) =>
                     <div key={index1} className="sportstypes">
                         <p className={isCollapse1[index1] ? 'collapse' : ''} onClick={() => collapseFunc1(index1)}>
-                            {/* {availableSportType} */}
-                            Football
-                            {(availableSportType) => filterSportList(availableSportType)}
-                            <span className="match-count">100</span>
+                            {SportTypeList[availableSportType - 1].name}
+                            <span className="match-count">
+                                {getLeagueMatchCount(availableSportType)}
+                            </span>
                         </p>
                         <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
                             {get_AllMatches.data.leagues && get_AllMatches.data.leagues.map((item, index2) =>
-                                item.betradarSportId == availableSportType ?
+                                item.betradarSportId === availableSportType ?
                                     <li key={index2}>
                                         <p className={isCollapse2[index2] ? 'collapse' : ''} onClick={() => collapseFunc2(index2)}>
                                             {item.name}
@@ -148,7 +123,7 @@ function SideNav(props) {
                                         <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
                                             {item.leagueList.map((league, index3) =>
                                                 <li key={index3}>
-                                                    <p className={isCollapse3 == index3 ? 'collapse' : ''} onClick={() => setIsCollapse3(index3)}>
+                                                    <p className={isCollapse3 === index3 ? 'collapse' : ''} onClick={() => setIsCollapse3(index3)}>
                                                         {league.name}<span className="match-count">{league.leagueMatchCount}</span>
                                                     </p>
                                                 </li>
@@ -185,4 +160,4 @@ function SideNav(props) {
         </div>
     );
 }
-export default withReducer('teamList', reducer)(SideNav)
+export default SideNav 

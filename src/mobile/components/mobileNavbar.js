@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import withReducer from 'store/withReducer';
-import reducer from 'store/sports';
 import SideNav from './sideNav'
 import './styles/mobileNavbar.css'
 
@@ -16,4 +14,4 @@ function MobileNavbar() {
         </div>
     );
 }
-export default withReducer('teamList', reducer)(MobileNavbar);
+export default MobileNavbar;

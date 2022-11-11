@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { SubMobileNavbar, MobileFooter, LeagueContent } from 'mobile/components'
+import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from 'mobile/components'
+
 import './mHome.css'
 const tipTypesList = [
     [1, 'X', 2],
@@ -125,6 +126,7 @@ function MHome() {
     }
     return (
         <>
+            <MobileNavbar />
             <SubMobileNavbar parentCallback={getTipTypes} />
             <div className='m_content'>
                 <div className='m_header'>

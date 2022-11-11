@@ -2,43 +2,43 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Utils } from 'utils';
 import { useMediaQuery } from 'usehooks-ts'
+//admin
+import { AdminConfig } from 'admin/adminConfig'
 //desktop view
 import { SportsBettingConfig } from 'main/sportsBetting/sportsBettingConfig'
 import { InPlayConfig } from 'main/inPlay/inPlayConfig'
 import { OutRightsConfig } from 'main/outRights/outRightsConfig'
 import { ResultsConfig } from 'main/results/resultsConfig'
-import { ErrorsConfig } from 'main/errors/errorsConfig'
 // mobile view
 import { MHomeConfig } from 'mobile/pages/home/mHomeConfig'
 import { MLoginConfig } from 'mobile/pages/login/mLoginConfig'
 
+import Error404 from 'main/errors/error404'
 const routeConfigs = [
+    AdminConfig,
     SportsBettingConfig,
     InPlayConfig,
     OutRightsConfig,
     ResultsConfig,
-    ErrorsConfig,
 ];
 //mobile case
 const m_routeConfigs = [
+    AdminConfig,
     MLoginConfig,
     MHomeConfig,
 ]
 function customRoutes() {
-    const isMobile = useMediaQuery('(min-width: 640px)')
+    const isMobile = useMediaQuery('(max-width: 640px)')
     return ([
-        ...Utils.generateRoutesFromConfigs(isMobile ? routeConfigs : m_routeConfigs),
+        ...Utils.generateRoutesFromConfigs(isMobile ? m_routeConfigs : routeConfigs),
         {
             path: '/',
-            component: () => isMobile ? <Redirect to="/sportsbetting" /> : <Redirect to="/m_home" />
-
+            exact: true,
+            component: () => isMobile ? <Redirect to="/m_home" /> : <Redirect to="/sportsbetting" />
         },
         {
-            component: () => <Redirect to="/error404" />
+            component: Error404
         },
-        {
-            component: () => <Redirect to="/error500" />
-        }
     ])
 }
 

@@ -1,8 +1,10 @@
 import React from 'react';
+import { MobileNavbar } from 'mobile/components'
 import './mLogin.css'
 function MLogin() {
     return (
         <>
+            <MobileNavbar/>
             <div className='login_header'>
                 <div className='d-flex justify-content-center'>Login</div>
                 <div className='d-flex justify-content-end'><a href='/m_home'><i className="fa fa-times-circle-o" aria-hidden="true"></i></a></div>

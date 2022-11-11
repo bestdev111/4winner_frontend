@@ -1,6 +1,6 @@
 import React from 'react';
 import './results.css'
-import { RightPanel } from 'components';
+import { Navbar, RightPanel } from 'components';
 const sportslist = [
     { sportsname: 'Football', value: 1 },
     { sportsname: 'Basketball', value: 2 },
@@ -62,50 +62,53 @@ const leagues = [
 function Results() {
 
     return (
-        <div className='container-fluid d-flex flex-column ptt'>
-            <div className='row'>
-                <div className='left px-2 float-left'></div>
-                <div className='center px-2 float-left'>
-                    <div className='match'>
-                        <div className='match-header'>
-                            <select id="betradarSportTypes" className='sporttype'>
-                                {
-                                    sportslist.map((item, index) => <option key={index} value={item.value}>{item.sportsname}</option>)
-                                }
-                            </select>
-                            <select id='dates'>
-                                {
-                                    date_list.map((item, index) => <option value={item.value} key={index}>{item.date}</option>)
-                                }
-                            </select>
-                        </div>
-                        <div className='match-content'>
-                            {leagues.map((item, index) =>
-                                <div className='league-table' key={index}>
-                                    <div className='league-title'>{item.title}</div>
+        <>
+            <Navbar/>
+            <div className='container-fluid d-flex flex-column ptt'>
+                <div className='row'>
+                    <div className='left px-2 float-left'></div>
+                    <div className='center px-2 float-left'>
+                        <div className='match'>
+                            <div className='match-header'>
+                                <select id="betradarSportTypes" className='sporttype'>
                                     {
-                                        item.matches.map((match, key) =>
-                                            <div className='finished-match-item d-flex justify-content-between' key={key}>
-                                                <div>{match.date}</div>
-                                                <div>{match.team1}</div>
-                                                <div>{match.team2}</div>
-                                                <div>{match.interim}</div>
-                                                <div>{match.final}</div>
-                                            </div>
-                                        )
+                                        sportslist.map((item, index) => <option key={index} value={item.value}>{item.sportsname}</option>)
                                     }
+                                </select>
+                                <select id='dates'>
+                                    {
+                                        date_list.map((item, index) => <option value={item.value} key={index}>{item.date}</option>)
+                                    }
+                                </select>
+                            </div>
+                            <div className='match-content'>
+                                {leagues.map((item, index) =>
+                                    <div className='league-table' key={index}>
+                                        <div className='league-title'>{item.title}</div>
+                                        {
+                                            item.matches.map((match, key) =>
+                                                <div className='finished-match-item d-flex justify-content-between' key={key}>
+                                                    <div>{match.date}</div>
+                                                    <div>{match.team1}</div>
+                                                    <div>{match.team2}</div>
+                                                    <div>{match.interim}</div>
+                                                    <div>{match.final}</div>
+                                                </div>
+                                            )
+                                        }
 
-                                </div>
+                                    </div>
 
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className='right px-2 float-left'>
-                    <RightPanel />
+                    <div className='right px-2 float-left'>
+                        <RightPanel />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 };
 export default Results;

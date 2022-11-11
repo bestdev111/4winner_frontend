@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TreeView from 'react-treeview';
-import withReducer from 'store/withReducer';
-import reducer from 'store/sports';
-import { getTypeList } from 'store/sports/teamListSlice'
+// import withReducer from 'store/withReducer';
+// import reducer from 'store/reducers/rootReducers';
+import { getTypeList } from 'store/actions/sportsActions'
 import './styles/leftMenu.css'
 
 function LeftMenu(props) {
-    const sports_team_list = useSelector(({ teamList }) => teamList.teamList.sportsTeamList);
+    const sports_team_list = useSelector(state => state.sportsReducers.getTypeList);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTypeList());
@@ -76,4 +76,5 @@ function LeftMenu(props) {
     );
 }
 
-export default withReducer('teamList', reducer)(LeftMenu);
+// export default withReducer('teamList', reducer)(LeftMenu);
+export default LeftMenu;
