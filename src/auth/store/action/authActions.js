@@ -6,11 +6,16 @@ import {
   GET_ERRORS,
   SET_CURRENT_USER
 } from 'store/actions/actionTypes';
+import { toast } from "react-toastify";
 
 export const registerUser = user => (dispatch) => {
   axios
     .post('/user/register', user)
     .then((res) => {
+      toast.success("Register Success", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        className: 'toast-message'
+      });
       dispatch({
         type: USER_REGISTER,
         payload: {
@@ -19,6 +24,10 @@ export const registerUser = user => (dispatch) => {
       });
     })
     .catch((err) => {
+      toast.error("Incorrect!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        className: 'toast-message'
+      });
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
@@ -34,6 +43,10 @@ export const loginUser = user => (dispatch) => {
       localStorage.setItem('jwtToken', token);
       SetAuthToken(token);
       const decoded = jwtDecode(token);
+      toast.success("Login Success!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        className: 'toast-message'
+      });
       dispatch(setCurrentUser(decoded));
     })
     .catch((err) => {

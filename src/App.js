@@ -7,9 +7,11 @@ import jwtDecode from 'jwt-decode';
 import createStore from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
-import {SetAuthToken} from './utils';
+import { SetAuthToken } from './utils';
 import { Loading } from 'utils'
 import { setCurrentUser, logoutUser } from 'auth/store/action/authActions'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore()
 if (localStorage.jwtToken) {
@@ -30,9 +32,10 @@ function App() {
     <AppContext.Provider value={{ real_routes }}>
       <Provider store={store}>
         <Suspense fallback={<Loading />}>
-          <Router history={history}>
-            {renderRoutes(real_routes)}
-          </Router>
+            <Router history={history}>
+              {renderRoutes(real_routes)}
+            </Router>
+          <ToastContainer autoClose={4000} />
         </Suspense>
       </Provider>
     </AppContext.Provider>
