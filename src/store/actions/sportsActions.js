@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE, GET_ERRORS } from './actionTypes';
 import SportTypeList from 'utils/dataUtils'
-
+import { toast } from "react-toastify";
 const topLeague = [
     { m_icon: 'assets/images/micons/champions_league1.png', type: 'CHAMPIONS LEAGUE' },
     { m_icon: 'assets/images/micons/europe_league.png', type: 'EUROPA LEAGUE' },
@@ -27,7 +27,11 @@ const topLeague = [
 export const getAllMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get('/user/getAllMatches');
+            const response = await axios.get('/sports/getAllMatches');
+            toast.success("getAllMatches Success", {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                className: 'toast-message'
+            });
             return dispatch({
                 type: GET_ALL_MATCHES,
                 payload: response
@@ -43,7 +47,7 @@ export const getAllMatches = () => {
 export const getMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get('/user/getMatches');
+            const response = await axios.get('/sports/getMatches');
             return dispatch({
                 type: GET_MATCHES,
                 payload: response
@@ -59,7 +63,7 @@ export const getMatches = () => {
 export const getTypeList = () => {
     return async dispatch => {
         try {
-            const response = await axios.get('/user/getMatches');
+            const response = await axios.get('/sports/getMatches');
             return dispatch({
                 type: GET_TYPE_LIST,
                 payload: SportTypeList
@@ -75,7 +79,7 @@ export const getTypeList = () => {
 export const getTopLeague = () => {
     return async dispatch => {
         try {
-            const response = await axios.get('/user/getMatches');
+            const response = await axios.get('/sports/getMatches');
             return dispatch({
                 type: GET_TOP_LEAGUE,
                 payload: topLeague

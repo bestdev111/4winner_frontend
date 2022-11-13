@@ -50,6 +50,10 @@ export const loginUser = user => (dispatch) => {
       dispatch(setCurrentUser(decoded));
     })
     .catch((err) => {
+      toast.error("Login Error!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+        className: 'toast-message'
+      });
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data

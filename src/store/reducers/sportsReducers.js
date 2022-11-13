@@ -14,13 +14,11 @@ export default function (state = initialState, action) {
                 getAllMatches: action.payload.data
             };
         case GET_TYPE_LIST:
-            console.log('GET_TYPE_LIST', action.payload);
             return {
                 ...state,
                 getTypeList: action.payload
             };
         case GET_TOP_LEAGUE:
-            console.log('GET_TOP_LEAGUE', action.payload);
             return {
                 ...state,
                 getTopLeague: action.payload
