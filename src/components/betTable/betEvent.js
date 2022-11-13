@@ -5,7 +5,7 @@ const Event = (props) => {
     return (
         <div className="event">
             <div className="date"><p>{props.date}</p></div>
-            {isLive? 
+            {isLive ?
                 <div className="time live-score"><p>{props.time}</p></div>
                 : <div className="time"><p>{props.time}</p></div>
             }
@@ -15,14 +15,19 @@ const Event = (props) => {
                 </div>
                     : <div className="slideout open">
                         <div className="fade-in show-in">
-                            <img src="../assets/images/icons/analytic-icon.svg" alt="img"/>
+                            <img src="../assets/images/icons/analytic-icon.svg" alt="img" />
                             <img src="../assets/images/icons/chart-icon.svg" alt="img" />
                         </div>
                     </div>
             }
             {
-                open ? <div className="detail-caret detail-caret-right" onClick={() => setOpen(!open)}></div>
-                    : <div className="detail-caret detail-caret-left" onClick={() => setOpen(!open)}></div>
+                open ?
+                    <div className="detail-caret detail-caret-right" onClick={() => setOpen(!open)}>
+                        {/* <img src="assets/images/icons/caret-right-solid-white.svg" alt="" /> */}
+                    </div>
+                    : <div className="detail-caret detail-caret-left" onClick={() => setOpen(!open)}>
+                        {/* <img src="assets/images/icons/caret-left-solid.svg" alt="" /> */}
+                    </div>
             }
             <div className="team-name"><p>{props.teamname}</p></div>
             <div className="more-odds">

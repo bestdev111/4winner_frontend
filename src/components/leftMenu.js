@@ -93,8 +93,8 @@ function LeftMenu(props) {
                                 {/* <span className="">
                                     {getLeagueMatchCount(availableSportType)}
                                 </span> */}
-                                    <img className='leftmenu-icon' src='assets/images/icons/caret-right-solid.svg'/>
-                                    <img className='leftmenu-icon' src={SportTypeList[availableSportType - 1].icon}/>
+                                    <img className='leftmenu-icon' src={isCollapse1[index1] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'}/>
+                                    <img className='sport-icon' src={SportTypeList[availableSportType - 1].icon}/>
                                 {SportTypeList[availableSportType - 1].name}
                             </p>
                             <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
@@ -102,12 +102,13 @@ function LeftMenu(props) {
                                     item.betradarSportId === availableSportType ?
                                         <li key={index2}>
                                             <p className={isCollapse2[index2] ? 'collapsed lists' : 'lists'} onClick={() => collapseFunc2(index2)}>
+                                                <img className='leftmenu-icon' src={isCollapse2[index2] ? 'assets/images/icons/caret-down-solid-white.svg' : 'assets/images/icons/caret-right-solid-white.svg'} />
                                                 {item.name}
                                             </p>
                                             <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
                                                 {item.leagueList.map((league, index3) =>
                                                     <li key={index3}>
-                                                        <p className={isCollapse3 === index3 ? 'collapsed lists' : 'lists'} onClick={() => setIsCollapse3(index3)}>
+                                                        <p className={isCollapse3 === index3 ? 'collapsed lists last-lists' : 'lists last-lists'} onClick={() => setIsCollapse3(index3)}>
                                                             {league.name}
                                                         </p>
                                                     </li>
