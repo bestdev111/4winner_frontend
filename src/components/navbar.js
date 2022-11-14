@@ -10,6 +10,7 @@ const menu = [
     { url: '/results', title: 'Results' },
     { url: '/slots', title: 'Slots' },
     { url: '/livecasino', title: 'Live Casino' },
+    { url: '/adminpanel', title: 'Admin Panel' },
 ]
 
 const customStyles = {
@@ -100,7 +101,6 @@ function Navbar() {
                         contentLabel="Example Modal"
                         shouldCloseOnOverlayClick={false}
                         overlayClassName='overlay'
-
                     >
                         <div className="modal-header">
                             <h5 className="modal-title">LANGUAGE SELECTOR</h5>

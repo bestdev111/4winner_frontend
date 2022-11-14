@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE, GET_ERRORS } from './actionTypes';
 import SportTypeList from 'utils/dataUtils'
-import { toast } from "react-toastify";
+import ToastService from 'service/toast.service';
+
 const topLeague = [
     { m_icon: 'assets/images/micons/champions_league1.png', type: 'CHAMPIONS LEAGUE' },
     { m_icon: 'assets/images/micons/europe_league.png', type: 'EUROPA LEAGUE' },
@@ -21,17 +22,13 @@ const topLeague = [
     { m_icon: '', type: 'World Cup Group F' },
     { m_icon: '', type: 'World Cup Group G' },
     { m_icon: '', type: 'World Cup Group H' },
-
 ]
 
 export const getAllMatches = () => {
     return async dispatch => {
         try {
             const response = await axios.get('/sports/getAllMatches');
-            toast.success("getAllMatches Success", {
-                position: toast.POSITION.BOTTOM_RIGHT,
-                className: 'toast-message'
-            });
+            ToastService("getAllMatches Success");
             return dispatch({
                 type: GET_ALL_MATCHES,
                 payload: response

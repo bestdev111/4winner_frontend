@@ -6,59 +6,44 @@ import {
   GET_ERRORS,
   SET_CURRENT_USER
 } from 'store/actions/actionTypes';
-import { toast } from "react-toastify";
+import AuthService from 'service/auth.service';
+import ToastService from 'service/toast.service';
 
-export const registerUser = user => (dispatch) => {
-  axios
-    .post('/user/register', user)
-    .then((res) => {
-      toast.success("Register Success", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'toast-message'
-      });
-      dispatch({
+export const registerUser = user => {
+  return async dispatch => {
+    try {
+      const response = await AuthService.register(user);
+      ToastService("Register Success");
+      return dispatch({
         type: USER_REGISTER,
         payload: {
-          success: true
+          success: true,
         }
       });
-    })
-    .catch((err) => {
-      toast.error("Incorrect!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'toast-message'
-      });
-      dispatch({
+    } catch (error) {
+      console.log(error.response.data);
+      ToastService("Incorrect!");
+      return dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: error.response.data
       });
-    });
+    }
+  }
 };
-
-export const loginUser = user => (dispatch) => {
-  axios
-    .post('/user/login', user)
-    .then((res) => {
-      const { token } = res.data;
-      localStorage.setItem('jwtToken', token);
-      SetAuthToken(token);
-      const decoded = jwtDecode(token);
-      toast.success("Login Success!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'toast-message'
-      });
-      dispatch(setCurrentUser(decoded));
-    })
-    .catch((err) => {
-      toast.error("Login Error!", {
-        position: toast.POSITION.BOTTOM_RIGHT,
-        className: 'toast-message'
-      });
-      dispatch({
+export const loginUser = user => {
+  return async dispatch => {
+    try {
+      const response = await AuthService.login(user);
+      ToastService("Login Success!");
+      return dispatch(setCurrentUser(response));
+    } catch (error) {
+      ToastService("Login Error!");
+      return dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: error.response.data
       });
-    });
+    }
+  }
 };
 
 export const setCurrentUser = decoded => ({
@@ -84,8 +69,6 @@ export const updateCurrentUser = (
     .catch(err => console.log(err));
 
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem('jwtToken');
-  SetAuthToken(false);
+  AuthService.logout();
   dispatch(setCurrentUser({}));
-  window.location.href = '/sportsbetting';
 };
