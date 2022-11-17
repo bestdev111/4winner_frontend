@@ -1,8 +1,8 @@
 import {lazy} from 'react'
-import { authRoles } from 'auth';
+import { authRoles } from '../../auth';
 
 export const SportsBettingConfig = {
-    auth: authRoles.admin,
+    // auth: authRoles.admin,
     routes: [
         {
             path: '/sportsbetting',

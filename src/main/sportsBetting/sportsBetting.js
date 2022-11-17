@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, RightPanel, LeftMenu, Divider, BetTable } from 'components';
+import { Navbar, RightPanel, LeftMenu, Divider, BetTable } from '../../components';
 import './sportsBetting.css'
 function SportsBetting() {
     return(

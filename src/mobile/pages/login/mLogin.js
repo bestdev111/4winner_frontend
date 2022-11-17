@@ -1,5 +1,5 @@
 import React from 'react';
-import { MobileNavbar } from 'mobile/components'
+import { MobileNavbar } from '../../../mobile/components'
 import './mLogin.css'
 function MLogin() {
     return (

@@ -44,7 +44,9 @@
     width: 100%;
     float: left;
 }
-
+.match-group>.table-content>.event-list>.event:hover {
+    background: #ddd;
+}
 .match-group>.table-content>.event-list>.event>div {
     align-items: center;
     padding: 0px 17px;
@@ -59,7 +61,7 @@
 .match-group>.table-content>.event-list>.event>.date {
     border-left: 0px;
     float: left;
-    max-width: 6%;
+    /* max-width: 6%; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

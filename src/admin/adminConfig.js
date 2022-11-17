@@ -1,8 +1,8 @@
-import { authRoles } from 'auth';
+import { authRoles } from '../auth';
 import { lazy } from 'react';
 
 export const AdminConfig = {
-    auth: authRoles.admin,
+    auth: authRoles.cashier,
     routes: [
         {
             path: '/adminpanel',

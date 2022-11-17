@@ -1,6 +1,6 @@
 import React from 'react';
 import './outRights.css'
-import { Navbar, RightPanel, LeftMenu, Divider, OutTable } from 'components';
+import { Navbar, RightPanel, LeftMenu, Divider, OutTable } from '../../components';
 const OutRights = () => (
     <>
         <Navbar/>

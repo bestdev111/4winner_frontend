@@ -1,17 +1,18 @@
 import React, { useState, } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, logoutUser } from 'auth/store/action/authActions'
+import { authRoles } from '../auth';
+import { loginUser, logoutUser } from '../auth/store/action/authActions'
 import './styles/navbar.css'
-const menu = [
-    { url: '/sportsbetting', title: 'Sports Betting' },
-    { url: '/inplay', title: 'In-Play' },
-    { url: '/outrights', title: 'Outrights' },
-    { url: '/results', title: 'Results' },
-    { url: '/slots', title: 'Slots' },
-    { url: '/livecasino', title: 'Live Casino' },
-    { url: '/adminpanel', title: 'Admin Panel' },
-]
+// const menu = [
+//     { url: '/sportsbetting', title: 'Sports Betting' },
+//     { url: '/inplay', title: 'In-Play' },
+//     { url: '/outrights', title: 'Outrights' },
+//     { url: '/results', title: 'Results' },
+//     { url: '/slots', title: 'Slots' },
+//     { url: '/livecasino', title: 'Live Casino' },
+//     { url: '/adminpanel', title: 'Admin Panel' },
+// ]
 
 const customStyles = {
     content: {
@@ -41,6 +42,22 @@ function Navbar() {
         dispatch(loginUser(user));
     }
     const userData = useSelector(state => state.authReducers.authReducer)
+    let menu = [];
+    if(userData.user !== null && userData.user.role !== null && userData.user.role !== 'user') {
+        menu = [
+            { url: '/adminpanel', title: 'Admin Panel' },
+        ]
+    }
+    else{
+        menu = [
+            { url: '/sportsbetting', title: 'Sports Betting' },
+            { url: '/inplay', title: 'In-Play' },
+            { url: '/outrights', title: 'Outrights' },
+            { url: '/results', title: 'Results' },
+            { url: '/slots', title: 'Slots' },
+            { url: '/livecasino', title: 'Live Casino' },
+        ]
+    }
     return (
         <div className='header'>
             <div className='top'>

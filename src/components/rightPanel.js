@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ToastService from 'service/toast.service';
+import ToastService from '../service/toast.service';
 import './styles/rightPanel.css'
 const RightPanel = () => {
     const [open, setOpen] = useState(false);
@@ -10,18 +10,18 @@ const RightPanel = () => {
     
     const amountCount = (param) => {
         param === 1 ? setAmount(amount + 5.00) : 
-            (amount !== 0 ? setAmount(amount - 5.00) : setAmount(amount))
+            (amount !== 5 ? setAmount(amount - 5.00) : setAmount(amount))
         ;
     }
     const placeBet = () => {
         if (!userData.isAuthenticated) {
-            ToastService("Please Login");
+            ToastService("Please Login", 'error');
             return;
         }
         setBet(false)
     }
     const betConfirm =()=> {
-        ToastService('betConfirm')
+        ToastService('betConfirm', 'success')
     }
     return (
         <div className='betpanel'>

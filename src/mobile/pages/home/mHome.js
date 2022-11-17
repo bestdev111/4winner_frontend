@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from 'mobile/components'
+import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from '../../../mobile/components'
 
 import './mHome.css'
 const tipTypesList = [

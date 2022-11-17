@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE, GET_ERRORS } from './actionTypes';
-import SportTypeList from 'utils/dataUtils'
-import ToastService from 'service/toast.service';
+import SportTypeList from '../../utils/dataUtils'
+import ToastService from '../../service/toast.service';
 
 const topLeague = [
     { m_icon: 'assets/images/micons/champions_league1.png', type: 'CHAMPIONS LEAGUE' },

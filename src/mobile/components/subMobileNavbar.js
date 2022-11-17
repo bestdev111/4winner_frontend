@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import withReducer from 'store/withReducer';
 // import reducer from 'store/reducers/rootReducers';
-import { getTopLeague } from 'store/actions/sportsActions'
+import { getTopLeague } from '../../store/actions/sportsActions'
 import './styles/mobileNavbar.css'
 
 const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];

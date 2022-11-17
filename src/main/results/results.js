@@ -1,6 +1,6 @@
 import React from 'react';
 import './results.css'
-import { Navbar, RightPanel } from 'components';
+import { Navbar, RightPanel } from '../../components';
 const sportslist = [
     { sportsname: 'Football', value: 1 },
     { sportsname: 'Basketball', value: 2 },

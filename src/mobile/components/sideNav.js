@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypeList, getAllMatches, getMatches } from 'store/actions/sportsActions'
+import { getTypeList, getAllMatches, getMatches } from '../../store/actions/sportsActions'
 
 const lang_list = [
     { id: 0, name: 'de_DE', icon: 'assets/images/flags/de_DE.png', title: 'Deutsch' },

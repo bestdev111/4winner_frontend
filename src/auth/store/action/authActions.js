@@ -1,19 +1,19 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import {SetAuthToken} from 'utils';
+import {SetAuthToken} from '../../../utils';
 import {
   USER_REGISTER,
   GET_ERRORS,
   SET_CURRENT_USER
-} from 'store/actions/actionTypes';
-import AuthService from 'service/auth.service';
-import ToastService from 'service/toast.service';
+} from '../../../store/actions/actionTypes';
+import AuthService from '../../../service/auth.service';
+import ToastService from '../../../service/toast.service';
 
 export const registerUser = user => {
   return async dispatch => {
     try {
       const response = await AuthService.register(user);
-      ToastService("Register Success");
+      ToastService("Register Success", 'success');
       return dispatch({
         type: USER_REGISTER,
         payload: {
@@ -21,8 +21,8 @@ export const registerUser = user => {
         }
       });
     } catch (error) {
-      console.log(error.response.data);
-      ToastService("Incorrect!");
+      console.log(error.response.data.error, typeof error.response.data.error);
+      ToastService(error.response.data.error, error);
       return dispatch({
         type: GET_ERRORS,
         payload: error.response.data
@@ -34,10 +34,10 @@ export const loginUser = user => {
   return async dispatch => {
     try {
       const response = await AuthService.login(user);
-      ToastService("Login Success!");
+      ToastService("Login Success!", "success");
       return dispatch(setCurrentUser(response));
     } catch (error) {
-      ToastService("Login Error!");
+      ToastService("Login Error!", 'error');
       return dispatch({
         type: GET_ERRORS,
         payload: error.response.data

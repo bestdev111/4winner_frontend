@@ -1,6 +1,6 @@
 import React from 'react';
 import './inPlay.css'
-import { Navbar, RightPanel, Divider, BetTable } from 'components';
+import { Navbar, RightPanel, Divider, BetTable } from '../../components';
 const InPlay = () => (
     <>
         <Navbar/>

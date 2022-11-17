@@ -7,9 +7,8 @@ import jwtDecode from 'jwt-decode';
 import createStore from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
-import { SetAuthToken } from './utils';
-import { Loading } from 'utils'
-import { setCurrentUser, logoutUser } from 'auth/store/action/authActions'
+import { SetAuthToken, Loading, Authorization } from './utils';
+import { setCurrentUser, logoutUser } from './auth/store/action/authActions'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -22,7 +21,7 @@ if (localStorage.jwtToken) {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     store.dispatch(logoutUser());
-    window.location.href = '/sportsbetting';
+    window.location.href = '/';
   }
 }
 
@@ -33,7 +32,9 @@ function App() {
       <Provider store={store}>
         <Suspense fallback={<Loading />}>
             <Router history={history}>
-              {renderRoutes(real_routes)}
+            <Authorization routes={real_routes}>
+                {renderRoutes(real_routes)}
+                </Authorization>
             </Router>
           <ToastContainer autoClose={4000} />
         </Suspense>
