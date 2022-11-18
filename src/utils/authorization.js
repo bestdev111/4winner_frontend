@@ -38,8 +38,7 @@ class Authorization extends Component {
 
         const matched = routes ? matchRoutes(routes, pathname)[0] : false;
         // if (matched && userData) {
-            console.info('custom1:', matched.route.auth);
-            console.info('custom---:', userData);
+            console.info('custom1:', matched.route);
             console.info('custom2:', userData ? userData.role: '');
         //     let b = this.hasPermission(matched.route.auth, userData.role);
         // }

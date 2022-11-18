@@ -105,4 +105,5 @@
 .custom-select,
 .custom-select option {
     height: 50px !important;
+    border-radius: 5px;
 }

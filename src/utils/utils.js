@@ -36,7 +36,7 @@ class Utils {
             console.info("auth is empty[]:", authArr);
             return !userRole || userRole.length === 0;
         }
-        console.info("auth arr:", authArr);
+        console.info("auth arr:", authArr, authArr.includes(userRole));
         if (userRole && Array.isArray(userRole)) {
             return authArr.some((r) => userRole.indexOf(r) >= 0);
         }

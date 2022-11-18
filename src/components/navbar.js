@@ -4,16 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authRoles } from '../auth';
 import { loginUser, logoutUser } from '../auth/store/action/authActions'
 import './styles/navbar.css'
-// const menu = [
-//     { url: '/sportsbetting', title: 'Sports Betting' },
-//     { url: '/inplay', title: 'In-Play' },
-//     { url: '/outrights', title: 'Outrights' },
-//     { url: '/results', title: 'Results' },
-//     { url: '/slots', title: 'Slots' },
-//     { url: '/livecasino', title: 'Live Casino' },
-//     { url: '/adminpanel', title: 'Admin Panel' },
-// ]
-
+let menu = [
+    { url: '/sportsbetting', title: 'Sports Betting' },
+    { url: '/inplay', title: 'In-Play' },
+    { url: '/outrights', title: 'Outrights' },
+    { url: '/results', title: 'Results' },
+    { url: '/slots', title: 'Slots' },
+    { url: '/livecasino', title: 'Live Casino' },
+]
 const customStyles = {
     content: {
         position: 'fixed',
@@ -42,20 +40,13 @@ function Navbar() {
         dispatch(loginUser(user));
     }
     const userData = useSelector(state => state.authReducers.authReducer)
-    let menu = [];
-    if(userData.user !== null && userData.user.role !== null && userData.user.role !== 'user') {
+    let userRole = 'user'
+    if (userData && userData.user !== null) {
+        userRole = userData.user.role;
+    }
+    if (authRoles.cashier.includes(userRole)) {
         menu = [
             { url: '/adminpanel', title: 'Admin Panel' },
-        ]
-    }
-    else{
-        menu = [
-            { url: '/sportsbetting', title: 'Sports Betting' },
-            { url: '/inplay', title: 'In-Play' },
-            { url: '/outrights', title: 'Outrights' },
-            { url: '/results', title: 'Results' },
-            { url: '/slots', title: 'Slots' },
-            { url: '/livecasino', title: 'Live Casino' },
         ]
     }
     return (

@@ -43,6 +43,11 @@ function LeftMenu(props) {
     if (get_AllMatches.data) {
         availableSportTypes = get_AllMatches.data.availableSportTypes;
     }
+    const iconGet = (index) => {
+        if (SportTypeList && SportTypeList[index])
+            return SportTypeList[index].icon;
+        return ''
+    }
     return (
         <div>
             <div className='menu-header'>
@@ -55,7 +60,7 @@ function LeftMenu(props) {
                             <div key={index1} className="sportstypes">
                                 <p className={isCollapse1[index1] ? 'collapsed first-lists' : 'first-lists'} onClick={() => collapseFunc1(index1)}>
                                     <img className='leftmenu-icon' src={isCollapse1[index1] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'} />
-                                    <img className='sport-icon' src={SportTypeList && SportTypeList[availableSportType - 1].icon ? SportTypeList[availableSportType - 1].icon : ''} />
+                                    <img className='sport-icon' src={iconGet(availableSportType - 1)} />
                                     {SportTypeList[availableSportType - 1].name}
                                 </p>
                                 <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
