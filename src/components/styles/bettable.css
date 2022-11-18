@@ -136,9 +136,6 @@
     float: left;
     color: #000;
     cursor: pointer;
-    /* background: #eee;
-    background: -webkit-gradient(linear, 0 0, 0 bottom, from(#fefefe), to(#dadada));
-    background: -moz-linear-gradient(#fefefe, #dadada); */
     background: linear-gradient(180deg, #fefefe, #dadada);
     border: 1px solid #5a5a5a;
     border-radius: 3px;
@@ -148,6 +145,17 @@
     text-shadow: 0 1px 0 #fafafa;
     display: flex;
     justify-content: space-around;
+}
+.match-group>.table-content>.event-list>.event>.odds>.odd:hover {
+    box-shadow: 0 0 1px 1px #777;
+}
+.match-group>.table-content>.event-list>.event>.odds>.odd.selected {
+    background: #f69f16;
+    color: #fff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: none;
 }
 .detail-caret-right {
     background-image: url(./caret-right-solid.svg);
@@ -308,4 +316,69 @@
     background-color: #38393c;
     color: #d69309 !important;
     font-weight: 900;
+}
+/* bet event */
+
+.match-details {
+    width: calc(100% - 20px);
+}
+.match-bets {
+    margin-top: 10px;
+    margin-left: -20px;
+}
+.match-details .bet-group {
+    width: calc(50% - 25px);
+    border: 1px solid #aaa;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: left;
+    background: #fff;
+    overflow: hidden;
+}
+.match-details .bet-group .header {
+    background-image: linear-gradient(180deg, #f3f3f3 0, #ddd);
+    padding: 7px;
+    font-weight: 700;
+    box-shadow: 0 6px 3px -3px #777;
+    color: #333;
+}
+.match-details .bet-group .bets {
+    margin-top: 5px;
+}
+.match-details .bet-group .bets .bet {
+    margin-bottom: 5px;
+    color: #ffe680;
+}
+.match-group>.content .event-list .event .odds {
+    text-align: center;
+    float: right;
+    padding: 5px;
+    max-width: 25%;
+}
+.match-details .bet-group .bets .bet .odds {
+    float: none;
+    width: calc(100% - 20px);
+    max-width: 100%;
+}
+.match-details .bet-group .odds a {
+    border-radius: 3px;
+    border: 1px solid #777;
+    padding: 5px;
+    margin: 5px;
+    width: calc(100% - 20px);
+    float: left;
+    color: #000;
+}
+.match-details .bet-group .odds a:hover {
+    box-shadow: 0 0 1px 1px #777;
+}
+.match-details .bet-group .odds a.selected {
+    background-color: #f69f16;
+    color: #fff;
+}
+.push-left {
+    float: left;
+}
+.push-right {
+    float: right !important;
 }

@@ -1,4 +1,4 @@
-import React, { useState, } from 'react'
+import React, { useEffect, useState, } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { authRoles } from '../auth';
@@ -32,6 +32,8 @@ function Navbar() {
     const [inputName, setInputName] = useState('');
     const [inputPass, setInputPass] = useState('');
     const [openModal, setOpenModal] = useState(false);
+    const [lang, setLang] = useState('en_US');
+
     const login = () => {
         const user = {
             name: inputName,
@@ -40,6 +42,12 @@ function Navbar() {
         dispatch(loginUser(user));
     }
     const userData = useSelector(state => state.authReducers.authReducer)
+    if (userData) {
+    }
+    useEffect(()=> {
+        console.log('lang:', lang);
+        // setLang(userData.user.lang);
+    }, lang)
     let userRole = 'user'
     if (userData && userData.user !== null) {
         userRole = userData.user.role;

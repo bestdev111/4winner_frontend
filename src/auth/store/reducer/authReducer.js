@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = user
     ? { isAuthenticated: true, user }
-    : { isAuthenticated: false, user: null, role: ''  };
+    : { isAuthenticated: false, user: null};
     
 export default function (state = initialState, action) {
     console.log(action.payload);

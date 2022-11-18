@@ -9,7 +9,6 @@ function Admin() {
     const [tab, setTab] = useState(0);
     const userData = useSelector(state => state.authReducers.authReducer.user)
     const userRole = userData ? userData.role : 'guest';
-    console.log(userRole);
     const tabList = [
         { title: 'Users', component: <UserRegister /> },
         { title: 'Betting', component: '' }

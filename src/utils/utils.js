@@ -17,7 +17,6 @@ class Utils {
             routes = routes.map((route) => {
                 let auth = config.auth ? [...config.auth] : [];
                 auth = route.auth ? [...auth, ...route.auth] : auth;
-                console.log('utils_auth', auth);
                 return {
                     ...route,
                     auth
