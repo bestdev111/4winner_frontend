@@ -29,14 +29,11 @@ class Utils {
     }
     static hasPermission(authArr, userRole) {
         if (authArr === null || authArr === undefined) {
-            console.info("auth is null || undefined:", authArr);
             return true;
         }
         if (authArr.length === 0) {
-            console.info("auth is empty[]:", authArr);
             return !userRole || userRole.length === 0;
         }
-        console.info("auth arr:", authArr, authArr.includes(userRole));
         if (userRole && Array.isArray(userRole)) {
             return authArr.some((r) => userRole.indexOf(r) >= 0);
         }

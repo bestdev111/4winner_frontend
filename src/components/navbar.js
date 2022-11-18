@@ -9,8 +9,8 @@ let menu = [
     { url: '/inplay', title: 'In-Play' },
     { url: '/outrights', title: 'Outrights' },
     { url: '/results', title: 'Results' },
-    { url: '/slots', title: 'Slots' },
-    { url: '/livecasino', title: 'Live Casino' },
+    // { url: '/slots', title: 'Slots' },
+    // { url: '/livecasino', title: 'Live Casino' },
 ]
 const customStyles = {
     content: {
