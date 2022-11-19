@@ -29,12 +29,12 @@ function App() {
   const real_routes = routes();
   return (
     <AppContext.Provider value={{ real_routes }}>
-      <Provider store={store}>
+      <Provider store={store} >
         <Suspense fallback={<Loading />}>
-            <Router history={history}>
-            <Authorization routes={real_routes}>
+          <Router history={history} lang={'en_US'}>
+              <Authorization routes={real_routes}>
                 {renderRoutes(real_routes)}
-                </Authorization>
+              </Authorization>
             </Router>
           <ToastContainer autoClose={4000} />
         </Suspense>

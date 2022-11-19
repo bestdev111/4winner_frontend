@@ -1,9 +1,13 @@
 import React, { useEffect, useState, } from 'react'
-import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import Modal from 'react-modal';
 import { authRoles } from '../auth';
-import { loginUser, logoutUser } from '../auth/store/action/authActions'
+import { loginUser, logoutUser, updateCurrentUser } from '../auth/store/action/authActions'
+import { Trans, withTranslation } from 'react-i18next';
+import { Language } from '../utils';
 import './styles/navbar.css'
+
 let menu = [
     { url: '/sportsbetting', title: 'Sports Betting' },
     { url: '/inplay', title: 'In-Play' },
@@ -17,7 +21,7 @@ const customStyles = {
         position: 'fixed',
         border: '1px solid rgba(0,0,0,.2)',
         width: '300px',
-        height: '350px',
+        height: '415px',
         inset: 'calc(15%) calc(50% - 150px)',
         padding: '10px',
         overflow: 'unset'
@@ -27,13 +31,21 @@ const customStyles = {
 const onClick = (e) => {
     localStorage.setItem('path', window.location.pathname);
 }
-function Navbar() {
+function Navbar(props) {
     const dispatch = useDispatch();
     const [inputName, setInputName] = useState('');
     const [inputPass, setInputPass] = useState('');
     const [openModal, setOpenModal] = useState(false);
-    const [lang, setLang] = useState('en_US');
-
+    const [currentLang, setCurrentLang] = useState();
+    const { i18n } = useTranslation();
+    const userData = useSelector(state => state.authReducers.authReducer)
+    useEffect(() => {
+        if (userData && userData.user) {
+            console.log('changelang');
+            setCurrentLang(Language[userData.user.lang])
+            i18n.changeLanguage(Language[userData.user.lang].name);
+        }
+    })
     const login = () => {
         const user = {
             name: inputName,
@@ -41,13 +53,6 @@ function Navbar() {
         };
         dispatch(loginUser(user));
     }
-    const userData = useSelector(state => state.authReducers.authReducer)
-    if (userData) {
-    }
-    useEffect(()=> {
-        console.log('lang:', lang);
-        // setLang(userData.user.lang);
-    }, lang)
     let userRole = 'user'
     if (userData && userData.user !== null) {
         userRole = userData.user.role;
@@ -57,11 +62,25 @@ function Navbar() {
             { url: '/adminpanel', title: 'Admin Panel' },
         ]
     }
+    const changeLanguage = (param, index) => {
+        i18n.changeLanguage(param);
+        setOpenModal(false)
+        if (userData && userData.user) {
+            let userId = userData.user.userId;
+            const data = {
+                userId: userId,
+                lang: index
+            }
+            dispatch(updateCurrentUser(data))
+        }
+        setCurrentLang(Language[index])
+    }
+    console.log('changelang2', currentLang);
     return (
         <div className='header'>
             <div className='top'>
                 <div className='logo'>
-                    <img src='' alt=''/>
+                    <img src='' alt='' />
                 </div>
                 <form
                     className='login_form'
@@ -69,12 +88,12 @@ function Navbar() {
                     {!userData.isAuthenticated ?
                         <div>
                             <div className='textbox'>
-                                <input type='text' className='inputbox' placeholder='Username' name='name' value={inputName} onChange={(e)=>setInputName(e.target.value)}/>
+                                <input type='text' className='inputbox' placeholder='Username' name='name' defaultValue={inputName} onChange={(e) => setInputName(e.target.value)} />
                             </div>
                             <div className='textbox'>
-                                <input type='text' className='inputbox' placeholder='Password' name='password' value={inputPass} onChange={(e)=>setInputPass(e.target.value)} />
+                                <input type='text' className='inputbox' placeholder='Password' name='password' defaultValue={inputPass} onChange={(e) => setInputPass(e.target.value)} />
                             </div>
-                            <input className='login_btn' type='button' value='Login' onClick={() => login()} />
+                            <input className='login_btn' type='button' defaultValue='Login' onClick={() => login()} />
                         </div>
                         : <div className='logined d-flex'>
                             <div><a href='/myaccount' className='text-white '>My Account</a></div><div className='text-white'>|</div>
@@ -97,7 +116,7 @@ function Navbar() {
                                 href={item.url}
                                 className={(window.location.pathname === item.url) ? 'menu-item active' : window.location.pathname === '/' && index === 0 ? 'menu-item active' : 'menu-item'}
                                 onClick={onClick}
-                            >{item.title}</a>
+                            ><Trans>{item.title}</Trans></a>
                         )}
                     </div>
                     <div className='dropdownbtn'>
@@ -105,8 +124,8 @@ function Navbar() {
                             className='dropbtn1'
                             onClick={() => setOpenModal(true)}
                         >
-                            <img src='./assets/images/flags/en_US.png' className='language' alt='flag' />
-                            <span> English</span>
+                            <img src={currentLang ? currentLang.icon : 'assets/images/flags/en_US.png'} className='language' alt='flag' />
+                            <span> {currentLang ? currentLang.title : 'English'}</span>
                         </p>
                     </div>
                     <div className='clearfix'></div>
@@ -114,9 +133,9 @@ function Navbar() {
                         isOpen={openModal}
                         onRequestClose={() => setOpenModal(false)}
                         style={customStyles}
-                        contentLabel="Example Modal"
                         shouldCloseOnOverlayClick={false}
                         overlayClassName='overlay'
+                        ariaHideApp={false}
                     >
                         <div className="modal-header">
                             <h5 className="modal-title">LANGUAGE SELECTOR</h5>
@@ -126,11 +145,13 @@ function Navbar() {
                             <div className="col-12 p-0">
                                 <div className="language-list">
                                     <ul>
-                                        <li><div><img src="../assets/images/flags/de_DE.png" className="language" alt=''/>Deutsch</div></li>
-                                        <li><div><img src="../assets/images/flags/en_US.png" className="language" alt=''/>English</div></li>
-                                        <li><div><img src="../assets/images/flags/nl_NL.png" className="language" alt=''/>Dutch</div></li>
-                                        <li><div><img src="../assets/images/flags/tr_TR.png" className="language" alt=''/>Türkçe</div></li>
-                                        <li><div><img src="../assets/images/flags/el_GR.png" className="language" alt=''/>Ελληνικά</div></li>
+                                        {Language ?
+                                            Language.map((lang, index) =>
+                                                <li key={index} onClick={() => changeLanguage(lang.name, index)}>
+                                                    <div><img src={lang.icon} className="language" alt='' />{lang.title}</div>
+                                                </li>)
+                                            : <></>
+                                        }
                                     </ul>
                                     <div className="clearfix"></div>
                                 </div>

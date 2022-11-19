@@ -90,7 +90,7 @@ const RightPanel = () => {
                         </div>
                         <div className="align-self-center col-8">
                             <div>
-                                <input type="text" id="PayingAmount" value={amount} className="payingamount py-1"/>
+                                <input type="text" id="PayingAmount" defaultValue={amount} className="payingamount py-1"/>
                                 <span className="text-danger"></span>
                             </div>
                         </div>

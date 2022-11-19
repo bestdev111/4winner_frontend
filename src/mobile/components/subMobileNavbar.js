@@ -65,5 +65,4 @@ function MobileNavbar(props) {
         </div>
     );
 }
-// export default withReducer('teamList', reducer)(MobileNavbar)
 export default MobileNavbar

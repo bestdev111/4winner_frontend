@@ -24,25 +24,25 @@ function UserRegister() {
                 <div className='d-flex flex-wrap mt-5'>
                     <div className='d-flex col-6'>
                         <label ><b>Name</b></label>
-                        <input type='text' className='' placeholder='Username' name='name' value={inputName} onChange={(e) => setInputName(e.target.value)} />
+                        <input type='text' className='' placeholder='Username' name='name' defaultValue={inputName} onChange={(e) => setInputName(e.target.value)} />
                     </div>
                     <div className='d-flex col-6'>
                         <label ><b>User Role</b></label>
-                        <select className='custom-select' name='role' value={role} onChange={(e) => setRole(e.target.value)}>
+                        <select className='custom-select' name='role' defaultValue={role} onChange={(e) => setRole(e.target.value)}>
                             <option value='' disabled>Please select role</option>
                             {rolelist ? rolelist.map((list, index) => <option key={index} value={index}>{list}</option>) : <></>}
                         </select>
                     </div>
                     <div className='d-flex col-6'>
                         <label ><b>Password</b></label>
-                        <input type='password' className='' placeholder='Password' name='password' value={inputPass} onChange={(e) => setInputPass(e.target.value)} />
+                        <input type='password' className='' placeholder='Password' name='password' defaultValue={inputPass} onChange={(e) => setInputPass(e.target.value)} />
                     </div>
                     <div className='d-flex col-6'>
                         <label ><b>Password Confirm</b></label>
-                        <input type='password' className='' placeholder='Password Confirm' name='psw-repeat' value={inputPassConfirm} onChange={(e) => setInputPassConfirm(e.target.value)} />
+                        <input type='password' className='' placeholder='Password Confirm' name='psw-repeat' defaultValue={inputPassConfirm} onChange={(e) => setInputPassConfirm(e.target.value)} />
                     </div>
                     <div className='d-flex justify-content-center col-12'>
-                        <input className='btn btn-register' type='button' value='Register' onClick={() => register()} />
+                        <input className='btn btn-register' type='button' defaultValue='Register' onClick={() => register()} />
                     </div>
                 </div>
             </form>

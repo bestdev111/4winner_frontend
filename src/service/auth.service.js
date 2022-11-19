@@ -18,6 +18,17 @@ const login = (user) => {
             return decoded;
         });
 };
+const update = (user) => {
+    return axios
+        .post("/user/update", user)
+        .then((response) => {
+            const { token } = response.data;
+            localStorage.setItem('jwtToken', token);
+            SetAuthToken(token);
+            const decoded = jwtDecode(token);
+            return decoded;
+        });
+};
 
 const logout = () => {
     localStorage.removeItem('jwtToken');
@@ -27,6 +38,7 @@ const logout = () => {
 
 const authService = {
     register,
+    update,
     login,
     logout,
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTypeList, getAllMatches, getMatches } from '../../store/actions/sportsActions'
-
+import { Language } from '../../utils';
 const lang_list = [
     { id: 0, name: 'de_DE', icon: 'assets/images/flags/de_DE.png', title: 'Deutsch' },
     { id: 1, name: 'en_US', icon: 'assets/images/flags/en_US.png', title: 'English' },
@@ -81,7 +81,6 @@ function SideNav(props) {
         });
         return sum;
     }
-    // console.log('here1', get_AllMatches.data);
 
     return (
         <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
@@ -143,13 +142,13 @@ function SideNav(props) {
             <div className='sidenav_lists'>
                 <p className='d-flex justify-content-between' onClick={() => setLangOpen(!langOpen)}>
                     <span>
-                        <img className='selected_lang' src={lang_list[siteLang].icon} alt='' />
-                        {lang_list[siteLang].title}
+                        <img className='selected_lang' src={Language[siteLang].icon} alt='' />
+                        {Language[siteLang].title}
                     </span>
                     <span className='expand_icon'>{langOpen ? '-' : '+'}</span>
                 </p>
                 <div className={langOpen ? 'lang_list lang_list_expand' : 'lang_list'}>
-                    {lang_list.map((lang, key) =>
+                    {Language.map((lang, key) =>
                         <div className='d-flex align-items-center' key={key} onClick={() => setSiteLang(key)}>
                             <img src={lang.icon} alt={lang.title} />
                             <p>{lang.title}</p>

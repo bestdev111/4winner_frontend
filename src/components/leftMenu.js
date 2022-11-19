@@ -61,7 +61,7 @@ function LeftMenu(props) {
                                 <p className={isCollapse1[index1] ? 'collapsed first-lists' : 'first-lists'} onClick={() => collapseFunc1(index1)}>
                                     <img className='leftmenu-icon' src={isCollapse1[index1] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'} />
                                     <img className='sport-icon' src={iconGet(availableSportType - 1)} />
-                                    {SportTypeList[availableSportType - 1].name}
+                                    {SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}
                                 </p>
                                 <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
                                     {get_AllMatches.data.leagues && get_AllMatches.data.leagues.map((item, index2) =>
