@@ -41,11 +41,14 @@ function Navbar(props) {
     const userData = useSelector(state => state.authReducers.authReducer)
     useEffect(() => {
         if (userData && userData.user) {
-            console.log('changelang');
             setCurrentLang(Language[userData.user.lang])
-            i18n.changeLanguage(Language[userData.user.lang].name);
         }
     })
+    useEffect(() => {
+        if (currentLang) {
+            i18n.changeLanguage(currentLang.name);
+        }
+    }, [currentLang])
     const login = () => {
         const user = {
             name: inputName,
@@ -75,7 +78,6 @@ function Navbar(props) {
         }
         setCurrentLang(Language[index])
     }
-    console.log('changelang2', currentLang);
     return (
         <div className='header'>
             <div className='top'>

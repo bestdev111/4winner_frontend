@@ -1,4 +1,3 @@
-/* the tree node's style */
 .menu_main {
   overflow-y: auto;
 }
@@ -15,7 +14,6 @@
   font-weight: 700;
   border-bottom: 1px solid #c1c1c1;
   background: linear-gradient(180deg, #f1f1f1 0, #d7d7d7);
-  /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f1f1f1", endColorstr="#d7d7d7", GradientType=0); */
   font-size: 16px;
   text-decoration: none;
   display: block;

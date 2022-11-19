@@ -81,11 +81,11 @@ function LeftMenu(props) {
                                                     )}
                                                 </ul>
                                             </li>
-                                            : <></>
+                                            : <div key={index2}></div>
                                     )}
                                 </ul>
                             </div>
-                            : <></>
+                            : <div key={index1}></div>
                     )}
                 </div>
             </div>
