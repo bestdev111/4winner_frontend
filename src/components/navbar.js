@@ -1,9 +1,10 @@
-import React, { useEffect, useState, } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-modal';
 import { authRoles } from '../auth';
 import { loginUser, logoutUser, updateCurrentUser } from '../auth/store/action/authActions'
+import { setLocalize } from '../store/actions/settingActions'
 import { Trans, withTranslation } from 'react-i18next';
 import { Language } from '../utils';
 import './styles/navbar.css'
@@ -39,16 +40,33 @@ function Navbar(props) {
     const [currentLang, setCurrentLang] = useState();
     const { i18n } = useTranslation();
     const userData = useSelector(state => state.authReducers.authReducer)
-    useEffect(() => {
-        if (userData && userData.user) {
-            setCurrentLang(Language[userData.user.lang])
+    useEffect(()=>{
+        if (localStorage.lang) {
+            console.log('useEffect');
+            let lang = localStorage.getItem('lang')
+            Language.forEach(item => {
+                if (item.name === lang)
+                    setCurrentLang(item);
+            });
+            // i18n.changeLanguage(lang);
         }
     })
-    useEffect(() => {
-        if (currentLang) {
-            i18n.changeLanguage(currentLang.name);
+    const changeLanguage = (param, index) => {
+        setOpenModal(false)
+        i18n.changeLanguage(param);
+        setCurrentLang(Language[index])
+        if (userData && userData.user) {
+            let userId = userData.user.userId;
+            const data = {
+                userId: userId,
+                lang: index
+            }
+            dispatch(updateCurrentUser(data))
         }
-    }, [currentLang])
+        else{
+            dispatch(setLocalize(param));
+        }
+    }
     const login = () => {
         const user = {
             name: inputName,
@@ -65,19 +83,7 @@ function Navbar(props) {
             { url: '/adminpanel', title: 'Admin Panel' },
         ]
     }
-    const changeLanguage = (param, index) => {
-        i18n.changeLanguage(param);
-        setOpenModal(false)
-        if (userData && userData.user) {
-            let userId = userData.user.userId;
-            const data = {
-                userId: userId,
-                lang: index
-            }
-            dispatch(updateCurrentUser(data))
-        }
-        setCurrentLang(Language[index])
-    }
+    
     return (
         <div className='header'>
             <div className='top'>

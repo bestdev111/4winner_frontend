@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTypeList, getAllMatches } from '../store/actions/sportsActions'
+import { Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import './styles/leftMenu.css'
 
 function LeftMenu(props) {
     const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
     const dispatch = useDispatch();
+    const { i18n } = useTranslation();
     useEffect(() => {
         dispatch(getTypeList());
         dispatch(getAllMatches());
@@ -51,7 +54,7 @@ function LeftMenu(props) {
     return (
         <div>
             <div className='menu-header'>
-                Sports Betting
+                <Trans>Sports Betting</Trans>
             </div>
             <div className='menu-content bordered-top'>
                 <div className='menu_main'>

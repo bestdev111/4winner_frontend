@@ -2,7 +2,7 @@ import axios from "axios";
 import jwtDecode from 'jwt-decode';
 import { SetAuthToken } from '../utils';
 // const API_URL = "http://localhost:5000/";
-
+import { Language } from '../utils'
 const register = (user) => {
     return axios.post('/user/register', user);
 };
@@ -15,6 +15,9 @@ const login = (user) => {
             localStorage.setItem('jwtToken', token);
             SetAuthToken(token);
             const decoded = jwtDecode(token);
+            console.log('decoded', decoded);
+            let lang = Language[decoded.lang].name
+            localStorage.setItem('lang', lang);
             return decoded;
         });
 };
@@ -26,6 +29,8 @@ const update = (user) => {
             localStorage.setItem('jwtToken', token);
             SetAuthToken(token);
             const decoded = jwtDecode(token);
+            let lang = Language[decoded.lang].name
+            localStorage.setItem('lang', lang);
             return decoded;
         });
 };

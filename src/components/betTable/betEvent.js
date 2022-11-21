@@ -1,8 +1,16 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 const Event = (props) => {
     const [open, setOpen] = useState(true);
     const [isLive, setIsLive] = useState(false)
     const [openMatches, setOpenMatches] = useState(true)
+    const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
+    
+    if (get_AllMatches.data) {
+        const outrightBetCompetitions = get_AllMatches.outrightBetCompetitions;
+        console.log('outrightBetCompetitions', get_AllMatches.data.outrightBetCompetitions);
+    }
+    
     return (
         <div className="event">
             <div className="date"><p>{props.date}</p></div>

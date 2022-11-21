@@ -1,17 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ToastService from '../service/toast.service';
+import { Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import './styles/rightPanel.css'
 const RightPanel = () => {
     const [open, setOpen] = useState(false);
     const [amount, setAmount] = useState(5);
     const [bet, setBet] = useState(true);
     const userData = useSelector(state => state.authReducers.authReducer)
-    
+    const { i18n } = useTranslation();
+    useEffect(() => {
+        if (userData && userData.user) {
+            // setCurrentLang(Language[userData.user.lang])
+        }
+    })
     const amountCount = (param) => {
-        param === 1 ? setAmount(amount + 5.00) : 
+        param === 1 ? setAmount(amount + 5.00) :
             (amount !== 5 ? setAmount(amount - 5.00) : setAmount(amount))
-        ;
+            ;
     }
     const placeBet = () => {
         if (!userData.isAuthenticated) {
@@ -20,7 +27,7 @@ const RightPanel = () => {
         }
         setBet(false)
     }
-    const betConfirm =()=> {
+    const betConfirm = () => {
         ToastService('betConfirm', 'success')
     }
     return (
@@ -37,15 +44,8 @@ const RightPanel = () => {
                 : <></>
             }
             <div className="bet-type-btn d-flex">
-                {open ? <>
-                    <p className="bet-type-btn-child" onClick={() => setOpen(false)}>Single/Multiple</p>
-                    <p className="bet-type-btn-child focus" onClick={() => setOpen(true)}>SYSTEM</p>
-                </>
-                    : <>
-                        <p className="bet-type-btn-child focus" onClick={() => setOpen(false)}>Single/Multiple</p>
-                        <p className="bet-type-btn-child" onClick={() => setOpen(true)}>SYSTEM</p>
-                    </>
-                }
+                <p className={open ? "bet-type-btn-child" : "bet-type-btn-child focus"} onClick={() => setOpen(false)}><Trans>Single/Multiple</Trans></p>
+                <p className={open ? "bet-type-btn-child focus" : "bet-type-btn-child"} onClick={() => setOpen(true)}><Trans>SYSTEM</Trans></p>
             </div>
             <div className="bet-slip">
                 <div className="selected-bets selected-bets-l"></div>
@@ -86,11 +86,11 @@ const RightPanel = () => {
                 <div className="place-bet show">
                     <div className='d-flex justify-content-around'>
                         <div>
-                            <p onClick={()=>amountCount(0)}>-</p>
+                            <p onClick={() => amountCount(0)}>-</p>
                         </div>
                         <div className="align-self-center col-8">
                             <div>
-                                <input type="text" id="PayingAmount" defaultValue={amount} className="payingamount py-1"/>
+                                <input type="text" id="PayingAmount" defaultValue={amount} className="payingamount py-1" />
                                 <span className="text-danger"></span>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ const RightPanel = () => {
                         </div>
                         : <div className="instead d-flex">
                             <div className="col-6">
-                                <p className="btn-place-bet py-1" onClick={()=>betConfirm()}>Confirm</p>
+                                <p className="btn-place-bet py-1" onClick={() => betConfirm()}>Confirm</p>
                             </div>
                             <div className="col-6">
                                 <p className="btn-place-bet cancel py-1" onClick={() => setBet(true)}>Cancel</p>

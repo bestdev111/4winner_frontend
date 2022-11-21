@@ -17,3 +17,5 @@ export const GET_MATCHES = 'GET_MATCHES';
 export const GET_TYPE_LIST = 'GET_TYPE_LIST';
 export const GET_TOP_LEAGUE = 'GET_TOP_LEAGUE';
 
+//settings
+export const SET_LOCALIZE = 'SET_LOCALIZE';
