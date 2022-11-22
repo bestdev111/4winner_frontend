@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navbar } from '../components'
 import UserRegister from './userRegister';
 import './admin.css'
-
+import { useEffectOnce } from 'usehooks-ts'
 function Admin() {
     const [tab, setTab] = useState(0);
     const userData = useSelector(state => state.authReducers.authReducer.user)
@@ -13,6 +13,10 @@ function Admin() {
         { title: 'Users', component: <UserRegister /> },
         { title: 'Betting', component: '' }
     ]
+    const [data, setData] = useState(0)
+    useEffectOnce(() => {
+        console.log('Triggered only once, on mount', { data })
+    })
     return (
         <>
             <Navbar />
@@ -22,6 +26,10 @@ function Admin() {
                 </div>
                 <div className='d-flex admin-main'>
                     {tabList[tab].component}
+                </div>
+                <div>
+                    <p>Open your console</p>
+                    <button onClick={() => setData(Date.now())}>Update data</button>
                 </div>
             </div>
         </>

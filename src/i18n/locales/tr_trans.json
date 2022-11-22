@@ -6,5 +6,16 @@
   "Admin Panel": "Admin Paneli",
   "Login Success!": "Giriş başarılı!",
   "Single/Multiple": "Tek/Çoklu",
-  "SYSTEM": "SİSTEM"
+  "SYSTEM": "SİSTEM",
+  "Place bet": "Bahsi teslim et",
+  "Reset": "Sıfırla",
+  "Stake:": "Bahis Bedeli:",
+  "Tax:": "Vergi:",
+  "Total stake:": "Bahis Bedeli:",
+  "Stake per bet:": "Bahis Başına Bedel:",
+  "Number of bets:": "Bahislerin Sayısı:",
+  "Max Winning:": "Maks. Kazanç:",
+  "Username": "Kullanıcı",
+  "Password": "Şifre",
+  "Combinations:": "Kombinasyonlar:"
 }

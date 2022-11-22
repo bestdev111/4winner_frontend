@@ -7,15 +7,15 @@ const SportTypeList = [
     },
     {
         sportTypeId: 2,
-        name: 'Baseball',
-        icon: '../assets/images/sports/baseball.png',
-        m_icon: '../assets/images/micons/baseball.svg',
-    },
-    {
-        sportTypeId: 3,
         name: 'Basketball',
         icon: '../assets/images/sports/basketball.png',
         m_icon: '../assets/images/micons/basketball.svg',
+    },
+    {
+        sportTypeId: 3,
+        name: 'Baseball',
+        icon: '../assets/images/sports/baseball.png',
+        m_icon: '../assets/images/micons/baseball.svg',
     },
     {
         sportTypeId: 4,

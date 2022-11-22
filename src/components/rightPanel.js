@@ -4,6 +4,7 @@ import ToastService from '../service/toast.service';
 import { Trans } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
 import './styles/rightPanel.css'
+import { useEffectOnce } from 'usehooks-ts'
 const RightPanel = () => {
     const [open, setOpen] = useState(false);
     const [amount, setAmount] = useState(5);
@@ -13,6 +14,12 @@ const RightPanel = () => {
     useEffect(() => {
         if (userData && userData.user) {
             // setCurrentLang(Language[userData.user.lang])
+        }
+    })
+    useEffectOnce(() => {
+        if (localStorage.lang) {
+            let lang = localStorage.getItem('lang')
+            i18n.changeLanguage(lang);
         }
     })
     const amountCount = (param) => {
@@ -50,35 +57,35 @@ const RightPanel = () => {
             <div className="bet-slip">
                 <div className="selected-bets selected-bets-l"></div>
                 {open ? <div className='comb'>
-                    <label>Combinations:</label>
+                    <label><Trans>Combinations:</Trans></label>
                 </div>
                     : <></>
                 }
                 <div className="bet-totals d-flex">
-                    <p className="btn-reset">Reset</p>
+                    <p className="btn-reset"><Trans>Reset</Trans></p>
                     <div className="totals px-2 pt-2">
                         <div className="d-flex justify-content-between">
-                            <div className="push-left">Stake:</div>
+                            <div className="push-left"><Trans>Stake:</Trans></div>
                             <div className="push-right">{amount}</div>
                         </div>
                         <div className="d-flex justify-content-between">
-                            <div className="push-left">Tax:</div>
+                            <div className="push-left"><Trans>Tax:</Trans></div>
                             <div className="push-right">0.00</div>
                         </div>
                         <div className="d-flex justify-content-between">
-                            <div className="push-left">Total stake:</div>
+                            <div className="push-left"><Trans>Total stake:</Trans></div>
                             <div className="push-right">{amount}</div>
                         </div>
                         <div className="d-flex justify-content-between">
-                            <div className="push-left">Stake per bet:</div>
+                            <div className="push-left"><Trans>Stake per bet:</Trans></div>
                             <div className="push-right">0.00</div>
                         </div>
                         <div className="d-flex justify-content-between">
-                            <div className="push-left">Number of bets:</div>
+                            <div className="push-left"><Trans>Number of bets:</Trans></div>
                             <div className="push-right">0</div>
                         </div>
                         <div className="d-flex justify-content-between">
-                            <div className="push-left">Max Winning:</div>
+                            <div className="push-left"><Trans>Max Winning:</Trans></div>
                             <div className="push-right">0.00</div>
                         </div>
                     </div>
@@ -101,14 +108,14 @@ const RightPanel = () => {
 
                     {bet ?
                         <div className="col-12">
-                            <p className="btn-place-bet py-1" onClick={() => placeBet(true)}>Place bet</p>
+                            <p className="btn-place-bet py-1" onClick={() => placeBet(true)}><Trans>Place bet</Trans></p>
                         </div>
                         : <div className="instead d-flex">
                             <div className="col-6">
-                                <p className="btn-place-bet py-1" onClick={() => betConfirm()}>Confirm</p>
+                                <p className="btn-place-bet py-1" onClick={() => betConfirm()}><Trans>Confirm</Trans></p>
                             </div>
                             <div className="col-6">
-                                <p className="btn-place-bet cancel py-1" onClick={() => setBet(true)}>Cancel</p>
+                                <p className="btn-place-bet cancel py-1" onClick={() => setBet(true)}><Trans>Cancel</Trans></p>
                             </div>
                         </div>
                     }

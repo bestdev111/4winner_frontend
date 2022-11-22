@@ -1,16 +1,8 @@
 import React, { useState } from "react";
-import { useSelector } from 'react-redux';
 const Event = (props) => {
     const [open, setOpen] = useState(true);
     const [isLive, setIsLive] = useState(false)
     const [openMatches, setOpenMatches] = useState(true)
-    const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
-    
-    if (get_AllMatches.data) {
-        const outrightBetCompetitions = get_AllMatches.outrightBetCompetitions;
-        console.log('outrightBetCompetitions', get_AllMatches.data.outrightBetCompetitions);
-    }
-    
     return (
         <div className="event">
             <div className="date"><p>{props.date}</p></div>
@@ -38,7 +30,7 @@ const Event = (props) => {
                         {/* <img src="assets/images/icons/caret-left-solid.svg" alt="" /> */}
                     </div>
             }
-            <div className="team-name"><p>{props.teamname}</p></div>
+            <div className="team-name"><p>{props.homeTeam} - {props.awayTeam}</p></div>
             <div className="more-odds">
                 <p onClick={() => setOpenMatches(!openMatches)}>{openMatches ? '+' : '-'}</p>
             </div>
@@ -76,17 +68,17 @@ const Event = (props) => {
                                 <div className="odds">
                                     <div className="col-12">
                                         <a className="changeable-odd ">
-                                            <span className="push-left">Katar</span><span className="push-right">3.30</span>
+                                            <span className="push-left">{props.homeTeam}</span><span className="push-right">3.30</span>
                                         </a>
                                     </div>
                                     <div className="col-12">
                                         <a className="changeable-odd ">
-                                            <span className="push-left">Katar</span><span className="push-right">3.30</span>
+                                            <span className="push-left">Draw</span><span className="push-right">3.30</span>
                                         </a>
                                     </div>
                                     <div className="col-12">
                                         <a className="changeable-odd ">
-                                            <span className="push-left">Katar</span><span className="push-right">3.30</span>
+                                            <span className="push-left">{props.awayTeam}</span><span className="push-right">3.30</span>
                                         </a>
                                     </div>
                                 </div>
@@ -94,23 +86,47 @@ const Event = (props) => {
                         </div>
                     </div>
                     <div className="bet-group">
-                        <div className="header">Winner</div>
+                        <div className="header">Handicap</div>
                         <div className="bets">
                             <div className="bet">
                                 <div className="odds">
                                     <div className="col-12">
                                         <a className="changeable-odd selected">
-                                            <span className="push-left">Katar</span><span className="push-right">3.30</span>
+                                            <span className="push-left">{props.homeTeam}</span><span className="push-right">3.30</span>
                                         </a>
                                     </div>
                                     <div className="col-12">
                                         <a className="changeable-odd ">
-                                            <span className="push-left">Katar</span><span className="push-right">3.30</span>
+                                            <span className="push-left">Draw</span><span className="push-right">3.30</span>
                                         </a>
                                     </div>
                                     <div className="col-12">
                                         <a className="changeable-odd ">
-                                            <span className="push-left">Katar</span><span className="push-right">3.30</span>
+                                            <span className="push-left">{props.awayTeam}</span><span className="push-right">3.30</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="bet-group">
+                        <div className="header">Over/Under</div>
+                        <div className="bets">
+                            <div className="bet">
+                                <div className="odds">
+                                    <div className="col-12">
+                                        <a className="changeable-odd">
+                                            <span className="push-left">{props.homeTeam}</span><span className="push-right">3.30</span>
+                                        </a>
+                                    </div>
+                                    <div className="col-12">
+                                        <a className="changeable-odd ">
+                                            <span className="push-left">Draw</span><span className="push-right">3.30</span>
+                                        </a>
+                                    </div>
+                                    <div className="col-12">
+                                        <a className="changeable-odd ">
+                                            <span className="push-left">{props.awayTeam}</span><span className="push-right">3.30</span>
                                         </a>
                                     </div>
                                 </div>

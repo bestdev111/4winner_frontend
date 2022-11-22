@@ -8,7 +8,7 @@ import { setLocalize } from '../store/actions/settingActions'
 import { Trans, withTranslation } from 'react-i18next';
 import { Language } from '../utils';
 import './styles/navbar.css'
-
+import { useEffectOnce } from 'usehooks-ts'
 let menu = [
     { url: '/sportsbetting', title: 'Sports Betting' },
     { url: '/inplay', title: 'In-Play' },
@@ -40,15 +40,15 @@ function Navbar(props) {
     const [currentLang, setCurrentLang] = useState();
     const { i18n } = useTranslation();
     const userData = useSelector(state => state.authReducers.authReducer)
-    useEffect(()=>{
+    useEffectOnce(()=>{
         if (localStorage.lang) {
-            console.log('useEffect');
+            console.log('render');
             let lang = localStorage.getItem('lang')
             Language.forEach(item => {
                 if (item.name === lang)
                     setCurrentLang(item);
             });
-            // i18n.changeLanguage(lang);
+            i18n.changeLanguage(lang);
         }
     })
     const changeLanguage = (param, index) => {
@@ -96,10 +96,10 @@ function Navbar(props) {
                     {!userData.isAuthenticated ?
                         <div>
                             <div className='textbox'>
-                                <input type='text' className='inputbox' placeholder='Username' name='name' defaultValue={inputName} onChange={(e) => setInputName(e.target.value)} />
+                                <input type='text' className='inputbox' placeholder="Username" name='name' defaultValue={inputName} onChange={(e) => setInputName(e.target.value)} />
                             </div>
                             <div className='textbox'>
-                                <input type='text' className='inputbox' placeholder='Password' name='password' defaultValue={inputPass} onChange={(e) => setInputPass(e.target.value)} />
+                                <input type='text' className='inputbox' placeholder="Password" name='password' defaultValue={inputPass} onChange={(e) => setInputPass(e.target.value)} />
                             </div>
                             <input className='login_btn' type='button' defaultValue='Login' onClick={() => login()} />
                         </div>

@@ -1,7 +1,8 @@
-import { GET_ALL_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE } from '../actions/actionTypes';
+import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE } from '../actions/actionTypes';
 
 const initialState = {
     getAllMatches: [],
+    getMatches: [],
     getTypeList: [],
     getTopLeague: []
 };
@@ -12,6 +13,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 getAllMatches: action.payload.data
+            };
+        case GET_MATCHES:
+            return {
+                ...state,
+                getMatches: action.payload.data
             };
         case GET_TYPE_LIST:
             return {

@@ -14,10 +14,12 @@ function SportsBetting() {
                         <Divider title='Highlights'/>
                         <BetTable 
                             title="Highlights"
+                            isTop= {false}
                         />
                         <Divider title='Top Odds'/>
-                        <BetTable 
+                        <BetTable
                             title="Top Odds"
+                            isTop={true}
                         />
                     </div>
                     <div className='right px-2 float-left'>
