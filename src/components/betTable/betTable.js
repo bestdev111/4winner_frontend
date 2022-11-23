@@ -14,7 +14,7 @@ const Table = (props) => {
     let matches = [];
     if (get_Matches.data) {
         matches = get_Matches.data.matches;
-        console.log('matches', get_Matches);
+        console.log('matches', matches[6]);
     }
     return (
         <div className="match-group border-top">
