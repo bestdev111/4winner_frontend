@@ -42,7 +42,6 @@ function Navbar(props) {
     const userData = useSelector(state => state.authReducers.authReducer)
     useEffectOnce(()=>{
         if (localStorage.lang) {
-            console.log('render');
             let lang = localStorage.getItem('lang')
             Language.forEach(item => {
                 if (item.name === lang)

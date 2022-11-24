@@ -7,6 +7,13 @@ const register = (user) => {
     return axios.post('/user/register', user);
 };
 
+const userGet = (user) => {
+    return axios
+        .get("/user", user)
+        .then((response) => {
+            return response.data;
+        });
+};
 const login = (user) => {
     return axios
         .post("/user/login", user)
@@ -21,7 +28,7 @@ const login = (user) => {
             return decoded;
         });
 };
-const update = (user) => {
+const updateCurrentUser = (user) => {
     return axios
         .post("/user/update", user)
         .then((response) => {
@@ -34,6 +41,22 @@ const update = (user) => {
             return decoded;
         });
 };
+const updateUser = (user) => {
+    return axios
+        .post("/user/updateuser", user)
+        .then((response) => {
+            console.log('response', response);
+            return response;
+        });
+};
+const deleteOne = (user) => {
+    return axios
+        .post("/user/deleteuser", user)
+        .then((response) => {
+            console.log('response', response);
+            return response;
+        });
+};
 
 const logout = () => {
     localStorage.removeItem('jwtToken');
@@ -42,8 +65,11 @@ const logout = () => {
 };
 
 const authService = {
+    userGet,
     register,
-    update,
+    updateCurrentUser,
+    updateUser,
+    deleteOne,
     login,
     logout,
 };

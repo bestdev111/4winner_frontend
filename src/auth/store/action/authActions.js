@@ -1,27 +1,27 @@
 import {
   USER_REGISTER,
   GET_ERRORS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  GET_ALL_USERS
 } from '../../../store/actions/actionTypes';
 import AuthService from '../../../service/auth.service';
 import ToastService from '../../../service/toast.service';
 import authRoles from '../../../auth/authRoles';
-export const registerUser = user => {
+
+export const userGet = () => {
   return async dispatch => {
     try {
-      const response = await AuthService.register(user);
-      ToastService("Register Success", 'success');
+      const response = await AuthService.userGet();
       return dispatch({
-        type: USER_REGISTER,
+        type: GET_ALL_USERS,
         payload: {
-          success: true,
+          users: response,
         }
       });
     } catch (error) {
-      ToastService(error.response.data.error, error);
       return dispatch({
         type: GET_ERRORS,
-        payload: error.response.data
+        payload: error.response
       });
     }
   }
@@ -44,14 +44,59 @@ export const loginUser = user => {
     }
   }
 };
-
+export const registerUser = user => {
+  return async dispatch => {
+    try {
+      const response = await AuthService.register(user);
+      ToastService("Create User Success", 'success');
+      return dispatch(userGet());
+    } catch (error) {
+      ToastService(error.response.data.error, error);
+      return dispatch({
+        type: GET_ERRORS,
+        payload: error.response.data
+      });
+    }
+  }
+};
+// updateCurrentUser for update language
 export const updateCurrentUser = data => {
   return async dispatch => {
     try {
-      const response = await AuthService.update(data);
+      const response = await AuthService.updateCurrentUser(data);
       return dispatch(setCurrentUser(response));
     } catch (error) {
+      return dispatch({
+        type: GET_ERRORS,
+        payload: error.response
+      });
+    }
+  }
+}
+// update user information
+export const updateUser = data => {
+  return async dispatch => {
+    try {
+      const response = await AuthService.updateUser(data);
+      ToastService("Update Success!", 'success');
+      return dispatch(userGet());
+    } catch (error) {
       ToastService("Update Error!", 'error');
+      return dispatch({
+        type: GET_ERRORS,
+        payload: error.response
+      });
+    }
+  }
+}
+export const deleteUser = data => {
+  return async dispatch => {
+    try {
+      const response = await AuthService.deleteOne(data);
+      ToastService("Delete Success!", 'success');
+      return dispatch(userGet());
+    } catch (error) {
+      ToastService("Delete Error!", 'error');
       return dispatch({
         type: GET_ERRORS,
         payload: error.response

@@ -1,10 +1,10 @@
-import { SET_CURRENT_USER, GET_ERRORS } from '../../../store/actions/actionTypes';
+import { SET_CURRENT_USER, GET_ALL_USERS } from '../../../store/actions/actionTypes';
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = user
     ? { isAuthenticated: true, user }
-    : { isAuthenticated: false, user: null};
-    
+    : { isAuthenticated: false, user: null };
+
 export default function (state = initialState, action) {
     switch (action.type) {
         case SET_CURRENT_USER:
@@ -12,6 +12,11 @@ export default function (state = initialState, action) {
                 ...state,
                 isAuthenticated: true,
                 user: action.payload,
+            };
+        case GET_ALL_USERS:
+            return {
+                ...state,
+                users: action.payload,
             };
         default:
             return state;

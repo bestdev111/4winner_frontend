@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { registerUser } from '../auth/store/action/authActions'
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Navbar } from '../components'
-import UserRegister from './userRegister';
-import './admin.css'
-import { useEffectOnce } from 'usehooks-ts'
+import Users from './users';
+import './styles/admin.css'
 function Admin() {
+    const dispatch = useDispatch();
     const [tab, setTab] = useState(0);
     const userData = useSelector(state => state.authReducers.authReducer.user)
+    const allUser = useSelector(state => state.authReducers.authReducer.users)
     const userRole = userData ? userData.role : 'guest';
     const tabList = [
-        { title: 'Users', component: <UserRegister /> },
-        { title: 'Betting', component: '' }
+        { title: 'Users', component: <Users />, visible: true },
+        { title: 'Shops', component: '', visible: true},
+        { title: 'Betting', component: '', visible: true},
     ]
-    const [data, setData] = useState(0)
-    useEffectOnce(() => {
-        console.log('Triggered only once, on mount', { data })
-    })
+    
     return (
         <>
             <Navbar />
@@ -26,10 +24,6 @@ function Admin() {
                 </div>
                 <div className='d-flex admin-main'>
                     {tabList[tab].component}
-                </div>
-                <div>
-                    <p>Open your console</p>
-                    <button onClick={() => setData(Date.now())}>Update data</button>
                 </div>
             </div>
         </>
