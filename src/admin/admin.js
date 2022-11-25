@@ -10,17 +10,24 @@ function Admin() {
     const allUser = useSelector(state => state.authReducers.authReducer.users)
     const userRole = userData ? userData.role : 'guest';
     const tabList = [
-        { title: 'Users', component: <Users />, visible: true },
-        { title: 'Shops', component: '', visible: true},
-        { title: 'Betting', component: '', visible: true},
+        { title: 'Banks', component: '', visible: true, icon: 'fa fa-university fa-1x fa-fw' },
+        { title: 'Users', component: <Users />, visible: true, icon: 'fa fa-users fa-1x fa-fw' },
+        { title: 'Shops', component: '', visible: true, icon: 'fa fa-shopping-cart fa-1x fa-fw' },
+        { title: 'Stats', component: '', visible: true, icon: 'fa fa-area-chart fa-1x fa-fw' },
+        { title: 'Settings', component: '', visible: true, icon: 'fa fa-cogs fa-1x fa-fw' },
     ]
-    
+
     return (
         <>
             <Navbar />
             <div className='d-flex mt-5 admin-panel'>
                 <div className="sidebar">
-                    {tabList.map((item, index) => <p key={index} className={index === tab ? 'admin-active' : ''} onClick={() => setTab(index)} >{item.title}</p>)}
+                    {tabList.map((item, index) =>
+                        <div className={index === tab ? 'admin-active' : ''} key={index} onClick={() => setTab(index)} >
+                            <span><i class={item.icon} aria-hidden="true"></i></span>
+                            <p  >{item.title}</p>
+                        </div>
+                    )}
                 </div>
                 <div className='d-flex admin-main'>
                     {tabList[tab].component}

@@ -13,6 +13,8 @@ import "./styles/crud_table.css";
 const CrudTable = () => {
     const dispatch = useDispatch();
     const allUser = useSelector(state => state.authReducers.authReducer.users)
+    const currentUser = useSelector(state => state.authReducers.authReducer.user)
+    const currentRole = currentUser.role;
     let tasks = [
         {
             id: 1,
@@ -51,7 +53,6 @@ const CrudTable = () => {
         return sorter;
     };
     
-    let count = allUser.users.length;
     const fetchItems = (payload, users) => {
         let result = Array.from(users);
         result = result.sort(getSorter(payload.sort));
@@ -70,16 +71,16 @@ const CrudTable = () => {
         container: { margin: "auto" }
     };
 
+    console.log('role', currentRole);
     return (
         <div style={styles.container}>
             <CRUDTable
-                caption="Users"
                 fetchItems={payload => fetchItems(payload, allUser.users)}
             >
                 <Fields>
                     {/* <Field name="_id" label="Id" hideInCreateForm hideInUpdateForm hideFromTable/> */}
                     <Field name="name" label="Name" placeholder="Name" />
-                    <Field name="userrole" label="Role" placeholder="Role" type='select' />
+                    <Field name='userrole' label="Role" placeholder="Role" type='list'/>
                     <Field name="balance" label="Balance" type='number' placeholder="Balance" />
                     <Field name="password" label="password" type='password' placeholder="password" hideFromTable hideInUpdateForm />
                     <Field name="passwordConfirm" label="Confirm Password" type='password' placeholder="passwordConfirm" hideFromTable hideInUpdateForm />

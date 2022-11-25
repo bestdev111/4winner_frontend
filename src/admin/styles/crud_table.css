@@ -145,6 +145,7 @@
 }
 
 .crud-table {
+    margin-top: 20px;
     width: 100%;
     background-color: transparent;
     border: 1px solid rgba(52, 145, 238, 0.15);
@@ -163,8 +164,12 @@
     border-bottom: 1px solid rgba(34, 36, 38, 0.1);
 }
 
-.crud-table__header {}
-
+.crud-table__header {
+    background-color: var(--primary-color);
+}
+.crud-table__header .crud-table__header-cell {
+    color: white;
+}
 .crud-table__body {
     background-color: #fff;
 }

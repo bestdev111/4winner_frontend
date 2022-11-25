@@ -15,7 +15,7 @@
 
 }
 
-.sidebar p {
+.sidebar div {
     cursor: pointer;
     width: 100%;
     display: block;
@@ -24,23 +24,35 @@
     font-size: 18px;
     text-decoration: none;
 }
-
-.sidebar p.admin-active {
+.sidebar>div {
+    display: flex;
+    border-bottom: solid 1px #ddd;
+}
+.sidebar>div span {
+    width: 25px;
+}
+.sidebar>div span i {
+    display: flex;
+    justify-content: center;
+}
+.sidebar>div p {
+    margin-left: 10px;
+    color: black;
+}
+.sidebar>div.admin-active {
     width: 100%;
     background-color: var(--primary-color);
+}
+.sidebar>div.admin-active p, .sidebar>div.admin-active i {
     color: white;
 }
-
-.sidebar p:hover:not(.admin-active) {
+.sidebar>div:hover:not(.admin-active) {
     background-color: #555;
     color: white;
 }
-
-/* div.content {
-    margin-left: 200px;
-    padding: 1px 16px;
-    height: 1000px;
-} */
+.sidebar>div:hover:not(.admin-active) p {
+    color: white;
+}
 
 @media screen and (max-width: 700px) {
     .sidebar {
