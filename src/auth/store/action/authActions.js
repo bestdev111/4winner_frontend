@@ -31,7 +31,7 @@ export const loginUser = user => {
     try {
       const response = await AuthService.login(user);
       ToastService('Login Success!', "success");
-      if (authRoles.cashier.includes(response.role)) {
+      if (authRoles.adminPM.includes(response.role)) {
         window.location.href = '/adminpanel';
       }
       return dispatch(setCurrentUser(response));

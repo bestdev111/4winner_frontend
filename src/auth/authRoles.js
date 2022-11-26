@@ -4,10 +4,11 @@
 const authRoles = {
     admin: ['admin'],
     agent: ['admin', 'agent'],
-    distributor: ['admin', 'agent', 'distributor'],
-    cashier: ['admin', 'agent', 'distributor', 'cashier'],
+    distributor: ['admin', 'distributor'],
+    cashier: ['admin', 'cashier'],
     user: ['admin', 'agent', 'distributor', 'cashier', 'user'],
-    onlyGuest: ['guest']
+    onlyGuest: ['guest'],
+    adminPM: ['admin', 'agent', 'distributor', 'cashier']
 };
 
 export default authRoles;
