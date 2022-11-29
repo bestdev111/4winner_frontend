@@ -7,11 +7,14 @@ import {
 import AuthService from '../../../service/auth.service';
 import ToastService from '../../../service/toast.service';
 import authRoles from '../../../auth/authRoles';
-
-export const userGet = () => {
+import jwtDecode from 'jwt-decode';
+const localUser = jwtDecode(localStorage.jwtToken);
+export const userGet = currentUser => {
+  currentUser = currentUser ? currentUser : localUser;
+  console.log('userget', currentUser);
   return async dispatch => {
     try {
-      const response = await AuthService.userGet();
+      const response = await AuthService.userGet(currentUser);
       return dispatch({
         type: GET_ALL_USERS,
         payload: {
@@ -89,10 +92,10 @@ export const updateUser = data => {
     }
   }
 }
-export const deleteUser = data => {
+export const deleteUser = userName => {
   return async dispatch => {
     try {
-      const response = await AuthService.deleteOne(data);
+      const response = await AuthService.deleteOne(userName);
       ToastService("Delete Success!", 'success');
       return dispatch(userGet());
     } catch (error) {

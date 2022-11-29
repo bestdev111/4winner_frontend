@@ -7,9 +7,9 @@ const register = (user) => {
     return axios.post('/user/register', user);
 };
 
-const userGet = (user) => {
+const userGet = (currentUser) => {
     return axios
-        .get("/user", user)
+        .get("/user", {params: currentUser})
         .then((response) => {
             return response.data;
         });
@@ -49,9 +49,9 @@ const updateUser = (user) => {
             return response;
         });
 };
-const deleteOne = (user) => {
+const deleteOne = (userName) => {
     return axios
-        .post("/user/deleteuser", user)
+        .post("/user/deleteuser", userName)
         .then((response) => {
             console.log('response', response);
             return response;

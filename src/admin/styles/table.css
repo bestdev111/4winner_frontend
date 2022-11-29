@@ -1,0 +1,45 @@
+.primary {
+    background-color: var(--primary-color);
+}
+
+.table {
+    margin-top: 20px;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid rgba(52, 145, 238, 0.15);
+    border-collapse: collapse;
+    box-shadow: 2px 2px 5px 0 #c7c7c7;
+}
+
+.table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+.table td, .table th {
+    text-align: center;
+    vertical-align: middle;
+}
+.button {
+    min-height: 1rem;
+    border-radius: 3px;
+    padding: 0.6rem 1rem;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    float: right;
+}
+.create_btn, .edit_btn, .submit_btn {
+    background-color: var(--primary-color) !important;
+}
+.form-label {
+    font-size: 15px;
+}
+.form-control {
+    font-size: 15px !important;
+}
+select {
+    height: 36px !important;
+}
+.del-detail {
+    font-size: 16px;
+}
