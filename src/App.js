@@ -32,10 +32,10 @@ function App() {
       <Provider store={store} >
         <Suspense fallback={<Loading />}>
           <Router history={history} lang={'en_US'}>
-              <Authorization routes={real_routes}>
-                {renderRoutes(real_routes)}
-              </Authorization>
-            </Router>
+            <Authorization routes={real_routes}>
+              {renderRoutes(real_routes)}
+            </Authorization>
+          </Router>
           <ToastContainer autoClose={4000} />
         </Suspense>
       </Provider>
