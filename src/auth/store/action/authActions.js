@@ -1,5 +1,4 @@
 import {
-  USER_REGISTER,
   GET_ERRORS,
   SET_CURRENT_USER,
   GET_ALL_USERS
@@ -8,7 +7,10 @@ import AuthService from '../../../service/auth.service';
 import ToastService from '../../../service/toast.service';
 import authRoles from '../../../auth/authRoles';
 import jwtDecode from 'jwt-decode';
-const localUser = jwtDecode(localStorage.jwtToken);
+let localUser=''
+if (localStorage.jwtToken) {
+  localUser = jwtDecode(localStorage.jwtToken);
+}
 export const userGet = currentUser => {
   currentUser = currentUser ? currentUser : localUser;
   console.log('userget', currentUser);
