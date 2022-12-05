@@ -5,7 +5,7 @@ import { SetAuthToken } from '../utils';
 import { Language } from '../utils'
 const register = (user) => {
     console.log('register', user);
-    return axios.post('/user/register', user);
+    return axios.post('http://localhost:5000/user/register', user);
 };
 
 const userGet = (currentUser) => {
@@ -17,7 +17,7 @@ const userGet = (currentUser) => {
 };
 const login = (user) => {
     return axios
-        .post("/user/login", user)
+        .post("http://localhost:5000/user/login", user)
         .then((response) => {
             const { token } = response.data;
             localStorage.setItem('jwtToken', token);
@@ -31,7 +31,7 @@ const login = (user) => {
 };
 const updateCurrentUser = (user) => {
     return axios
-        .post("/user/update", user)
+        .post("http://localhost:5000/user/update", user)
         .then((response) => {
             const { token } = response.data;
             localStorage.setItem('jwtToken', token);
@@ -44,7 +44,7 @@ const updateCurrentUser = (user) => {
 };
 const updateUser = (user) => {
     return axios
-        .post("/user/updateuser", user)
+        .post("http://localhost:5000/user/updateuser", user)
         .then((response) => {
             console.log('updateUser', response);
             return response;
@@ -52,7 +52,7 @@ const updateUser = (user) => {
 };
 const deleteOne = (userName) => {
     return axios
-        .post("/user/deleteuser", userName)
+        .post("http://localhost:5000/user/deleteuser", userName)
         .then((response) => {
             console.log('deleteOne', response);
             return response;
