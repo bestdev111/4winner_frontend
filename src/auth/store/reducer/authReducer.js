@@ -6,7 +6,6 @@ const initialState = user
     : { isAuthenticated: false, user: null };
 
 export default function (state = initialState, action) {
-    console.log('initialState', state);
     switch (action.type) {
         case SET_CURRENT_USER:
             return {
