@@ -62,8 +62,8 @@ function LeftMenu(props) {
                         availableSportType && SportTypeList ?
                             <div key={index1} className="sportstypes">
                                 <p className={isCollapse1[index1] ? 'collapsed first-lists' : 'first-lists'} onClick={() => collapseFunc1(index1)}>
-                                    <img className='leftmenu-icon' src={isCollapse1[index1] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'} />
-                                    <img className='sport-icon' src={iconGet(availableSportType - 1)} />
+                                    <img className='leftmenu-icon' src={isCollapse1[index1] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'} alt=''/>
+                                    <img className='sport-icon' src={iconGet(availableSportType - 1)} alt='' />
                                     {SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}
                                 </p>
                                 <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
@@ -71,7 +71,7 @@ function LeftMenu(props) {
                                         item.betradarSportId === availableSportType ?
                                             <li key={index2}>
                                                 <p className={isCollapse2[index2] ? 'collapsed lists' : 'lists'} onClick={() => collapseFunc2(index2)}>
-                                                    <img className='leftmenu-icon' src={isCollapse2[index2] ? 'assets/images/icons/caret-down-solid-white.svg' : 'assets/images/icons/caret-right-solid-white.svg'} />
+                                                    <img className='leftmenu-icon' src={isCollapse2[index2] ? 'assets/images/icons/caret-down-solid-white.svg' : 'assets/images/icons/caret-right-solid-white.svg'} alt=''/>
                                                     {item.name}
                                                 </p>
                                                 <ul className={isCollapse2[index2] ? 'show' : 'hide'}>

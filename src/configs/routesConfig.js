@@ -18,8 +18,8 @@ const routeConfigs = [
     OutRightsConfig,
     ResultsConfig,
 
-    MLoginConfig,
-    MHomeConfig,
+    // MLoginConfig,
+    // MHomeConfig,
 ];
 //mobile case
 const m_routeConfigs = [

@@ -35,8 +35,8 @@ function MobileNavbar(props) {
             <div className='d-flex'>
                 {availableSportTypes && availableSportTypes.map((availableSportType, index) =>
                     <div className={sportActive === index ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveFunc(index)}>
-                        <img src={SportTypeList[availableSportType-1].m_icon ? SportTypeList[availableSportType-1].m_icon : ''} alt='' />
-                        <p>{SportTypeList[availableSportType-1].name}</p>
+                        <img src={SportTypeList[availableSportType-1] ? SportTypeList[availableSportType-1].m_icon : ''} alt='' />
+                        <p>{SportTypeList[availableSportType - 1]? SportTypeList[availableSportType - 1].name : ''}</p>
                     </div>
                 )}
             </div>

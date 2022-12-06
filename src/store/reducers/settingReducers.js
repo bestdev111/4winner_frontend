@@ -1,5 +1,4 @@
 import { SET_LOCALIZE } from '../actions/actionTypes';
-import jwtDecode from 'jwt-decode';
 let initialState = { lang: 'en_US' }
 if (localStorage.lang){
     let lang = localStorage.getItem('lang');

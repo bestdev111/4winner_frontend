@@ -129,7 +129,7 @@ function SideNav(props) {
                                             )}
                                         </ul>
                                     </li>
-                                    : <></>
+                                    : <li key={index2}></li>
                             )}
                         </ul>
                     </div>

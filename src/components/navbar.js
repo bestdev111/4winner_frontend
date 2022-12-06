@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-modal';
 import { loginUser, logoutUser, updateCurrentUser } from '../store/actions/authActions'
 import { setLocalize } from '../store/actions/settingActions'
-import { Trans, withTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import { Language } from '../utils';
 import './styles/navbar.css'
 import { useEffectOnce } from 'usehooks-ts'
