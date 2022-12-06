@@ -1,4 +1,3 @@
-import { authRoles } from "../auth";
 class Utils {
     static generateRoutesFromConfigs(configs) {
         let allRoutes = [];

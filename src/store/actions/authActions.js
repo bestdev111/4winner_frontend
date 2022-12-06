@@ -2,10 +2,9 @@ import {
   GET_ERRORS,
   SET_CURRENT_USER,
   GET_ALL_USERS
-} from '../../../store/actions/actionTypes';
-import AuthService from '../../../service/auth.service';
-import ToastService from '../../../service/toast.service';
-import authRoles from '../../../auth/authRoles';
+} from '../../store/actions/actionTypes';
+import AuthService from '../../service/auth.service';
+import ToastService from '../../service/toast.service';
 import jwtDecode from 'jwt-decode';
 let localUser=''
 if (localStorage.jwtToken) {
@@ -36,9 +35,6 @@ export const loginUser = user => {
     try {
       const response = await AuthService.login(user);
       ToastService('Login Success!', "success");
-      if (authRoles.adminPM.includes(response.role)) {
-        window.location.href = '/adminpanel';
-      }
       return dispatch(setCurrentUser(response));
     } catch (error) {
       ToastService("Login Error!", 'error');

@@ -8,7 +8,7 @@ import createStore from './store';
 import Provider from 'react-redux/es/components/Provider';
 import history from './history';
 import { SetAuthToken, Loading, Authorization } from './utils';
-import { setCurrentUser, logoutUser } from './auth/store/action/authActions'
+import { setCurrentUser, logoutUser } from './store/actions/authActions'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

@@ -64,7 +64,7 @@ class Authorization extends Component {
 
 function mapStateToProps({ authReducers }) {
     return {
-        userData: authReducers.authReducer.user,
+        userData: authReducers.user,
     };
 }
 

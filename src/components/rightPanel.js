@@ -9,7 +9,7 @@ const RightPanel = () => {
     const [open, setOpen] = useState(false);
     const [amount, setAmount] = useState(5);
     const [bet, setBet] = useState(true);
-    const userData = useSelector(state => state.authReducers.authReducer)
+    const userData = useSelector(state => state.authReducers)
     const { i18n } = useTranslation();
     useEffect(() => {
         if (userData && userData.user) {

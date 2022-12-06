@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import authReducers from '../../auth/store/reducer';
+import authReducers from './authReducers';
 import sportsReducers from './sportsReducers';
 import settingReducers from './settingReducers';
 

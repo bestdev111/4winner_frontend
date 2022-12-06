@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER, GET_ALL_USERS } from '../../../store/actions/actionTypes';
+import { SET_CURRENT_USER, GET_ALL_USERS } from '../../store/actions/actionTypes';
 
 const user = JSON.parse(localStorage.getItem("user"));
 const initialState = user

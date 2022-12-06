@@ -2,8 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Modal from 'react-modal';
-import { authRoles } from '../auth';
-import { loginUser, logoutUser, updateCurrentUser } from '../auth/store/action/authActions'
+import { loginUser, logoutUser, updateCurrentUser } from '../store/actions/authActions'
 import { setLocalize } from '../store/actions/settingActions'
 import { Trans, withTranslation } from 'react-i18next';
 import { Language } from '../utils';
@@ -39,7 +38,7 @@ function Navbar(props) {
     const [openModal, setOpenModal] = useState(false);
     const [currentLang, setCurrentLang] = useState();
     const { i18n } = useTranslation();
-    const userData = useSelector(state => state.authReducers.authReducer)
+    const userData = useSelector(state => state.authReducers)
     useEffectOnce(()=>{
         if (localStorage.lang) {
             let lang = localStorage.getItem('lang')
@@ -77,11 +76,11 @@ function Navbar(props) {
     if (userData && userData.user !== null) {
         userRole = userData.user.role;
     }
-    if (authRoles.cashier.includes(userRole)) {
-        menu = [
-            { url: '/adminpanel', title: 'Admin Panel' },
-        ]
-    }
+    // if (authRoles.cashier.includes(userRole)) {
+    //     menu = [
+    //         { url: '/adminpanel', title: 'Admin Panel' },
+    //     ]
+    // }
     
     return (
         <div className='header'>

@@ -2,9 +2,6 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { Utils } from '../utils';
 import { useMediaQuery } from 'usehooks-ts'
-import { authRoles } from '../auth';
-//admin
-import { AdminConfig } from '../admin/adminConfig'
 //desktop view
 import { SportsBettingConfig } from '../main/sportsBetting/sportsBettingConfig'
 import { InPlayConfig } from '../main/inPlay/inPlayConfig'
@@ -16,7 +13,6 @@ import { MLoginConfig } from '../mobile/pages/login/mLoginConfig'
 
 import Error404 from '../main/errors/error404'
 const routeConfigs = [
-    AdminConfig,
     SportsBettingConfig,
     InPlayConfig,
     OutRightsConfig,
@@ -27,7 +23,6 @@ const routeConfigs = [
 ];
 //mobile case
 const m_routeConfigs = [
-    AdminConfig,
     MLoginConfig,
     MHomeConfig,
 ]
