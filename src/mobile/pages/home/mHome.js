@@ -35,7 +35,7 @@ const leagueContentData = [
                 status: 2,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [3.40,1.70,4.50]
             },
         ]
     },
@@ -51,7 +51,7 @@ const leagueContentData = [
                 status: 0,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [15.00,1.00,2.90]
             },
             {
                 content_Id: '4',
@@ -62,7 +62,7 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [15.00,1.00,23.00]
             },
             {
                 content_Id: '5',
@@ -73,7 +73,7 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [8.80,1.00,15.00]
             },
             {
                 content_Id: '6',
@@ -84,7 +84,7 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [2.70,1.60,8.00]
             },
             {
                 content_Id: '7',
@@ -95,7 +95,7 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [5.60,2.50,2.60]
             },
             {
                 content_Id: '8',
@@ -106,7 +106,7 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odds: [1.5,1.2,2.3]
+                odds: [14.00,7.50,6.40]
             },
         ]
     }
