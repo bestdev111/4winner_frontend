@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import './styles/leagueContent.css'
 function LeagueContent(props) {
+    const [vList, setVList] = useState([])
     const matchData = props
     const matchStatus = () => {
         switch (matchData.status) {
@@ -25,6 +26,11 @@ function LeagueContent(props) {
             default:
                 break;
         }
+    }
+    const betOddSelect = (index, param) => {
+        props.betCollector(param);
+        setVList([...vList, index])
+        console.log('match:', matchData.content_Id);
     }
     return (
         <div className="match d-flex">
@@ -52,9 +58,11 @@ function LeagueContent(props) {
                 </div>
             </div>
             <div className="odds">
-                <div className="o3"><div className="changeable-odd">{matchData.odd1}</div></div>
-                <div className="o3"><div className="changeable-odd">{matchData.odd2}</div></div>
-                <div className="o3"><div className="changeable-odd">{matchData.odd3}</div></div>
+                {matchData.odds ? matchData.odds.map((odd, index) =>
+                    <div key={index} className='o3'><div className={vList !== [] && vList.includes(index) ? "changeable-odd odd-selected" : 'changeable-odd'} onClick={() => betOddSelect(index, odd)}>{odd}</div></div>
+                ) : <></>}
+                {/* <div className="o3"><div className="changeable-odd" onClick={() => props.betCollector(matchData.odd2)}>{matchData.odd2}</div></div>
+                <div className="o3"><div className="changeable-odd" onClick={() => props.betCollector(matchData.odd3)}>{matchData.odd3}</div></div> */}
             </div>
         </div>
     );

@@ -31,3 +31,15 @@
 .footer-active {
     color: #25851f;
 }
+.bet-slip-active {
+    width: 31px;
+    background-color: #25851f;
+    border-radius: 15px;
+    color: #fff;
+    padding: 4px;
+    font-weight: 700;
+    display: inline-block;
+    margin-top: -6px;
+    font-size: 15px;
+    text-align: center;
+}

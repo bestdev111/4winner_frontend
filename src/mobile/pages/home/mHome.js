@@ -16,6 +16,7 @@ const leagueContentData = [
         title: 'Football/Argentina/Torneo Regional Federal',
         leagues: [
             {
+                content_Id: '1',
                 teamName1: 'La Emilia',
                 teamName2: 'Regatas San Nicol.',
                 score1: 1,
@@ -23,11 +24,10 @@ const leagueContentData = [
                 status: 3,
                 redCard1: 0,
                 redCard2: 2,
-                odd1: '1.50',
-                odd2: '0.60',
-                odd3: '1.90',
+                odds: [1.5,1.2,2.3]
             },
             {
+                content_Id: '2',
                 teamName1: 'Paris SG',
                 teamName2: 'Arsenal F.C.',
                 score1: 0,
@@ -35,9 +35,7 @@ const leagueContentData = [
                 status: 2,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '3.20',
-                odd2: '1.30',
-                odd3: '3.20',
+                odds: [1.5,1.2,2.3]
             },
         ]
     },
@@ -45,6 +43,7 @@ const leagueContentData = [
         title: 'Football/Mexico/Liga Expansion MX Apertura',
         leagues: [
             {
+                content_Id: '3',
                 teamName1: 'FC Barcelona',
                 teamName2: 'Real Madrid',
                 score1: 0,
@@ -52,11 +51,10 @@ const leagueContentData = [
                 status: 0,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '2.30',
-                odd2: '2.60',
-                odd3: '1.20',
+                odds: [1.5,1.2,2.3]
             },
             {
+                content_Id: '4',
                 teamName1: 'Cimarrones Sonora',
                 teamName2: 'Club Celaya FC',
                 score1: 0,
@@ -64,11 +62,10 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '2.30',
-                odd2: '2.60',
-                odd3: '1.40',
+                odds: [1.5,1.2,2.3]
             },
             {
+                content_Id: '5',
                 teamName1: 'Cimarrones Sonora',
                 teamName2: 'Club Celaya FC',
                 score1: 0,
@@ -76,11 +73,10 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '2.30',
-                odd2: '2.60',
-                odd3: '1.40',
+                odds: [1.5,1.2,2.3]
             },
             {
+                content_Id: '6',
                 teamName1: 'Cimarrones Sonora',
                 teamName2: 'Club Celaya FC',
                 score1: 0,
@@ -88,11 +84,10 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '2.30',
-                odd2: '2.60',
-                odd3: '1.40',
+                odds: [1.5,1.2,2.3]
             },
             {
+                content_Id: '7',
                 teamName1: 'Cimarrones Sonora',
                 teamName2: 'Club Celaya FC',
                 score1: 0,
@@ -100,11 +95,10 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '2.30',
-                odd2: '2.60',
-                odd3: '1.40',
+                odds: [1.5,1.2,2.3]
             },
             {
+                content_Id: '8',
                 teamName1: 'Cimarrones Sonora',
                 teamName2: 'Club Celaya FC',
                 score1: 0,
@@ -112,17 +106,21 @@ const leagueContentData = [
                 status: 1,
                 redCard1: 0,
                 redCard2: 0,
-                odd1: '2.30',
-                odd2: '2.60',
-                odd3: '1.40',
+                odds: [1.5,1.2,2.3]
             },
         ]
     }
 ]
 function MHome() {
     const [tipTypes, setTipTypes] = useState();
+    const [betCollectList, setBetCollectList] = useState([]);
+    const [betCollectCount, setBetCollectCount] = useState(0);
     const getTipTypes = (data) => { //callback function for children component
         setTipTypes(data);
+    }
+    const BetCollector = (oddValue) => {
+        setBetCollectCount(betCollectCount + 1)
+        setBetCollectList([...betCollectList, oddValue]);
     }
     return (
         <>
@@ -136,11 +134,12 @@ function MHome() {
                 </div>
                 <div className='m_body'>
                     {leagueContentData && leagueContentData.map((leaguesData, index)=> 
-                        <>
+                        <div key={index}>
                             <div key={index} className="league-content">{leaguesData.title}</div>
                             {leaguesData.leagues.map((leagues, i)=> 
                                 <LeagueContent
                                     key={i}
+                                    content_Id={leagues.content_Id}
                                     teamName1={leagues.teamName1}
                                     teamName2={leagues.teamName2}
                                     score1={leagues.score1}
@@ -148,16 +147,17 @@ function MHome() {
                                     status={leagues.status}
                                     redCard1={leagues.redCard1}
                                     redCard2={leagues.redCard2}
-                                    odd1={leagues.odd1}
-                                    odd2={leagues.odd2}
-                                    odd3={leagues.odd3}
+                                    odds={leagues.odds}
+                                    betCollector={BetCollector} 
                                 />
                             )}
-                        </>    
+                        </div>    
                     )}
                 </div>
             </div>
-            <MobileFooter />
+            <MobileFooter 
+                betSlipNum={betCollectCount}
+            />
         </>
     );
 };

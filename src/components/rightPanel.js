@@ -7,11 +7,14 @@ import './styles/rightPanel.css'
 import { useEffectOnce } from 'usehooks-ts'
 
 const RightPanel = () => {
-    const amountRef = useRef(5);
+    const amountRef = useRef(Number(5));
     const [open, setOpen] = useState(false);
-    // const [amount, setAmount] = useState(5);
-    const [stake, setStake] = useState(0);
-    const [totalStake, setTotalStake] = useState(0);
+    const [stake, setStake] = useState(Number(0));
+    const [totalStake, setTotalStake] = useState(Number(0));
+    const [tax, setTax] = useState(Number(0));
+    const [stakeBet, setStakeBet] = useState(Number(0));
+    const [numBet, setNumBet] = useState(Number(0));
+    const [maxWinning, setMaxWinning] = useState(Number(0));
 
     const [bet, setBet] = useState(true);
     const userData = useSelector(state => state.authReducers)
@@ -27,19 +30,25 @@ const RightPanel = () => {
             i18n.changeLanguage(lang);
         }
     })
+    const resetAll = () => {
+        setStake(Number(0));
+        setTotalStake(Number(0));
+        setTax(Number(0));
+        setStakeBet(Number(0));
+        setNumBet(Number(0));
+        setMaxWinning(Number(0));
+        amountRef.current.value = Number(0.00);
+    }
     const amountCount = (param) => {
-        console.log('ref:',amountRef.current.value / 1);
+        console.log('here', typeof Number(amountRef.current.value));
         if (param === 1) {
-            setStake(stake + amountRef.current.value / 1);
-            setTotalStake(totalStake + amountRef.current.value / 1);
+            setStake(Number(stake)+ Number(amountRef.current.value));
+            setTotalStake(Number(totalStake) *1 + Number(amountRef.current.value) *1);
         }
         else{
-            setStake(stake - amountRef.current.value / 1);
-            setTotalStake(totalStake - amountRef.current.value / 1);
+            setStake(Number(stake) - Number(amountRef.current.value));
+            setTotalStake(Number(totalStake) - Number(amountRef.current.value));
         }
-        // param === 1 ? setAmount(amount + amountRef.current.value / 1) :
-        //     (amount !== 5 ? setAmount(amount - amountRef.current.value /1) : setAmount(amount))
-        //     ;
     }
     const placeBet = () => {
         if (!userData.isAuthenticated) {
@@ -76,7 +85,7 @@ const RightPanel = () => {
                     : <></>
                 }
                 <div className="bet-totals d-flex">
-                    <p className="btn-reset"><Trans>Reset</Trans></p>
+                    <p className="btn-reset" onClick={resetAll}><Trans>Reset</Trans></p>
                     <div className="totals px-2 pt-2">
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Stake:</Trans></div>
@@ -84,7 +93,7 @@ const RightPanel = () => {
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Tax:</Trans></div>
-                            <div className="push-right">0.00</div>
+                            <div className="push-right">{tax}</div>
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Total stake:</Trans></div>
@@ -92,15 +101,15 @@ const RightPanel = () => {
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Stake per bet:</Trans></div>
-                            <div className="push-right">0.00</div>
+                            <div className="push-right">{stakeBet}</div>
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Number of bets:</Trans></div>
-                            <div className="push-right">0</div>
+                            <div className="push-right">{numBet}</div>
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Max Winning:</Trans></div>
-                            <div className="push-right">0.00</div>
+                            <div className="push-right">{maxWinning}</div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +120,7 @@ const RightPanel = () => {
                         </div>
                         <div className="align-self-center col-8">
                             <div>
-                                <input type="text" id="PayingAmount" ref={amountRef} defaultValue='0' className="payingamount py-1" />
+                                <input type="number" step='0.1' id="PayingAmount" ref={amountRef} defaultValue="0.00" className="payingamount py-1" />
                                 <span className="text-danger"></span>
                             </div>
                         </div>
