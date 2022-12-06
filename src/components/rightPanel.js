@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import ToastService from '../service/toast.service';
 import { Trans } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
 import './styles/rightPanel.css'
 import { useEffectOnce } from 'usehooks-ts'
+
 const RightPanel = () => {
+    const amountRef = useRef(5);
     const [open, setOpen] = useState(false);
-    const [amount, setAmount] = useState(5);
+    // const [amount, setAmount] = useState(5);
+    const [stake, setStake] = useState(0);
+    const [totalStake, setTotalStake] = useState(0);
+
     const [bet, setBet] = useState(true);
     const userData = useSelector(state => state.authReducers)
     const { i18n } = useTranslation();
@@ -23,9 +28,18 @@ const RightPanel = () => {
         }
     })
     const amountCount = (param) => {
-        param === 1 ? setAmount(amount + 5.00) :
-            (amount !== 5 ? setAmount(amount - 5.00) : setAmount(amount))
-            ;
+        console.log('ref:',amountRef.current.value / 1);
+        if (param === 1) {
+            setStake(stake + amountRef.current.value / 1);
+            setTotalStake(totalStake + amountRef.current.value / 1);
+        }
+        else{
+            setStake(stake - amountRef.current.value / 1);
+            setTotalStake(totalStake - amountRef.current.value / 1);
+        }
+        // param === 1 ? setAmount(amount + amountRef.current.value / 1) :
+        //     (amount !== 5 ? setAmount(amount - amountRef.current.value /1) : setAmount(amount))
+        //     ;
     }
     const placeBet = () => {
         if (!userData.isAuthenticated) {
@@ -66,7 +80,7 @@ const RightPanel = () => {
                     <div className="totals px-2 pt-2">
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Stake:</Trans></div>
-                            <div className="push-right">{amount}</div>
+                            <div className="push-right">{stake}</div>
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Tax:</Trans></div>
@@ -74,7 +88,7 @@ const RightPanel = () => {
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Total stake:</Trans></div>
-                            <div className="push-right">{amount}</div>
+                            <div className="push-right">{totalStake}</div>
                         </div>
                         <div className="d-flex justify-content-between">
                             <div className="push-left"><Trans>Stake per bet:</Trans></div>
@@ -97,7 +111,7 @@ const RightPanel = () => {
                         </div>
                         <div className="align-self-center col-8">
                             <div>
-                                <input type="text" id="PayingAmount" defaultValue={amount} className="payingamount py-1" />
+                                <input type="text" id="PayingAmount" ref={amountRef} defaultValue='0' className="payingamount py-1" />
                                 <span className="text-danger"></span>
                             </div>
                         </div>
