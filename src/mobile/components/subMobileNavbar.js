@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import withReducer from 'store/withReducer';
-// import reducer from 'store/reducers/rootReducers';
 import { getTopLeague } from '../../store/actions/sportsActions'
 import './styles/mobileNavbar.css'
 
@@ -12,7 +10,7 @@ function MobileNavbar(props) {
     const [selected, setSelected] = useState(0);
     const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
-    const leagues_list = useSelector(state => state.sportsReducers.topLeague);
+    const leagues_list = useSelector(state => state.sportsReducers.getTopLeague);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTopLeague());
@@ -40,7 +38,7 @@ function MobileNavbar(props) {
                     </div>
                 )}
             </div>
-            {sportActive === 0 ?
+            {sportActive === 1 ?
                 <>
                     <div className='d-flex'>
                         {leagues_list && leagues_list.map((item, index) =>
