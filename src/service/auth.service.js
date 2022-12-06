@@ -2,7 +2,6 @@ import axios from "axios";
 import jwtDecode from 'jwt-decode';
 import { SetAuthToken } from '../utils';
 import { ServerURL } from "../utils";
-// const API_URL = "http://localhost:5000/";
 import { Language } from '../utils'
 const register = (user) => {
     console.log('register', user);
