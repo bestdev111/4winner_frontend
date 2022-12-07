@@ -1,8 +1,12 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import './styles/leagueContent.css'
+import { betOddSelectAction } from "../../store/actions/betActions";
 function LeagueContent(props) {
+    const dispatch = useDispatch();
     const [vList, setVList] = useState([])
-    const matchData = props
+    const matchData = props;
+    const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const matchStatus = () => {
         switch (matchData.status) {
             case 0:
@@ -27,11 +31,28 @@ function LeagueContent(props) {
                 break;
         }
     }
+    // useEffect(() => {
+    // }, [betCollectList])
+    console.log('useSelector::::', betCollectList);
+
     const betOddSelect = (index, param) => {
-        props.betCollector(param);
-        setVList([...vList, index])
-        console.log('match:', matchData.content_Id);
+        const obj = {
+            matchId: props.content_Id,
+            odds: []
+        }
+        obj.odds.push(index)
+        dispatch(betOddSelectAction(betCollectList, obj));
+        // if (vList.includes(index)) {
+        //     var i = vList.indexOf(index)
+        //     let tempList = vList;
+        //     if (i > -1) {
+        //         tempList.splice(i, 1);
+        //     }
+        //     setVList([...vList, index])
+        // }
+        // setVList([...vList, index])
     }
+
     return (
         <div className="match d-flex">
             <div className="m_teams">
@@ -59,10 +80,16 @@ function LeagueContent(props) {
             </div>
             <div className="odds">
                 {matchData.odds ? matchData.odds.map((odd, index) =>
-                    <div key={index} className='o3'><div className={vList !== [] && vList.includes(index) ? "changeable-odd odd-selected" : 'changeable-odd'} onClick={() => betOddSelect(index, odd)}>{odd}</div></div>
+                    <div key={index} className='o3'>
+                        <div
+                            // className={vList !== [] && vList.includes(index) ? "changeable-odd odd-selected" : 'changeable-odd'} 
+                            className='changeable-odd'
+                            onClick={() => betOddSelect(index, odd)}
+                        >
+                            {odd}
+                        </div>
+                    </div>
                 ) : <></>}
-                {/* <div className="o3"><div className="changeable-odd" onClick={() => props.betCollector(matchData.odd2)}>{matchData.odd2}</div></div>
-                <div className="o3"><div className="changeable-odd" onClick={() => props.betCollector(matchData.odd3)}>{matchData.odd3}</div></div> */}
             </div>
         </div>
     );

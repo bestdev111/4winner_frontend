@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import './styles/mobileFooter.css'
 
 function MobileFooter(props) {
     const [numActive, setNumActive] = useState(0);
+    const [betSlipNum, setBetSlipNum] = useState(0);
     const mFooterList = [
         { icon: 'fa fa-home', title: 'Home' },
         { icon: 'fa fa-clock-o', title: 'Live' },
@@ -13,7 +15,7 @@ function MobileFooter(props) {
     const goActive = (index) => {
         setNumActive(index);
     }
-    console.log('betSlipNum:',props.betSlipNum);
+    
     return (
         <div className="m-footer pl-5 pr-5">
             <div className='d-flex justify-content-between'>

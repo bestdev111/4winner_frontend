@@ -20,5 +20,5 @@ export const GET_TOP_LEAGUE = 'GET_TOP_LEAGUE';
 //settings
 export const SET_LOCALIZE = 'SET_LOCALIZE';
 
-//adminActions
-export const ADMIN_PANEL = 'ADMIN_PANEL';
+//betActions
+export const BET_SELECT = 'BET_SELECT';

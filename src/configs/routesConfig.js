@@ -12,14 +12,12 @@ import { MHomeConfig } from '../mobile/pages/home/mHomeConfig'
 import { MLoginConfig } from '../mobile/pages/login/mLoginConfig'
 
 import Error404 from '../main/errors/error404'
+//desktop view
 const routeConfigs = [
     SportsBettingConfig,
     InPlayConfig,
     OutRightsConfig,
     ResultsConfig,
-
-    // MLoginConfig,
-    // MHomeConfig,
 ];
 //mobile case
 const m_routeConfigs = [
