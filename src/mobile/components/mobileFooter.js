@@ -15,7 +15,9 @@ function MobileFooter(props) {
     const goActive = (index) => {
         setNumActive(index);
     }
-    
+    const openModal = () => {
+        props.modalFunc(false)
+    }
     return (
         <div className="m-footer pl-5 pr-5">
             <div className='d-flex justify-content-between'>
@@ -24,8 +26,8 @@ function MobileFooter(props) {
                         <div className='item' key={index} onClick={() => goActive(index)}>
                             <div className='d-flex justify-content-center'>
                                 {props.betSlipNum > 0 && index === 2 ? 
-                                    <span className='bet-slip-active'>{props.betSlipNum}</span> : 
-                                    <i className={index === numActive ? `footer-active ${item.icon}` : item.icon} ></i>
+                                    <span onClick={openModal} className='bet-slip-active'>{props.betSlipNum}</span> : 
+                                    <i onClick={openModal} className={index === numActive ? `footer-active ${item.icon}` : item.icon} ></i>
                                 }
                             </div>
                             <div className='d-flex justify-content-center'>
