@@ -26,7 +26,8 @@ const topLeague = [
 export const getAllMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL +'/sports/getAllMatches');
+            const instance = axios.create({ baseURL: 'http://volley90.com:5000' })
+            const response = await instance.get(ServerURL +'/sports/getAllMatches');
             ToastService("getAllMatches Success");
             return dispatch({
                 type: GET_ALL_MATCHES,
