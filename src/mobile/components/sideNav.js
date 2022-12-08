@@ -73,7 +73,7 @@ function SideNav(props) {
         setIsCollapse2(newArr);
         setIsCollapse3(undefined);
     }
-    const availableSportTypes = get_AllMatches.data.availableSportTypes;
+    const availableSportTypes = get_AllMatches && get_AllMatches.data ? get_AllMatches.data.availableSportTypes : [];
     function getLeagueMatchCount(params) {
         let sum = 0;
         get_AllMatches.data.leagues.forEach(element => {
@@ -98,13 +98,13 @@ function SideNav(props) {
                 <p>
                     Outrights
                     <span className="match-count">
-                        {get_AllMatches.data.totalOutrightsCount}
+                        {get_AllMatches && get_AllMatches.data ?  get_AllMatches.data.totalOutrightsCount : ''}
                     </span>
                 </p>
                 <p>
                     Highrights
                     <span className="match-count">
-                        {get_AllMatches.data.totalHighLightsCount}
+                        {get_AllMatches && get_AllMatches.data ? get_AllMatches.data.totalHighLightsCount : ''}
                     </span>
                 </p>
                 {availableSportTypes && availableSportTypes.map((availableSportType, index1) =>
