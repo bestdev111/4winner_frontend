@@ -110,7 +110,7 @@ function SideNav(props) {
                 {availableSportTypes && availableSportTypes.map((availableSportType, index1) =>
                     <div key={index1} className="sportstypes">
                         <p className={isCollapse1[index1] ? 'collapse' : ''} onClick={() => collapseFunc1(index1)}>
-                            {SportTypeList[availableSportType - 1].name}
+                            {SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}
                             <span className="match-count">
                                 {getLeagueMatchCount(availableSportType)}
                             </span>
