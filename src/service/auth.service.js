@@ -62,7 +62,7 @@ const deleteOne = (userName) => {
 const logout = () => {
     localStorage.removeItem('jwtToken');
     SetAuthToken(false);
-    window.location.href = '/sportsbetting';
+    window.location.href = '/';
 };
 
 const authService = {
