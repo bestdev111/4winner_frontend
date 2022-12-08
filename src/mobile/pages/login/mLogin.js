@@ -30,7 +30,7 @@ function MLogin() {
                     <label htmlFor="pwd">Password:</label>
                     <input type="password" className="form-control p-2 pl-3" onChange={e => setPass(e.target.value)} id="pwd" name="password" placeholder='Password' />
                 </div>
-                <input type="submit" className="m_login_btn" value='Login' onClick={login} />
+                <input type="button" className="m_login_btn" value='Login' onClick={login} />
             </div>
         </>
     );

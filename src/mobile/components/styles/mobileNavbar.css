@@ -28,7 +28,15 @@
 .sidenav .login a {
     width: 100%;
 }
-
+.user-info {
+    margin-top: -2px;
+    margin-right: 15px;
+    display: inline-grid;
+}
+.user-info span {
+    color: #c96141;
+    font-size: 12px;
+}
 .m-navbar .top-nav {
     float: left;
     padding: 2px 6px 2px 6px;
@@ -227,4 +235,7 @@
 }
 .match-count {
     float: right;
+}
+.account {
+    padding-left: 8px;
 }

@@ -3,18 +3,7 @@ import jwtDecode from 'jwt-decode';
 import { SetAuthToken } from '../utils';
 import { ServerURL } from "../utils";
 import { Language } from '../utils'
-const register = (user) => {
-    console.log('register', user);
-    return axios.post(ServerURL +'/user/register', user);
-};
 
-const userGet = (currentUser) => {
-    return axios
-        .get("/user", {params: currentUser})
-        .then((response) => {
-            return response.data;
-        });
-};
 const login = (user) => {
     return axios
         .post(ServerURL + "/user/login", user)
@@ -42,23 +31,13 @@ const updateCurrentUser = (user) => {
             return decoded;
         });
 };
-const updateUser = (user) => {
+const passwordChange = data => {
     return axios
-        .post(ServerURL + "/user/updateuser", user)
+        .post(ServerURL + "/user/changepass", data)
         .then((response) => {
-            console.log('updateUser', response);
             return response;
         });
 };
-const deleteOne = (userName) => {
-    return axios
-        .post(ServerURL + "/user/deleteuser", userName)
-        .then((response) => {
-            console.log('deleteOne', response);
-            return response;
-        });
-};
-
 const logout = () => {
     localStorage.removeItem('jwtToken');
     SetAuthToken(false);
@@ -66,11 +45,8 @@ const logout = () => {
 };
 
 const authService = {
-    userGet,
-    register,
     updateCurrentUser,
-    updateUser,
-    deleteOne,
+    passwordChange,
     login,
     logout,
 };

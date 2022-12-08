@@ -9,17 +9,24 @@ function MobileNavbar() {
     const [openSide, setOpenSide] = useState(false);
     const userData = useSelector(state => state.authReducers)
     const isAuth = userData.isAuthenticated
+    console.log(isAuth);
     return (
         <div className="m-navbar px-2 pt-3 pb-0">
             <SideNav show={openSide} onClickOutside={() => setOpenSide(false)} />
             <div className='d-flex justify-content-between'>
                 <div className='top-nav' onClick={() => setOpenSide(true)}><i className="fa fa-fw fa-bars"></i></div>
-                <div className='top-nav login'>
                     {!isAuth ?
-                        <a href='/m_login'>Login</a>
-                        : <a onClick={()=> dispatch(logoutUser())}>Logout</a>
+                        <div className='top-nav login'>
+                            <a href='/m_login'>Login</a>
+                        </div>
+                        : <div className='top-nav d-flex'>
+                        <div className='user-info'>
+                                <span>{userData.user.name}</span>
+                                <span>{userData.user.balance}</span>
+                            </div>
+                            <i onClick={() => dispatch(logoutUser())} className='fa fa-sign-out fw-2'></i>
+                        </div>
                     }
-                </div>
             </div>
         </div>
     );

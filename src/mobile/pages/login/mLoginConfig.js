@@ -5,6 +5,10 @@ export const MLoginConfig = {
         {
             path: '/m_login',
             component: lazy(() => import('./mLogin'))
-        }
+        },
+        {
+            path: '/m_changepassword',
+            component: lazy(() => import('./mChangePassword'))
+        },
     ]
 };

@@ -46,7 +46,7 @@ class Authorization extends Component {
         const redirectUrl = state && state.redirectUrl ? state.redirectUrl : '/';
         if (userData) {
             history.push({
-                pathname: '/sportsbetting',
+                pathname: '/',
                 state: { redirectUrl: pathname },
             });
         }

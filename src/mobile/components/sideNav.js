@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTypeList, getAllMatches, getMatches } from '../../store/actions/sportsActions'
+import { logoutUser } from '../../store/actions/authActions'
 import { Language } from '../../utils';
 const lang_list = [
     { id: 0, name: 'de_DE', icon: 'assets/images/flags/de_DE.png', title: 'Deutsch' },
@@ -25,7 +26,8 @@ function SideNav(props) {
     const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
     // const get_Matches = useSelector(state => state.sportsReducers.getMatches);
-
+    const userData = useSelector(state => state.authReducers)
+    const isAuth = userData.isAuthenticated
     useEffect(() => {
         dispatch(getTypeList());
         dispatch(getAllMatches());
@@ -81,11 +83,13 @@ function SideNav(props) {
         });
         return sum;
     }
-
+    const changePassword = () => {
+        window.location.href = '/m_changepassword'
+    }
     return (
         <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
             <div className='p-3'>
-                <div className='login d-flex justify-content-center p-2'><a href='/m_login'>Login</a></div>
+                {!isAuth ? <div className='login d-flex justify-content-center p-2'><a href='/m_login'>Login</a></div> :<></>}
             </div>
             <div className='pan'>
                 <div>Bets</div>
@@ -156,6 +160,20 @@ function SideNav(props) {
                     )}
                 </div>
             </div>
+            {isAuth ? 
+                <>
+                    <div className='pan'>
+                        <div>Account</div>
+                    </div>
+                    <div className='account'>
+                        <p onClick={changePassword}>Change Password</p>
+                        <p>My Bets</p>
+                        <p>Transactions</p>
+                        <p onClick={() => dispatch(logoutUser())}>Logout</p>
+                    </div>
+                </>
+                : <></>
+            }
         </div>
     );
 }
