@@ -131,6 +131,7 @@ function MHome() {
     const [stakeBet, setStakeBet] = useState(Number(0));
     const [numBet, setNumBet] = useState(Number(0));
     const [maxWinning, setMaxWinning] = useState(Number(0));
+    const [betCollectorHome, setBetCollectorHome] = useState([]);
 
     const userData = useSelector(state => state.authReducers)
     const getTipTypes = (data) => {
@@ -161,10 +162,31 @@ function MHome() {
         setOpenBetModal(true);
 
     }
-    // useEffect(()=> {
-    //     console.log('hello');
-    //     setStakeValue(amountRef.current.value)
-    // }, [amountRef])
+    useEffect(()=> {
+        console.log('hello');
+        // setStakeValue(amountRef.current.value)
+    }, [betCollectorHome])
+    const betCollectListFunc = (betCollectList, obj)=> {
+        let tempBetCollectList = [];
+        tempBetCollectList = betCollectList;
+        if (tempBetCollectList && tempBetCollectList.length > 0) {
+            let flag = false;
+            tempBetCollectList.forEach((item, index) => {
+                if (item.matchId === obj.matchId) {
+                    item.odds.includes(...obj.odds) ? arrayRemove(item.odds, item.odds.indexOf(...obj.odds)) : item.odds.push(...obj.odds);
+                    return flag = true;
+                }
+            });
+            if (flag === false) {
+                tempBetCollectList.push(obj)
+            }
+        }
+        else {
+            tempBetCollectList.push(obj)
+        }
+        console.log('betCollectListFunc', tempBetCollectList);
+        setBetCollectorHome(tempBetCollectList);
+    }
     return (
         <>
             <MobileNavbar />
@@ -184,7 +206,7 @@ function MHome() {
                                     {leaguesData.leagues.map((leagues, i) =>
                                         <LeagueContent
                                             key={i}
-                                            // selected={betCollectList}
+                                            selected={betCollectListFunc}
                                             content_Id={leagues.content_Id}
                                             teamName1={leagues.teamName1}
                                             teamName2={leagues.teamName2}
@@ -194,14 +216,14 @@ function MHome() {
                                             redCard1={leagues.redCard1}
                                             redCard2={leagues.redCard2}
                                             odds={leagues.odds}
-                                        // betCollector={BetCollector} 
+                                            betCollectorHome={betCollectorHome} 
                                         />
                                     )}
                                 </div>
                             )}
                         </div>
                     </div>
-                    <MobileFooter modalFunc={modalFunc} />
+                    <MobileFooter betCollectorHome={betCollectorHome} modalFunc={modalFunc} />
                 </>
                 :
                 <div className='bet-pan'>

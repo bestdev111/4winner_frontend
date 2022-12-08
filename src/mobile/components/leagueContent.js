@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './styles/leagueContent.css'
 import { betOddSelectAction } from "../../store/actions/betActions";
+import { use } from "i18next";
+import { useMemo } from "react";
+function arrayRemove(array, index) {
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
+}
 function LeagueContent(props) {
     const dispatch = useDispatch();
     const matchData = props;
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
-    const [vList, setVList] = useState();
+    // const [betCollectList, setBetCollectList] = useState([]);
     const matchStatus = () => {
         switch (matchData.status) {
             case 0:
@@ -31,6 +39,9 @@ function LeagueContent(props) {
                 break;
         }
     }
+    useMemo(()=> {
+        console.log('clicked', props.betCollectorHome);
+    }, [props])
     const betOddSelect = (index, param) => {
         const obj = {
             matchId: props.content_Id,
@@ -38,20 +49,9 @@ function LeagueContent(props) {
         }
         obj.odds.push(index)
         dispatch(betOddSelectAction(betCollectList, obj));
-        // if (vList.includes(index)) {
-        //     var i = vList.indexOf(index)
-        //     let tempList = vList;
-        //     if (i > -1) {
-        //         tempList.splice(i, 1);
-        //     }
-        //     setVList([...vList, index])
-        // }
-        // setVList([...vList, index])
+        props.selected(betCollectList, obj);
     }
-    // useEffect(()=> {
-    //     console.log('erhe');
-    // }, [betCollectList]);
-    // setVList(betCollectList)
+
     return (
         <div className="match d-flex">
             <div className="m_teams">
@@ -81,8 +81,12 @@ function LeagueContent(props) {
                 {matchData.odds ? matchData.odds.map((odd, index) =>
                     <div key={index} className='o3'>
                         <div
-                            // className={vList !== [] && vList.includes(index) ? "changeable-odd odd-selected" : 'changeable-odd'} 
-                            className='changeable-odd'
+                            className={
+                                props.betCollectorHome.length > 0 ? props.betCollectorHome.map((list, i) =>
+                                    list.matchId === matchData.content_Id && list.odds.includes(index) ? 'changeable-odd odd-selected' : 'changeable-odd'
+                                )
+                                    : 'changeable-odd'
+                            }
                             onClick={() => betOddSelect(index, odd)}
                         >
                             {odd}

@@ -22,13 +22,18 @@ function MobileFooter(props) {
         props.modalFunc(false)
     }
     useEffect(()=> {
-        if(betCollectList) {
-            betCollectList.forEach(list => {
-                setBetSlipNum(betSlipNum + list.odds.length);
+        if (props.betCollectorHome.length > 0) {
+            props.betCollectorHome.forEach(item => {
+                setBetSlipNum(betSlipNum + item.odds.length);
             });
         }
-    }, [openModal])
-    console.log('betCollectList', betCollectList);
+        // if(betCollectList) {
+        //     betCollectList.forEach(list => {
+        //         setBetSlipNum(betSlipNum + list.odds.length);
+        //     });
+        // }
+    }, [props])
+    console.log('betCollectList', props.betCollectorHome, betSlipNum);
     return (
         <div className="m-footer pl-5 pr-5">
             <div className='d-flex justify-content-between'>
