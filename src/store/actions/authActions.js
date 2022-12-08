@@ -35,6 +35,7 @@ export const loginUser = user => {
     try {
       const response = await AuthService.login(user);
       ToastService('Login Success!', "success");
+      window.location.href = '/';
       return dispatch(setCurrentUser(response));
     } catch (error) {
       ToastService("Login Error!", 'error');

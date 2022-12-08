@@ -4,9 +4,9 @@ import './styles/leagueContent.css'
 import { betOddSelectAction } from "../../store/actions/betActions";
 function LeagueContent(props) {
     const dispatch = useDispatch();
-    const [vList, setVList] = useState([])
     const matchData = props;
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
+    const [vList, setVList] = useState();
     const matchStatus = () => {
         switch (matchData.status) {
             case 0:
@@ -31,10 +31,6 @@ function LeagueContent(props) {
                 break;
         }
     }
-    // useEffect(() => {
-    // }, [betCollectList])
-    console.log('useSelector::::', betCollectList);
-
     const betOddSelect = (index, param) => {
         const obj = {
             matchId: props.content_Id,
@@ -52,7 +48,10 @@ function LeagueContent(props) {
         // }
         // setVList([...vList, index])
     }
-
+    // useEffect(()=> {
+    //     console.log('erhe');
+    // }, [betCollectList]);
+    // setVList(betCollectList)
     return (
         <div className="match d-flex">
             <div className="m_teams">

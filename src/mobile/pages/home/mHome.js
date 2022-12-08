@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux'; 
+import { useSelector } from 'react-redux';
 import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from '../../../mobile/components'
 import ToastService from '../../../service/toast.service';
 import './mHome.css'
@@ -123,13 +123,15 @@ function MHome() {
     const [tipTypes, setTipTypes] = useState();
     const [tab, setTab] = useState(true);
     const [bet, setBet] = useState(true);
-    const amountRef = useRef();
+    const amountRef = useRef(Number(5));
+    const [stakeValue, setStakeValue] = useState(5);
     const [stake, setStake] = useState(Number(0));
     const [totalStake, setTotalStake] = useState(Number(0));
     const [tax, setTax] = useState(Number(0));
     const [stakeBet, setStakeBet] = useState(Number(0));
     const [numBet, setNumBet] = useState(Number(0));
     const [maxWinning, setMaxWinning] = useState(Number(0));
+
     const userData = useSelector(state => state.authReducers)
     const getTipTypes = (data) => {
         setTipTypes(data);
@@ -139,8 +141,9 @@ function MHome() {
     }
     const amountCount = (param) => {
         if (param === 1) {
-            setStake(Number(stake) + Number(amountRef.current.value));
+            setStake(Number(stake) * 1 + Number(amountRef.current.value) * 1);
             setTotalStake(Number(totalStake) * 1 + Number(amountRef.current.value) * 1);
+            console.log('called!!!', amountRef.current.value);
         }
         else {
             setStake(Number(stake) - Number(amountRef.current.value));
@@ -148,12 +151,20 @@ function MHome() {
         }
     }
     const placeBet = () => {
+        ToastService("Please Login", 'error');
         if (!userData.isAuthenticated) {
-            ToastService("Please Login", 'error');
             return;
         }
         setBet(false)
     }
+    const oddsReset = () => {
+        setOpenBetModal(true);
+
+    }
+    // useEffect(()=> {
+    //     console.log('hello');
+    //     setStakeValue(amountRef.current.value)
+    // }, [amountRef])
     return (
         <>
             <MobileNavbar />
@@ -200,18 +211,18 @@ function MHome() {
                                 <div onClick={() => setOpenBetModal(true)} ><i className="fa fa-times-circle-o fa-3x" aria-hidden="true"></i></div>
                             </div>
                             <div className='d-flex align-items-center'><span>BETTING SLIP</span></div>
-                            <div><span className='btn btn-success'>Reset</span></div>
+                            <div onClick={oddsReset}><span className='btn btn-success'>Reset</span></div>
                         </div>
                     </div>
                     <div className='oddmodal-body'>
                         <div className="betslip-type">
-                            <a 
+                            <a
                                 className={tab ? "btn btn-orange btn-group-justified single-multiple-button tab-selected" : "btn btn-orange btn-group-justified single-multiple-button"}
-                                onClick={()=> setTab(true)}
+                                onClick={() => setTab(true)}
                             >SINGLE/MULTIPLE</a>
-                            <a 
+                            <a
                                 className={!tab ? "btn btn-orange btn-group-justified single-multiple-button tab-selected" : "btn btn-orange btn-group-justified single-multiple-button"}
-                                onClick={() => setTab(false) }
+                                onClick={() => setTab(false)}
                             >SYSTEM</a>
                         </div>
                         <div className='tips'>
@@ -221,33 +232,35 @@ function MHome() {
                     </div>
                     <div className='oddmodal-footer'>
                         <div className='betslip-stake'>
-                            <a className="stake-button" onClick={() => amountCount(0)}>-</a><span className="stake-input">5.00</span><a className="stake-button" onClick={() => amountCount(1)}>+</a>
+                            <a className="stake-button" onClick={() => amountCount(0)}>-</a>
+                            <span ref={amountRef} className="stake-input" >{stakeValue}</span>
+                            <a className="stake-button" onClick={() => amountCount(1)}>+</a>
                         </div>
                         <div>
                             <a className="place-bet bold">Create Barcode</a>
                             <div className="summary">
                                 <div className="summary-row">
                                     <span>Total stake:</span>
-                                    <span className="value bold">5.00</span>
+                                    <span className="value bold">{totalStake}</span>
                                 </div>
                                 <div className="summary-row">
                                     <span>Tax:</span>
-                                    <span className="value bold">0.00</span>
+                                    <span className="value bold">{tax}</span>
                                 </div>
                                 <div className="summary-row">
                                     <span>Stake per bet:</span>
-                                    <span className="value bold">0.00</span>
+                                    <span className="value bold">{stakeBet}</span>
                                 </div>
                                 <div className="summary-row">
                                     <span>Number of bets:</span>
-                                    <span className="value bold">0</span>
+                                    <span className="value bold">{numBet}</span>
                                 </div>
                                 <div className="summary-row">
                                     <span>Max Winning :</span>
-                                    <span className="value bold">0.00</span>
+                                    <span className="value bold">{maxWinning}</span>
                                 </div>
                             </div>
-                            <a className="place-bet bold" onClick={() => placeBet(true)}>Place bet</a>
+                            <a className="place-bet bold" onClick={placeBet}>Place bet</a>
                         </div>
                     </div>
                 </div>
