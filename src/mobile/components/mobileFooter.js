@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer, useRef } from 'react'
 import { useSelector } from 'react-redux';
-import betReducers from '../../store/reducers/betReducers';
 import './styles/mobileFooter.css'
 import ToastService from '../../service/toast.service';
+import Calculator from './calculator';
 function MobileFooter(props) {
     const mFooterList = [
         { icon: 'fa fa-home', title: 'Home', },
@@ -17,28 +17,24 @@ function MobileFooter(props) {
         { icon: 'fa fa-file-o', title: 'Bet Slip' },
         { icon: 'fa fa-heartbeat', title: 'My Bets' },
     ]
+    const [openCalc, setOpenCalc] = useState(false);
     const [numActive, setNumActive] = useState(0);
     const [betSlipNum, setBetSlipNum] = useState(0);
     const [openBetModal, setOpenBetModal] = useState(true);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const userData = useSelector(state => state.authReducers)
     const isAuth = userData.isAuthenticated;
-    let footerList;
-
-    const [tipTypes, setTipTypes] = useState();
+    var temp1 = 1
+    var temp2 = 0
     const [tab, setTab] = useState(true);
-    const [bet, setBet] = useState(true);
     const amountRef = useRef(Number(5));
-    const [stakeValue, setStakeValue] = useState(5);
-    const [stake, setStake] = useState(Number(0));
-    const [totalStake, setTotalStake] = useState(Number(0));
-    const [tax, setTax] = useState(Number(0));
-    const [stakeBet, setStakeBet] = useState(Number(0));
+    const [totalStake, setTotalStake] = useState(temp1.toFixed(2));
+    const [tax, setTax] = useState(temp2.toFixed(2));
+    const [stakeBet, setStakeBet] = useState(temp2.toFixed(2));
     const [numBet, setNumBet] = useState(Number(0));
-    const [maxWinning, setMaxWinning] = useState(Number(0));
-    // const [betCollectorHome, setBetCollectorHome] = useState([]);
-
-    footerList = isAuth ? mFooterListAuthor : mFooterList;
+    const [maxWinning, setMaxWinning] = useState(temp2.toFixed(2));
+    
+    let footerList = isAuth ? mFooterListAuthor : mFooterList;
 
     const goActive = (index) => {
         setNumActive(index);
@@ -72,30 +68,30 @@ function MobileFooter(props) {
                 setBetSlipNum(betSlipNum + list.odds.length);
             });
         }
-    }, [props])
-    const amountCount = (param) => {
-        if (param === 1) {
-            setStake(Number(stake) * 1 + Number(amountRef.current.value) * 1);
-            setTotalStake(Number(totalStake) * 1 + Number(amountRef.current.value) * 1);
-            console.log('called!!!', amountRef.current.value);
-        }
-        else {
-            setStake(Number(stake) - Number(amountRef.current.value));
-            setTotalStake(Number(totalStake) - Number(amountRef.current.value));
-        }
+    }, [betCollectList])
+
+    // bet slip board
+    const calcStake = (param) => {
+        let temp = param === 1 ? Number(totalStake) * 1 + 1 : totalStake > 1 ? Number(totalStake) * 1 - 1 : 1;
+        setTotalStake(temp.toFixed(2));
     }
     const placeBet = () => {
         if (!isAuth) {
             ToastService("Please Login", 'error');
-        }else{
+        } else {
             // ToastService("Bet Success!", 'success');
         }
     }
     const oddsReset = () => {
         setOpenBetModal(true);
+        var temp1 = 1
+        var temp2 = 0
+        setTotalStake(temp1.toFixed(2));
+        setTax(temp2.toFixed(2));
+        setStakeBet(temp2.toFixed(2))
+        setMaxWinning(temp2.toFixed(2))
     }
     console.log('betCollectList', betCollectList, betSlipNum);
-    console.log('currentPath:', window.location.href);
     return (
         <>
             {!openBetModal ?
@@ -122,86 +118,60 @@ function MobileFooter(props) {
                         </div>
                         <div className='tips'>
                             <div>{/* virtual data */}
-                                <div className='tip'> 
-                                    <div className='d-flex justify-content-center'>
-                                        {!tab ? <span className='btn-bank'>B</span> :<span></span>}
-                                    </div>
-                                    <div className='float'>
-                                        <div className='tip-row'>
-                                            <div class="tip-col middle-col bold">Ferroviaria SP (F)</div>
-                                            <div class="tip-col right-col bold">5.00</div>
-                                        </div>
-                                        <div className='tip-row'>
-                                            <div class="tip-col middle-col">Rest of Match</div>
-                                            <div class="tip-col right-col bold">
-                                                <div class=" currentscore-green">4-4</div>
-                                            </div>
-                                        </div>
-                                        <div className='tip-row'>
-                                            <div class="tip-col middle-col">Ferroviaria SP (F) - SE Palmeiras SP(F)</div>
-                                            <div class="tip-col right-col bold">
-                                                <div class=" currentscore-green"> 86'</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a className='remove-btn'><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></a>
-                            </div>
-                            <div>{/* virtual data */}
-                                <div className='tip'> 
+                                <div className='tip'>
                                     <div className='d-flex justify-content-center'>
                                         {!tab ? <span className='btn-bank'>B</span> : <span></span>}
                                     </div>
                                     <div className='float'>
                                         <div className='tip-row'>
-                                            <div class="tip-col middle-col bold">Ferroviaria SP (F)</div>
-                                            <div class="tip-col right-col bold">5.00</div>
+                                            <div className="tip-col middle-col bold">Ferroviaria SP (F)</div>
+                                            <div className="tip-col right-col bold">5.00</div>
                                         </div>
                                         <div className='tip-row'>
-                                            <div class="tip-col middle-col">Rest of Match</div>
-                                            <div class="tip-col right-col bold">
-                                                <div class=" currentscore-green">4-4</div>
+                                            <div className="tip-col middle-col">Rest of Match</div>
+                                            <div className="tip-col right-col bold">
+                                                <div className=" currentscore-green">4-4</div>
                                             </div>
                                         </div>
                                         <div className='tip-row'>
-                                            <div class="tip-col middle-col">Ferroviaria SP (F) - SE Palmeiras SP(F)</div>
-                                            <div class="tip-col right-col bold">
-                                                <div class=" currentscore-green"> 86'</div>
+                                            <div className="tip-col middle-col">Ferroviaria SP (F) - SE Palmeiras SP(F)</div>
+                                            <div className="tip-col right-col bold">
+                                                <div className=" currentscore-green"> 86'</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <a className='remove-btn'><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></a>
                             </div>
-                            {!tab ? 
+                            {!tab ?
                                 <div className='combinations'>
                                     <div>Combinations: </div>
                                     <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0'/>
+                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
                                         <label className='bold pl-2' htmlFor='cbCombination_0'>1 Out of 4 = 4 bets</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0'/>
+                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
                                         <label className='bold pl-2' htmlFor='cbCombination_0'>2 Out of 4 = 6 bets</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0'/>
+                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
                                         <label className='bold pl-2' htmlFor='cbCombination_0'>3 Out of 4 = 4 bets</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0'/>
+                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
                                         <label className='bold pl-2' htmlFor='cbCombination_0'>4 Out of 4 = 1 bets</label>
                                     </div>
-                                </div> 
+                                </div>
                                 : <></>
                             }
                         </div>
                     </div>
                     <div className='oddmodal-footer'>
                         <div className='betslip-stake'>
-                            <a className="stake-button" onClick={() => amountCount(0)}>-</a>
-                            <span ref={amountRef} className="stake-input" >{stakeValue}</span>
-                            <a className="stake-button" onClick={() => amountCount(1)}>+</a>
+                            <a className="stake-button" onClick={() => calcStake(0)}>-</a>
+                            <span ref={amountRef} className="stake-input" onClick={() => setOpenCalc(true)}>{totalStake}</span>
+                            <a className="stake-button" onClick={() => calcStake(1)}>+</a>
                         </div>
                         <div>
                             <a className="place-bet bold">Create Barcode</a>
@@ -233,6 +203,8 @@ function MobileFooter(props) {
                 </div>
                 : <></>
             }
+            <Calculator show={openCalc} onClickOutside={() => setOpenCalc(false)} />
+            {/* main footer bar */}
             <div className="m-footer pl-5 pr-5">
                 <div className='d-flex justify-content-between'>
                     {

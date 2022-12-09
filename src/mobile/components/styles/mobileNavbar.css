@@ -28,15 +28,18 @@
 .sidenav .login a {
     width: 100%;
 }
+
 .user-info {
     margin-top: -2px;
     margin-right: 15px;
     display: inline-grid;
 }
+
 .user-info span {
     color: #c96141;
     font-size: 12px;
 }
+
 .m-navbar .top-nav {
     float: left;
     padding: 2px 6px 2px 6px;
@@ -140,6 +143,16 @@
     overflow-y: scroll;
 }
 
+.opacity-back {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: #00000096;
+}
+
 .sidenav p {
     cursor: default;
     padding: 9px 9px 9px 0px;
@@ -220,9 +233,11 @@
     border: solid 1px #bbb;
     background: linear-gradient(180deg, #fff 0, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6);
 }
+
 .sportstypes ul {
     padding-left: 15px;
 }
+
 .selected {
     font-weight: 700;
     color: #fff;
@@ -233,9 +248,11 @@
 .collapse {
     color: #25851f !important;
 }
+
 .match-count {
     float: right;
 }
+
 .account {
     padding-left: 8px;
 }

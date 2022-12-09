@@ -7,14 +7,16 @@ import './styles/rightPanel.css'
 import { useEffectOnce } from 'usehooks-ts'
 
 const RightPanel = () => {
-    const amountRef = useRef(Number(5));
+    var temp = 0
+    const amountRef = useRef();
     const [open, setOpen] = useState(false);
-    const [stake, setStake] = useState(Number(0));
-    const [totalStake, setTotalStake] = useState(Number(0));
-    const [tax, setTax] = useState(Number(0));
-    const [stakeBet, setStakeBet] = useState(Number(0));
-    const [numBet, setNumBet] = useState(Number(0));
-    const [maxWinning, setMaxWinning] = useState(Number(0));
+    const [val, setVal] = useState(temp.toFixed(2));
+    const [stake, setStake] = useState(temp.toFixed(2));
+    const [totalStake, setTotalStake] = useState(temp.toFixed(2));
+    const [tax, setTax] = useState(temp.toFixed(2));
+    const [stakeBet, setStakeBet] = useState(temp.toFixed(2));
+    const [numBet, setNumBet] = useState(0);
+    const [maxWinning, setMaxWinning] = useState(temp.toFixed(2));
 
     const [bet, setBet] = useState(true);
     const userData = useSelector(state => state.authReducers)
@@ -30,25 +32,23 @@ const RightPanel = () => {
             i18n.changeLanguage(lang);
         }
     })
-    const resetAll = () => {
-        setStake(Number(0));
-        setTotalStake(Number(0));
-        setTax(Number(0));
-        setStakeBet(Number(0));
-        setNumBet(Number(0));
-        setMaxWinning(Number(0));
-        amountRef.current.value = Number(0.00);
+    const handleChange =(e)=> {
+        setVal(e.target.value);
     }
-    const amountCount = (param) => {
-        console.log('here', typeof Number(amountRef.current.value));
-        if (param === 1) {
-            setStake(Number(stake)+ Number(amountRef.current.value));
-            setTotalStake(Number(totalStake) *1 + Number(amountRef.current.value) *1);
-        }
-        else{
-            setStake(Number(stake) - Number(amountRef.current.value));
-            setTotalStake(Number(totalStake) - Number(amountRef.current.value));
-        }
+    const resetAll = () => {
+        var temp = 0
+        setVal(temp.toFixed(2));
+        setTotalStake(temp.toFixed(2));
+        setStake(temp.toFixed(2));
+        setTax(temp.toFixed(2));
+        setStakeBet(temp.toFixed(2));
+        setMaxWinning(temp.toFixed(2));
+    }
+    const calcStake = (param) => {
+        let temp = param === 1 ? Number(stake) * 1 + 1 : stake > 1 ? Number(stake) * 1 - 1 : 1;
+        setStake(temp.toFixed(2));
+        setVal(temp.toFixed(2));
+        setTotalStake(temp.toFixed(2));
     }
     const placeBet = () => {
         if (!userData.isAuthenticated) {
@@ -116,16 +116,24 @@ const RightPanel = () => {
                 <div className="place-bet show">
                     <div className='d-flex justify-content-around'>
                         <div>
-                            <p onClick={() => amountCount(0)}>-</p>
+                            <p onClick={() => calcStake(0)}>-</p>
                         </div>
                         <div className="align-self-center col-8">
-                            <div>
-                                <input type="number" step='0.1' id="PayingAmount" ref={amountRef} defaultValue="0.00" className="payingamount py-1" />
+                            <form>
+                                <input
+                                    // name='stake'
+                                    className="payingamount py-1"
+                                    id="PayingAmount" 
+                                    type="number" 
+                                    step='0.1'
+                                    onChange={handleChange} 
+                                    value={val}
+                                />
                                 <span className="text-danger"></span>
-                            </div>
+                            </form>
                         </div>
                         <div>
-                            <p onClick={() => amountCount(1)}>+</p>
+                            <p onClick={() => calcStake(1)}>+</p>
                         </div>
                     </div>
 

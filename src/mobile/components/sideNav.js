@@ -87,93 +87,95 @@ function SideNav(props) {
         window.location.href = '/m_changepassword'
     }
     return (
-        <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
-            <div className='p-3'>
-                {!isAuth ? <div className='login d-flex justify-content-center p-2'><a href='/m_login'>Login</a></div> :<></>}
-            </div>
-            <div className='pan'>
-                <div>Bets</div>
-            </div>
-            <div className='sidenav_lists'>
-                <p>
-                    Outrights
-                    <span className="match-count">
-                        {get_AllMatches && get_AllMatches.data ?  get_AllMatches.data.totalOutrightsCount : ''}
-                    </span>
-                </p>
-                <p>
-                    Highrights
-                    <span className="match-count">
-                        {get_AllMatches && get_AllMatches.data ? get_AllMatches.data.totalHighLightsCount : ''}
-                    </span>
-                </p>
-                {availableSportTypes && availableSportTypes.map((availableSportType, index1) =>
-                    <div key={index1} className="sportstypes">
-                        <p className={isCollapse1[index1] ? 'collapse' : ''} onClick={() => collapseFunc1(index1)}>
-                            {SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}
-                            <span className="match-count">
-                                {getLeagueMatchCount(availableSportType)}
-                            </span>
-                        </p>
-                        <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
-                            {get_AllMatches.data.leagues && get_AllMatches.data.leagues.map((item, index2) =>
-                                item.betradarSportId === availableSportType ?
-                                    <li key={index2}>
-                                        <p className={isCollapse2[index2] ? 'collapse' : ''} onClick={() => collapseFunc2(index2)}>
-                                            {item.name}
-                                            <span className="match-count">{item.leagueMatchCount}</span>
-                                        </p>
-                                        <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
-                                            {item.leagueList.map((league, index3) =>
-                                                <li key={index3}>
-                                                    <p className={isCollapse3 === index3 ? 'collapse' : ''} onClick={() => setIsCollapse3(index3)}>
-                                                        {league.name}<span className="match-count">{league.leagueMatchCount}</span>
-                                                    </p>
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </li>
-                                    : <li key={index2}></li>
-                            )}
-                        </ul>
-                    </div>
-                )}
-                <p>Results</p>
-            </div>
-            <div className='pan'>
-                <div>Language Selection</div>
-            </div>
-            <div className='sidenav_lists'>
-                <p className='d-flex justify-content-between' onClick={() => setLangOpen(!langOpen)}>
-                    <span>
-                        <img className='selected_lang' src={Language[siteLang].icon} alt='' />
-                        {Language[siteLang].title}
-                    </span>
-                    <span className='expand_icon'>{langOpen ? '-' : '+'}</span>
-                </p>
-                <div className={langOpen ? 'lang_list lang_list_expand' : 'lang_list'}>
-                    {Language.map((lang, key) =>
-                        <div className='d-flex align-items-center' key={key} onClick={() => setSiteLang(key)}>
-                            <img src={lang.icon} alt={lang.title} />
-                            <p>{lang.title}</p>
+        <div className='opacity-back'>
+            <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
+                <div className='p-3'>
+                    {!isAuth ? <div className='login d-flex justify-content-center p-2'><a href='/m_login'>Login</a></div> : <></>}
+                </div>
+                <div className='pan'>
+                    <div>Bets</div>
+                </div>
+                <div className='sidenav_lists'>
+                    <p>
+                        Outrights
+                        <span className="match-count">
+                            {get_AllMatches && get_AllMatches.data ? get_AllMatches.data.totalOutrightsCount : ''}
+                        </span>
+                    </p>
+                    <p>
+                        Highrights
+                        <span className="match-count">
+                            {get_AllMatches && get_AllMatches.data ? get_AllMatches.data.totalHighLightsCount : ''}
+                        </span>
+                    </p>
+                    {availableSportTypes && availableSportTypes.map((availableSportType, index1) =>
+                        <div key={index1} className="sportstypes">
+                            <p className={isCollapse1[index1] ? 'collapse' : ''} onClick={() => collapseFunc1(index1)}>
+                                {SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}
+                                <span className="match-count">
+                                    {getLeagueMatchCount(availableSportType)}
+                                </span>
+                            </p>
+                            <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
+                                {get_AllMatches.data.leagues && get_AllMatches.data.leagues.map((item, index2) =>
+                                    item.betradarSportId === availableSportType ?
+                                        <li key={index2}>
+                                            <p className={isCollapse2[index2] ? 'collapse' : ''} onClick={() => collapseFunc2(index2)}>
+                                                {item.name}
+                                                <span className="match-count">{item.leagueMatchCount}</span>
+                                            </p>
+                                            <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
+                                                {item.leagueList.map((league, index3) =>
+                                                    <li key={index3}>
+                                                        <p className={isCollapse3 === index3 ? 'collapse' : ''} onClick={() => setIsCollapse3(index3)}>
+                                                            {league.name}<span className="match-count">{league.leagueMatchCount}</span>
+                                                        </p>
+                                                    </li>
+                                                )}
+                                            </ul>
+                                        </li>
+                                        : <li key={index2}></li>
+                                )}
+                            </ul>
                         </div>
                     )}
+                    <p>Results</p>
                 </div>
+                <div className='pan'>
+                    <div>Language Selection</div>
+                </div>
+                <div className='sidenav_lists'>
+                    <p className='d-flex justify-content-between' onClick={() => setLangOpen(!langOpen)}>
+                        <span>
+                            <img className='selected_lang' src={Language[siteLang].icon} alt='' />
+                            {Language[siteLang].title}
+                        </span>
+                        <span className='expand_icon'>{langOpen ? '-' : '+'}</span>
+                    </p>
+                    <div className={langOpen ? 'lang_list lang_list_expand' : 'lang_list'}>
+                        {Language.map((lang, key) =>
+                            <div className='d-flex align-items-center' key={key} onClick={() => setSiteLang(key)}>
+                                <img src={lang.icon} alt={lang.title} />
+                                <p>{lang.title}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                {isAuth ?
+                    <>
+                        <div className='pan'>
+                            <div>Account</div>
+                        </div>
+                        <div className='account'>
+                            <p onClick={changePassword}>Change Password</p>
+                            <p onClick={() => window.location.href = '/mybets'}>My Bets</p>
+                            <p>Transactions</p>
+                            <p onClick={() => dispatch(logoutUser())}>Logout</p>
+                        </div>
+                    </>
+                    : <></>
+                }
             </div>
-            {isAuth ? 
-                <>
-                    <div className='pan'>
-                        <div>Account</div>
-                    </div>
-                    <div className='account'>
-                        <p onClick={changePassword}>Change Password</p>
-                        <p>My Bets</p>
-                        <p>Transactions</p>
-                        <p onClick={() => dispatch(logoutUser())}>Logout</p>
-                    </div>
-                </>
-                : <></>
-            }
         </div>
     );
 }
