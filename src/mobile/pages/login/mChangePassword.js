@@ -32,6 +32,10 @@ function MChangePassword() {
     return (
         <>
             <MobileNavbar />
+            <div className='login_header'>
+                <div className='d-flex justify-content-center'>Change Password</div>
+                <div className='d-flex justify-content-end'><a href='/m_home'><i className="fa fa-times-circle-o" aria-hidden="true"></i></a></div>
+            </div>
             <div className='p-3 form'>
                 <div className="form-group">
                     <label htmlFor="usr">Current Password:</label>
