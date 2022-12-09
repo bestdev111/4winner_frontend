@@ -1,0 +1,30 @@
+.transactions {
+    overflow-y: auto;
+}
+.transactions>.status {
+    padding: 10px;
+}
+.transactions>.status>* {
+    width: 100%;
+    font-size: 14px;
+    padding: 3px;
+}
+
+#bets_period {
+    margin-bottom: 10px;
+}
+
+.match-header {
+    display: flex;
+    font-size: 14px;
+    margin-top: 20px;
+    background: linear-gradient(180deg, #b5bdc8 0, #828c95 36%, #28343b);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b5bdc8", endColorstr="#28343b", GradientType=0);
+    width: 100%;
+    color: #fff;
+    font-weight: 700;
+    padding: 5px 0;
+}
+.match-header div {
+    padding: 3px;
+}

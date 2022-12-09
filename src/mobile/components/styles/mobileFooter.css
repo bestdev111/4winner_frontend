@@ -8,6 +8,7 @@
     overflow: auto;
     font-size: 13px;
 }
+
 .m-footer i {
     font-size: 24px;
 }
@@ -31,6 +32,7 @@
 .footer-active {
     color: #25851f;
 }
+
 .bet-slip-active {
     width: 31px;
     background-color: #25851f;
@@ -42,4 +44,193 @@
     margin-top: -6px;
     font-size: 15px;
     text-align: center;
+}
+
+/*  */
+.bet-pan {
+    position: absolute;
+    z-index: 10;
+}
+
+.oddmodal-header {
+    position: fixed;
+    top: 53px;
+    background-color: #1e1e1e;
+    color: #fff;
+    padding: 3px;
+    width: 100%;
+}
+
+.oddmodal-header .title span {
+    font-size: 14px;
+}
+
+.oddmodal-body {
+    height: calc(100% - 213px);
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+    top: 90px;
+    background-color: #fff;
+}
+
+.betslip-type {
+    display: flex;
+}
+
+.betslip-type a {
+    font-size: 14px;
+}
+
+.betslip-type a.tab-selected {
+    font-weight: 700;
+}
+
+.combinations {
+    margin: 10px 20px;
+    font-size: 14px;
+}
+
+.betslip-type a:last-child {
+    border-right: 0;
+}
+
+.betslip-type a {
+    width: 50%;
+    display: block;
+    background-color: #fc0;
+    color: #000;
+    border-right: 1px solid #7a7a7a;
+    text-align: center;
+    padding: 5px;
+}
+
+.oddmodal-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.oddmodal-footer .summary {
+    background-color: #fc0;
+    font-size: 10px;
+    padding: 5px;
+    width: 40%;
+    float: left;
+    height: 86px;
+}
+
+.oddmodal-footer .summary .summary-row {
+    width: 100%;
+}
+
+.oddmodal-footer .summary .summary-row .value {
+    float: right;
+}
+
+.betslip-stake {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: #dfdfdf;
+}
+
+.place-bet {
+    background-color: #2db343;
+    display: block;
+    width: 30%;
+    color: #fff !important;
+    text-align: center;
+    height: 86px;
+    float: left;
+    font-size: 12px;
+    padding-top: 34px;
+}
+
+.betslip-stake .stake-input {
+    padding: 9px 40px 7px;
+    background-color: #fff;
+    font-size: 18px;
+}
+
+.stake-button {
+    align-items: center;
+    display: inline-block;
+    justify-content: center;
+    height: 100%;
+    width: 20%;
+    border: 1px solid #d5d5d5;
+    padding: 5px;
+    color: #666;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bolder;
+    background: linear-gradient(180deg, #fff 0, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6);
+}
+
+.tip,
+.tips,
+.tip-row {
+    width: 100%;
+}
+
+.tip {
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid #d5d5d5;
+    float: left;
+    width: calc(100% - 20px);
+}
+
+.tip-row .left-col {
+    width: 15%;
+    float: left;
+    text-align: center;
+}
+
+.tip-row .tip-col {
+    font-size: 14px;
+}
+
+.tip-row .middle-col {
+    width: calc(70% - 20px);
+}
+.middle-col {
+    float: left;
+}
+.right-col {
+    float: right !important;
+}
+.tip-row .right-col {
+    width: 15%;
+    float: left;
+}
+
+.remove-btn {
+    width: 20px;
+    float: right;
+    padding-top: 30px;
+}
+.tip div span {
+    margin: 10px;
+    width: 33px;
+    height: 37px;
+    color: white;
+    font-size: 15px;
+    padding-top: 8px;
+    text-align: center;
+}
+.btn-bank {
+    margin: 10px;
+    width: 33px;
+    height: 37px;
+    color: white;
+    font-size: 15px;
+    border: 1px solid #7a7a7a;
+    padding-top: 8px;
+    text-align: center;
+    background-color: #acacac;
 }

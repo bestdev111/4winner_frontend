@@ -131,3 +131,6 @@ ul {
     border-radius: 4px;
   }
 }
+.bold {
+  font-weight: 700;
+}

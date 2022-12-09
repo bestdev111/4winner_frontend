@@ -4,12 +4,12 @@ import './styles/leagueContent.css'
 import { betOddSelectAction } from "../../store/actions/betActions";
 import { use } from "i18next";
 import { useMemo } from "react";
-function arrayRemove(array, index) {
-    if (index > -1) {
-        array.splice(index, 1);
-    }
-    return array;
-}
+// function arrayRemove(array, index) {
+//     if (index > -1) {
+//         array.splice(index, 1);
+//     }
+//     return array;
+// }
 function LeagueContent(props) {
     const dispatch = useDispatch();
     const matchData = props;
@@ -39,9 +39,9 @@ function LeagueContent(props) {
                 break;
         }
     }
-    useMemo(()=> {
-        console.log('clicked', props.betCollectorHome);
-    }, [props])
+    // useMemo(()=> {
+    //     console.log('clicked', betCollectList);
+    // }, [dispatch])
     const betOddSelect = (index, param) => {
         const obj = {
             matchId: props.content_Id,
@@ -49,7 +49,6 @@ function LeagueContent(props) {
         }
         obj.odds.push(index)
         dispatch(betOddSelectAction(betCollectList, obj));
-        props.selected(betCollectList, obj);
     }
 
     return (
@@ -82,10 +81,10 @@ function LeagueContent(props) {
                     <div key={index} className='o3'>
                         <div
                             className={
-                                props.betCollectorHome.length > 0 ? props.betCollectorHome.map((list, i) =>
+                                betCollectList.length > 0 ? betCollectList.map((list, i) =>
                                     list.matchId === matchData.content_Id && list.odds.includes(index) ? 'changeable-odd odd-selected' : 'changeable-odd'
                                 )
-                                    : 'changeable-odd'
+                                : 'changeable-odd'
                             }
                             onClick={() => betOddSelect(index, odd)}
                         >

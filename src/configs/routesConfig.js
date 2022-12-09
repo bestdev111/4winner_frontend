@@ -9,6 +9,7 @@ import { OutRightsConfig } from '../main/outRights/outRightsConfig'
 import { ResultsConfig } from '../main/results/resultsConfig'
 // mobile view
 import { MHomeConfig } from '../mobile/pages/home/mHomeConfig'
+import { MyBetsConfig } from '../mobile/pages/myBets/myBetsConfig'
 import { MLoginConfig } from '../mobile/pages/login/mLoginConfig'
 
 import Error404 from '../main/errors/error404'
@@ -23,6 +24,7 @@ const routeConfigs = [
 const m_routeConfigs = [
     MLoginConfig,
     MHomeConfig,
+    MyBetsConfig
 ]
 function customRoutes() {
     const isMobile = useMediaQuery('(max-width: 640px)');
