@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTopLeague } from '../../store/actions/sportsActions'
+import { getTopLeague } from '../../store/actions/mobileSportsActions'
 import './styles/mobileNavbar.css'
 
 const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];
@@ -8,9 +8,9 @@ function MobileNavbar(props) {
     const [sportActive, setSportActive] = useState(0);
     const [leagueActive, setLeagueActive] = useState(0);
     const [selected, setSelected] = useState(0);
-    const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
-    const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
-    const leagues_list = useSelector(state => state.sportsReducers.getTopLeague);
+    const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
+    const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
+    const leagues_list = useSelector(state => state.mobileSportsReducers.getTopLeague);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTopLeague());

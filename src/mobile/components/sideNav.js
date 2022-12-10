@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypeList, getAllMatches, getMatches } from '../../store/actions/sportsActions'
+import { getAllMatches, getMatches } from '../../store/actions/mobileSportsActions'
 import { logoutUser } from '../../store/actions/authActions'
 import { Language } from '../../utils';
 const lang_list = [
@@ -23,15 +23,13 @@ function SideNav(props) {
     const { onClickOutside } = props;
     const ref = useRef(null);
     const dispatch = useDispatch();
-    const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
-    const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
-    // const get_Matches = useSelector(state => state.sportsReducers.getMatches);
+    const SportTypeList = useSelector(state => state.mobileSportsReducers.getMatches);
+    const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const userData = useSelector(state => state.authReducers)
     const isAuth = userData.isAuthenticated
     useEffect(() => {
-        dispatch(getTypeList());
+        dispatch(getMatches());
         dispatch(getAllMatches());
-        // getMatches();
     }, [dispatch]);
 
     useEffect(() => {

@@ -328,6 +328,7 @@
 .calculator .double-line {
     height: 100% !important;
     line-height: 6.0625em;
+    padding-top: 30px;
 }
 
 .calculator .num-btn {

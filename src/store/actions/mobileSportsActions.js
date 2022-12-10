@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE, GET_ERRORS } from './actionTypes';
-import { SportTypeList, ServerURL } from '../../utils'
-import ToastService from '../../service/toast.service';
+import { MOBILE_GET_ALL_MATCHES, MOBILE_GET_MATCHES, MOBILE_GET_TOP_LEAGUE, MOBILE_GET_LEAGUE_SORTS, GET_ERRORS } from './actionTypes';
+import { ServerURL } from '../../utils';
+
 const topLeague = [
     { m_icon: 'assets/images/micons/champions_league1.png', type: 'CHAMPIONS LEAGUE' },
     { m_icon: 'assets/images/micons/europe_league.png', type: 'EUROPA LEAGUE' },
@@ -22,13 +22,13 @@ const topLeague = [
     { m_icon: '', type: 'World Cup Group G' },
     { m_icon: '', type: 'World Cup Group H' },
 ]
-
 export const getAllMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL +'/sports/getAllMatches');
+            const response = await axios.get(ServerURL + '/m_sports/getAllMatches');
+            console.log('getAllMatches',response.data);
             return dispatch({
-                type: GET_ALL_MATCHES,
+                type: MOBILE_GET_ALL_MATCHES,
                 payload: response
             });
         } catch (error) {
@@ -42,26 +42,10 @@ export const getAllMatches = () => {
 export const getMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches');
+            const response = await axios.get(ServerURL + '/m_sports/getMatches');
             return dispatch({
-                type: GET_MATCHES,
+                type: MOBILE_GET_MATCHES,
                 payload: response
-            });
-        } catch (error) {
-            return dispatch({
-                type: GET_ERRORS,
-                payload: error
-            });
-        }
-    }
-};
-export const getTypeList = () => {
-    return async dispatch => {
-        try {
-            const response = await axios.get(ServerURL + '/sports/getMatches');
-            return dispatch({
-                type: GET_TYPE_LIST,
-                payload: SportTypeList
             });
         } catch (error) {
             return dispatch({
@@ -74,10 +58,26 @@ export const getTypeList = () => {
 export const getTopLeague = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches');
+            const response = await axios.get(ServerURL +'/m_sports/getTopLeagues');
             return dispatch({
-                type: GET_TOP_LEAGUE,
-                payload: topLeague
+                type: MOBILE_GET_TOP_LEAGUE,
+                payload: topLeague//
+            });
+        } catch (error) {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: error
+            });
+        }
+    }
+};
+export const getLeagueSorts = () => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(ServerURL +'/m_sports/getLeagueSorts');
+            return dispatch({
+                type: MOBILE_GET_LEAGUE_SORTS,
+                payload: response
             });
         } catch (error) {
             return dispatch({
