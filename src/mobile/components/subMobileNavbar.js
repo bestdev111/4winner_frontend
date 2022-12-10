@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTopLeague } from '../../store/actions/mobileSportsActions'
+import { getTopLeague, getTypeList } from '../../store/actions/mobileSportsActions'
 import './styles/mobileNavbar.css'
 
 const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];
 function MobileNavbar(props) {
-    const [sportActive, setSportActive] = useState(0);
+    const [sportActive, setSportActive] = useState(1);
     const [leagueActive, setLeagueActive] = useState(0);
     const [selected, setSelected] = useState(0);
     const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
@@ -14,6 +14,7 @@ function MobileNavbar(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTopLeague());
+        dispatch(getTypeList());
     }, [dispatch]);
 
     const sportActiveFunc = (index) => {
@@ -32,7 +33,7 @@ function MobileNavbar(props) {
         <div className="m-subnavbar">
             <div className='d-flex'>
                 {availableSportTypes && availableSportTypes.map((availableSportType, index) =>
-                    <div className={sportActive === index ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveFunc(index)}>
+                    <div className={availableSportType === sportActive ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveFunc(availableSportType)}>
                         <img src={SportTypeList[availableSportType-1] ? SportTypeList[availableSportType-1].m_icon : ''} alt='' />
                         <p>{SportTypeList[availableSportType - 1]? SportTypeList[availableSportType - 1].name : ''}</p>
                     </div>
@@ -41,16 +42,16 @@ function MobileNavbar(props) {
             {sportActive === 1 ?
                 <>
                     <div className='d-flex'>
-                        {leagues_list && leagues_list.map((item, index) =>
+                        {leagues_list.length !== 0 ? leagues_list.data.result.map((item, index) =>
                             <div
                                 className={leagueActive === index ? 'leagues league-active ml-2 mr-2' : 'leagues ml-2 mr-2'}
                                 key={index}
                                 onClick={() => leagueActiveFunc(index)}
                             >
-                                {item.m_icon ? <img src={item.m_icon} alt='' /> : <></>}
-                                <p className={!item.m_icon ? 'font' : ''}>{item.type}</p>
+                                {item.imageName ? <img src={'assets/images/micons/' + item.imageName + '.png'} alt={item.leagueName} /> : <></>}
+                                <p className={!item.imageName ? 'font' : ''}>{item.displayName}</p>
                             </div>
-                        )}
+                        ): <></>}
                     </div>
                     <div className='tip-types '>
                         <div className='d-flex'>

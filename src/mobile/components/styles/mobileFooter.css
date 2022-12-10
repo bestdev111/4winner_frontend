@@ -78,11 +78,11 @@
     display: flex;
 }
 
-.betslip-type a {
+.betslip-type p {
     font-size: 14px;
 }
 
-.betslip-type a.tab-selected {
+.betslip-type p.tab-selected {
     font-weight: 700;
 }
 
@@ -91,11 +91,11 @@
     font-size: 14px;
 }
 
-.betslip-type a:last-child {
+.betslip-type p:last-child {
     border-right: 0;
 }
 
-.betslip-type a {
+.betslip-type p {
     width: 50%;
     display: block;
     background-color: #fc0;

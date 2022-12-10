@@ -160,7 +160,6 @@ function MHome() {
                             {leaguesData.leagues.map((leagues, i) =>
                                 <LeagueContent
                                     key={i}
-                                    // selected={betCollectListFunc}
                                     content_Id={leagues.content_Id}
                                     teamName1={leagues.teamName1}
                                     teamName2={leagues.teamName2}
@@ -170,6 +169,7 @@ function MHome() {
                                     redCard1={leagues.redCard1}
                                     redCard2={leagues.redCard2}
                                     odds={leagues.odds}
+                                    // selected={betCollectListFunc}
                                     // betCollectorHome={betCollectorHome}
                                 />
                             )}

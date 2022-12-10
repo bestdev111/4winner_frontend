@@ -101,9 +101,7 @@ const SportTypeList = [
     },
     {
         sportTypeId: 21,
-        name: 'Futsal',
-        icon: '../assets/images/sports/futsal.png',
-        m_icon: '../assets/images/micons/futsal.svg',
+        name: 'xxx'
     },
     {
         sportTypeId: 22,
@@ -139,7 +137,9 @@ const SportTypeList = [
     },
     {
         sportTypeId: 29,
-        name: 'xxx'
+        name: 'Futsal',
+        icon: '../assets/images/sports/futsal.png',
+        m_icon: '../assets/images/micons/futsal.svg',
     },
 ]
 // const SportsTeamList = [

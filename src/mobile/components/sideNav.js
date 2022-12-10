@@ -23,7 +23,7 @@ function SideNav(props) {
     const { onClickOutside } = props;
     const ref = useRef(null);
     const dispatch = useDispatch();
-    const SportTypeList = useSelector(state => state.mobileSportsReducers.getMatches);
+    const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const userData = useSelector(state => state.authReducers)
     const isAuth = userData.isAuthenticated

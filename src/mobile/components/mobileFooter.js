@@ -107,14 +107,14 @@ function MobileFooter(props) {
                     </div>
                     <div className='oddmodal-body'>
                         <div className="betslip-type">
-                            <a
+                            <p
                                 className={tab ? "btn btn-orange btn-group-justified single-multiple-button tab-selected" : "btn btn-orange btn-group-justified single-multiple-button"}
                                 onClick={() => setTab(true)}
-                            >SINGLE/MULTIPLE</a>
-                            <a
+                            >SINGLE/MULTIPLE</p>
+                            <p
                                 className={!tab ? "btn btn-orange btn-group-justified single-multiple-button tab-selected" : "btn btn-orange btn-group-justified single-multiple-button"}
                                 onClick={() => setTab(false)}
-                            >SYSTEM</a>
+                            >SYSTEM</p>
                         </div>
                         <div className='tips'>
                             <div>{/* virtual data */}
@@ -141,7 +141,7 @@ function MobileFooter(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <a className='remove-btn'><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></a>
+                                <p className='remove-btn'><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></p>
                             </div>
                             {!tab ?
                                 <div className='combinations'>
@@ -169,12 +169,12 @@ function MobileFooter(props) {
                     </div>
                     <div className='oddmodal-footer'>
                         <div className='betslip-stake'>
-                            <a className="stake-button" onClick={() => calcStake(0)}>-</a>
+                            <p className="stake-button" onClick={() => calcStake(0)}>-</p>
                             <span ref={amountRef} className="stake-input" onClick={() => setOpenCalc(true)}>{totalStake}</span>
-                            <a className="stake-button" onClick={() => calcStake(1)}>+</a>
+                            <p className="stake-button" onClick={() => calcStake(1)}>+</p>
                         </div>
                         <div>
-                            <a className="place-bet bold">Create Barcode</a>
+                            <p className="place-bet bold">Create Barcode</p>
                             <div className="summary">
                                 <div className="summary-row">
                                     <span>Total stake:</span>
@@ -197,7 +197,7 @@ function MobileFooter(props) {
                                     <span className="value bold">{maxWinning}</span>
                                 </div>
                             </div>
-                            <a className="place-bet bold" onClick={placeBet}>Place bet</a>
+                            <p className="place-bet bold" onClick={placeBet}>Place bet</p>
                         </div>
                     </div>
                 </div>

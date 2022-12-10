@@ -8,14 +8,14 @@ function LeagueContent(props) {
     const dispatch = useDispatch();
     const matchData = props;
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
-    const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches);
-    let matches = [];
-    useEffect(()=> {
-        if (get_Matches.data) {
-            matches = get_Matches.data.matches;
-            console.log('Mobile_matches', matches);
-        }
-    }, [get_Matches]);
+    // const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches);
+    // let matches = [];
+    // useEffect(()=> {
+    //     if (get_Matches.data) {
+    //         matches = get_Matches.data.matches;
+    //         console.log('Mobile_matches', matches);
+    //     }
+    // }, [get_Matches]);
     // const [betCollectList, setBetCollectList] = useState([]);
     const matchStatus = () => {
         switch (matchData.status) {

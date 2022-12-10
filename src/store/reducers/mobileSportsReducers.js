@@ -1,10 +1,11 @@
-import { MOBILE_GET_ALL_MATCHES, MOBILE_GET_MATCHES, MOBILE_GET_TOP_LEAGUE, MOBILE_GET_LEAGUE_SORTS } from '../actions/actionTypes';
+import { MOBILE_GET_ALL_MATCHES, MOBILE_GET_MATCHES, MOBILE_GET_TOP_LEAGUE, MOBILE_GET_LEAGUE_SORTS, MOBILE_GET_TYPE_LIST } from '../actions/actionTypes';
 
 const initialState = {
     getAllMatches: [],
     getMatches: [],
     getLeagueSorts: [],
-    getTopLeague: []
+    getTopLeague: [],
+    getTypeList: [],
 };
 
 export default function (state = initialState, action) {
@@ -28,6 +29,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 getTopLeague: action.payload
+            };
+        case MOBILE_GET_TYPE_LIST:
+            return {
+                ...state,
+                getTypeList: action.payload
             };
         default:
             return state;
