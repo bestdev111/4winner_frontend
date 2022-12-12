@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer, useRef } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
 import './styles/mobileFooter.css'
 import ToastService from '../../service/toast.service';
 import Calculator from './calculator';
+import { betRemoveOddsAction } from "../../store/actions/betActions";
 function MobileFooter(props) {
     const mFooterList = [
         { icon: 'fa fa-home', title: 'Home', },
@@ -17,12 +18,14 @@ function MobileFooter(props) {
         { icon: 'fa fa-file-o', title: 'Bet Slip' },
         { icon: 'fa fa-heartbeat', title: 'My Bets' },
     ]
+    const dispatch = useDispatch();
     const [openCalc, setOpenCalc] = useState(false);
     const [numActive, setNumActive] = useState(0);
     const [betSlipNum, setBetSlipNum] = useState(0);
     const [openBetModal, setOpenBetModal] = useState(true);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const userData = useSelector(state => state.authReducers)
+    const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
     const isAuth = userData.isAuthenticated;
     var temp1 = 1
     var temp2 = 0
@@ -33,7 +36,7 @@ function MobileFooter(props) {
     const [stakeBet, setStakeBet] = useState(temp2.toFixed(2));
     const [numBet, setNumBet] = useState(Number(0));
     const [maxWinning, setMaxWinning] = useState(temp2.toFixed(2));
-
+    const [confirmVal, setConfirmVal] = useState(false);
     let footerList = isAuth ? mFooterListAuthor : mFooterList;
 
     const goActive = (index) => {
@@ -69,9 +72,15 @@ function MobileFooter(props) {
                 num = num + list.odds.length;
             });
         }
-        setBetSlipNum(num);
+        setNumBet(num);
+        let tempStack = totalStake / num
+        setStakeBet(tempStack.toFixed(2))
     }, [betCollectList])
-
+    
+    useEffect(()=> {
+        let tempStack = totalStake / numBet
+        setStakeBet(tempStack.toFixed(2))
+    }, [totalStake])
     // bet slip board
     const calcStake = (param) => {
         let temp = param === 1 ? Number(totalStake) * 1 + 1 : totalStake > 1 ? Number(totalStake) * 1 - 1 : 1;
@@ -80,6 +89,7 @@ function MobileFooter(props) {
     const placeBet = () => {
         if (!isAuth) {
             ToastService("Please Login", 'error');
+            setConfirmVal(false);
         } else {
             ToastService("Bet Success!", 'success');
         }
@@ -93,7 +103,15 @@ function MobileFooter(props) {
         setStakeBet(temp2.toFixed(2))
         setMaxWinning(temp2.toFixed(2))
     }
-    // console.log('Footer ===>', betCollectList);
+    const removeBetOdd =(matchId)=> {
+        console.log('remove it');
+        betRemoveOddsAction(betCollectList, matchId)
+    }
+    const onClickOutside =(param)=> {
+        setOpenCalc(false);
+        if(param) setTotalStake(param);
+    }
+    console.log('Footer ===>', betCollectList);
     return (
         <>
             {!openBetModal ?
@@ -143,7 +161,7 @@ function MobileFooter(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <p className='remove-btn'><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></p>
+                                <p className='remove-btn' onClick={removeBetOdd}><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></p>
                             </div>
                             {!tab ?
                                 <div className='combinations'>
@@ -199,13 +217,23 @@ function MobileFooter(props) {
                                     <span className="value bold">{maxWinning}</span>
                                 </div>
                             </div>
-                            <p className="place-bet bold" onClick={placeBet}>Place bet</p>
+                            <p className="place-bet bold" onClick={()=> setConfirmVal(true)}>Place bet</p>
                         </div>
                     </div>
                 </div>
                 : <></>
             }
-            <Calculator show={openCalc} onClickOutside={() => setOpenCalc(false)} />
+            {confirmVal ? 
+                <div className='bet-confirm-modal'>
+                    <div className='opacity-back'>
+                        <div className='bet-confirm-modal bet-confirm'>
+                            <a className='btn btn-success m-4' onClick={placeBet}>Confirm</a>
+                            <a className='btn btn-danger m-4' onClick={() => setConfirmVal(false)}>Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            : null}
+            <Calculator show={openCalc} onClickOutside={onClickOutside} />
             {/* main footer bar */}
             <div className="m-footer pl-5 pr-5">
                 <div className='d-flex justify-content-between'>
@@ -213,8 +241,8 @@ function MobileFooter(props) {
                         footerList.map((item, index) =>
                             <div className='item' key={index} onClick={() => goActive(index)}>
                                 <div className='d-flex justify-content-center'>
-                                    {betSlipNum > 0 && index === 2 ?
-                                        <span onClick={openModal} className='bet-slip-active'>{betSlipNum}</span> :
+                                    {numBet > 0 && index === 2 ?
+                                        <span onClick={openModal} className='bet-slip-active'>{numBet}</span> :
                                         <i onClick={() => goTo(item.title)} className={localStorage.getItem('path') === item.title ? `footer-active ${item.icon}` : item.icon} ></i>
                                     }
                                 </div>

@@ -37,3 +37,24 @@ export const betOddSelectAction = (betCollectList, obj) => {
         });
     }
 };
+export const betRemoveOddsAction = (betCollectList, matchId) => {
+    return async dispatch => {
+        console.log('not selected');
+        let tempBetCollectList = [];
+        tempBetCollectList = betCollectList;
+        if(tempBetCollectList.length > 0){
+            tempBetCollectList.forEach(list => {
+                if(list.matchId === matchId){
+                    console.log('remove');
+                }
+            });
+        }else{
+        }
+        return dispatch({
+            type: BET_SELECT,
+            payload: {
+                list: tempBetCollectList,
+            }
+        });
+    }
+}

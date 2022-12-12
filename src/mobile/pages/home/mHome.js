@@ -14,7 +14,7 @@ const tipTypesList = [
     ['1X', 12, 'X2'],
     ['Yes', 'No'],
 ]
-function MHome() {
+function MHome({socket}) {
 
     const dispatch = useDispatch()
     const [tipTypes, setTipTypes] = useState();
@@ -94,7 +94,7 @@ function MHome() {
                                         awayTeam={match.match.awayTeam}
                                         matchResults={match.matchResults}
                                         score={match.scoreCache}
-                                        status={0}
+                                        matchState={match.betState.matchState}
                                         // status={match.matchResults.fullTimeResult ? match.matchResults.fullTimeResult : match.matchResults.interimResults ? match.matchResults.interimResults : null}
                                         redCard={match.redCards}
                                         betState={match.betState}

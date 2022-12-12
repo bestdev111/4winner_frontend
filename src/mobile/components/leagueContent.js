@@ -15,25 +15,31 @@ function LeagueContent(props) {
     const [odds, setOdds] = useState([]);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const matchStatus = () => {
-        switch (matchData.status) {
+        switch (matchData.matchState) {
             case 0:
                 return <span className="not-will-live">Today 09:00</span>
             case 1:
                 return <span className="will-live">Today 09:00</span>
             case 2:
-                return (
-                    <>
-                        <span className="halftime">1Half</span>
-                        <span className="live-time">1Half</span>
-                    </>
-                )
+                return (<>
+                    <span className="will-live">Live</span>
+                    <span className="live-time">Today 09:00</span>
+                </>) 
             case 3:
-                return (
-                    <>
-                        <span className="live">Live</span>
-                        <span className="live-time">2. Half 70'</span>
-                    </>
-                )
+                return (<>
+                    <span className="will-live">Live</span>
+                    <span className="live-time">37'</span>
+                </>)
+            case 4:
+                return (<>
+                    <span className="halftime">1Half</span>
+                    <span className="live-time">1Half</span>
+                </>)
+            case 5:
+                return (<>
+                    <span className="live">Live</span>
+                    <span className="live-time">2. Half 70'</span>
+                </>)
             default:
                 break;
         }
@@ -42,6 +48,7 @@ function LeagueContent(props) {
         e.stopPropagation()
         let obj = {
             matchId: matchData.matchId,
+            // betType: matchData.,
             odds: []
         }
         obj.odds.push(param)
