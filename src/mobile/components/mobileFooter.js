@@ -33,7 +33,7 @@ function MobileFooter(props) {
     const [stakeBet, setStakeBet] = useState(temp2.toFixed(2));
     const [numBet, setNumBet] = useState(Number(0));
     const [maxWinning, setMaxWinning] = useState(temp2.toFixed(2));
-    
+
     let footerList = isAuth ? mFooterListAuthor : mFooterList;
 
     const goActive = (index) => {
@@ -63,11 +63,13 @@ function MobileFooter(props) {
         }
     }
     useEffect(() => {
-        if (betCollectList) {
+        let num = 0;
+        if (betCollectList.length > 0) {
             betCollectList.forEach(list => {
-                setBetSlipNum(betSlipNum + list.odds.length);
+                num = num + list.odds.length;
             });
         }
+        setBetSlipNum(num);
     }, [betCollectList])
 
     // bet slip board
@@ -79,7 +81,7 @@ function MobileFooter(props) {
         if (!isAuth) {
             ToastService("Please Login", 'error');
         } else {
-            // ToastService("Bet Success!", 'success');
+            ToastService("Bet Success!", 'success');
         }
     }
     const oddsReset = () => {
@@ -91,7 +93,7 @@ function MobileFooter(props) {
         setStakeBet(temp2.toFixed(2))
         setMaxWinning(temp2.toFixed(2))
     }
-    console.log('betCollectList', betCollectList, betSlipNum);
+    // console.log('Footer ===>', betCollectList);
     return (
         <>
             {!openBetModal ?

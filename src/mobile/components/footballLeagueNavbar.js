@@ -19,7 +19,9 @@ function FootballLeagueNavbar(props) {
     const tipTypes = (index) => {
         setSelected(index);
     }
-    props.parentCallback(selected);
+    useEffect(()=> {
+        props.parentCallback(selected);
+    },[props])
     return (
         <div className="league-navbar fixed-top">
             <div className='d-flex'>

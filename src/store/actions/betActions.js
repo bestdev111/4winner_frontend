@@ -29,7 +29,6 @@ export const betOddSelectAction = (betCollectList, obj) => {
         else {
             tempBetCollectList.push(obj)
         }
-
         return dispatch({
             type: BET_SELECT,
             payload: {

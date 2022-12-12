@@ -34,7 +34,7 @@ const OddDetailPanel = (props) => {
                             <div>
                                 <span>{matchData ? matchData.match.homeTeam : null}</span>
                                 <span className='px-4'>
-                                    {matchData ? matchData.betState.score.home + ":" + matchData.betState.score.away :'0:0'}
+                                    {matchData ? matchData.betState.score.home + ":" + matchData.betState.score.away : '0:0'}
                                 </span>
                                 <span>{matchData ? matchData.match.awayTeam : null}</span>
                             </div>
@@ -206,30 +206,6 @@ const OddDetailPanel = (props) => {
                             </div>
                         </div>
                         : <></>}
-                    {/* {matchData.betState.firstHalftimeOddsOU.released ? 
-                        <div id="restofmatchwinner">
-                            <div className='custom-row match-detail-bet'>
-                                <div className="custom-row p-2 match-detail-bet-header">Rest of Match - Handicap</div>
-                            </div>
-                            <div className="row px-4">
-                                <div className="col-6 p-2 d-flex justify-content-center align-items-center">
-                                    <div className="bet-type-line-title bet-name">
-                                        1st Half Over/Under {matchData.betState.firstHalftimeOddsOU.threshold /10}
-                                    </div>
-                                </div>
-                                <div className="col-6 p-2 d-flex justify-content-around">
-                                    <div>
-                                        <div className="bet-type-line-title">+</div>
-                                        <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeOddsOU.over)}</a>
-                                    </div>
-                                    <div>
-                                        <div className="bet-type-line-title">-</div>
-                                        <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeOddsOU.under)}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        : <></>} */}
                     {matchData.betState.doubleChanceOdds102.released ?
                         <div id="restofmatchwinner">
                             <div className='custom-row match-detail-bet'>
@@ -330,4 +306,4 @@ const OddDetailPanel = (props) => {
         </div>
     </>
 }
-export default OddDetailPanel; 
+export default OddDetailPanel;

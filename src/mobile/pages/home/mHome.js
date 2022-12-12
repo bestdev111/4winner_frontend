@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'usehooks-ts';
 import { MobileNavbar, FootballLeagueNavbar, MobileFooter, LeagueContent, OddDetailPanel } from '../../../mobile/components'
 import { getMatches } from '../../../store/actions/mobileSportsActions';
-import {FadeInOut} from "../../../utils";
+import { FadeInOut } from "../../../utils";
 import './mHome.css'
 const tipTypesList = [
     [1, 'X', 2],
@@ -22,9 +22,8 @@ function MHome() {
     const [openOddDetailVal, setOpenOddDetailVal] = useState(false);
     const [selectMatchId, setSelectMatchId] = useState();
     const [sportActive, setSportActive] = useState(1);
-    const prevScrollY = useRef(0)
     const [hideSubNav, setHideSubNav] = useState(true);
-    // const [betCollectorHome, setBetCollectorHome] = useState([]);
+    const prevScrollY = useRef(0)
     const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
     useEffectOnce(() => {
         dispatch(getMatches())
@@ -42,7 +41,7 @@ function MHome() {
 
     }, [get_Matches])
 
-    useEffect(() => {
+    useEffect(() => { //football navbar with scroll
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
             if (prevScrollY.current < (currentScrollY - 15) && hideSubNav) {
@@ -68,36 +67,12 @@ function MHome() {
     const sportActiveFunc = (index) => {
         setSportActive(index);
     }
-    // useEffect(() => {
-    //     console.log('hello');
-    // }, [betCollectorHome])
-    // const betCollectListFunc = (betCollectList, obj) => {
-    //     let tempBetCollectList = [];
-    //     tempBetCollectList = betCollectList;
-    //     if (tempBetCollectList && tempBetCollectList.length > 0) {
-    //         let flag = false;
-    //         tempBetCollectList.forEach((item, index) => {
-    //             if (item.matchId === obj.matchId) {
-    //                 item.odds.includes(...obj.odds) ? arrayRemove(item.odds, item.odds.indexOf(...obj.odds)) : item.odds.push(...obj.odds);
-    //                 return flag = true;
-    //             }
-    //         });
-    //         if (flag === false) {
-    //             tempBetCollectList.push(obj)
-    //         }
-    //     }
-    //     else {
-    //         tempBetCollectList.push(obj)
-    //     }
-    //     console.log('betCollectListFunc', tempBetCollectList);
-    //     setBetCollectorHome(tempBetCollectList);
-    // }
     return (
         <>
             <MobileNavbar sportActiveFunc={sportActiveFunc} />
-            {sportActive === 1 && hideSubNav ? 
+            {sportActive === 1 && hideSubNav ?
                 <FadeInOut show="true" duration={400}>
-                    <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} /> 
+                    <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} />
                 </FadeInOut>
                 : <></>}
             <div className={sportActive === 1 ? 'm_content custom-top' : 'm_content'}>
@@ -107,8 +82,8 @@ function MHome() {
                     </div>
                 </div>
                 <div className='m_body'>
-                    {leagueType ? leagueType.map((league, index) => <>
-                        <div key={index} className="league-content">{league}</div>
+                    {leagueType ? leagueType.map((league, index1) => <div key={index1}>
+                        <div className="league-content">{league}</div>
                         {get_Matches && get_Matches.length !== 0 ? get_Matches.data.matches.map((match, i) => (
                             league === match.match.league ?
                                 <div key={i}>
@@ -126,13 +101,12 @@ function MHome() {
                                         isTop={match.isTop}
                                         odds={match.betState}
                                     // selected={betCollectListFunc}
-                                    // betCollectorHome={betCollectorHome}
                                     />
                                 </div>
                                 : null
                         )
                         ) : null}
-                    </>
+                    </div>
                     ) : null}
                 </div>
             </div>

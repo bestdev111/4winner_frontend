@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import './styles/leagueContent.css'
 import { betOddSelectAction } from "../../store/actions/betActions";
-import { use } from "i18next";
-
+import './styles/leagueContent.css'
+// import { use } from "i18next";
+function arrayRemove(array, index) {
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
+}
 function LeagueContent(props) {
     const dispatch = useDispatch();
     const matchData = props;
+    const [odds, setOdds] = useState([]);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
-    // const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches);
-    // let matches = [];
-    // useEffect(()=> {
-    //     if (get_Matches.data) {
-    //         matches = get_Matches.data.matches;
-    //         console.log('Mobile_matches', matches);
-    //     }
-    // }, [get_Matches]);
-    // const [betCollectList, setBetCollectList] = useState([]);
     const matchStatus = () => {
         switch (matchData.status) {
             case 0:
@@ -41,13 +38,24 @@ function LeagueContent(props) {
                 break;
         }
     }
-    const betOddSelect = (index, param) => {
-        const obj = {
-            matchId: props.content_Id,
+    const betOddSelect = (e, param) => {
+        e.stopPropagation()
+        let obj = {
+            matchId: matchData.matchId,
             odds: []
         }
-        obj.odds.push(index)
+        obj.odds.push(param)
+        func(param);
         dispatch(betOddSelectAction(betCollectList, obj));
+    }
+    const func = param => {
+        let temp = odds;
+        if (odds.includes(param)) {
+            temp = arrayRemove(temp, temp.indexOf(param))
+            setOdds([...temp]);
+        } else {
+            setOdds([...odds, param]);
+        }
     }
     const openDetailOdd = () => {
         props.openDetailOdd(true, props.matchId);
@@ -78,14 +86,14 @@ function LeagueContent(props) {
                 </div>
             </div>
             <div className="odds">
-                <div className="o3">
-                    <div className="changeable-odd">{matchData.odds ? matchData.odds.matchOdds102.o1 / 100 : '-'}</div>
+                <div className="o3" onClick={(e) => betOddSelect(e, 1)}>
+                    <div className={odds.length > 0 && odds.includes(1) ? "changeable-odd odd-selected" : 'changeable-odd'}>{matchData.odds ? matchData.odds.matchOdds102.o1 / 100 : '-'}</div>
                 </div>
-                <div className="o3">
-                    <div className="changeable-odd">{matchData.odds ? matchData.odds.matchOdds102.o0 / 100 : '-'}</div>
+                <div className="o3" onClick={(e) => betOddSelect(e, 0)}>
+                    <div className={odds.length > 0 && odds.includes(0) ? "changeable-odd odd-selected" : 'changeable-odd'}>{matchData.odds ? matchData.odds.matchOdds102.o0 / 100 : '-'}</div>
                 </div>
-                <div className="o3">
-                    <div className="changeable-odd">{matchData.odds ? matchData.odds.matchOdds102.o2 / 100 : '-'}</div>
+                <div className="o3" onClick={(e) => betOddSelect(e, 2)}>
+                    <div className={odds.length > 0 && odds.includes(2) ? "changeable-odd odd-selected" : 'changeable-odd'}>{matchData.odds ? matchData.odds.matchOdds102.o2 / 100 : '-'}</div>
                 </div>
             </div>
         </div>
