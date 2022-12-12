@@ -112,11 +112,11 @@ const OddDetailPanel = (props) => {
                                         </div>
                                         <div className="col-4 p-2">
                                             <div className="bet-type-line-title">+</div>
-                                            <a className="changeable-odd">{matchData.betState.matchOddsOU.over}</a>
+                                            <a className="changeable-odd">{calcOdd(matchData.betState.matchOddsOU.over)}</a>
                                         </div>
                                         <div className="col-4 p-2">
                                             <div className="bet-type-line-title">-</div>
-                                            <a className="changeable-odd">{matchData.betState.matchOddsOU.under}</a>
+                                            <a className="changeable-odd">{calcOdd(matchData.betState.matchOddsOU.under)}</a>
                                         </div>
                                     </div>
                                     : <></>}
@@ -129,11 +129,11 @@ const OddDetailPanel = (props) => {
                                             <div className="col-6 p-2 d-flex justify-content-around">
                                                 <div>
                                                     <div className="bet-type-line-title">+</div>
-                                                    <a className="changeable-odd">{matchData.betState.totalsHomeTeamOddsOU.over}</a>
+                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsHomeTeamOddsOU.over)}</a>
                                                 </div>
                                                 <div>
                                                     <div className="bet-type-line-title">-</div>
-                                                    <a className="changeable-odd">{matchData.betState.totalsHomeTeamOddsOU.under}</a>
+                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsHomeTeamOddsOU.under)}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,11 +144,11 @@ const OddDetailPanel = (props) => {
                                             <div className="col-6 p-2 d-flex justify-content-around">
                                                 <div>
                                                     <div className="bet-type-line-title">+</div>
-                                                    <a className="changeable-odd">{matchData.betState.totalsAwayTeamOddsOU.over}</a>
+                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsAwayTeamOddsOU.over)}</a>
                                                 </div>
                                                 <div>
                                                     <div className="bet-type-line-title">-</div>
-                                                    <a className="changeable-odd">{matchData.betState.totalsAwayTeamOddsOU.under}</a>
+                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsAwayTeamOddsOU.under)}</a>
                                                 </div>
                                             </div>
                                         </div>
