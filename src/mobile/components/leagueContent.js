@@ -41,9 +41,6 @@ function LeagueContent(props) {
                 break;
         }
     }
-    // useMemo(()=> {
-    //     console.log('clicked', betCollectList);
-    // }, [dispatch])
     const betOddSelect = (index, param) => {
         const obj = {
             matchId: props.content_Id,
@@ -52,48 +49,44 @@ function LeagueContent(props) {
         obj.odds.push(index)
         dispatch(betOddSelectAction(betCollectList, obj));
     }
-
+    const openDetailOdd = () => {
+        props.openDetailOdd(true, props.matchId);
+    }
     return (
-        <div className="match d-flex">
+        <div className="match d-flex" onClick={openDetailOdd}>
             <div className="m_teams">
                 <div className="time">
                     {matchStatus()}
                 </div>
                 <div className="d-flex team">
                     <div className="team_name">
-                        {matchData.teamName1}
+                        {matchData.homeTeam}
                         {matchData.redCard1 && matchData.redCard1 !== 0 ? <div className="red-card">{matchData.redCard1}</div> : <></>}
                     </div>
                     <div className="wrapper">
-                        <div className="score">{matchData.score1}</div>
+                        <div className="score">{matchData.score.history[0][0].home}</div>
                     </div>
                 </div>
                 <div className="d-flex team">
                     <div className="team_name">
-                        {matchData.teamName2}
+                        {matchData.awayTeam}
                         {matchData.redCard2 && matchData.redCard2 !== 0 ? <div className="red-card">{matchData.redCard2}</div> : <></>}
                     </div>
                     <div className="wrapper">
-                        <div className="score">{matchData.score2}</div>
+                        <div className="score">{matchData.score.history[0][0].away}</div>
                     </div>
                 </div>
             </div>
             <div className="odds">
-                {matchData.odds ? matchData.odds.map((odd, index) =>
-                    <div key={index} className='o3'>
-                        <div
-                            className={
-                                betCollectList.length > 0 ? betCollectList.map((list, i) =>
-                                    list.matchId === matchData.content_Id && list.odds.includes(index) ? 'changeable-odd odd-selected' : 'changeable-odd'
-                                )
-                                : 'changeable-odd'
-                            }
-                            onClick={() => betOddSelect(index, odd)}
-                        >
-                            {odd}
-                        </div>
-                    </div>
-                ) : <></>}
+                <div className="o3">
+                    <div className="changeable-odd">{matchData.odds ? matchData.odds.matchOdds102.o1 / 100 : '-'}</div>
+                </div>
+                <div className="o3">
+                    <div className="changeable-odd">{matchData.odds ? matchData.odds.matchOdds102.o0 / 100 : '-'}</div>
+                </div>
+                <div className="o3">
+                    <div className="changeable-odd">{matchData.odds ? matchData.odds.matchOdds102.o2 / 100 : '-'}</div>
+                </div>
             </div>
         </div>
     );

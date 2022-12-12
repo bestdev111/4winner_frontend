@@ -1,15 +1,32 @@
-.m-navbar,
-.m-subnavbar>div:first-child {
+.m-navbar {
+    display: block;
+    width: 100%;
+    background-color: #000000;
+    overflow: auto;
+    height: 100px;
+    padding-bottom: 3px;
+    z-index: 7 !important;
+}
+
+.sports-type {
     display: block;
     width: 100%;
     background-color: #000000;
     overflow: auto;
     height: 53px;
     padding-bottom: 3px;
+    margin-top: 4px;
+}
+
+.league-navbar {
+    top: 100px;
+    background-color: #ffffff;
+    z-index: 5 !important;
+    transition: top 0.7s;
 }
 
 .m-navbar i,
-.m-subnavbar i {
+.league-navbar i {
     font-size: 28px;
 }
 
@@ -50,17 +67,22 @@
 
 /* subnavbar */
 
-.m-subnavbar>div {
+.league-navbar>div,
+.sports-type {
     overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-.m-subnavbar>div::-webkit-scrollbar {
+.sports-type::-webkit-scrollbar {
     display: none;
 }
 
-/* .m-subnavbar>div:last-child>div {
+.league-navbar>div::-webkit-scrollbar {
+    display: none;
+}
+
+/* .league-navbar>div:last-child>div {
     background-color: white;
     color: #000000;
     display: inline-grid;
@@ -68,7 +90,7 @@
     margin-bottom: 2px;
 } */
 
-.m-subnavbar .item {
+.sports-type .item {
     float: left;
     display: inline-grid;
     padding: 6px 6px 3px 6px;
@@ -79,16 +101,16 @@
     text-align: center;
 }
 
-.m-subnavbar .item img,
-.m-subnavbar .leagues img {
+.sports-type .item img,
+.league-navbar .leagues img {
     margin: auto;
 }
 
-.m-subnavbar .item img {
+.sports-type .item img {
     width: 25px;
 }
 
-.m-subnavbar .leagues {
+.league-navbar .leagues {
     color: #000000;
     min-width: 100px;
     background-color: white;
@@ -98,7 +120,7 @@
     margin-bottom: 2px;
 }
 
-.m-subnavbar .leagues img {
+.league-navbar .leagues img {
     margin: auto;
     height: 25px;
 }
@@ -108,18 +130,19 @@
     margin-bottom: 0px !important;
 }
 
-.m-subnavbar .leagues .font {
+.league-navbar .leagues .font {
     font-size: 12px;
 }
 
-.m-subnavbar p {
+.sports-type p,
+.league-navbar p {
     margin: auto;
     width: max-content;
     font-size: 10px;
     text-align: center;
 }
 
-.item-active {
+.sports-type .item-active {
     border-bottom: solid 3px #25851f;
     margin-bottom: 0px;
 }

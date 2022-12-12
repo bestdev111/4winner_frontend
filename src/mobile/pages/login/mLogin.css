@@ -2,6 +2,9 @@
     background-color: #1e1e1e;
     color: #fff;
     padding: 3px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 8;
 }
 
 .login_header>div {
@@ -17,7 +20,12 @@
     font-size: 14px;
     font-weight: 700;
 }
-
+.login-form {
+    position: absolute;
+    z-index: 8;
+    width: 100%;
+    background-color: white;
+}
 .form-group input {
     font-size: 14px;
 }

@@ -7,6 +7,7 @@
     background-color: #000000;
     overflow: auto;
     font-size: 13px;
+    z-index: 6;
 }
 
 .m-footer i {
@@ -49,7 +50,7 @@
 /*  */
 .bet-pan {
     position: absolute;
-    z-index: 10;
+    z-index: 9;
 }
 
 .oddmodal-header {
@@ -348,6 +349,7 @@
     padding-left: 13px;
     padding-right: 13px;
 }
+
 .height-50 {
     height: 50%;
 }

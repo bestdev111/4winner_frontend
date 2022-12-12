@@ -6,7 +6,6 @@ export const getAllMatches = () => {
     return async dispatch => {
         try {
             const response = await axios.get(ServerURL + '/m_sports/getAllMatches');
-            console.log('getAllMatches',response.data);
             return dispatch({
                 type: MOBILE_GET_ALL_MATCHES,
                 payload: response
@@ -38,7 +37,7 @@ export const getMatches = () => {
 export const getTopLeague = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL +'/m_sports/getTopLeagues');
+            const response = await axios.get(ServerURL + '/m_sports/getTopLeagues');
             return dispatch({
                 type: MOBILE_GET_TOP_LEAGUE,
                 payload: response.data
@@ -54,7 +53,7 @@ export const getTopLeague = () => {
 export const getLeagueSorts = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL +'/m_sports/getLeagueSorts');
+            const response = await axios.get(ServerURL + '/m_sports/getLeagueSorts');
             return dispatch({
                 type: MOBILE_GET_LEAGUE_SORTS,
                 payload: response

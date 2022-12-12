@@ -23,12 +23,12 @@ export default function (state = initialState, action) {
         case MOBILE_GET_LEAGUE_SORTS:
             return {
                 ...state,
-                getLeagueSorts: action.payload
+                getLeagueSorts: action.payload.data
             };
         case MOBILE_GET_TOP_LEAGUE:
             return {
                 ...state,
-                getTopLeague: action.payload
+                getTopLeague: action.payload.data
             };
         case MOBILE_GET_TYPE_LIST:
             return {

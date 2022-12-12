@@ -1,3 +1,10 @@
+.m_content {
+    margin-top: 102px;
+}
+.custom-top {
+    margin-top: 183px !important;
+}
+
 .m_header {
     display: flex;
     justify-content: flex-end;
@@ -31,19 +38,24 @@
     width: 100%;
     background-color: #fff;
 }
+
 .betslip-type {
     display: flex;
 }
+
 .betslip-type a {
     font-size: 14px;
 }
+
 .betslip-type a.tab-selected {
     font-weight: 700;
 }
+
 .combinations {
     margin: 10px 20px;
     font-size: 13px;
 }
+
 .betslip-type a:last-child {
     border-right: 0;
 }

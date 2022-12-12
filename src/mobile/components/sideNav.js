@@ -84,8 +84,11 @@ function SideNav(props) {
     const changePassword = () => {
         window.location.href = '/m_changepassword'
     }
+    const onHandleChange = e => {
+        e.stopPropagation();
+    }
     return (
-        <div className='opacity-back'>
+        <div className='opacity-back' onScroll={onHandleChange}>
             <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
                 <div className='p-3'>
                     {!isAuth ? <div className='login d-flex justify-content-center p-2'><a href='/m_login'>Login</a></div> : <></>}

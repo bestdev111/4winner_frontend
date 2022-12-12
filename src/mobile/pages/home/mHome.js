@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from '../../../mobile/components'
-import ToastService from '../../../service/toast.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffectOnce } from 'usehooks-ts';
+import { MobileNavbar, FootballLeagueNavbar, MobileFooter, LeagueContent, OddDetailPanel } from '../../../mobile/components'
+import { getMatches } from '../../../store/actions/mobileSportsActions';
+import {FadeInOut} from "../../../utils";
 import './mHome.css'
 const tipTypesList = [
     [1, 'X', 2],
@@ -12,116 +14,63 @@ const tipTypesList = [
     ['1X', 12, 'X2'],
     ['Yes', 'No'],
 ]
-const leagueContentData = [
-    {
-        title: 'Football/Argentina/Torneo Regional Federal',
-        leagues: [
-            {
-                content_Id: '1',
-                teamName1: 'La Emilia',
-                teamName2: 'Regatas San Nicol.',
-                score1: 1,
-                score2: 2,
-                status: 3,
-                redCard1: 0,
-                redCard2: 2,
-                odds: [1.5, 1.2, 2.3]
-            },
-            {
-                content_Id: '2',
-                teamName1: 'Paris SG',
-                teamName2: 'Arsenal F.C.',
-                score1: 0,
-                score2: 0,
-                status: 2,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [3.40, 1.70, 4.50]
-            },
-        ]
-    },
-    {
-        title: 'Football/Mexico/Liga Expansion MX Apertura',
-        leagues: [
-            {
-                content_Id: '3',
-                teamName1: 'FC Barcelona',
-                teamName2: 'Real Madrid',
-                score1: 0,
-                score2: 0,
-                status: 0,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [15.00, 1.00, 2.90]
-            },
-            {
-                content_Id: '4',
-                teamName1: 'Cimarrones Sonora',
-                teamName2: 'Club Celaya FC',
-                score1: 0,
-                score2: 0,
-                status: 1,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [15.00, 1.00, 23.00]
-            },
-            {
-                content_Id: '5',
-                teamName1: 'Cimarrones Sonora',
-                teamName2: 'Club Celaya FC',
-                score1: 0,
-                score2: 0,
-                status: 1,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [8.80, 1.00, 15.00]
-            },
-            {
-                content_Id: '6',
-                teamName1: 'Cimarrones Sonora',
-                teamName2: 'Club Celaya FC',
-                score1: 0,
-                score2: 0,
-                status: 1,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [2.70, 1.60, 8.00]
-            },
-            {
-                content_Id: '7',
-                teamName1: 'Cimarrones Sonora',
-                teamName2: 'Club Celaya FC',
-                score1: 0,
-                score2: 0,
-                status: 1,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [5.60, 2.50, 2.60]
-            },
-            {
-                content_Id: '8',
-                teamName1: 'Cimarrones Sonora',
-                teamName2: 'Club Celaya FC',
-                score1: 0,
-                score2: 0,
-                status: 1,
-                redCard1: 0,
-                redCard2: 0,
-                odds: [14.00, 7.50, 6.40]
-            },
-        ]
-    }
-]
 function MHome() {
+
+    const dispatch = useDispatch()
     const [tipTypes, setTipTypes] = useState();
-    const [betCollectorHome, setBetCollectorHome] = useState([]);
-    const userData = useSelector(state => state.authReducers)
+    const [leagueType, setLeagueType] = useState([]);
+    const [openOddDetailVal, setOpenOddDetailVal] = useState(false);
+    const [selectMatchId, setSelectMatchId] = useState();
+    const [sportActive, setSportActive] = useState(1);
+    const prevScrollY = useRef(0)
+    const [hideSubNav, setHideSubNav] = useState(true);
+    // const [betCollectorHome, setBetCollectorHome] = useState([]);
+    const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
+    useEffectOnce(() => {
+        dispatch(getMatches())
+    })
+    useEffect(() => {
+        let tempType = leagueType;
+        if (get_Matches && get_Matches.length !== 0) {
+            get_Matches.data.matches.forEach(item => {
+                if (!tempType.includes(item.match.league)) {
+                    tempType.push(item.match.league)
+                }
+            });
+            setLeagueType(tempType);
+        }
+
+    }, [get_Matches])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (prevScrollY.current < (currentScrollY - 15) && hideSubNav) {
+                setHideSubNav(false);
+            }
+            if (prevScrollY.current > currentScrollY && !hideSubNav) {
+                setHideSubNav(true);
+            }
+            prevScrollY.current = currentScrollY;
+        }
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [hideSubNav])
+
     const getTipTypes = (data) => {
         setTipTypes(data);
     }
-    useEffect(() => {
-        console.log('hello');
-    }, [betCollectorHome])
+    const openDetailOdd = (index, id) => {
+        setOpenOddDetailVal(index);
+        setSelectMatchId(id);
+    }
+    const sportActiveFunc = (index) => {
+        setSportActive(index);
+    }
+    // useEffect(() => {
+    //     console.log('hello');
+    // }, [betCollectorHome])
     // const betCollectListFunc = (betCollectList, obj) => {
     //     let tempBetCollectList = [];
     //     tempBetCollectList = betCollectList;
@@ -145,39 +94,50 @@ function MHome() {
     // }
     return (
         <>
-            <MobileNavbar />
-            <SubMobileNavbar parentCallback={getTipTypes} />
-            <div className='m_content'>
+            <MobileNavbar sportActiveFunc={sportActiveFunc} />
+            {sportActive === 1 && hideSubNav ? 
+                <FadeInOut show="true" duration={400}>
+                    <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} /> 
+                </FadeInOut>
+                : <></>}
+            <div className={sportActive === 1 ? 'm_content custom-top' : 'm_content'}>
                 <div className='m_header'>
                     <div className='odds'>
-                        {tipTypes !== undefined ? tipTypesList[tipTypes].map((item, index) => <p key={index}>{item}</p>) : <></>}
+                        {tipTypes !== undefined ? tipTypesList[tipTypes].map((item, index) => <p key={index}>{item}</p>) : null}
                     </div>
                 </div>
                 <div className='m_body'>
-                    {leagueContentData && leagueContentData.map((leaguesData, index) =>
-                        <div key={index}>
-                            <div key={index} className="league-content">{leaguesData.title}</div>
-                            {leaguesData.leagues.map((leagues, i) =>
-                                <LeagueContent
-                                    key={i}
-                                    content_Id={leagues.content_Id}
-                                    teamName1={leagues.teamName1}
-                                    teamName2={leagues.teamName2}
-                                    score1={leagues.score1}
-                                    score2={leagues.score2}
-                                    status={leagues.status}
-                                    redCard1={leagues.redCard1}
-                                    redCard2={leagues.redCard2}
-                                    odds={leagues.odds}
+                    {leagueType ? leagueType.map((league, index) => <>
+                        <div key={index} className="league-content">{league}</div>
+                        {get_Matches && get_Matches.length !== 0 ? get_Matches.data.matches.map((match, i) => (
+                            league === match.match.league ?
+                                <div key={i}>
+                                    <LeagueContent
+                                        openDetailOdd={openDetailOdd}
+                                        matchId={match.id}
+                                        homeTeam={match.match.homeTeam}
+                                        awayTeam={match.match.awayTeam}
+                                        matchResults={match.matchResults}
+                                        score={match.scoreCache}
+                                        status={0}
+                                        // status={match.matchResults.fullTimeResult ? match.matchResults.fullTimeResult : match.matchResults.interimResults ? match.matchResults.interimResults : null}
+                                        redCard={match.redCards}
+                                        betState={match.betState}
+                                        isTop={match.isTop}
+                                        odds={match.betState}
                                     // selected={betCollectListFunc}
                                     // betCollectorHome={betCollectorHome}
-                                />
-                            )}
-                        </div>
-                    )}
+                                    />
+                                </div>
+                                : null
+                        )
+                        ) : null}
+                    </>
+                    ) : null}
                 </div>
             </div>
             <MobileFooter />
+            {openOddDetailVal ? <OddDetailPanel openDetailOdd={openDetailOdd} matchId={selectMatchId} /> : <></>}
         </>
     );
 };
