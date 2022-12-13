@@ -27,10 +27,10 @@ function SideNav(props) {
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const userData = useSelector(state => state.authReducers)
     const isAuth = userData.isAuthenticated
-    useEffect(() => {
-        dispatch(getMatches());
-        dispatch(getAllMatches());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(getMatches());
+    //     dispatch(getAllMatches());
+    // }, [dispatch]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

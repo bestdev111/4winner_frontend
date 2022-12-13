@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './styles/mobileFooter.css'
 import ToastService from '../../service/toast.service';
 import Calculator from './calculator';
@@ -18,7 +18,6 @@ function MobileFooter(props) {
         { icon: 'fa fa-file-o', title: 'Bet Slip' },
         { icon: 'fa fa-heartbeat', title: 'My Bets' },
     ]
-    const dispatch = useDispatch();
     const [openCalc, setOpenCalc] = useState(false);
     const [numActive, setNumActive] = useState(0);
     const [betSlipNum, setBetSlipNum] = useState(0);

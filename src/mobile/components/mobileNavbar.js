@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SideNav from './sideNav'
 import { logoutUser } from '../../store/actions/authActions'
-import { getTypeList } from '../../store/actions/mobileSportsActions'
 import './styles/mobileNavbar.css'
 
 function MobileNavbar(props) {
@@ -13,15 +12,13 @@ function MobileNavbar(props) {
     const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const isAuth = userData.isAuthenticated
-    useEffect(() => {
-        dispatch(getTypeList());
-    }, [dispatch]);
+
     const open = () => {
         setOpenSide(false)
     }
-    const sportActiveChange = (index) => {
+    const sportActiveChange = (index, typeName) => {
         setSportActiveVal(index);
-        if (index) props.sportActiveFunc(index);
+        if (index) props.sportActiveFunc(index, typeName);
     }
     let availableSportTypes = '';
     if (get_AllMatches.data) { availableSportTypes = get_AllMatches.data.availableSportTypes }
@@ -45,7 +42,7 @@ function MobileNavbar(props) {
             </div>
             <div className='d-flex sports-type'>
                 {availableSportTypes && availableSportTypes.map((availableSportType, index) =>
-                    <div className={availableSportType === sportActiveVal ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveChange(availableSportType)}>
+                    <div className={availableSportType === sportActiveVal ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveChange(availableSportType, SportTypeList[availableSportType - 1].name)}>
                         <img src={SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].m_icon : ''} alt='' />
                         <p>{SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}</p>
                     </div>

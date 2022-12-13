@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 import routes from './configs/routesConfig'
 import AppContext from './appContext';
-import { renderRoutes } from 'react-router-config'
 import { Router } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import createStore from './store';
@@ -10,6 +9,7 @@ import history from './history';
 import { SetAuthToken, Loading, Authorization } from './utils';
 import { setCurrentUser, logoutUser } from './store/actions/authActions'
 import { ToastContainer } from "react-toastify";
+import AppMain from './AppMain'
 import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore()
@@ -33,7 +33,7 @@ function App() {
         <Suspense fallback={<Loading />}>
           <Router history={history} lang={'en_US'}>
             <Authorization routes={real_routes}>
-              {renderRoutes(real_routes)}
+              <AppMain real_routes={real_routes} />
             </Authorization>
           </Router>
           <ToastContainer autoClose={4000} />

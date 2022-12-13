@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'usehooks-ts';
 import { MobileNavbar, FootballLeagueNavbar, MobileFooter, LeagueContent, OddDetailPanel } from '../../../mobile/components'
-import { getMatches } from '../../../store/actions/mobileSportsActions';
+import { getMatches, getAllMatches, getTopLeague, getLeagueSorts, getTypeList } from '../../../store/actions/mobileSportsActions';
 import { FadeInOut } from "../../../utils";
 import './mHome.css'
 const tipTypesList = [
@@ -23,10 +23,25 @@ function MHome({socket}) {
     const [selectMatchId, setSelectMatchId] = useState();
     const [sportActive, setSportActive] = useState(1);
     const [hideSubNav, setHideSubNav] = useState(true);
+    const [sportTypeName, setSportTypeName] = useState('Football');
     const prevScrollY = useRef(0)
+    const [timer, setTimer] = useState(null)
+    const [isMounted, setIsMounted] = useState(false)
     const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
-    useEffectOnce(() => {
+    const dataFetch = () => {
         dispatch(getMatches())
+        dispatch(getAllMatches())
+        dispatch(getTopLeague())
+        dispatch(getLeagueSorts())
+        dispatch(getTypeList())
+        clearTimeout(timer)
+        setTimer(setTimeout(dataFetch, 10000))
+    }
+    useEffect(() => {
+        if (!isMounted) {
+            dataFetch()
+            setIsMounted(true)
+        }
     })
     useEffect(() => {
         let tempType = leagueType;
@@ -38,9 +53,10 @@ function MHome({socket}) {
             });
             setLeagueType(tempType);
         }
-
     }, [get_Matches])
-
+    useEffectOnce(()=> {
+        dataFetch()
+    })
     useEffect(() => { //football navbar with scroll
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -64,9 +80,12 @@ function MHome({socket}) {
         setOpenOddDetailVal(index);
         setSelectMatchId(id);
     }
-    const sportActiveFunc = (index) => {
+    const sportActiveFunc = (index, typeName) => {
+        console.log('typeName: ',typeName);
         setSportActive(index);
+        setSportTypeName(typeName);
     }
+    console.log('get_Matches');
     return (
         <>
             <MobileNavbar sportActiveFunc={sportActiveFunc} />
@@ -83,7 +102,7 @@ function MHome({socket}) {
                 </div>
                 <div className='m_body'>
                     {leagueType ? leagueType.map((league, index1) => <div key={index1}>
-                        <div className="league-content">{league}</div>
+                        <div className="league-content">{sportTypeName}/{league}</div>
                         {get_Matches && get_Matches.length !== 0 ? get_Matches.data.matches.map((match, i) => (
                             league === match.match.league ?
                                 <div key={i}>

@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getTopLeague } from '../../store/actions/mobileSportsActions'
 import './styles/mobileNavbar.css'
 
 const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];
 function FootballLeagueNavbar(props) {
-    const dispatch = useDispatch();
     const [leagueActive, setLeagueActive] = useState(0);
     const [selected, setSelected] = useState(0);
     const leagues_list = useSelector(state => state.mobileSportsReducers.getTopLeague);
-    useEffect(() => {
-        dispatch(getTopLeague());
-    }, [dispatch]);
 
     const leagueActiveFunc = (index) => {
         setLeagueActive(index);
@@ -19,9 +15,9 @@ function FootballLeagueNavbar(props) {
     const tipTypes = (index) => {
         setSelected(index);
     }
-    useEffect(()=> {
+    useEffect(() => {
         props.parentCallback(selected);
-    },[props])
+    }, [props])
     return (
         <div className="league-navbar fixed-top">
             <div className='d-flex'>

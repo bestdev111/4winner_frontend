@@ -1,12 +1,11 @@
-import { lastIndexOf } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 function Calculator(props) {
 
     const { onClickOutside, show } = props;
     const ref = useRef(null);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [showNum, setShowNum] = useState();
     const [calcError, setCalcError] = useState(false);
     useEffect(() => {
@@ -28,7 +27,10 @@ function Calculator(props) {
         e.persist();
         if (showNum !== 0 && showNum !== undefined) {
             let temp = showNum + (e.currentTarget.textContent).toString()
-            if (Number(temp) <= 5000) setShowNum(temp);
+            if (Number(temp) <= 5000 && !(temp.includes('0.0'))) {
+                if((Number(temp) - 1) * 100 > 0 && (Number(temp)-1) * 100 < 1 ){return}
+                 setShowNum(temp);
+            }
             else setCalcError(true);
         } else {
             setShowNum((e.currentTarget.textContent).toString())
@@ -38,12 +40,15 @@ function Calculator(props) {
         e.persist();
         props.onClickOutside(e.target.innerText);
     }
+    const onOk = () =>{
+        props.onClickOutside(showNum);
+    }
     const deleteVal = () => {
         let temp = showNum;
-        console.log(lastIndexOf(temp));
-        temp.slice(0, temp.length-2)
-        console.log( temp);
-        setShowNum(temp);
+        if(temp.length > 0) {
+            temp = temp.slice(0, temp.length-1)
+            setShowNum(temp);
+        }
     }
 
     return (
@@ -124,7 +129,7 @@ function Calculator(props) {
                                         </div>
                                     </div>
                                     <div className="row height-50">
-                                        <div className="col-xs-12 calc-num">
+                                        <div className="col-xs-12 calc-num" onClick={onOk}>
                                             <a className="num-btn btn-group-justified double-line">OK</a>
                                         </div>
                                     </div>
