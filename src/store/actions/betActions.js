@@ -1,5 +1,5 @@
 import {
-    BET_SELECT, GET_ERRORS
+    BET_SELECT, GET_MY_BETS, GET_ERRORS
 } from '../../store/actions/actionTypes';
 
 function arrayRemove(array, index) {
@@ -54,6 +54,16 @@ export const betRemoveOddsAction = (betCollectList, matchId) => {
             type: BET_SELECT,
             payload: {
                 list: tempBetCollectList,
+            }
+        });
+    }
+}
+export const getMyBetData = () => {
+    return async dispatch => {
+        return dispatch({
+            type: GET_MY_BETS,
+            payload: {
+                myBetData : ''
             }
         });
     }

@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, MobileFooter } from '../../../mobile/components'
 import { loginUser } from '../../../store/actions/authActions';
+import { getTypeList } from '../../../store/actions/mobileSportsActions';
 import './mLogin.css'
 function MLogin() {
     const dispatch = useDispatch();
     const [name, setName] = useState();
     const [pass, setPass] = useState();
+    useEffect(()=> {
+        dispatch(getTypeList())
+    })
+    useSelector(state => state.mobileSportsReducers.getTypeList)
     const login = () => {
         const user = {
             userName: name,

@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from '../../../mobile/components'
-// import ToastService from '../../../service/toast.service';
+import { getMyBetData } from '../../../store/actions/betActions'
 import './myBets.css'
-// import './mHome.css'
 
 function MyBets() {
+    const dispatch = useDispatch()
     const [openBetModal, setOpenBetModal] = useState(true);
     // const [numBet, setNumBet] = useState(Number(0));
-    const [betCollectorHome, setBetCollectorHome] = useState([]);
+    const myBetData = useSelector(state => state.betReducers.myBetData);
+    useEffect(()=> {
+        dispatch(getMyBetData());
+    },[])
     return (
         <>
             <MobileNavbar />
@@ -40,7 +43,10 @@ function MyBets() {
                             <div className='col-3 text-center'>Winnings</div>
                         </div>
                         <div className='match-body p-3'>
-                            No records found
+                            {myBetData.length > 0 ? <div>
+                                Bet List
+                                </div>
+                            :   <div> NO Data Found</div>}
                         </div>
                         <div className='match-footer text-center'></div>
                     </div>

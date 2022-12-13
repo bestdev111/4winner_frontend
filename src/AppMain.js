@@ -4,10 +4,11 @@ import { renderRoutes } from 'react-router-config'
 import { Loading } from './utils';
 
 function AppMain(props) {
-  const isLoading = useSelector(state => state.mobileSportsReducers.isLoading)
+  const isLoading1 = useSelector(state => state.mobileSportsReducers.isLoading)
+  const isLoading2 = useSelector(state => state.betReducers.isLoading)
   return (
     <>
-      {isLoading ? <Loading /> : null}
+      {isLoading1 && isLoading2 ? <Loading /> : null}
       {renderRoutes(props.real_routes)}
     </>
   );
