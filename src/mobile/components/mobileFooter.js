@@ -93,7 +93,13 @@ function MobileFooter(props) {
             ToastService("Please Login", 'error');
             setConfirmVal(false);
         } else {
-            dispatch(placeMyBet(betCollectList));
+            const betState = {
+                initialStack: totalStake,
+                tax: tax,
+                stakeBet: stakeBet,
+                maxWinning: maxWinning
+            }
+            dispatch(placeMyBet(betCollectList, betState));
             setConfirmVal(false);
             oddsReset();
         }

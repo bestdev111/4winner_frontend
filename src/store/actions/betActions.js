@@ -73,10 +73,10 @@ export const getMyBetData = () => {
         });
     }
 }
-export const placeMyBet = betsData => {
+export const placeMyBet = (betsData, betState) => {
     return async dispatch => {
         try {
-            const response = await axios.post(ServerURL + '/betting/mybets', betsData);
+            const response = await axios.post(ServerURL + '/betting/mybets', {betsData, betState});
             ToastService('Successfully Bet!', 'success')
             return dispatch({
                 type: MY_BETS,
