@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { betOddSelectAction } from "../../store/actions/betActions";
 import './styles/leagueContent.css'
 // import { use } from "i18next";
-function arrayRemove(array, index) {
-    if (index > -1) {
-        array.splice(index, 1);
-    }
-    return array;
-}
+
 function LeagueContent(props) {
     const dispatch = useDispatch();
     const matchData = props;
@@ -28,7 +23,7 @@ function LeagueContent(props) {
             case 3:
                 return (<>
                     <span className="will-live">Live</span>
-                    <span className="live-time">37'</span>
+                    <span className="live-time">{matchData.time !== null ? matchData.time: null}{"'"}</span>
                 </>)
             case 4:
                 return (<>
@@ -38,7 +33,7 @@ function LeagueContent(props) {
             case 5:
                 return (<>
                     <span className="live">Live</span>
-                    <span className="live-time">2. Half 70'</span>
+                    <span className="live-time">2. Half {matchData.time !== null ? matchData.time: null}{"'"}</span>
                 </>)
             default:
                 break;

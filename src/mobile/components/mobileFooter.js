@@ -49,11 +49,11 @@ function MobileFooter(props) {
     }
     const goTo = (title) => {
         if (title === 'Home') {
-            window.location.href = '/';
+            window.location.href = '/m_home';
             localStorage.setItem('path', 'Home');
         }
         if (title === 'Live') {
-            window.location.href = '/';
+            window.location.href = '/m_live';
             localStorage.setItem('path', 'Live');
         }
         if (title === 'Bet Slip') {

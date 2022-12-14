@@ -7,11 +7,12 @@ import { FadeInOut } from "../../../utils";
 import { tipTypesList } from '../../../utils/dataUtils'
 import './mHome.css'
 
-function MHome() {
+function MHome(props) {
 
     const dispatch = useDispatch()
     const [tipTypes, setTipTypes] = useState();
-    const [leagueType, setLeagueType] = useState([]);
+    const [liveLeagueType, setLiveLeagueType] = useState([]);
+    const [willLeagueType, setWillLeagueType] = useState([]);
     const [openOddDetailVal, setOpenOddDetailVal] = useState(false);
     const [selectMatchId, setSelectMatchId] = useState();
     const [sportActive, setSportActive] = useState(1);
@@ -20,6 +21,9 @@ function MHome() {
     const prevScrollY = useRef(0)
     const [timer, setTimer] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
+    const [liveMatches, setLiveMatches] = useState(null);
+    const [willMatches, setWillMatches] = useState(null);
+    const [onlyLive, setOnlyLive] = useState(false);
     const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
     const dataFetch = () => {
         dispatch(getMatches())
@@ -37,19 +41,35 @@ function MHome() {
         }
     })
     useEffect(() => {
-        let tempType = leagueType;
+        let tempType1 = liveLeagueType;
+        let tempType2 = willLeagueType;
         if (get_Matches && get_Matches.length !== 0) {
-            get_Matches.data.matches.forEach(item => {
-                if (!tempType.includes(item.match.league)) {
-                    tempType.push(item.match.league)
+            let live_leagues = get_Matches.data.matches.filter(item => item.betState.matchState >= 3)
+            let will_leagues = get_Matches.data.matches.filter(item => item.betState.matchState < 3)
+            setLiveMatches(live_leagues);
+            setWillMatches(will_leagues);
+            live_leagues.forEach(item => {
+                if (!tempType1.includes(item.match.league)) {
+                    tempType1.push(item.match.league)
                 }
             });
-            setLeagueType(tempType);
+            will_leagues.forEach(item => {
+                if (!tempType2.includes(item.match.league)) {
+                    tempType2.push(item.match.league)
+                }
+            });
+            setLiveLeagueType(tempType1);
+            setWillLeagueType(tempType2)
         }
     }, [get_Matches])
     useEffectOnce(() => {
         dataFetch()
     })
+    useEffect(() => {
+        if (props && props.onlyLive) {
+            setOnlyLive(props.onlyLive)
+        }
+    }, [props])
     useEffect(() => { //football navbar with scroll
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -74,9 +94,14 @@ function MHome() {
         setSelectMatchId(id);
     }
     const sportActiveFunc = (index, typeName) => {
-        console.log('typeName: ', typeName);
         setSportActive(index);
         setSportTypeName(typeName);
+    }
+    const getTime = (param) => {
+        let timestamp = new Date(param.timestamp).getTime();
+        let virtualStartTime = new Date(param.virtualStartTime).getTime();
+        let t = (timestamp - virtualStartTime) / (60 * 1000);
+        return Math.floor(t).toFixed(0);
     }
     return (
         <>
@@ -93,9 +118,9 @@ function MHome() {
                     </div>
                 </div>
                 <div className='m_body'>
-                    {leagueType ? leagueType.map((league, index1) => <div key={index1}>
+                    {liveLeagueType ? liveLeagueType.map((league, index1) => <div key={index1}>
                         <div className="league-content">{sportTypeName}/{league}</div>
-                        {get_Matches && get_Matches.length !== 0 ? get_Matches.data.matches.map((match, i) => (
+                        {liveMatches.map((match, i) => (
                             league === match.match.league ?
                                 <div key={i}>
                                     <LeagueContent
@@ -107,17 +132,40 @@ function MHome() {
                                         matchResults={match.matchResults}
                                         score={match.scoreCache}
                                         matchState={match.betState.matchState}
-                                        // status={match.matchResults.fullTimeResult ? match.matchResults.fullTimeResult : match.matchResults.interimResults ? match.matchResults.interimResults : null}
                                         redCard={match.redCards}
                                         betState={match.betState}
                                         isTop={match.isTop}
                                         odds={match.betState}
-                                    // selected={betCollectListFunc}
+                                        time={getTime(match.betState)}
                                     />
                                 </div>
                                 : null
-                        )
-                        ) : null}
+                        ))}
+                    </div>
+                    ) : null}
+                    {!onlyLive && willLeagueType ? willLeagueType.map((league, index1) => <div key={index1}>
+                        <div className="league-content">{sportTypeName}/{league}</div>
+                        {willMatches.map((match, i) => (
+                            league === match.match.league ?
+                                <div key={i}>
+                                    <LeagueContent
+                                        tipTypes={tipTypes}
+                                        openDetailOdd={openDetailOdd}
+                                        matchId={match.id}
+                                        homeTeam={match.match.homeTeam}
+                                        awayTeam={match.match.awayTeam}
+                                        matchResults={match.matchResults}
+                                        score={match.scoreCache}
+                                        matchState={match.betState.matchState}
+                                        redCard={match.redCards}
+                                        betState={match.betState}
+                                        isTop={match.isTop}
+                                        odds={match.betState}
+                                        time={getTime(match.betState)}
+                                    />
+                                </div>
+                                : null
+                        ))}
                     </div>
                     ) : null}
                 </div>

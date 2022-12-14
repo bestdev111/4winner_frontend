@@ -9,6 +9,7 @@ import { OutRightsConfig } from '../main/outRights/outRightsConfig'
 import { ResultsConfig } from '../main/results/resultsConfig'
 // mobile view
 import { MHomeConfig } from '../mobile/pages/home/mHomeConfig'
+import { MLiveConfig } from '../mobile/pages/live/mLiveConfig'
 import { MyBetsConfig } from '../mobile/pages/myBets/myBetsConfig'
 import { MLoginConfig } from '../mobile/pages/login/mLoginConfig'
 
@@ -24,6 +25,7 @@ const routeConfigs = [
 const m_routeConfigs = [
     MLoginConfig,
     MHomeConfig,
+    MLiveConfig,
     MyBetsConfig
 ]
 function customRoutes() {
