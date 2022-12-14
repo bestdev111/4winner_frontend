@@ -1,4 +1,4 @@
-import { BET_SELECT, GET_MY_BETS } from '../../store/actions/actionTypes';
+import { BET_SELECT, GET_MY_BETS, MY_BETS } from '../../store/actions/actionTypes';
 
 const initialState = { betCollectList: [], myBetData: [], isLoading: true }
 
@@ -13,6 +13,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 myBetData: [...action.payload.myBetData],
+                isLoading: false
+            };
+        case MY_BETS:
+            return {
+                ...state,
                 isLoading: false
             };
         default:

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllMatches, getMatches } from '../../store/actions/mobileSportsActions'
+import { getAllMatches, getMatches, getTypeList } from '../../store/actions/mobileSportsActions'
 import { logoutUser } from '../../store/actions/authActions'
 import { Language } from '../../utils';
 const lang_list = [
@@ -27,10 +27,10 @@ function SideNav(props) {
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const userData = useSelector(state => state.authReducers)
     const isAuth = userData.isAuthenticated
-    // useEffect(() => {
-    //     dispatch(getMatches());
-    //     dispatch(getAllMatches());
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(getTypeList());
+        dispatch(getAllMatches());
+    }, [dispatch]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {

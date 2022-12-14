@@ -22,7 +22,9 @@
     cursor: default;
     width: 20%;
 }
-
+.m-footer .item p {
+    font-size: 11px;
+}
 .m-footer .login {
     color: #25851f;
     border: solid 1px #25851f;
@@ -182,8 +184,7 @@
     display: flex;
     padding: 5px;
     border-bottom: 1px solid #d5d5d5;
-    float: left;
-    width: calc(100% - 20px);
+    width: 90%;
 }
 
 .tip-row .left-col {
@@ -207,16 +208,21 @@
 .right-col {
     float: right !important;
 }
-
+.tip-body {
+    width: 100%;
+}
 .tip-row .right-col {
     width: 15%;
     float: left;
 }
-
+ .currentscore-green {
+    color:#2db343;
+ }
 .remove-btn {
     width: 20px;
-    float: right;
     padding-top: 30px;
+    width: 10%;
+    text-align: center;
 }
 
 .tip div span {
@@ -357,7 +363,7 @@
 .bet-confirm-modal {
     position: absolute;
     z-index: 9;
-    background-color: white;
+    background-color: #333;
     bottom: 0px;
 }
 

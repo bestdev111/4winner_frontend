@@ -22,6 +22,10 @@ const OddDetailPanel = (props) => {
     const handleChange = e => {
         e.stopPropagation();
     }
+    const betOddSelect = (betType, oddType) => {
+        
+        console.log(props.matchId,betType, oddType);
+    }
     return <>
         <div className="openDetailOdd" onScroll={handleChange}>
             <div className='match-detail-header'>
@@ -65,15 +69,15 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.matchOdds102.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('matchOdds102', 'o1')}>{calcOdd(matchData.betState.matchOdds102.o1)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">X</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.matchOdds102.o0)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('matchOdds102', 'o0')}>{calcOdd(matchData.betState.matchOdds102.o0)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.matchOdds102.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('matchOdds102', 'o2')}>{calcOdd(matchData.betState.matchOdds102.o2)}</a>
                                 </div>
                             </div>
                         </div>
@@ -86,15 +90,15 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.matchWinnerOdds102.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('matchWinnerOdds102', 'o1')}>{calcOdd(matchData.betState.matchWinnerOdds102.o1)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">X</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.matchWinnerOdds102.o0)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('matchWinnerOdds102', 'o0')}>{calcOdd(matchData.betState.matchWinnerOdds102.o0)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.matchWinnerOdds102.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('matchWinnerOdds102', 'o2')}>{calcOdd(matchData.betState.matchWinnerOdds102.o2)}</a>
                                 </div>
                             </div>
                         </div>
@@ -110,13 +114,13 @@ const OddDetailPanel = (props) => {
                                         <div className="col-4 p-2 d-flex justify-content-center align-items-center">
                                             <div className="bet-type-line-title bet-name">{matchData.betState.matchOddsOU.threshold / 10}</div>
                                         </div>
-                                        <div className="col-4 p-2">
+                                        <div className="col-4 p-2" >
                                             <div className="bet-type-line-title">+</div>
-                                            <a className="changeable-odd">{calcOdd(matchData.betState.matchOddsOU.over)}</a>
+                                            <a className="changeable-odd" onClick={() => betOddSelect('matchOddsOU', 'over')}>{calcOdd(matchData.betState.matchOddsOU.over)}</a>
                                         </div>
                                         <div className="col-4 p-2">
                                             <div className="bet-type-line-title">-</div>
-                                            <a className="changeable-odd">{calcOdd(matchData.betState.matchOddsOU.under)}</a>
+                                            <a className="changeable-odd" onClick={() => betOddSelect('matchOddsOU', 'under')}>{calcOdd(matchData.betState.matchOddsOU.under)}</a>
                                         </div>
                                     </div>
                                     : <></>}
@@ -129,11 +133,11 @@ const OddDetailPanel = (props) => {
                                             <div className="col-6 p-2 d-flex justify-content-around">
                                                 <div>
                                                     <div className="bet-type-line-title">+</div>
-                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsHomeTeamOddsOU.over)}</a>
+                                                    <a className="changeable-odd" onClick={() => betOddSelect('totalsHomeTeamOddsOU', 'under')}>{calcOdd(matchData.betState.totalsHomeTeamOddsOU.over)}</a>
                                                 </div>
                                                 <div>
                                                     <div className="bet-type-line-title">-</div>
-                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsHomeTeamOddsOU.under)}</a>
+                                                    <a className="changeable-odd" onClick={() => betOddSelect('totalsHomeTeamOddsOU', 'under')}>{calcOdd(matchData.betState.totalsHomeTeamOddsOU.under)}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,11 +148,11 @@ const OddDetailPanel = (props) => {
                                             <div className="col-6 p-2 d-flex justify-content-around">
                                                 <div>
                                                     <div className="bet-type-line-title">+</div>
-                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsAwayTeamOddsOU.over)}</a>
+                                                    <a className="changeable-odd" onClick={() => betOddSelect('totalsAwayTeamOddsOU', 'under')}>{calcOdd(matchData.betState.totalsAwayTeamOddsOU.over)}</a>
                                                 </div>
                                                 <div>
                                                     <div className="bet-type-line-title">-</div>
-                                                    <a className="changeable-odd">{calcOdd(matchData.betState.totalsAwayTeamOddsOU.under)}</a>
+                                                    <a className="changeable-odd" onClick={() => betOddSelect('totalsAwayTeamOddsOU', 'under')}>{calcOdd(matchData.betState.totalsAwayTeamOddsOU.under)}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,15 +169,15 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.nextGoalOdds102.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('nextGoalOdds102', 'o1')}>{calcOdd(matchData.betState.nextGoalOdds102.o1)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">X</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.nextGoalOdds102.o0)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('nextGoalOdds102', 'o0')}>{calcOdd(matchData.betState.nextGoalOdds102.o0)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.nextGoalOdds102.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('nextGoalOdds102', 'o2')}>{calcOdd(matchData.betState.nextGoalOdds102.o2)}</a>
                                 </div>
                             </div>
                         </div>
@@ -192,15 +196,15 @@ const OddDetailPanel = (props) => {
                                 <div className="col-6 p-2 d-flex justify-content-around">
                                     <div>
                                         <div className="bet-type-line-title">1</div>
-                                        <a className="changeable-odd">{calcOdd(matchData.betState.handicapOdds102.BASE.o1)}</a>
+                                        <a className="changeable-odd" onClick={() => betOddSelect('handicapOdds102', 'o1')}>{calcOdd(matchData.betState.handicapOdds102.BASE.o1)}</a>
                                     </div>
                                     <div>
                                         <div className="bet-type-line-title">X</div>
-                                        <a className="changeable-odd">{calcOdd(matchData.betState.handicapOdds102.BASE.o0)}</a>
+                                        <a className="changeable-odd" onClick={() => betOddSelect('handicapOdds102', 'o0')}>{calcOdd(matchData.betState.handicapOdds102.BASE.o0)}</a>
                                     </div>
                                     <div>
                                         <div className="bet-type-line-title">2</div>
-                                        <a className="changeable-odd">{calcOdd(matchData.betState.handicapOdds102.BASE.o2)}</a>
+                                        <a className="changeable-odd" onClick={() => betOddSelect('handicapOdds102', 'o2')}>{calcOdd(matchData.betState.handicapOdds102.BASE.o2)}</a>
                                     </div>
                                 </div>
                             </div>
@@ -214,15 +218,15 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.doubleChanceOdds102.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('doubleChanceOdds102', 'o1')}>{calcOdd(matchData.betState.doubleChanceOdds102.o1)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">X</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.doubleChanceOdds102.o0)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('doubleChanceOdds102', 'o0')}>{calcOdd(matchData.betState.doubleChanceOdds102.o0)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.doubleChanceOdds102.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('doubleChanceOdds102', 'o2')}>{calcOdd(matchData.betState.doubleChanceOdds102.o2)}</a>
                                 </div>
                             </div>
                         </div>
@@ -235,15 +239,15 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeDoubleChanceOdds102.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('firstHalftimeDoubleChanceOdds102', 'o1')}>{calcOdd(matchData.betState.firstHalftimeDoubleChanceOdds102.o1)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">X</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeDoubleChanceOdds102.o0)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('firstHalftimeDoubleChanceOdds102', 'o0')}>{calcOdd(matchData.betState.firstHalftimeDoubleChanceOdds102.o0)}</a>
                                 </div>
                                 <div className="col-4 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeDoubleChanceOdds102.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('firstHalftimeDoubleChanceOdds102', 'o2')}>{calcOdd(matchData.betState.firstHalftimeDoubleChanceOdds102.o2)}</a>
                                 </div>
                             </div>
                         </div>
@@ -256,11 +260,11 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-6 p-2">
                                     <div className="bet-type-line-title">YES</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.bothToScoreOddsYN.yes)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('bothToScoreOddsYN', 'yes')}>{calcOdd(matchData.betState.bothToScoreOddsYN.yes)}</a>
                                 </div>
                                 <div className="col-6 p-2">
                                     <div className="bet-type-line-title">No</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.bothToScoreOddsYN.no)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('bothToScoreOddsYN', 'no')}>{calcOdd(matchData.betState.bothToScoreOddsYN.no)}</a>
                                 </div>
                             </div>
                         </div>
@@ -273,11 +277,11 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-6 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.drawNoBet12.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('drawNoBet12', 'o1')}>{calcOdd(matchData.betState.drawNoBet12.o1)}</a>
                                 </div>
                                 <div className="col-6 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.drawNoBet12.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('drawNoBet12', 'o2')}>{calcOdd(matchData.betState.drawNoBet12.o2)}</a>
                                 </div>
                             </div>
                         </div>
@@ -290,11 +294,11 @@ const OddDetailPanel = (props) => {
                             <div className="custom-row row px-4">
                                 <div className="col-6 p-2">
                                     <div className="bet-type-line-title">1</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeDrawNoBetOdds12.o1)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('firstHalftimeDrawNoBetOdds12', 'o1')}>{calcOdd(matchData.betState.firstHalftimeDrawNoBetOdds12.o1)}</a>
                                 </div>
                                 <div className="col-6 p-2">
                                     <div className="bet-type-line-title">2</div>
-                                    <a className="changeable-odd">{calcOdd(matchData.betState.firstHalftimeDrawNoBetOdds12.o2)}</a>
+                                    <a className="changeable-odd" onClick={() => betOddSelect('firstHalftimeDrawNoBetOdds12', 'o2')}>{calcOdd(matchData.betState.firstHalftimeDrawNoBetOdds12.o2)}</a>
                                 </div>
                             </div>
                         </div>

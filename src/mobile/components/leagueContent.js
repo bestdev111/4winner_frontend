@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { betOddSelectAction } from "../../store/actions/betActions";
 import './styles/leagueContent.css'
@@ -24,7 +24,7 @@ function LeagueContent(props) {
                 return (<>
                     <span className="will-live">Live</span>
                     <span className="live-time">Today 09:00</span>
-                </>) 
+                </>)
             case 3:
                 return (<>
                     <span className="will-live">Live</span>
@@ -48,25 +48,36 @@ function LeagueContent(props) {
         e.stopPropagation()
         let obj = {
             matchId: matchData.matchId,
-            // betType: matchData.,
-            odds: []
+            homeTeam: matchData.homeTeam,
+            awayTeam: matchData.awayTeam,
+            homeScore: matchData.score.history[0][0].home,
+            awayScore: matchData.score.history[0][0].away,
+            betType: props.tipTypes,
+            odds: [matchData.odds.matchOdds102],
+            selectedOdds: param
         }
-        obj.odds.push(param)
-        func(param);
         dispatch(betOddSelectAction(betCollectList, obj));
-    }
-    const func = param => {
-        let temp = odds;
-        if (odds.includes(param)) {
-            temp = arrayRemove(temp, temp.indexOf(param))
-            setOdds([...temp]);
-        } else {
-            setOdds([...odds, param]);
-        }
     }
     const openDetailOdd = () => {
         props.openDetailOdd(true, props.matchId);
     }
+    const calcOdd = (param) => {
+        let value = param / 100;
+        return value.toFixed(2)
+    }
+    useEffect(() => {
+        let styleArr = [];
+        if (betCollectList && betCollectList.length > 0) {
+            betCollectList.forEach(item => {
+                if (item.matchId === matchData.matchId) {
+                    styleArr.push(item.selectedOdds);
+                }
+            });
+            setOdds(styleArr);
+        }else{
+            setOdds([]);
+        }
+    }, [betCollectList])
     return (
         <div className="match d-flex" onClick={openDetailOdd}>
             <div className="m_teams">
@@ -93,14 +104,20 @@ function LeagueContent(props) {
                 </div>
             </div>
             <div className="odds">
-                <div className="o3" onClick={(e) => betOddSelect(e, 1)}>
-                    <div className={odds.length > 0 && odds.includes(1) ? "changeable-odd odd-selected" : 'changeable-odd'}>{matchData.odds ? matchData.odds.matchOdds102.o1 / 100 : '-'}</div>
+                <div className="o3" onClick={(e) => betOddSelect(e, 'o1')}>
+                    <div className={odds.length > 0 && odds.includes('o1') ? 'changeable-odd odd-selected' : 'changeable-odd'}>
+                        {matchData.odds ? calcOdd(matchData.odds.matchOdds102.o1) : '-'}
+                    </div>
                 </div>
-                <div className="o3" onClick={(e) => betOddSelect(e, 0)}>
-                    <div className={odds.length > 0 && odds.includes(0) ? "changeable-odd odd-selected" : 'changeable-odd'}>{matchData.odds ? matchData.odds.matchOdds102.o0 / 100 : '-'}</div>
+                <div className="o3" onClick={(e) => betOddSelect(e, 'o0')}>
+                    <div className={odds.length > 0 && odds.includes('o0') ? 'changeable-odd odd-selected' : 'changeable-odd'}>
+                        {matchData.odds ? calcOdd(matchData.odds.matchOdds102.o0) : '-'}
+                    </div>
                 </div>
-                <div className="o3" onClick={(e) => betOddSelect(e, 2)}>
-                    <div className={odds.length > 0 && odds.includes(2) ? "changeable-odd odd-selected" : 'changeable-odd'}>{matchData.odds ? matchData.odds.matchOdds102.o2 / 100 : '-'}</div>
+                <div className="o3" onClick={(e) => betOddSelect(e, 'o2')}>
+                    <div className={odds.length > 0 && odds.includes('o2') ? 'changeable-odd odd-selected' : 'changeable-odd'}>
+                        {matchData.odds ? calcOdd(matchData.odds.matchOdds102.o2) : '-'}
+                    </div>
                 </div>
             </div>
         </div>

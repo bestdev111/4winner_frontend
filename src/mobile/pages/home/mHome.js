@@ -4,17 +4,10 @@ import { useEffectOnce } from 'usehooks-ts';
 import { MobileNavbar, FootballLeagueNavbar, MobileFooter, LeagueContent, OddDetailPanel } from '../../../mobile/components'
 import { getMatches, getAllMatches, getTopLeague, getLeagueSorts, getTypeList } from '../../../store/actions/mobileSportsActions';
 import { FadeInOut } from "../../../utils";
+import { tipTypesList } from '../../../utils/dataUtils'
 import './mHome.css'
-const tipTypesList = [
-    [1, 'X', 2],
-    [1, 'X', 2],
-    ['Over', 'Under'],
-    [1, 'X', 2],
-    [1, 'X', 2],
-    ['1X', 12, 'X2'],
-    ['Yes', 'No'],
-]
-function MHome({socket}) {
+
+function MHome() {
 
     const dispatch = useDispatch()
     const [tipTypes, setTipTypes] = useState();
@@ -54,7 +47,7 @@ function MHome({socket}) {
             setLeagueType(tempType);
         }
     }, [get_Matches])
-    useEffectOnce(()=> {
+    useEffectOnce(() => {
         dataFetch()
     })
     useEffect(() => { //football navbar with scroll
@@ -73,25 +66,24 @@ function MHome({socket}) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [hideSubNav])
 
-    const getTipTypes = (data) => {
-        setTipTypes(data);
+    const getTipTypes = (index) => {
+        setTipTypes(index);
     }
     const openDetailOdd = (index, id) => {
         setOpenOddDetailVal(index);
         setSelectMatchId(id);
     }
     const sportActiveFunc = (index, typeName) => {
-        console.log('typeName: ',typeName);
+        console.log('typeName: ', typeName);
         setSportActive(index);
         setSportTypeName(typeName);
     }
-    console.log('get_Matches');
     return (
         <>
             <MobileNavbar sportActiveFunc={sportActiveFunc} />
             {sportActive === 1 && hideSubNav ?
                 <FadeInOut show="true" duration={400}>
-                    <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} />
+                    <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} tipTypes={getTipTypes} />
                 </FadeInOut>
                 : <></>}
             <div className={sportActive === 1 ? 'm_content custom-top' : 'm_content'}>
@@ -107,6 +99,7 @@ function MHome({socket}) {
                             league === match.match.league ?
                                 <div key={i}>
                                     <LeagueContent
+                                        tipTypes={tipTypes}
                                         openDetailOdd={openDetailOdd}
                                         matchId={match.id}
                                         homeTeam={match.match.homeTeam}

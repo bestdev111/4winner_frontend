@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getTopLeague } from '../../store/actions/mobileSportsActions'
+import { tip_types } from '../../utils/dataUtils'
 import './styles/mobileNavbar.css'
 
-const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];
+// const tip_types = ['RM', 'Winner', 'O/U', 'HC', 'NG', 'DC', 'BS'];
 function FootballLeagueNavbar(props) {
     const [leagueActive, setLeagueActive] = useState(0);
     const [selected, setSelected] = useState(0);
@@ -14,6 +15,7 @@ function FootballLeagueNavbar(props) {
     }
     const tipTypes = (index) => {
         setSelected(index);
+        props.tipTypes(index);
     }
     useEffect(() => {
         props.parentCallback(selected);

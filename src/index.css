@@ -134,3 +134,6 @@ ul {
 .bold {
   font-weight: 700;
 }
+.Toastify__toast {
+  float: right !important;
+}

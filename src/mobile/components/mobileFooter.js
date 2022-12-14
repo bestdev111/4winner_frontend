@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './styles/mobileFooter.css'
 import ToastService from '../../service/toast.service';
 import Calculator from './calculator';
-import { betRemoveOddsAction } from "../../store/actions/betActions";
+import { betRemoveOddsAction, removeAllBet, placeMyBet } from "../../store/actions/betActions";
+import { FadeInOut } from '../../utils';
+import { betTypesList } from '../../utils/dataUtils'
 function MobileFooter(props) {
     const mFooterList = [
         { icon: 'fa fa-home', title: 'Home', },
@@ -18,6 +20,7 @@ function MobileFooter(props) {
         { icon: 'fa fa-file-o', title: 'Bet Slip' },
         { icon: 'fa fa-heartbeat', title: 'My Bets' },
     ]
+    const dispatch = useDispatch()
     const [openCalc, setOpenCalc] = useState(false);
     const [numActive, setNumActive] = useState(0);
     const [betSlipNum, setBetSlipNum] = useState(0);
@@ -33,7 +36,7 @@ function MobileFooter(props) {
     const [totalStake, setTotalStake] = useState(temp1.toFixed(2));
     const [tax, setTax] = useState(temp2.toFixed(2));
     const [stakeBet, setStakeBet] = useState(temp2.toFixed(2));
-    const [numBet, setNumBet] = useState(Number(0));
+    const [numBet, setNumBet] = useState();
     const [maxWinning, setMaxWinning] = useState(temp2.toFixed(2));
     const [confirmVal, setConfirmVal] = useState(false);
     let footerList = isAuth ? mFooterListAuthor : mFooterList;
@@ -65,34 +68,44 @@ function MobileFooter(props) {
         }
     }
     useEffect(() => {
-        let num = 0;
-        if (betCollectList.length > 0) {
-            betCollectList.forEach(list => {
-                num = num + list.odds.length;
-            });
+        if (betCollectList && betCollectList.length > 0) {
+            setNumBet(betCollectList.length);
+        } else {
+            setNumBet(0);
         }
-        setNumBet(num);
-        let tempStack = totalStake / num
-        setStakeBet(tempStack.toFixed(2))
+        let tempStack = totalStake / numBet
+        setStakeBet(tempStack.toFixed(2));
     }, [betCollectList])
-    
-    useEffect(()=> {
+
+    useEffect(() => {
         let tempStack = totalStake / numBet
         setStakeBet(tempStack.toFixed(2))
     }, [totalStake])
+
     // bet slip board
     const calcStake = (param) => {
         let temp = param === 1 ? Number(totalStake) * 1 + 1 : totalStake > 1 ? Number(totalStake) * 1 - 1 : 1;
         setTotalStake(temp.toFixed(2));
     }
-    const placeBet = () => {
+    //bet 
+    const confirmBet = () => {
         if (!isAuth) {
             ToastService("Please Login", 'error');
             setConfirmVal(false);
         } else {
-            ToastService("Bet Success!", 'success');
+            dispatch(placeMyBet(betCollectList));
+            setConfirmVal(false);
+            oddsReset();
         }
     }
+    const placeBet = () => {
+        if (numBet === 0) {
+            ToastService("Please Add Bet!", 'info');
+            return;
+        }
+        setConfirmVal(true)
+    }
+    //odd manage
     const oddsReset = () => {
         setOpenBetModal(true);
         var temp1 = 1
@@ -101,16 +114,26 @@ function MobileFooter(props) {
         setTax(temp2.toFixed(2));
         setStakeBet(temp2.toFixed(2))
         setMaxWinning(temp2.toFixed(2))
+        dispatch(removeAllBet());
     }
-    const removeBetOdd =(matchId)=> {
-        console.log('remove it');
-        betRemoveOddsAction(betCollectList, matchId)
+    const removeBetOdd = (item) => {
+        dispatch(betRemoveOddsAction(betCollectList, item))
     }
-    const onClickOutside =(param)=> {
+    //
+    const onClickOutside = (param) => {
         setOpenCalc(false);
-        if(param) setTotalStake(param);
+        if (param) setTotalStake(param);
     }
-    console.log('Footer ===>', betCollectList);
+    const objFunc = (obj, index, betType) => {
+        for (let key in obj) {
+            if (key === index && obj.hasOwnProperty(index)) {
+                var value = obj[index];
+                value = value / 100
+                return value.toFixed(2);
+            }
+        }
+        return null
+    }
     return (
         <>
             {!openBetModal ?
@@ -135,56 +158,60 @@ function MobileFooter(props) {
                                 onClick={() => setTab(false)}
                             >SYSTEM</p>
                         </div>
-                        <div className='tips'>
-                            <div>{/* virtual data */}
-                                <div className='tip'>
-                                    <div className='d-flex justify-content-center'>
-                                        {!tab ? <span className='btn-bank'>B</span> : <span></span>}
-                                    </div>
-                                    <div className='float'>
-                                        <div className='tip-row'>
-                                            <div className="tip-col middle-col bold">Ferroviaria SP (F)</div>
-                                            <div className="tip-col right-col bold">5.00</div>
-                                        </div>
-                                        <div className='tip-row'>
-                                            <div className="tip-col middle-col">Rest of Match</div>
-                                            <div className="tip-col right-col bold">
-                                                <div className=" currentscore-green">4-4</div>
+                        {betCollectList !== undefined && betCollectList !== [] ?
+                            <div className='tips'>
+                                {betCollectList.map((item, index) =>
+                                    <div className='d-flex' key={index}>
+                                        <div className='tip'>
+                                            <div className='d-flex justify-content-center'>
+                                                {!tab ? <span className='btn-bank'>B</span> : <span></span>}
+                                            </div>
+                                            <div className='tip-body'>
+                                                <div className='tip-row'>
+                                                    <div className="tip-col middle-col bold">{item.selectedOdds === 'o0' ? 'Draw' : item.selectedOdds === 'o1' ? item.homeTeam : item.awayTeam}</div>
+                                                    <div className="tip-col right-col bold">{objFunc(item.odds[0], item, item.betType)}</div>
+                                                </div>
+                                                <div className='tip-row'>
+                                                    <div className="tip-col middle-col">{betTypesList[item.betType].title}</div>
+                                                    <div className="tip-col right-col bold">
+                                                        <div className=" currentscore-green">{item.homeScore}:{item.awayScore}</div>
+                                                    </div>
+                                                </div>
+                                                <div className='tip-row'>
+                                                    <div className="tip-col middle-col">{item.homeTeam} - {item.awayTeam}</div>
+                                                    <div className="tip-col right-col bold">
+                                                        <div className=" currentscore-green"> 86'</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className='tip-row'>
-                                            <div className="tip-col middle-col">Ferroviaria SP (F) - SE Palmeiras SP(F)</div>
-                                            <div className="tip-col right-col bold">
-                                                <div className=" currentscore-green"> 86'</div>
-                                            </div>
+                                        <p className='remove-btn' onClick={() => removeBetOdd(item)}><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></p>
+                                    </div>
+                                )}
+                                {!tab ?
+                                    <div className='combinations'>
+                                        <div>Combinations: </div>
+                                        <div>
+                                            <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
+                                            <label className='bold pl-2' htmlFor='cbCombination_0'>1 Out of 4 = 4 bets</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
+                                            <label className='bold pl-2' htmlFor='cbCombination_0'>2 Out of 4 = 6 bets</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
+                                            <label className='bold pl-2' htmlFor='cbCombination_0'>3 Out of 4 = 4 bets</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
+                                            <label className='bold pl-2' htmlFor='cbCombination_0'>4 Out of 4 = 1 bets</label>
                                         </div>
                                     </div>
-                                </div>
-                                <p className='remove-btn' onClick={removeBetOdd}><i className="fa fa-times-circle-o fa-2x" aria-hidden="true"></i></p>
+                                    : <></>
+                                }
                             </div>
-                            {!tab ?
-                                <div className='combinations'>
-                                    <div>Combinations: </div>
-                                    <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
-                                        <label className='bold pl-2' htmlFor='cbCombination_0'>1 Out of 4 = 4 bets</label>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
-                                        <label className='bold pl-2' htmlFor='cbCombination_0'>2 Out of 4 = 6 bets</label>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
-                                        <label className='bold pl-2' htmlFor='cbCombination_0'>3 Out of 4 = 4 bets</label>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id='cbCombination_0' className='cbCombination' value='0' />
-                                        <label className='bold pl-2' htmlFor='cbCombination_0'>4 Out of 4 = 1 bets</label>
-                                    </div>
-                                </div>
-                                : <></>
-                            }
-                        </div>
+                            : null}
                     </div>
                     <div className='oddmodal-footer'>
                         <div className='betslip-stake'>
@@ -216,22 +243,24 @@ function MobileFooter(props) {
                                     <span className="value bold">{maxWinning}</span>
                                 </div>
                             </div>
-                            <p className="place-bet bold" onClick={()=> setConfirmVal(true)}>Place bet</p>
+                            <p className="place-bet bold" onClick={placeBet}>Place bet</p>
                         </div>
                     </div>
                 </div>
-                : <></>
+                : null
             }
-            {confirmVal ? 
-                <div className='bet-confirm-modal'>
-                    <div className='opacity-back'>
-                        <div className='bet-confirm-modal bet-confirm'>
-                            <a className='btn btn-success m-4' onClick={placeBet}>Confirm</a>
-                            <a className='btn btn-danger m-4' onClick={() => setConfirmVal(false)}>Cancel</a>
+            {confirmVal ?
+                <FadeInOut show="true" duration={800}>
+                    <div className='bet-confirm-modal'>
+                        <div className='opacity-back'>
+                            <div className='bet-confirm-modal bet-confirm'>
+                                <a className='btn btn-success m-4' onClick={confirmBet}>Confirm</a>
+                                <a className='btn btn-danger m-4' onClick={() => setConfirmVal(false)}>Cancel</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            : null}
+                </FadeInOut>
+                : null}
             <Calculator show={openCalc} onClickOutside={onClickOutside} />
             {/* main footer bar */}
             <div className="m-footer pl-5 pr-5">

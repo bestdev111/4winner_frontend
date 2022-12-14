@@ -5,7 +5,7 @@
     overflow: auto;
     height: 100px;
     padding-bottom: 3px;
-    z-index: 7 !important;
+    z-index: 9 !important;
 }
 
 .sports-type {
@@ -55,6 +55,7 @@
 .user-info span {
     color: #c96141;
     font-size: 12px;
+    line-height: 13px;
 }
 
 .m-navbar .top-nav {

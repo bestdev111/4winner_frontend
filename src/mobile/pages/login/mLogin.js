@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, MobileFooter } from '../../../mobile/components'
 import { loginUser } from '../../../store/actions/authActions';
