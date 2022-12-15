@@ -22,11 +22,16 @@ const topLeague = [
     { m_icon: '', type: 'World Cup Group G' },
     { m_icon: '', type: 'World Cup Group H' },
 ]
-
+const config = {
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }
+};
 export const getAllMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL +'/sports/getAllMatches');
+            const response = await axios.get(ServerURL + '/sports/getAllMatches', config);
             return dispatch({
                 type: GET_ALL_MATCHES,
                 payload: response
@@ -42,7 +47,7 @@ export const getAllMatches = () => {
 export const getMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches');
+            const response = await axios.get(ServerURL + '/sports/getMatches', config);
             return dispatch({
                 type: GET_MATCHES,
                 payload: response
@@ -58,7 +63,7 @@ export const getMatches = () => {
 export const getTypeList = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches');
+            const response = await axios.get(ServerURL + '/sports/getMatches', config);
             return dispatch({
                 type: GET_TYPE_LIST,
                 payload: SportTypeList
@@ -74,7 +79,7 @@ export const getTypeList = () => {
 export const getTopLeague = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches');
+            const response = await axios.get(ServerURL + '/sports/getMatches', config);
             return dispatch({
                 type: GET_TOP_LEAGUE,
                 payload: topLeague
