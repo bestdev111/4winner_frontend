@@ -94,11 +94,12 @@ function MobileFooter(props) {
             setConfirmVal(false);
         } else {
             const betState = {
-                initialStack: totalStake,
+                initialStake: totalStake,
                 tax: tax,
-                stakeBet: stakeBet,
+                stakeBet: (totalStake / numBet).toFixed(2),
                 maxWinning: maxWinning
             }
+            console.log('==>',betState);
             dispatch(placeMyBet(betCollectList, betState));
             setConfirmVal(false);
             oddsReset();
