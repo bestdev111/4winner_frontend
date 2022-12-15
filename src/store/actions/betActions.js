@@ -1,5 +1,5 @@
 import {
-    BET_SELECT, GET_MY_BETS, MY_BETS, GET_ERRORS
+    BET_SELECT, GET_MY_BETS, NEW_BETS, GET_ERRORS
 } from '../../store/actions/actionTypes';
 import axios from 'axios';
 import { ServerURL } from '../../utils'
@@ -63,23 +63,32 @@ export const removeAllBet = () => {
         });
     }
 }
-export const getMyBetData = () => {
+export const getMyBet = () => {
     return async dispatch => {
-        return dispatch({
-            type: GET_MY_BETS,
-            payload: {
-                myBetData: ''
-            }
-        });
+        try {
+            const response = await axios.get(ServerURL + '/betting/getmybet');
+            return dispatch({
+                type: GET_MY_BETS,
+                payload: {
+                    myBetData: response.data.betData
+                }
+            });
+        } catch (error) {
+            ToastService('error!', 'error')
+            return dispatch({
+                type: GET_ERRORS,
+                payload: error
+            });
+        }
     }
 }
 export const placeMyBet = (betsData, betState) => {
     return async dispatch => {
         try {
-            const response = await axios.post(ServerURL + '/betting/mybets', {betsData, betState});
+            const response = await axios.post(ServerURL + '/betting/newbet', {betsData, betState});
             ToastService('Successfully Bet!', 'success')
             return dispatch({
-                type: MY_BETS,
+                type: NEW_BETS,
                 payload: {
                     message: 'success'
                 }

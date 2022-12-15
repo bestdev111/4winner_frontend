@@ -31,4 +31,4 @@ export const SET_LOCALIZE = 'SET_LOCALIZE';
 //betActions
 export const BET_SELECT = 'BET_SELECT';
 export const GET_MY_BETS = 'GET_MY_BETS';
-export const MY_BETS = 'MY_BETS';
+export const NEW_BETS = 'NEW_BETS';

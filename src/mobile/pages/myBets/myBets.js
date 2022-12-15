@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { MobileNavbar, SubMobileNavbar, MobileFooter, LeagueContent } from '../../../mobile/components'
-import { getMyBetData } from '../../../store/actions/betActions'
+import { MobileNavbar, MobileFooter } from '../../../mobile/components'
+import { getMyBet } from '../../../store/actions/betActions'
+import { GetTime } from '../../../utils';
 import './myBets.css'
 
 function MyBets() {
@@ -9,9 +10,10 @@ function MyBets() {
     const [openBetModal, setOpenBetModal] = useState(true);
     // const [numBet, setNumBet] = useState(Number(0));
     const myBetData = useSelector(state => state.betReducers.myBetData);
-    useEffect(()=> {
-        dispatch(getMyBetData());
-    },[])
+    useEffect(() => {
+        dispatch(getMyBet());
+    }, [])
+    console.log('myBetData', myBetData);
     return (
         <>
             <MobileNavbar />
@@ -38,15 +40,41 @@ function MyBets() {
                     <div className='myaccount-table'>
                         <div className='match-header'>
                             <div className='col-3 text-center'>Type</div>
-                            <div className='col-3 text-center'>Date</div>
-                            <div className='col-3 text-center'>Stake</div>
+                            <div className='col-4 text-center'>Date</div>
+                            <div className='col-2 text-center'>Stake</div>
                             <div className='col-3 text-center'>Winnings</div>
                         </div>
-                        <div className='match-body p-3'>
-                            {myBetData.length > 0 ? <div>
-                                Bet List
-                                </div>
-                            :   <div> NO Data Found</div>}
+                        <div className='match-body'>
+                            {myBetData !== null && myBetData.length > 0 ?
+                                myBetData.map((item, index) =>
+                                    <div key={index} className={item.state === 0 ? 'bet-result-wait' : item.state === 1 ? 'bet-result-win' : 'bet-result-lose'}>
+                                        <div className='col-3 text-center p-2'>{item.betSystem}</div>
+                                        <div className='col-4 text-center p-2'>{GetTime(item.date)}</div>
+                                        <div className='col-2 text-center p-2'>{item.initialStake.toFixed(2)}</div>
+                                        <div className='col-3 text-center p-2'>
+                                            {item.state === 0 ? <p>Result Awaited</p>
+                                                : item.state === 1 ?
+                                                <>
+                                                    <div className='d-flex justify-content-center'>
+                                                        <p>{item.maxWinning}</p>
+                                                    </div>
+                                                    <div className='d-flex justify-content-center'>
+                                                        <p>Win</p>
+                                                    </div>
+                                                </>
+                                                : <>
+                                                    <div className='d-flex justify-content-center'>
+                                                        <p>{item.maxWinning}</p>
+                                                    </div>
+                                                    <div className='d-flex justify-content-center'>
+                                                        <p>Lose</p>
+                                                    </div>
+                                                </>
+                                            }
+                                        </div>
+                                    </div>
+                                )
+                                : <div> NO Data Found</div>}
                         </div>
                         <div className='match-footer text-center'></div>
                     </div>

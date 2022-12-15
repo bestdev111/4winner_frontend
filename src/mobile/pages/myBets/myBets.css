@@ -1,5 +1,6 @@
 .transactions {
     overflow-y: auto;
+    margin-top: 100px;
 }
 .transactions>.status {
     padding: 10px;
@@ -26,5 +27,30 @@
     padding: 5px 0;
 }
 .match-header div {
+    padding: 3px;
+}
+.match-body > div {
+    border-bottom: solid 1px #28343b;
+}
+.bet-result-wait {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 3px;
+}
+.bet-result-win {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: white;
+    background-color: #057433;
+    padding: 3px;
+}
+.bet-result-lose {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: white;
+    background-color: #702c2c;
     padding: 3px;
 }
