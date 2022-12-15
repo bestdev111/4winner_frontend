@@ -32,7 +32,7 @@ function MHome(props) {
         dispatch(getLeagueSorts())
         dispatch(getTypeList())
         clearTimeout(timer)
-        setTimer(setTimeout(dataFetch, 10000))
+        setTimer(setTimeout(dataFetch, 2000))
     }
     useEffect(() => {
         if (!isMounted) {
@@ -98,11 +98,21 @@ function MHome(props) {
         setSportTypeName(typeName);
     }
     const getTime = (param) => {
-        let timestamp = new Date(param.timestamp).getTime();
-        let virtualStartTime = new Date(param.virtualStartTime).getTime();
-        let t = (timestamp - virtualStartTime) / (60 * 1000);
-        return Math.floor(t).toFixed(0);
+        let timestamp = new Date(param.betState.timestamp).getTime();
+        let virtualStartTime = new Date(param.betState.virtualStartTime).getTime();
+        let t;
+        if(virtualStartTime !== 0){
+            t = (timestamp - virtualStartTime) / (60 * 1000);
+            t = Math.round(t - 1).toFixed(0)
+        }else{
+            // t = new Date(param.europeanStartTime).toLocaleTimeString('en-US')
+            let h = new Date(param.europeanStartTime).getUTCHours()
+            let m = new Date(param.europeanStartTime).getUTCMinutes() === 0 ? '00' : new Date(param.europeanStartTime).getUTCMinutes()
+            t = h + ':' + m; 
+        }
+        return t;
     }
+    console.log('=>', get_Matches);
     return (
         <>
             <MobileNavbar sportActiveFunc={sportActiveFunc} />
@@ -136,7 +146,7 @@ function MHome(props) {
                                         betState={match.betState}
                                         isTop={match.isTop}
                                         odds={match.betState}
-                                        time={getTime(match.betState)}
+                                        time={getTime(match)}
                                     />
                                 </div>
                                 : null
@@ -161,7 +171,7 @@ function MHome(props) {
                                         betState={match.betState}
                                         isTop={match.isTop}
                                         odds={match.betState}
-                                        time={getTime(match.betState)}
+                                        time={getTime(match)}
                                     />
                                 </div>
                                 : null

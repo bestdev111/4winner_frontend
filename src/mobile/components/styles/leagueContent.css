@@ -26,7 +26,7 @@
     font-size: 10px;
     color: #777;
     margin-left: -10px;
-    line-height: 11px;
+    line-height: 13px;
 }
 
 .m_body .match .m_teams .time .halftime,
@@ -119,7 +119,7 @@
 .match .m_teams .time>.not-will-live,
 .will-live {
     color: #fff;
-    padding: 2px 12px 2px 8px;
+    padding: 1px 12px 1px 8px;
     border-radius: 0 8px 8px 0;
 }
 
@@ -135,4 +135,8 @@
     background: #e6c12c !important;
     box-shadow: inset 0 0 0 1px #fc0 !important;
 }
-
+.add-min {
+    margin-top: -3px;
+    position: absolute;
+    font-size: 8px;
+}

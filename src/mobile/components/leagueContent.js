@@ -12,13 +12,13 @@ function LeagueContent(props) {
     const matchStatus = () => {
         switch (matchData.matchState) {
             case 0:
-                return <span className="not-will-live">Today 09:00</span>
+                return <span className="not-will-live">Today {matchData.time}</span>
             case 1:
-                return <span className="will-live">Today 09:00</span>
+                return <span className="will-live">Today {matchData.time}</span>
             case 2:
                 return (<>
                     <span className="will-live">Live</span>
-                    <span className="live-time">Today 09:00</span>
+                    <span className="live-time">Today {matchData.time}</span>
                 </>)
             case 3:
                 return (<>
@@ -33,7 +33,14 @@ function LeagueContent(props) {
             case 5:
                 return (<>
                     <span className="live">Live</span>
-                    <span className="live-time">2. Half {matchData.time !== null ? matchData.time: null}{"'"}</span>
+                    <span className="live-time d-flex">2. Half {' '}
+                        {matchData.time !== null ? 
+                            (matchData.time > 90 ? 
+                                <p className="pl-1 pr-2">90<span className="mb-3 add-min">+{matchData.time - 90}{"'"}</span></p>
+                            :  matchData.time + "'")
+                        : null
+                        }
+                    </span>
                 </>)
             default:
                 break;

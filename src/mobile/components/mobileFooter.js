@@ -270,8 +270,8 @@ function MobileFooter(props) {
                 : null}
             <Calculator show={openCalc} onClickOutside={onClickOutside} />
             {/* main footer bar */}
-            <div className="m-footer pl-5 pr-5">
-                <div className='d-flex justify-content-between'>
+            <div className="m-footer px-2">
+                <div className='d-flex justify-content-around'>
                     {
                         footerList.map((item, index) =>
                             <div className='item' key={index} onClick={() => goActive(index)}>
