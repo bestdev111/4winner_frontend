@@ -1,37 +1,16 @@
 import axios from 'axios';
 import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE, GET_ERRORS } from './actionTypes';
 import { SportTypeList, ServerURL } from '../../utils'
-import ToastService from '../../service/toast.service';
-const topLeague = [
-    { m_icon: 'assets/images/micons/champions_league1.png', type: 'CHAMPIONS LEAGUE' },
-    { m_icon: 'assets/images/micons/europe_league.png', type: 'EUROPA LEAGUE' },
-    { m_icon: 'assets/images/micons/premier_league.png', type: 'PREMIER LEAGUE' },
-    { m_icon: 'assets/images/micons/la_liga.png', type: 'LA LIGA' },
-    { m_icon: 'assets/images/micons/bundesliga.png', type: '1.BUNDESLIGA' },
-    { m_icon: 'assets/images/micons/serie_a.png', type: 'SERIE A' },
-    { m_icon: 'assets/images/micons/league_1.png', type: 'LEAGUE 1' },
-    { m_icon: 'assets/images/micons/super_lig.png', type: 'SUPER LIG' },
-    { m_icon: 'assets/images/micons/eredivisie.png', type: 'EREDIVISIE' },
-    { m_icon: 'assets/images/micons/liga_portugal.png', type: 'LIGA PORTUGAL' },
-    { m_icon: '', type: 'World Cup Group A' },
-    { m_icon: '', type: 'World Cup Group B' },
-    { m_icon: '', type: 'World Cup Group C' },
-    { m_icon: '', type: 'World Cup Group D' },
-    { m_icon: '', type: 'World Cup Group E' },
-    { m_icon: '', type: 'World Cup Group F' },
-    { m_icon: '', type: 'World Cup Group G' },
-    { m_icon: '', type: 'World Cup Group H' },
-]
-const config = {
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-};
+
+const getMatchUrl = "https://m.4winners.bet/Home/GetMatches?sportTypeId=1&betradarCategoryId=0&leagueName=&matchState=home&startIndex=0&orderByLeague=false"
+const getAllMatchUrl = "https://m.4winners.bet/Home/GetAllMatches";
+const leagueUrl = "https://m.4winners.bet/Home/GetLeagueSorts";
+const topUrl = "https://m.4winners.bet/Home/GetTopLeages";
+
 export const getAllMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getAllMatches', config);
+            const response = await axios.get(getAllMatchUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36' } });
             return dispatch({
                 type: GET_ALL_MATCHES,
                 payload: response
@@ -47,7 +26,7 @@ export const getAllMatches = () => {
 export const getMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches', config);
+            const response = await axios.get(getMatchUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36' } });
             return dispatch({
                 type: GET_MATCHES,
                 payload: response
@@ -63,7 +42,7 @@ export const getMatches = () => {
 export const getTypeList = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches', config);
+            const response = await axios.get(leagueUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36' } });
             return dispatch({
                 type: GET_TYPE_LIST,
                 payload: SportTypeList
@@ -79,10 +58,10 @@ export const getTypeList = () => {
 export const getTopLeague = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches', config);
+            const response = axios.get(topUrl, { headers: { 'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Mobile Safari/537.36' } });
             return dispatch({
                 type: GET_TOP_LEAGUE,
-                payload: topLeague
+                payload: response
             });
         } catch (error) {
             return dispatch({

@@ -85,13 +85,17 @@ function LeagueContent(props) {
         if (matchData !== null){
             if(index === 0 ){
                 matchData.redCard.forEach(item => {
-                    if(item.home > 0) 
-                        return <div className="red-card">{matchData.redCard.home}</div>
+                    if(item.home > 0) {
+                        console.log('home==>', item);
+                        return <div className="red-card">{item.home}</div>
+                    }
                 })
             }else{
                 matchData.redCard.forEach(item => {
-                    if(item.away > 0) 
-                        return <div className="red-card">{matchData.redCard.away}</div>
+                    if(item.away > 0) {
+                        console.log('away==>', item);
+                        return <div className="red-card">{item.away}</div>
+                    }
                 })
             }
         }

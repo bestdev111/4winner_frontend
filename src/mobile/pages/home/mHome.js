@@ -32,7 +32,7 @@ function MHome(props) {
         dispatch(getLeagueSorts())
         dispatch(getTypeList())
         clearTimeout(timer)
-        setTimer(setTimeout(dataFetch, 2000))
+        setTimer(setTimeout(dataFetch, 5000))
     }
     useEffect(() => {
         if (!isMounted) {
