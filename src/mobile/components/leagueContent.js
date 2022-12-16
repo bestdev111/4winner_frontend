@@ -12,13 +12,13 @@ function LeagueContent(props) {
     const matchStatus = () => {
         switch (matchData.matchState) {
             case 0:
-                return <span className="not-will-live">Today {matchData.time}</span>
+                return <span className="not-will-live">{matchData.date} {matchData.time}</span>
             case 1:
-                return <span className="will-live">Today {matchData.time}</span>
+                return <span className="will-live">{matchData.date} {matchData.time}</span>
             case 2:
                 return (<>
                     <span className="will-live">Live</span>
-                    <span className="live-time">Today {matchData.time}</span>
+                    <span className="live-time">{matchData.date} {matchData.time}</span>
                 </>)
             case 3:
                 return (<>

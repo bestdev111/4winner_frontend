@@ -103,7 +103,8 @@ function MHome(props) {
         let t;
         if(virtualStartTime !== 0){
             t = (timestamp - virtualStartTime) / (60 * 1000);
-            t = Math.round(t - 1).toFixed(0)
+            console.log(t);
+            t = Math.round(t - 1.6).toFixed(0)
         }else{
             const dateString = param.europeanStartTime;
             const userOffset = (new Date().getTimezoneOffset()) / 60;
@@ -114,6 +115,26 @@ function MHome(props) {
             t = h + ':' + m;
         }
         return t;
+    }
+    const getDate = (param)=> {
+        let date;
+        const dateString = param.europeanStartTime;
+        const userOffset = (new Date().getTimezoneOffset()) / 60;
+        const localDate = new Date(dateString);
+        const utcDate = new Date(localDate.getTime() - (userOffset + 1) * 60 * 60 * 1000);
+        const todayDay = new Date().getDate();
+        const matchDay = new Date(utcDate).getDate(); 
+        const matchMonth = new Date(utcDate).getMonth(); 
+        if(todayDay === matchDay){
+            date = 'Today'
+        }
+        if (matchDay === todayDay + 1){
+            date = 'Tomorrow'
+        }
+        if (matchDay > todayDay + 1){
+            date = matchDay + '.'+ matchMonth
+        }
+        return date;
     }
     return (
         <>
@@ -149,6 +170,7 @@ function MHome(props) {
                                         isTop={match.isTop}
                                         odds={match.betState}
                                         time={getTime(match)}
+                                        date={getDate(match)}
                                     />
                                 </div>
                                 : null
@@ -174,6 +196,7 @@ function MHome(props) {
                                         isTop={match.isTop}
                                         odds={match.betState}
                                         time={getTime(match)}
+                                        date={getDate(match)}
                                     />
                                 </div>
                                 : null
