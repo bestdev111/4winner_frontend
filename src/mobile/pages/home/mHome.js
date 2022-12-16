@@ -105,14 +105,16 @@ function MHome(props) {
             t = (timestamp - virtualStartTime) / (60 * 1000);
             t = Math.round(t - 1).toFixed(0)
         }else{
-            // t = new Date(param.europeanStartTime).toLocaleTimeString('en-US')
-            let h = new Date(param.europeanStartTime).getUTCHours()
-            let m = new Date(param.europeanStartTime).getUTCMinutes() === 0 ? '00' : new Date(param.europeanStartTime).getUTCMinutes()
-            t = h + ':' + m; 
+            const dateString = param.europeanStartTime;
+            const userOffset = (new Date().getTimezoneOffset()) / 60;
+            const localDate = new Date(dateString);
+            const utcDate = new Date(localDate.getTime() - (userOffset + 1) * 60 * 60 * 1000);
+            const h = new Date(utcDate).getHours();
+            const m = new Date(utcDate).getMinutes() === 0 ? '00' : new Date(utcDate).getMinutes();
+            t = h + ':' + m;
         }
         return t;
     }
-    console.log('=>', get_Matches);
     return (
         <>
             <MobileNavbar sportActiveFunc={sportActiveFunc} />
