@@ -8,6 +8,8 @@ function LeagueContent(props) {
     const dispatch = useDispatch();
     const matchData = props;
     const [odds, setOdds] = useState([]);
+    const [redCardHome, setRedCardHome] = useState(0);
+    const [redCardAway, setRedCardAway] = useState(0);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const matchStatus = () => {
         switch (matchData.matchState) {
@@ -81,25 +83,22 @@ function LeagueContent(props) {
             setOdds([]);
         }
     }, [betCollectList])
-    const redCardFunc = (index) => {
+    useEffect(() => {
         if (matchData !== null){
-            if(index === 0 ){
-                matchData.redCard.forEach(item => {
-                    if(item.home > 0) {
-                        console.log('home==>', item);
-                        return <div className="red-card">{item.home}</div>
-                    }
-                })
-            }else{
-                matchData.redCard.forEach(item => {
-                    if(item.away > 0) {
-                        console.log('away==>', item);
-                        return <div className="red-card">{item.away}</div>
-                    }
-                })
-            }
+            matchData.redCard.forEach(item => {
+                if(item.home > 0) {
+                    console.log('home==>', item);
+                    setRedCardHome(item.home);
+                }
+            })
+            matchData.redCard.forEach(item => {
+                if(item.away > 0) {
+                    console.log('away==>', item);
+                    setRedCardAway(item.away);
+                }
+            })
         }
-    }
+    }, [matchData])
     return (
         <div className="match d-flex" onClick={openDetailOdd}>
             <div className="m_teams">
@@ -109,7 +108,10 @@ function LeagueContent(props) {
                 <div className="d-flex team">
                     <div className="team_name">
                         {matchData.homeTeam}
-                        {redCardFunc(0)}
+                        {redCardHome > 0? 
+                            <div className="red-card">{redCardHome}</div>
+                            :null
+                        }
                     </div>
                     <div className="wrapper">
                         <div className="score">{matchData.score.history[0][0].home}</div>
@@ -118,8 +120,10 @@ function LeagueContent(props) {
                 <div className="d-flex team">
                     <div className="team_name">
                         {matchData.awayTeam}
-                        {redCardFunc(1)}
-                        {/* {matchData.redCards ? <div className="red-card">{matchData.redCard2}</div> : null} */}
+                        {redCardAway > 0 ?
+                            <div className="red-card">{redCardAway}</div>
+                            : null
+                        }
                     </div>
                     <div className="wrapper">
                         <div className="score">{matchData.score.history[0][0].away}</div>

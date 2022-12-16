@@ -103,8 +103,9 @@ function MHome(props) {
         let t;
         if(virtualStartTime !== 0){
             t = (timestamp - virtualStartTime) / (60 * 1000);
-            console.log(t);
-            t = (t-1).toFixed(0)
+            let y = (timestamp / 60000) - (virtualStartTime / 60000)
+            console.log(t, y);
+            t = t.toFixed(0)
         }else{
             const dateString = param.europeanStartTime;
             const userOffset = (new Date().getTimezoneOffset()) / 60;
