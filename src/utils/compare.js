@@ -21,9 +21,9 @@ const setOddsUpdate = (prev, next) => {
                 // console.log(idx, key, prevOdds.matchOdds102[key], nextOdds.matchOdds102[key])
                 next[idx].betState.matchOdds102['u' + keyIdx] = 0
                 if (prevOdds.timestamp !== nextOdds.timestamp) {
-                    console.log(idx, 'timestamps different')
+                    // console.log(idx, 'timestamps different')
                     next[idx].betState.matchOdds102['u' + keyIdx] = compare(prevOdds.matchOdds102[key], nextOdds.matchOdds102[key])
-                    console.log(next[idx].match.awayTeam, next[idx].match.homeTeam, 'changed? ', next[idx].betState.matchOdds102['u' + keyIdx])
+                    // console.log(next[idx].match.awayTeam, next[idx].match.homeTeam, 'changed? ', next[idx].betState.matchOdds102['u' + keyIdx])
                 }
                 else if(prevOdds.timestamp === nextOdds.timestamp){
                     // console.log(idx, 'timestamps same')
