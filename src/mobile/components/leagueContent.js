@@ -25,7 +25,7 @@ function LeagueContent(props) {
             case 3:
                 return (<>
                     <span className="will-live">Live</span>
-                    <span className="live-time">{matchData.time !== null ? matchData.time: null}{"'"}</span>
+                    <span className="live-time">{matchData.time !== null ? matchData.time : null}{"'"}</span>
                 </>)
             case 4:
                 return (<>
@@ -36,11 +36,11 @@ function LeagueContent(props) {
                 return (<>
                     <span className="live">Live</span>
                     <span className="live-time d-flex">2. Half {' '}
-                        {matchData.time !== null ? 
-                            (matchData.time > 90 ? 
+                        {matchData.time !== null ?
+                            (matchData.time > 90 ?
                                 <p className="pl-1 pr-2">90<span className="mb-3 add-min">+{matchData.time - 90}{"'"}</span></p>
-                            :  matchData.time + "'")
-                        : null
+                                : matchData.time + "'")
+                            : null
                         }
                     </span>
                 </>)
@@ -79,20 +79,20 @@ function LeagueContent(props) {
                 }
             });
             setOdds(styleArr);
-        }else{
+        } else {
             setOdds([]);
         }
     }, [betCollectList])
     useEffect(() => {
-        if (matchData !== null){
+        if (matchData !== null) {
             matchData.redCard.forEach(item => {
-                if(item.home > 0) {
+                if (item.home > 0) {
                     console.log('home==>', item);
                     setRedCardHome(item.home);
                 }
             })
             matchData.redCard.forEach(item => {
-                if(item.away > 0) {
+                if (item.away > 0) {
                     console.log('away==>', item);
                     setRedCardAway(item.away);
                 }
@@ -108,9 +108,9 @@ function LeagueContent(props) {
                 <div className="d-flex team">
                     <div className="team_name">
                         {matchData.homeTeam}
-                        {redCardHome > 0? 
+                        {redCardHome > 0 ?
                             <div className="red-card">{redCardHome}</div>
-                            :null
+                            : null
                         }
                     </div>
                     <div className="wrapper">
@@ -132,18 +132,30 @@ function LeagueContent(props) {
             </div>
             <div className="odds">
                 <div className="o3" onClick={(e) => betOddSelect(e, 'o1')}>
-                    <div className={odds.length > 0 && odds.includes('o1') ? 'changeable-odd odd-selected' : 'changeable-odd'}>
-                        {matchData.odds ? calcOdd(matchData.odds.matchOdds102.o1) : '-'}
+                    <div className={
+                        odds.length > 0 && odds.includes('o1')
+                            ? (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                            : (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                    }>
+                        {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o1) : '-'}
                     </div>
                 </div>
                 <div className="o3" onClick={(e) => betOddSelect(e, 'o0')}>
-                    <div className={odds.length > 0 && odds.includes('o0') ? 'changeable-odd odd-selected' : 'changeable-odd'}>
-                        {matchData.odds ? calcOdd(matchData.odds.matchOdds102.o0) : '-'}
+                    <div className={
+                        odds.length > 0 && odds.includes('o0')
+                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                    }>
+                        {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o0) : '-'}
                     </div>
                 </div>
                 <div className="o3" onClick={(e) => betOddSelect(e, 'o2')}>
-                    <div className={odds.length > 0 && odds.includes('o2') ? 'changeable-odd odd-selected' : 'changeable-odd'}>
-                        {matchData.odds ? calcOdd(matchData.odds.matchOdds102.o2) : '-'}
+                    <div className={
+                        odds.length > 0 && odds.includes('o2')
+                            ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                            : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                    }>
+                        {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o2) : '-'}
                     </div>
                 </div>
             </div>

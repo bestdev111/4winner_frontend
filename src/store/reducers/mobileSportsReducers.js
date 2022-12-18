@@ -1,5 +1,5 @@
 import { MOBILE_GET_ALL_MATCHES, MOBILE_GET_MATCHES, MOBILE_GET_TOP_LEAGUE, MOBILE_GET_LEAGUE_SORTS, MOBILE_GET_TYPE_LIST } from '../actions/actionTypes';
-
+import OddCompareFunctions from '../../utils/compare'
 const initialState = {
     getAllMatches: [],
     getMatches: [],
@@ -18,6 +18,9 @@ export default function (state = initialState, action) {
                 isLoading: false
             };
         case MOBILE_GET_MATCHES:
+            // console.log('reducer get_matches', action.payload.data.data, action.payload.data.data.matches)
+            if (state.getMatches.data && action.payload.data)
+                OddCompareFunctions.setOddsUpdate(state.getMatches.data.matches, action.payload.data.data.matches)
             return {
                 ...state,
                 getMatches: action.payload.data,

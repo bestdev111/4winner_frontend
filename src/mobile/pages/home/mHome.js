@@ -102,10 +102,10 @@ function MHome(props) {
         let virtualStartTime = new Date(param.betState.virtualStartTime).getTime();
         let t;
         if(virtualStartTime !== 0){
-            t = (timestamp - virtualStartTime) / (60 * 1000);
-            let y = (timestamp / 60000) - (virtualStartTime / 60000)
-            console.log(t, y);
-            t = t.toFixed(0)
+            t = (timestamp - virtualStartTime-45000) / (60 * 1000);
+            // t = (timestamp - virtualStartTime) / (60 * 1000);
+            // let y = (timestamp / 60000) - (virtualStartTime / 60000)
+            t = Math.floor(t)
         }else{
             const dateString = param.europeanStartTime;
             const userOffset = (new Date().getTimezoneOffset()) / 60;
@@ -191,11 +191,11 @@ function MHome(props) {
                                         awayTeam={match.match.awayTeam}
                                         matchResults={match.matchResults}
                                         score={match.scoreCache}
-                                        matchState={match.betState.matchState}
                                         redCard={match.redCards}
                                         betState={match.betState}
+                                        // odds={match.betState}
+                                        matchState={match.betState.matchState}
                                         isTop={match.isTop}
-                                        odds={match.betState}
                                         time={getTime(match)}
                                         date={getDate(match)}
                                     />

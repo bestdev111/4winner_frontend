@@ -140,3 +140,27 @@
     position: absolute;
     font-size: 8px;
 }
+.odd-increased {
+    position: relative;
+}
+.odd-increased:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 10px 0 0 10px;
+    border-style: solid;
+    border-color: #2db343 transparent;
+}
+.odd-decreased {
+    position: relative;
+}
+.odd-decreased:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-width: 0 0 10px 10px;
+    border-style: solid;
+    border-color: #ff3b30 transparent;
+}
