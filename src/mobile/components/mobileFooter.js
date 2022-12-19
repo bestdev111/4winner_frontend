@@ -29,7 +29,7 @@ function MobileFooter(props) {
     const userData = useSelector(state => state.authReducers)
     const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
     const isAuth = userData.isAuthenticated;
-    var temp1 = 1
+    var temp1 = 5
     var temp2 = 0
     const [tab, setTab] = useState(true);
     const amountRef = useRef(Number(5));
@@ -99,7 +99,6 @@ function MobileFooter(props) {
                 stakeBet: (totalStake / numBet).toFixed(2),
                 maxWinning: maxWinning
             }
-            console.log('==>',betState);
             dispatch(placeMyBet(betCollectList, betState));
             setConfirmVal(false);
             oddsReset();
@@ -115,7 +114,7 @@ function MobileFooter(props) {
     //odd manage
     const oddsReset = () => {
         setOpenBetModal(true);
-        var temp1 = 1
+        var temp1 = 5
         var temp2 = 0
         setTotalStake(temp1.toFixed(2));
         setTax(temp2.toFixed(2));
