@@ -17,6 +17,7 @@
     overflow: auto;
     height: 53px;
     padding-bottom: 3px;
+    z-index: 5;
 }
 
 .league-navbar {
