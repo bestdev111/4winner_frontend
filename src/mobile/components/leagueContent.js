@@ -13,10 +13,10 @@ function LeagueContent(props) {
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const matchStatus = () => {
         switch (matchData.matchState) {
-            case 0:
-                return <span className="not-will-live">{matchData.date} {matchData.time}</span>
+            // case 0:
+            //     return <span className="not-will-live">{matchData.date} {matchData.time}</span>
             case 1:
-                return <span className="will-live">{matchData.date} {matchData.time}</span>
+                return <span className={matchData.willBeLive ? "will-live" : "not-will-live"}>{matchData.date} {matchData.time}</span>
             case 2:
                 return (<>
                     <span className="will-live">Live</span>

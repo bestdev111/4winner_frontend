@@ -9,6 +9,7 @@ import { OutRightsConfig } from '../main/outRights/outRightsConfig'
 import { ResultsConfig } from '../main/results/resultsConfig'
 // mobile view
 import { MHomeConfig } from '../mobile/pages/home/mHomeConfig'
+import { MResultsConfig } from '../mobile/pages/results/mResultsConfig'
 import { MLiveConfig } from '../mobile/pages/live/mLiveConfig'
 import { MyBetsConfig } from '../mobile/pages/myBets/myBetsConfig'
 import { MLoginConfig } from '../mobile/pages/login/mLoginConfig'
@@ -26,7 +27,8 @@ const m_routeConfigs = [
     MLoginConfig,
     MHomeConfig,
     MLiveConfig,
-    MyBetsConfig
+    MyBetsConfig,
+    MResultsConfig
 ]
 function customRoutes() {
     const isMobile = useMediaQuery('(max-width: 640px)');

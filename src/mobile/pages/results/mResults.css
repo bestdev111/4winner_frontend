@@ -1,0 +1,53 @@
+.results {
+    position: absolute;
+    background-color: #000000;
+    top: 50px;
+    width: 100%;
+    z-index: 6;
+}
+.results-header{
+    padding-left: 10px;
+    padding-right: 10px;
+    position: fixed;
+    width: 100%;
+    background: black;
+}
+.results-header select {
+    width: 100%;
+    background: black;
+    color: white;
+    height: 30px;
+    font-size: 14px;
+}
+.results-body {
+    overflow-y: auto;
+    margin-top: 100px;
+}
+.league-title {
+    color: #eb7e13;
+    font-weight: 700;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+.finished-match-item {
+    display: flex;
+    width: 100%;
+    color: #fff;
+    background-color: #363636;
+    /* background-image: -webkit-gradient(linear, left top, left bottom, from(#363636), to(#2d2d2d)); */
+    background-image: -webkit-linear-gradient(top, #363636, #2d2d2d);
+    margin-bottom: 1px;
+    font-size: 12px;
+}
+.finished-match-item>.team {
+    float: left;
+    width: 45%;
+    padding: 13px 10px;
+    text-align: center;
+}
+.finished-match-item>.score {
+    float: left;
+    width: 10%;
+    padding: 5px 10px;
+    text-align: center;
+}

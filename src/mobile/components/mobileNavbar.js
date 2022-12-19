@@ -4,21 +4,15 @@ import SideNav from './sideNav'
 import { logoutUser } from '../../store/actions/authActions'
 import './styles/mobileNavbar.css'
 
-function MobileNavbar(props) {
+function MobileNavbar() {
     const dispatch = useDispatch();
-    const [sportActiveVal, setSportActiveVal] = useState(1);
     const [openSide, setOpenSide] = useState(false);
     const userData = useSelector(state => state.authReducers)
-    const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const isAuth = userData.isAuthenticated
 
     const open = () => {
         setOpenSide(false)
-    }
-    const sportActiveChange = (index, typeName) => {
-        setSportActiveVal(index);
-        if (index) props.sportActiveFunc(index, typeName);
     }
     let availableSportTypes = '';
     if (get_AllMatches.data) { availableSportTypes = get_AllMatches.data.availableSportTypes }
@@ -39,14 +33,6 @@ function MobileNavbar(props) {
                         <i onClick={() => dispatch(logoutUser())} className='fa fa-sign-out fw-2'></i>
                     </div>
                 }
-            </div>
-            <div className='d-flex sports-type'>
-                {availableSportTypes && availableSportTypes.map((availableSportType, index) =>
-                    <div className={availableSportType === sportActiveVal ? 'item item-active' : 'item'} key={index} onClick={() => sportActiveChange(availableSportType, SportTypeList[availableSportType - 1].name)}>
-                        <img src={SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].m_icon : ''} alt='' />
-                        <p>{SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}</p>
-                    </div>
-                )}
             </div>
         </div>
     );

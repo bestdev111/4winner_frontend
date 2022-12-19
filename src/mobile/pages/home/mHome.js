@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'usehooks-ts';
-import { MobileNavbar, FootballLeagueNavbar, MobileFooter, LeagueContent, OddDetailPanel } from '../../../mobile/components'
+import { MobileNavbar, FootballLeagueNavbar, SportsTypeNavbar, MobileFooter, LeagueContent, OddDetailPanel } from '../../../mobile/components'
 import { getMatches, getAllMatches, getTopLeague, getLeagueSorts, getTypeList } from '../../../store/actions/mobileSportsActions';
 import { FadeInOut } from "../../../utils";
 import { tipTypesList } from '../../../utils/dataUtils'
@@ -105,7 +105,7 @@ function MHome(props) {
             t = (timestamp - virtualStartTime-45000) / (60 * 1000);
             // t = (timestamp - virtualStartTime) / (60 * 1000);
             // let y = (timestamp / 60000) - (virtualStartTime / 60000)
-            t = Math.floor(t)
+            t = Math.floor(t) >= 0 ? Math.floor(t) : 0;
         }else{
             const dateString = param.europeanStartTime;
             const userOffset = (new Date().getTimezoneOffset()) / 60;
@@ -139,7 +139,8 @@ function MHome(props) {
     }
     return (
         <>
-            <MobileNavbar sportActiveFunc={sportActiveFunc} />
+            <MobileNavbar />
+            <SportsTypeNavbar sportActiveFunc={sportActiveFunc} />
             {sportActive === 1 && hideSubNav ?
                 <FadeInOut show="true" duration={400}>
                     <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} tipTypes={getTipTypes} />
@@ -193,7 +194,7 @@ function MHome(props) {
                                         score={match.scoreCache}
                                         redCard={match.redCards}
                                         betState={match.betState}
-                                        // odds={match.betState}
+                                        willBeLive={match.match.willBeLive}
                                         matchState={match.betState.matchState}
                                         isTop={match.isTop}
                                         time={getTime(match)}

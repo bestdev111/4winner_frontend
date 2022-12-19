@@ -61,7 +61,10 @@ function MobileFooter(props) {
             localStorage.setItem('path', 'Bet Slip');
         }
         // if (title === 'Highlights') window.location.href = '/m_highlights'
-        // if (title === 'Results') window.location.href = '/m_results'
+        if (title === 'Results') {
+            window.location.href = '/m_results'
+            localStorage.setItem('path', 'Results');
+        }
         if (title === 'My Bets') {
             window.location.href = '/mybets';
             localStorage.setItem('path', 'My Bets');
