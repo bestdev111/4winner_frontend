@@ -21,7 +21,7 @@
 }
 
 .league-navbar {
-    top: 100px;
+    top: 105px;
     background-color: #ffffff;
     z-index: 5 !important;
     transition: top 0.7s;
@@ -99,7 +99,7 @@
     padding: 6px 6px 3px 6px;
     color: white;
     cursor: default;
-    margin: 0px 4px 3px 4px;
+    margin: 0px 6px 3px 6px;
     width: max-content;
     text-align: center;
 }
