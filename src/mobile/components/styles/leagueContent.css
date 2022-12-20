@@ -135,14 +135,13 @@
     background: #e6c12c !important;
     box-shadow: inset 0 0 0 1px #fc0 !important;
 }
+
 .add-min {
     margin-top: -3px;
     position: absolute;
     font-size: 8px;
 }
-.odd-increased {
-    position: relative;
-}
+
 .odd-increased:before {
     content: '';
     position: absolute;
@@ -150,11 +149,11 @@
     right: 0;
     border-width: 10px 0 0 10px;
     border-style: solid;
-    border-color: #2db343 transparent;
+    border-color: #ffffff transparent;
+    animation-name: increase;
+    animation-duration: 3s;
 }
-.odd-decreased {
-    position: relative;
-}
+
 .odd-decreased:before {
     content: '';
     position: absolute;
@@ -162,5 +161,35 @@
     right: 0;
     border-width: 0 0 10px 10px;
     border-style: solid;
-    border-color: #ff3b30 transparent;
+    border-color: #ffffff transparent;
+    animation-name: decrease;
+    animation-duration: 3s;
+}
+
+.odd-increased {
+    position: relative;
+}
+
+.odd-decreased {
+    position: relative;
+}
+
+@keyframes increase {
+    0% {
+        border-color: #2db343 transparent;
+    }
+
+    100% {
+        border-color: #2db343 transparent;
+    }
+}
+
+@keyframes decrease {
+    0% {
+        border-color: #ff3b30 transparent;
+    }
+
+    100% {
+        border-color: #ff3b30 transparent;
+    }
 }
