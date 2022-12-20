@@ -41,8 +41,8 @@ function MHome(props) {
         }
     })
     useEffect(() => {
-        let tempType1 = liveLeagueType;
-        let tempType2 = willLeagueType;
+        let tempType1 = [];
+        let tempType2 = [];
         if (get_Matches && get_Matches.length !== 0) {
             let live_leagues = get_Matches.data.matches.filter(item => item.betState.matchState >= 3)
             let will_leagues = get_Matches.data.matches.filter(item => item.betState.matchState < 3)
@@ -102,10 +102,10 @@ function MHome(props) {
         let virtualStartTime = new Date(param.betState.virtualStartTime).getTime();
         let t;
         if(virtualStartTime !== 0){
-            t = (timestamp - virtualStartTime-45000) / (60 * 1000);
+            t = (timestamp - virtualStartTime) / (60 * 1000);
             // t = (timestamp - virtualStartTime) / (60 * 1000);
             // let y = (timestamp / 60000) - (virtualStartTime / 60000)
-            t = Math.round(t - 0.96442) >= 0 ? Math.round(t - 0.96442) : 0;
+            t = Math.round(t + 0.96442) >= 0 ? Math.round(t + 0.96442) : 0;
         }else{
             const dateString = param.europeanStartTime;
             const userOffset = (new Date().getTimezoneOffset()) / 60;
@@ -137,6 +137,7 @@ function MHome(props) {
         }
         return date;
     }
+    console.log('==>', liveLeagueType);
     return (
         <>
             <MobileNavbar />

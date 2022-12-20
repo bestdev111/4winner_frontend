@@ -9,7 +9,7 @@ function MResults() {
 
     const dispatch = useDispatch()
     const [date, setDate] = useState();
-    const [sportsType, setSportsType] = useState();
+    const [betradarSportType, setBetradarSportType] = useState();
     const [category, setCategory] = useState();
     const [leagueList, setLeagueList] = useState([]);
     
@@ -24,7 +24,7 @@ function MResults() {
         setDate(e.target.value)
     }
     const sportsTypeSet = e => {
-        setSportsType(e.target.value);
+        setBetradarSportType(e.target.value);
     }
     const categorySet = e => {
         setCategory(e.target.value)
@@ -34,7 +34,7 @@ function MResults() {
     })
     useEffect(()=> {
         getResultData();
-    },[date, sportsType, category])
+    }, [date, betradarSportType, category])
     useEffect(()=> {
         let temp = []
         if (getResultList.data && getResultList.data.length > 0){
@@ -50,10 +50,14 @@ function MResults() {
     const getResultData = () => {
         const obj = {
             date: date,
-            sportsType: sportsType,
+            betradarSportType: betradarSportType,
             category: category
         }
         dispatch(getResult(obj))
+    }
+    const getDate = () => {
+        const todayDay = new Date().getDate();
+        console.log(todayDay);
     }
     return (
         <>
