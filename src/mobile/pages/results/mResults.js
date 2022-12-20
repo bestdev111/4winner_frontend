@@ -9,17 +9,17 @@ function MResults() {
 
     const dispatch = useDispatch()
     const [date, setDate] = useState();
-    const [betradarSportType, setBetradarSportType] = useState();
+    const [dateList, setDateList] = useState();
+    const [betradarSportType, setBetradarSportType] = useState(1);
     const [category, setCategory] = useState();
     const [leagueList, setLeagueList] = useState([]);
-    
+
+    const getResultList = useSelector(state => state.mobileSportsReducers.getResult);
     // const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     // const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
-    const getResultList = useSelector(state => state.mobileSportsReducers.getResult);
     // let availableSportTypes = '';
     // if (get_AllMatches.data) { availableSportTypes = get_AllMatches.data.availableSportTypes }
 
-    const isLoading = useSelector(state => state.mobileSportsReducers.isLoading);
     const dateSet = e => {
         setDate(e.target.value)
     }
@@ -29,25 +29,29 @@ function MResults() {
     const categorySet = e => {
         setCategory(e.target.value)
     }
-    useEffectOnce(()=> {
+    useEffectOnce(() => {
         getResultData();
     })
-    useEffect(()=> {
+    useEffect(() => {
         getResultData();
     }, [date, betradarSportType, category])
-    useEffect(()=> {
+    useEffect(() => {
+        getDate()
         let temp = []
-        if (getResultList.data && getResultList.data.length > 0){
+        if (getResultList.data && getResultList.data.length > 0) {
             getResultList.data.forEach(item => {
-                if(temp.includes(item.BASE.leagueName) === false){
-                    temp.push(item.BASE.leagueName);
+                if (temp.includes(item.BASE.leagueName + '-' + item.BASE.brCategory.name) === false) {
+                    temp.push(item.BASE.leagueName + '-' + item.BASE.brCategory.name);
                 }
             });
         }
-        // { item.BASE.brCategory.name }
         setLeagueList(temp);
     }, [getResultList])
     const getResultData = () => {
+        if(date === undefined) {
+            const todayDay = new Date()
+            setDate(todayDay.getFullYear() + '-' + (todayDay.getMonth() + 1) + '-' + todayDay.getDate());
+        }
         const obj = {
             date: date,
             betradarSportType: betradarSportType,
@@ -56,17 +60,36 @@ function MResults() {
         dispatch(getResult(obj))
     }
     const getDate = () => {
-        const todayDay = new Date().getDate();
-        console.log(todayDay);
+        let dateListTemp = [];
+        const todayDay = new Date()
+        const daysAgo = new Date(todayDay.getTime());
+        for (let i = 0; i < 12; i++) {
+            daysAgo.setDate(todayDay.getDate() - i);
+            const day = daysAgo.getDate()
+            const year = daysAgo.getFullYear();
+            const month = daysAgo.getMonth() + 1;
+            let title = day + '.' + month + '.' + year
+            const param = year + '-' + month + '-' + day
+            title = i === 0 ? 'Today' : i === 1 ? 'Yesterday' : title;
+            let obj = {
+                title: title,
+                param: param
+            }
+            dateListTemp.push(obj)
+        }
+        // setDate(dateListTemp[0].param)
+        setDateList(dateListTemp)
     }
+    console.log(date);
     return (
         <>
             <MobileNavbar />
             <div className='results'>
                 <div className='results-header'>
-                    <select onChange={dateSet}>
-                        <option value={1}>Today</option>
-                        <option value={2}>Yesterday</option>
+                    <select className='date' onChange={dateSet}>
+                        {dateList ? dateList.map((item, index) =>
+                            <option key={index} value={item.param}>{item.title}</option>
+                        ) : null}
                     </select>
                     <select onChange={sportsTypeSet}>
                         {/* {availableSportTypes ? availableSportTypes.map((item, index)=> 
@@ -91,11 +114,11 @@ function MResults() {
                     </select>
                 </div>
                 <div className='results-body'>
-                    {leagueList ? leagueList.map((league, i)=> 
+                    {leagueList ? leagueList.map((league, i) =>
                         <div key={i}>
-                            <div className='league-title'>{league} - </div>
-                            {getResultList.data ? getResultList.data.map((item, index)=>
-                                league === item.BASE.leagueName ? 
+                            <div className='league-title'>{league}</div>
+                            {getResultList.data ? getResultList.data.map((item, index) =>
+                                league === item.BASE.leagueName + '-' + item.BASE.brCategory.name ?
                                     <div className='finished-match-item' key={index}>
                                         <div className='team'>{item.BASE.homeTeamName}</div>
                                         <div className='score'>
@@ -104,10 +127,10 @@ function MResults() {
                                         </div>
                                         <div className='team'>{item.BASE.awayTeamName}</div>
                                     </div>
-                                : null
-                            ):null}
+                                    : null
+                            ) : null}
                         </div>
-                    ):null}
+                    ) : null}
                 </div>
             </div>
             <MobileFooter />

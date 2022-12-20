@@ -137,7 +137,7 @@ function MHome(props) {
         }
         return date;
     }
-    console.log('==>', liveLeagueType);
+    // console.log('==>', liveLeagueType);
     return (
         <>
             <MobileNavbar />

@@ -93,7 +93,7 @@ export const getResult = options => {
     console.log('=>',options);
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/m_sports/getResult', options);
+            const response = await axios.post(ServerURL + '/m_sports/getResult', options);
             return dispatch({
                 type: MOBILE_GET_RESULT,
                 payload: response

@@ -7,4 +7,5 @@ export { default as Authorization } from './authorization';
 export { default as ServerURL } from './serverURL';
 export { default as FadeInOut } from './fadeInOut';
 export { default as GetTime } from './getTime';
-export { default as Compare } from './compare';
+export { default as OddCompareFunctions } from './compare';
+export { default as isEmpty } from './isEmpty';
