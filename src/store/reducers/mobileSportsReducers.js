@@ -15,6 +15,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 getAllMatches: action.payload.data,
+                isLoading: isEmpty(action.payload.data)
             };
         case MOBILE_GET_MATCHES:
             if (state.getMatches.data && action.payload.data)
