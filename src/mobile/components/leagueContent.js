@@ -167,7 +167,7 @@ function LeagueContent(props) {
                                         ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
                                         : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
                                 }>
-                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length - 1][1][1][0][1]) : '-'}
+                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0] ? matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length -1][1][1][0][1] : null) : '-'}
                                 </div>
                             </div>
                             <div className="o3">
@@ -176,7 +176,7 @@ function LeagueContent(props) {
                                         ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
                                         : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
                                 }>
-                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length - 1][0][1][0][1]) : '-'}
+                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0] ? matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length-1][0][1][0][1] : null) : '-'}
                                 </div>
                             </div>
                         </>

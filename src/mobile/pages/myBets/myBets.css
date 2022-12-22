@@ -36,7 +36,8 @@
 .bet-result-wait {
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 700;
     padding: 3px;
 }
 .bet-result-win {
@@ -44,7 +45,7 @@
     justify-content: space-between;
     font-size: 12px;
     color: white;
-    background-color: #057433;
+    background-color: #0b7029;
     padding: 3px;
 }
 .bet-result-lose {
@@ -54,4 +55,8 @@
     color: white;
     background-color: #702c2c;
     padding: 3px;
+}
+.bet-result-win>div, .bet-result-lose>div {
+    font-weight: 700;
+    font-size: 13px;
 }
