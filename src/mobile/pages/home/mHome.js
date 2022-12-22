@@ -50,11 +50,15 @@ function MHome(props) {
     );
     const dataFetch = () => {
         let id = localStorage.getItem("sportTypeId");
-        let leagueName = localStorage.getItem("leagueName");
         let betradarCategoryId1 = betradarCategoryId;
-        if (leagueName !== null || leagueName !== undefined)
-            betradarCategoryId1 = leagueNameRadarId[leagueName];
         id = id === undefined ? 1 : id;
+        if(id !== '1'){
+            console.log('id=>', id);
+            localStorage.setItem("leagueName", '');
+        }
+        let leagueName = localStorage.getItem("leagueName");
+        if (leagueName !== null || leagueName !== undefined)
+        betradarCategoryId1 = leagueNameRadarId[leagueName];
         let obj = {
             sportTypeId: id,
             betradarCategoryId: betradarCategoryId1,
@@ -141,8 +145,11 @@ function MHome(props) {
     };
     const getLeagueName = (leagueName) => {
         leagueName = leagueName.replaceAll(" ", "%20");
-        localStorage.setItem("leagueName", leagueName);
-        setLeagueName(leagueName);
+        if (localStorage.getItem('sportTypeId') === '1'){
+            console.log(localStorage.getItem('sportTypeId'));
+            localStorage.setItem("leagueName", leagueName);
+            setLeagueName(leagueName);
+        }
     };
     const openDetailOdd = (index, id) => {
         setOpenOddDetailVal(index);
