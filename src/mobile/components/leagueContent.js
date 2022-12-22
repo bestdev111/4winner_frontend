@@ -161,7 +161,7 @@ function LeagueContent(props) {
                     </>
                     : props.sportTypeId === 5 ?
                         <>
-                            <div className="o3" onClick={(e) => betOddSelect(e, 'o0')}>
+                            <div className="o3">
                                 <div className={
                                     odds.length > 0 && odds.includes('o0')
                                         ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
@@ -170,7 +170,7 @@ function LeagueContent(props) {
                                     {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length - 1][1][1][0][1]) : '-'}
                                 </div>
                             </div>
-                            <div className="o3" onClick={(e) => betOddSelect(e, 'o2')}>
+                            <div className="o3">
                                 <div className={
                                     odds.length > 0 && odds.includes('o2')
                                         ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
