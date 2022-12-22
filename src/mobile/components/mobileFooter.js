@@ -51,6 +51,7 @@ function MobileFooter(props) {
         if (title === 'Home') {
             window.location.href = '/m_home';
             localStorage.setItem('path', 'Home');
+            localStorage.setItem('leagueName', '');
         }
         if (title === 'Live') {
             window.location.href = '/m_live';

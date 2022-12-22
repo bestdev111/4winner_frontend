@@ -229,4 +229,16 @@ export const betTypesList = [
     { title: '1st Half Both Teams To Score', shortName: '' },
     { title: '1st Half Over/Under', shortName: '' },
 ];
+export const leagueNameRadarId = {
+    "UEFA%20Champions%20League": 393,
+    "UEFA%20Europa%20League": 393,
+    "Premier%20League": 1,
+    LaLiga: 32,
+    Bundesliga: 30,
+    "Serie%20A": 31,
+    "Ligue%201": 7,
+    "Süper%20Lig": 46,
+    Eredivisie: 35,
+    "Primeira%20Liga": 44,
+};
 export default SportTypeList;
