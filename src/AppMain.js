@@ -8,7 +8,7 @@ function AppMain(props) {
   const isLoading2 = useSelector(state => state.betReducers.isLoading)
   return (
     <>
-      {isLoading1 && isLoading2 ? <Loading /> : null}
+      {!(isLoading1 || isLoading2) ? <Loading /> : null}
       {renderRoutes(props.real_routes)}
     </>
   );

@@ -149,9 +149,10 @@
     right: 0;
     border-width: 10px 0 0 10px;
     border-style: solid;
-    border-color: #ffffff transparent;
+    border-color: #2db343 transparent;
     animation-name: increase;
     animation-duration: 3s;
+    opacity: 0;
 }
 
 .odd-decreased:before {
@@ -161,9 +162,10 @@
     right: 0;
     border-width: 0 0 10px 10px;
     border-style: solid;
-    border-color: #ffffff transparent;
+    border-color: #ff3b30 transparent;
     animation-name: decrease;
     animation-duration: 3s;
+    opacity: 0;
 }
 
 .odd-increased {
@@ -176,20 +178,20 @@
 
 @keyframes increase {
     0% {
-        border-color: #2db343 transparent;
+        opacity: 1;
     }
-
+    
     100% {
-        border-color: #2db343 transparent;
+        opacity: 1;
     }
 }
 
 @keyframes decrease {
     0% {
-        border-color: #ff3b30 transparent;
+        opacity: 1;
     }
-
+    
     100% {
-        border-color: #ff3b30 transparent;
+        opacity: 1;
     }
 }

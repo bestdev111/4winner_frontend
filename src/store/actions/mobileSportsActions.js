@@ -26,10 +26,11 @@ export const getAllMatches = () => {
         }
     }
 };
-export const getMatches = () => {
+export const getMatches = options => {
+    // console.log('==>',options);
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/m_sports/getMatches');
+            const response = await axios.post(ServerURL + '/m_sports/getMatches', options);
             return dispatch({
                 type: MOBILE_GET_MATCHES,
                 payload: response
@@ -90,7 +91,6 @@ export const getTypeList = () => {
     }
 };
 export const getResult = options => {
-    console.log('=>',options);
     return async dispatch => {
         try {
             const response = await axios.post(ServerURL + '/m_sports/getResult', options);

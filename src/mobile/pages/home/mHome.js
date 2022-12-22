@@ -10,23 +10,41 @@ import './mHome.css'
 function MHome(props) {
 
     const dispatch = useDispatch()
+    const prevScrollY = useRef(0)
     const [tipTypes, setTipTypes] = useState();
     const [liveLeagueType, setLiveLeagueType] = useState([]);
     const [willLeagueType, setWillLeagueType] = useState([]);
     const [openOddDetailVal, setOpenOddDetailVal] = useState(false);
     const [selectMatchId, setSelectMatchId] = useState();
-    const [sportActive, setSportActive] = useState(1);
     const [hideSubNav, setHideSubNav] = useState(true);
-    const [sportTypeName, setSportTypeName] = useState('Football');
-    const prevScrollY = useRef(0)
     const [timer, setTimer] = useState(null)
     const [isMounted, setIsMounted] = useState(false)
     const [liveMatches, setLiveMatches] = useState(null);
     const [willMatches, setWillMatches] = useState(null);
     const [onlyLive, setOnlyLive] = useState(false);
+
+    const [sportTypeId, setSportTypeId] = useState(1);
+    const [betradarCategoryId, setBetradarCategoryId] = useState(0);
+    const [leagueName, setLeagueName] = useState();
+    const [matchState, setMatchState] = useState('home');
+    const [startIndex, setStartIndex] = useState(0);
+    const [orderByLeague, setOrderByLeague] = useState(false);
+
     const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
+    const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
     const dataFetch = () => {
-        dispatch(getMatches())
+        let id = localStorage.getItem('sportTypeId');
+        id = id === undefined ? 1 : id;
+        console.log('sportTypeId==>', id);
+        let obj = {
+            sportTypeId: id,
+            betradarCategoryId: betradarCategoryId,
+            leagueName: leagueName,
+            matchState: matchState,
+            startIndex: startIndex,
+            orderByLeague: orderByLeague
+        }
+        dispatch(getMatches(obj))
         dispatch(getAllMatches())
         dispatch(getTopLeague())
         dispatch(getLeagueSorts())
@@ -40,6 +58,17 @@ function MHome(props) {
             setIsMounted(true)
         }
     })
+    useEffectOnce(() => {
+        // if(localStorage.getItem('sportTypeId')){
+        //     console.log('setted!!!!', localStorage.getItem('sportTypeId'));
+        //     setSportTypeId(localStorage.getItem('sportTypeId'));
+        // }
+        dataFetch()
+    })
+    const sportActiveFunc = (index) => {
+        setSportTypeId(index);
+        localStorage.setItem('sportTypeId', index);
+    }
     useEffect(() => {
         let tempType1 = [];
         let tempType2 = [];
@@ -62,9 +91,6 @@ function MHome(props) {
             setWillLeagueType(tempType2)
         }
     }, [get_Matches])
-    useEffectOnce(() => {
-        dataFetch()
-    })
     useEffect(() => {
         if (props && props.onlyLive) {
             setOnlyLive(props.onlyLive)
@@ -93,20 +119,14 @@ function MHome(props) {
         setOpenOddDetailVal(index);
         setSelectMatchId(id);
     }
-    const sportActiveFunc = (index, typeName) => {
-        setSportActive(index);
-        setSportTypeName(typeName);
-    }
     const getTime = (param) => {
         let timestamp = new Date(param.betState.timestamp).getTime();
         let virtualStartTime = new Date(param.betState.virtualStartTime).getTime();
         let t;
-        if(virtualStartTime !== 0){
+        if (virtualStartTime !== 0) {
             t = (timestamp - virtualStartTime) / (60 * 1000);
-            // t = (timestamp - virtualStartTime) / (60 * 1000);
-            // let y = (timestamp / 60000) - (virtualStartTime / 60000)
             t = Math.round(t + 0.96442) >= 0 ? Math.round(t + 0.96442) : 0;
-        }else{
+        } else {
             const dateString = param.europeanStartTime;
             const userOffset = (new Date().getTimezoneOffset()) / 60;
             const localDate = new Date(dateString);
@@ -117,37 +137,36 @@ function MHome(props) {
         }
         return t;
     }
-    const getDate = (param)=> {
+    const getDate = (param) => {
         let date;
         const dateString = param.europeanStartTime;
         const userOffset = (new Date().getTimezoneOffset()) / 60;
         const localDate = new Date(dateString);
         const utcDate = new Date(localDate.getTime() - (userOffset + 1) * 60 * 60 * 1000);
         const todayDay = new Date().getDate();
-        const matchDay = new Date(utcDate).getDate(); 
-        const matchMonth = new Date(utcDate).getMonth(); 
-        if(todayDay === matchDay){
+        const matchDay = new Date(utcDate).getDate();
+        const matchMonth = new Date(utcDate).getMonth();
+        if (todayDay === matchDay) {
             date = 'Today'
         }
-        if (matchDay === todayDay + 1){
+        if (matchDay === todayDay + 1) {
             date = 'Tomorrow'
         }
-        if (matchDay > todayDay + 1){
-            date = matchDay + '.'+ matchMonth
+        if (matchDay > todayDay + 1) {
+            date = matchDay + '.' + matchMonth
         }
         return date;
     }
-    // console.log('==>', liveLeagueType);
     return (
         <>
             <MobileNavbar />
-            <SportsTypeNavbar sportActiveFunc={sportActiveFunc} />
-            {sportActive === 1 && hideSubNav ?
+            <SportsTypeNavbar sportActiveFunc={(index) => sportActiveFunc(index)} />
+            {(sportTypeId === 1) && hideSubNav ?
                 <FadeInOut show="true" duration={400}>
-                    <FootballLeagueNavbar parentCallback={getTipTypes} sportActive={sportActive} tipTypes={getTipTypes} />
+                    <FootballLeagueNavbar parentCallback={getTipTypes} tipTypes={getTipTypes} />
                 </FadeInOut>
                 : <></>}
-            <div className={sportActive === 1 ? 'm_content custom-top' : 'm_content'}>
+            <div className={sportTypeId === 1 ? 'm_content custom-top' : 'm_content'}>
                 <div className='m_header'>
                     <div className='odds'>
                         {tipTypes !== undefined ? tipTypesList[tipTypes].map((item, index) => <p key={index}>{item}</p>) : null}
@@ -155,11 +174,14 @@ function MHome(props) {
                 </div>
                 <div className='m_body'>
                     {liveLeagueType ? liveLeagueType.map((league, index1) => <div key={index1}>
-                        <div className="league-content">{sportTypeName}/{league}</div>
+                        <div className="league-content">
+                            {SportTypeList.map((item) => item.sportTypeId === sportTypeId ? item.name : null)}/{league}
+                        </div>
                         {liveMatches.map((match, i) => (
                             league === match.match.league ?
                                 <div key={i}>
                                     <LeagueContent
+                                        sportTypeId={sportTypeId}
                                         tipTypes={tipTypes}
                                         openDetailOdd={openDetailOdd}
                                         matchId={match.id}
@@ -181,11 +203,14 @@ function MHome(props) {
                     </div>
                     ) : null}
                     {!onlyLive && willLeagueType ? willLeagueType.map((league, index1) => <div key={index1}>
-                        <div className="league-content">{sportTypeName}/{league}</div>
+                        <div className="league-content">
+                            {SportTypeList.map((item) => item.sportTypeId === sportTypeId ? item.name : null)}/{league}
+                        </div>
                         {willMatches.map((match, i) => (
                             league === match.match.league ?
                                 <div key={i}>
                                     <LeagueContent
+                                        sportTypeId={sportTypeId}
                                         tipTypes={tipTypes}
                                         openDetailOdd={openDetailOdd}
                                         matchId={match.id}

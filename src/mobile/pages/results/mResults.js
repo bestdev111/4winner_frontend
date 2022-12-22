@@ -77,10 +77,8 @@ function MResults() {
             }
             dateListTemp.push(obj)
         }
-        // setDate(dateListTemp[0].param)
         setDateList(dateListTemp)
     }
-    console.log(date);
     return (
         <>
             <MobileNavbar />
