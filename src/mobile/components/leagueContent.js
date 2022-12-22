@@ -57,7 +57,7 @@ function LeagueContent(props) {
             homeScore: matchData.score.history[0][0].home,
             awayScore: matchData.score.history[0][0].away,
             betType: props.tipTypes,
-            odds: [matchData.odds.matchOdds102],
+            odds: [matchData.betState.matchOdds102],
             selectedOdds: param,
             betSystem: 'Single/Multiple'
         }

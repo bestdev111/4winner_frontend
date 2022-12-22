@@ -1,6 +1,7 @@
 .transactions {
     overflow-y: auto;
     margin-top: 50px;
+    height: calc(100vh - 120px);
 }
 .transactions>.status {
     padding: 10px;

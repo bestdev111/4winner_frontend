@@ -6,9 +6,10 @@ import { Loading } from './utils';
 function AppMain(props) {
   const isLoading1 = useSelector(state => state.mobileSportsReducers.isLoading)
   const isLoading2 = useSelector(state => state.betReducers.isLoading)
+  console.log('isLoading2',isLoading2);
   return (
     <>
-      {!(isLoading1 || isLoading2) ? <Loading /> : null}
+      {!isLoading1 || !isLoading2 ? null : <Loading />}
       {renderRoutes(props.real_routes)}
     </>
   );
