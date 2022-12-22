@@ -180,7 +180,28 @@ function LeagueContent(props) {
                                 </div>
                             </div>
                         </>
-                        : <>
+                    : props.sportTypeId === 2 ?
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0] ? matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length -1][1][1][0][1] : null) : '-'}
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0] ? matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length-1][0][1][0][1] : null) : '-'}
+                                </div>
+                            </div>
+                        </>
+                    :   <>
                             <div className="o3" onClick={(e) => betOddSelect(e, 'o1')}>
                                 <div className={
                                     odds.length > 0 && odds.includes('o1')
