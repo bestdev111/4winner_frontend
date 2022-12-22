@@ -26,7 +26,7 @@ function SportsTypeNavbar(props) {
     return (
         <div className='d-flex sports-type'>
             {SportTypeList && SportTypeList.map((item, index) =>
-                availableSportTypes.includes(item.sportTypeId) ?
+                availableSportTypes ? availableSportTypes.includes(item.sportTypeId) ?
                     <div
                         className={item.sportTypeId === sportActiveVal ? 'item item-active' : 'item'}
                         key={index}
@@ -35,7 +35,7 @@ function SportsTypeNavbar(props) {
                         <img src={item.m_icon} alt='' />
                         <p>{item.name}</p>
                     </div>
-                : null
+                : null : null
             )}
         </div>
     );
