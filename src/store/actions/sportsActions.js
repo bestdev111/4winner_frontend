@@ -26,7 +26,7 @@ export const getAllMatches = () => {
 export const getMatches = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(ServerURL + '/sports/getMatches', config);
+            const response = await axios.post(ServerURL + '/sports/getMatches', config);
             return dispatch({
                 type: GET_MATCHES,
                 payload: response
