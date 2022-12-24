@@ -67,19 +67,19 @@ const Event = (props) => {
                             <div className="bet">
                                 <div className="odds">
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">{props.homeTeam}</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">Draw</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">{props.awayTeam}</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -91,19 +91,19 @@ const Event = (props) => {
                             <div className="bet">
                                 <div className="odds">
                                     <div className="col-12">
-                                        <a className="changeable-odd selected">
+                                        <p className="changeable-odd selected">
                                             <span className="push-left">{props.homeTeam}</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">Draw</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">{props.awayTeam}</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -115,19 +115,19 @@ const Event = (props) => {
                             <div className="bet">
                                 <div className="odds">
                                     <div className="col-12">
-                                        <a className="changeable-odd">
+                                        <p className="changeable-odd">
                                             <span className="push-left">{props.homeTeam}</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">Draw</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                     <div className="col-12">
-                                        <a className="changeable-odd ">
+                                        <p className="changeable-odd ">
                                             <span className="push-left">{props.awayTeam}</span><span className="push-right">3.30</span>
-                                        </a>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

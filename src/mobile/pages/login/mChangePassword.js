@@ -16,7 +16,7 @@ function MChangePassword() {
     })
     useSelector(state => state.mobileSportsReducers.getTypeList)
     const changePass = () => {
-        if (currentPass && newPass && confirmPass) { 
+        if (currentPass && newPass && confirmPass) {
             if (newPass === confirmPass) {
                 const data = {
                     userName: userData.user.name,
@@ -26,11 +26,11 @@ function MChangePassword() {
                 }
                 dispatch(passwordChange(data));
             }
-            else{
+            else {
                 ToastService("Please Match Password!", 'error');
             }
         }
-        else{
+        else {
             ToastService("Please Input Password!", 'error');
         }
     }
@@ -44,11 +44,11 @@ function MChangePassword() {
             <div className='p-3 form login-form'>
                 <div className="form-group">
                     <label htmlFor="usr">Current Password:</label>
-                    <input type="password" className="form-control p-2 pl-3" onChange={e => setCurrentPass(e.target.value)} id="pwd" name="currentPass"/>
+                    <input type="password" className="form-control p-2 pl-3" onChange={e => setCurrentPass(e.target.value)} id="pwd" name="currentPass" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="pwd">New Password:</label>
-                    <input type="password" className="form-control p-2 pl-3" onChange={e => setNewPass(e.target.value)} id="pwd" name="newPass"/>
+                    <input type="password" className="form-control p-2 pl-3" onChange={e => setNewPass(e.target.value)} id="pwd" name="newPass" />
                 </div>
                 <div className="form-group">
                     <label htmlFor="pwd">Confirm Password:</label>

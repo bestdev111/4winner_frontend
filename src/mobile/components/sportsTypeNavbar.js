@@ -4,7 +4,6 @@ import './styles/mobileNavbar.css'
 
 function SportsTypeNavbar(props) {
     const [sportActiveVal, setSportActiveVal] = useState(1);
-    // const [orderedSportsList, setOrderedSportsList] = useState();
     const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const sportActiveChange = (index) => {
@@ -13,13 +12,13 @@ function SportsTypeNavbar(props) {
     }
     let availableSportTypes = '';
     if (get_AllMatches.data) { availableSportTypes = get_AllMatches.data.availableSportTypes }
-    useEffect(()=> {
+    useEffect(() => {
         if (localStorage.getItem('sportTypeId')) {
             setSportActiveVal(localStorage.getItem('sportTypeId'));
         }
     }, [])
-    useEffect(()=> {
-        if(SportTypeList){
+    useEffect(() => {
+        if (SportTypeList) {
             SportTypeList.sort((a, b) => a.order - b.order);
         }
     }, [SportTypeList])
@@ -35,7 +34,7 @@ function SportsTypeNavbar(props) {
                         <img src={item.m_icon} alt='' />
                         <p>{item.name}</p>
                     </div>
-                : null : null
+                    : null : null
             )}
         </div>
     );

@@ -8,14 +8,9 @@ function MobileNavbar() {
     const dispatch = useDispatch();
     const [openSide, setOpenSide] = useState(false);
     const userData = useSelector(state => state.authReducers)
-    const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const isAuth = userData.isAuthenticated
 
-    const open = () => {
-        setOpenSide(false)
-    }
-    let availableSportTypes = '';
-    if (get_AllMatches.data) { availableSportTypes = get_AllMatches.data.availableSportTypes }
+    const open = () => setOpenSide(false)
     return (
         <div className="m-navbar px-2 pt-3 pb-0 fixed-top">
             <SideNav show={openSide} onClickOutside={open} />

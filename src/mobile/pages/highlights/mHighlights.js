@@ -18,9 +18,9 @@ import {
 } from "../../../store/actions/mobileSportsActions";
 import { FadeInOut } from "../../../utils";
 import { tipTypesList, leagueNameRadarId } from "../../../utils/dataUtils";
-import "./mHome.css";
+import "./mHighlights.css";
 
-function MHome(props) {
+function MHighlights(props) {
     const dispatch = useDispatch();
     const prevScrollY = useRef(0);
     const [tipTypes, setTipTypes] = useState();
@@ -28,8 +28,6 @@ function MHome(props) {
     const [willLeagueType, setWillLeagueType] = useState([]);
     const [openOddDetailVal, setOpenOddDetailVal] = useState(false);
     const [selectMatchId, setSelectMatchId] = useState();
-    const [selectMatchDate, setSelectMatchDate] = useState();
-    const [selectMatchTime, setSelectMatchTime] = useState();
     const [hideSubNav, setHideSubNav] = useState(true);
     const [timer, setTimer] = useState(null);
     const [isMounted, setIsMounted] = useState(false);
@@ -40,7 +38,7 @@ function MHome(props) {
     const [sportTypeId, setSportTypeId] = useState(1);
     const [betradarCategoryId, setBetradarCategoryId] = useState(0);
     const [leagueName, setLeagueName] = useState();
-    const [matchState, setMatchState] = useState("home");
+    const [matchState, setMatchState] = useState("topOdds");
     const [startIndex, setStartIndex] = useState(0);
     const [orderByLeague, setOrderByLeague] = useState(false);
 
@@ -52,14 +50,15 @@ function MHome(props) {
     );
     const dataFetch = () => {
         let id = localStorage.getItem("sportTypeId");
-        let betradarCategoryId1 = betradarCategoryId;
-        id = id === undefined ? 1 : id;
-        if (id !== '1') {
-            localStorage.setItem("leagueName", '');
-        }
         let leagueName = localStorage.getItem("leagueName");
-        if (leagueName !== null || leagueName !== undefined)
+        let betradarCategoryId1 = betradarCategoryId;
+        if (
+            leagueName !== null &&
+            leagueName !== undefined &&
+            leagueName !== ""
+        )
             betradarCategoryId1 = leagueNameRadarId[leagueName];
+        id = id === undefined ? 1 : id;
         let obj = {
             sportTypeId: id,
             betradarCategoryId: betradarCategoryId1,
@@ -83,6 +82,10 @@ function MHome(props) {
         }
     });
     useEffectOnce(() => {
+        // if(localStorage.getItem('sportTypeId')){
+        //     console.log('setted!!!!', localStorage.getItem('sportTypeId'));
+        //     setSportTypeId(localStorage.getItem('sportTypeId'));
+        // }
         dataFetch();
     });
     const sportActiveFunc = (index) => {
@@ -142,16 +145,12 @@ function MHome(props) {
     };
     const getLeagueName = (leagueName) => {
         leagueName = leagueName.replaceAll(" ", "%20");
-        if (localStorage.getItem('sportTypeId') === '1') {
-            localStorage.setItem("leagueName", leagueName);
-            setLeagueName(leagueName);
-        }
+        localStorage.setItem("leagueName", leagueName);
+        setLeagueName(leagueName);
     };
-    const openDetailOdd = (index, id, date, time) => {
+    const openDetailOdd = (index, id) => {
         setOpenOddDetailVal(index);
         setSelectMatchId(id);
-        setSelectMatchDate(date);
-        setSelectMatchTime(time);
     };
     const getTime = (param) => {
         let timestamp = new Date(param.betState.timestamp).getTime();
@@ -227,103 +226,103 @@ function MHome(props) {
                     <div className="odds">
                         {tipTypes !== undefined
                             ? tipTypesList[tipTypes].map((item, index) => (
-                                <p key={index}>{item}</p>
-                            ))
+                                  <p key={index}>{item}</p>
+                              ))
                             : null}
                     </div>
                 </div>
                 <div className="m_body">
                     {liveLeagueType
                         ? liveLeagueType.map((league, index1) => (
-                            <div key={index1}>
-                                <div className="league-content">
-                                    {SportTypeList.map((item) =>
-                                        item.sportTypeId === sportTypeId
-                                            ? item.name
-                                            : null
-                                    )}
-                                    /{league}
-                                </div>
-                                {liveMatches.map((match, i) =>
-                                    league === match.match.league ? (
-                                        <div key={i}>
-                                            <LeagueContent
-                                                sportTypeId={sportTypeId}
-                                                tipTypes={tipTypes}
-                                                openDetailOdd={openDetailOdd}
-                                                matchId={match.id}
-                                                homeTeam={
-                                                    match.match.homeTeam
-                                                }
-                                                awayTeam={
-                                                    match.match.awayTeam
-                                                }
-                                                matchResults={
-                                                    match.matchResults
-                                                }
-                                                score={match.scoreCache}
-                                                matchState={
-                                                    match.betState.matchState
-                                                }
-                                                redCard={match.redCards}
-                                                betState={match.betState}
-                                                isTop={match.isTop}
-                                                odds={match.betState}
-                                                time={getTime(match)}
-                                                date={getDate(match)}
-                                            />
-                                        </div>
-                                    ) : null
-                                )}
-                            </div>
-                        ))
+                              <div key={index1}>
+                                  <div className="league-content">
+                                      {SportTypeList.map((item) =>
+                                          item.sportTypeId === sportTypeId
+                                              ? item.name
+                                              : null
+                                      )}
+                                      /{league}
+                                  </div>
+                                  {liveMatches.map((match, i) =>
+                                      league === match.match.league ? (
+                                          <div key={i}>
+                                              <LeagueContent
+                                                  sportTypeId={sportTypeId}
+                                                  tipTypes={tipTypes}
+                                                  openDetailOdd={openDetailOdd}
+                                                  matchId={match.id}
+                                                  homeTeam={
+                                                      match.match.homeTeam
+                                                  }
+                                                  awayTeam={
+                                                      match.match.awayTeam
+                                                  }
+                                                  matchResults={
+                                                      match.matchResults
+                                                  }
+                                                  score={match.scoreCache}
+                                                  matchState={
+                                                      match.betState.matchState
+                                                  }
+                                                  redCard={match.redCards}
+                                                  betState={match.betState}
+                                                  isTop={match.isTop}
+                                                  odds={match.betState}
+                                                  time={getTime(match)}
+                                                  date={getDate(match)}
+                                              />
+                                          </div>
+                                      ) : null
+                                  )}
+                              </div>
+                          ))
                         : null}
                     {!onlyLive && willLeagueType
                         ? willLeagueType.map((league, index1) => (
-                            <div key={index1}>
-                                <div className="league-content">
-                                    {SportTypeList.map((item) =>
-                                        item.sportTypeId === sportTypeId
-                                            ? item.name
-                                            : null
-                                    )}
-                                    /{league}
-                                </div>
-                                {willMatches.map((match, i) =>
-                                    league === match.match.league ? (
-                                        <div key={i}>
-                                            <LeagueContent
-                                                sportTypeId={sportTypeId}
-                                                tipTypes={tipTypes}
-                                                openDetailOdd={openDetailOdd}
-                                                matchId={match.id}
-                                                homeTeam={
-                                                    match.match.homeTeam
-                                                }
-                                                awayTeam={
-                                                    match.match.awayTeam
-                                                }
-                                                matchResults={
-                                                    match.matchResults
-                                                }
-                                                score={match.scoreCache}
-                                                redCard={match.redCards}
-                                                betState={match.betState}
-                                                willBeLive={
-                                                    match.match.willBeLive
-                                                }
-                                                matchState={
-                                                    match.betState.matchState
-                                                }
-                                                isTop={match.isTop}
-                                                time={getTime(match)}
-                                                date={getDate(match)}
-                                            />
-                                        </div>
-                                    ) : null
-                                )}
-                            </div>
-                        ))
+                              <div key={index1}>
+                                  <div className="league-content">
+                                      {SportTypeList.map((item) =>
+                                          item.sportTypeId === sportTypeId
+                                              ? item.name
+                                              : null
+                                      )}
+                                      /{league}
+                                  </div>
+                                  {willMatches.map((match, i) =>
+                                      league === match.match.league ? (
+                                          <div key={i}>
+                                              <LeagueContent
+                                                  sportTypeId={sportTypeId}
+                                                  tipTypes={tipTypes}
+                                                  openDetailOdd={openDetailOdd}
+                                                  matchId={match.id}
+                                                  homeTeam={
+                                                      match.match.homeTeam
+                                                  }
+                                                  awayTeam={
+                                                      match.match.awayTeam
+                                                  }
+                                                  matchResults={
+                                                      match.matchResults
+                                                  }
+                                                  score={match.scoreCache}
+                                                  redCard={match.redCards}
+                                                  betState={match.betState}
+                                                  willBeLive={
+                                                      match.match.willBeLive
+                                                  }
+                                                  matchState={
+                                                      match.betState.matchState
+                                                  }
+                                                  isTop={match.isTop}
+                                                  time={getTime(match)}
+                                                  date={getDate(match)}
+                                              />
+                                          </div>
+                                      ) : null
+                                  )}
+                              </div>
+                          ))
                         : null}
                 </div>
             </div>
@@ -332,8 +331,6 @@ function MHome(props) {
                 <OddDetailPanel
                     openDetailOdd={openDetailOdd}
                     matchId={selectMatchId}
-                    date={selectMatchDate}
-                    time={selectMatchTime}
                 />
             ) : (
                 <></>
@@ -341,4 +338,4 @@ function MHome(props) {
         </>
     );
 }
-export default MHome;
+export default MHighlights;

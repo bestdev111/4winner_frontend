@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 
 function Calculator(props) {
 
     const { onClickOutside, show } = props;
     const ref = useRef(null);
-    // const dispatch = useDispatch();
     const [showNum, setShowNum] = useState();
     const [calcError, setCalcError] = useState(false);
     useEffect(() => {
@@ -28,8 +26,8 @@ function Calculator(props) {
         if (showNum !== 0 && showNum !== undefined) {
             let temp = showNum + (e.currentTarget.textContent).toString()
             if (Number(temp) <= 5000 && !(temp.includes('0.0'))) {
-                if((Number(temp) - 1) * 100 > 0 && (Number(temp)-1) * 100 < 1 ){return}
-                 setShowNum(temp);
+                if ((Number(temp) - 1) * 100 > 0 && (Number(temp) - 1) * 100 < 1) { return }
+                setShowNum(temp);
             }
             else setCalcError(true);
         } else {
@@ -40,13 +38,13 @@ function Calculator(props) {
         e.persist();
         props.onClickOutside(e.target.innerText);
     }
-    const onOk = () =>{
+    const onOk = () => {
         props.onClickOutside(showNum);
     }
     const deleteVal = () => {
         let temp = showNum;
-        if(temp.length > 0) {
-            temp = temp.slice(0, temp.length-1)
+        if (temp.length > 0) {
+            temp = temp.slice(0, temp.length - 1)
             setShowNum(temp);
         }
     }
@@ -69,7 +67,7 @@ function Calculator(props) {
                                     <div className="form-group error">
                                         Maximum Playing value is 5000
                                     </div>
-                                : null}
+                                    : null}
                             </div>
                             <div className="col-xs-12 calc-num">
                                 <span className="num-quick" onClick={easyStack}>10</span>
@@ -82,62 +80,60 @@ function Calculator(props) {
                                 <div className="col-9">
                                     <div className="row">
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">1</a>
+                                            <p className="num-btn btn-group-justified">1</p>
                                         </div>
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">2</a>
+                                            <p className="num-btn btn-group-justified">2</p>
                                         </div>
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">3</a>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">4</a>
-                                        </div>
-                                        <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">5</a>
-                                        </div>
-                                        <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">6</a>
+                                            <p className="num-btn btn-group-justified">3</p>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">7</a>
+                                            <p className="num-btn btn-group-justified">4</p>
                                         </div>
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">8</a>
+                                            <p className="num-btn btn-group-justified">5</p>
                                         </div>
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">9</a>
+                                            <p className="num-btn btn-group-justified">6</p>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-4 calc-num" onClick={handleDisplay}>
+                                            <p className="num-btn btn-group-justified">7</p>
+                                        </div>
+                                        <div className="col-4 calc-num" onClick={handleDisplay}>
+                                            <p className="num-btn btn-group-justified">8</p>
+                                        </div>
+                                        <div className="col-4 calc-num" onClick={handleDisplay}>
+                                            <p className="num-btn btn-group-justified">9</p>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-8 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">0</a>
+                                            <p className="num-btn btn-group-justified">0</p>
                                         </div>
                                         <div className="col-4 calc-num" onClick={handleDisplay}>
-                                            <a className="num-btn btn-group-justified">.</a>
+                                            <p className="num-btn btn-group-justified">.</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-3">
                                     <div className="row height-50">
                                         <div className="col-xs-12 calc-num" onClick={deleteVal}>
-                                            <a className="num-btn btn-group-justified double-line">DEL</a>
+                                            <p className="num-btn btn-group-justified double-line">DEL</p>
                                         </div>
                                     </div>
                                     <div className="row height-50">
                                         <div className="col-xs-12 calc-num" onClick={onOk}>
-                                            <a className="num-btn btn-group-justified double-line">OK</a>
+                                            <p className="num-btn btn-group-justified double-line">OK</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="clearfix"></div> */}
                         </div>
-                        {/* <div className="clearfix"></div> */}
                     </div>
                 </div>
             </div>

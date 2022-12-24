@@ -19,14 +19,12 @@ class FadeInOut extends Component {
 
         this.state = { status: UNMOUNTED };
     }
-
     componentDidMount() {
         const { show } = this.props;
         if (show) {
             this.performEnter();
         }
     }
-
     componentDidUpdate(prevProps) {
         let nextStatus = null;
         if (prevProps !== this.props) {
@@ -43,7 +41,6 @@ class FadeInOut extends Component {
         }
         this.updateStatus(nextStatus);
     }
-
     updateStatus(nextStatus) {
         if (nextStatus !== null) {
             if (nextStatus === ENTERING) {
@@ -55,7 +52,6 @@ class FadeInOut extends Component {
             this.setState({ status: UNMOUNTED });
         }
     }
-
     performEnter() {
         this.setState({ status: ENTERING }, () => {
             setTimeout(() => {
@@ -63,7 +59,6 @@ class FadeInOut extends Component {
             }, 0);
         });
     }
-
     performExit() {
         const { duration } = this.props;
         this.setState({ status: EXITING }, () => {
@@ -72,13 +67,11 @@ class FadeInOut extends Component {
             }, duration);
         });
     }
-
     render() {
         const { status } = this.state;
         if (status === UNMOUNTED) {
             return null;
         }
-
         const { children, duration, className, style } = this.props;
         return (
             <div

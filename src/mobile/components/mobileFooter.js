@@ -23,7 +23,6 @@ function MobileFooter(props) {
     const dispatch = useDispatch()
     const [openCalc, setOpenCalc] = useState(false);
     const [numActive, setNumActive] = useState(0);
-    const [betSlipNum, setBetSlipNum] = useState(0);
     const [openBetModal, setOpenBetModal] = useState(true);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
     const userData = useSelector(state => state.authReducers)
@@ -37,17 +36,16 @@ function MobileFooter(props) {
     const [tax, setTax] = useState(temp2.toFixed(2));
     const [stakeBet, setStakeBet] = useState(temp2.toFixed(2));
     const [numBet, setNumBet] = useState();
+    const [slipNum, setSlipNum] = useState();
     const [maxWinning, setMaxWinning] = useState(temp2.toFixed(2));
     const [confirmVal, setConfirmVal] = useState(false);
     let footerList = isAuth ? mFooterListAuthor : mFooterList;
 
-    const goActive = (index) => {
-        setNumActive(index);
-    }
     const openModal = () => {
         setOpenBetModal(false)
     }
-    const goTo = (title) => {
+    const goTo = (title, index) => {
+        setNumActive(index);
         if (title === 'Home') {
             window.location.href = '/m_home';
             localStorage.setItem('path', 'Home');
@@ -61,7 +59,11 @@ function MobileFooter(props) {
             openModal()
             localStorage.setItem('path', 'Bet Slip');
         }
-        // if (title === 'Highlights') window.location.href = '/m_highlights'
+        if (title === "Highlights") {
+            window.location.href = "/m_highlights";
+            localStorage.setItem("path", "Highlights");
+            localStorage.setItem("leagueName", "");
+        }
         if (title === 'Results') {
             window.location.href = '/m_results'
             localStorage.setItem('path', 'Results');
@@ -72,13 +74,34 @@ function MobileFooter(props) {
         }
     }
     useEffect(() => {
+        let tempVal = 1;
         if (betCollectList && betCollectList.length > 0) {
-            setNumBet(betCollectList.length);
+            setSlipNum(betCollectList.length);
+            let matchList = [];
+            let matchCounts = [];
+            betCollectList.forEach(item => {
+                if (!matchList.includes(item.matchId)){
+                    matchList.push(item.matchId);
+                }
+            });
+            for (let index = 0; index < matchList.length; index++) {
+                let matchCount=0
+                betCollectList.forEach(item => {
+                    if (item.matchId === matchList[index]) matchCount++
+                });
+                matchCounts.push(matchCount);
+            }
+            matchCounts.forEach(item => {
+                tempVal = item * tempVal
+            })
+            setNumBet(tempVal);
         } else {
-            setNumBet(0);
+            setSlipNum(0);
+            setNumBet(0)
         }
-        let tempStack = totalStake / numBet
+        let tempStack = totalStake / tempVal
         setStakeBet(tempStack.toFixed(2));
+        calcMaxWinnings(betCollectList, )
     }, [betCollectList])
 
     useEffect(() => {
@@ -109,7 +132,7 @@ function MobileFooter(props) {
         }
     }
     const placeBet = () => {
-        if (numBet === 0) {
+        if (numBet === 0 && slipNum === 0) {
             ToastService("Please Add Bet!", 'info');
             return;
         }
@@ -143,6 +166,9 @@ function MobileFooter(props) {
             }
         }
         return null
+    }
+    const calcMaxWinnings = (betCollectList, index = numBet) => {
+
     }
     return (
         <>
@@ -264,8 +290,8 @@ function MobileFooter(props) {
                     <div className='bet-confirm-modal'>
                         <div className='opacity-back'>
                             <div className='bet-confirm-modal bet-confirm'>
-                                <a className='btn btn-success m-4' onClick={confirmBet}>Confirm</a>
-                                <a className='btn btn-danger m-4' onClick={() => setConfirmVal(false)}>Cancel</a>
+                                <p className='btn btn-success m-4' onClick={confirmBet}>Confirm</p>
+                                <p className='btn btn-danger m-4' onClick={() => setConfirmVal(false)}>Cancel</p>
                             </div>
                         </div>
                     </div>
@@ -277,11 +303,11 @@ function MobileFooter(props) {
                 <div className='d-flex justify-content-around'>
                     {
                         footerList.map((item, index) =>
-                            <div className='item' key={index} onClick={() => goActive(index)}>
+                            <div className='item' key={index} onClick={() => goTo(item.title, index)}>
                                 <div className='d-flex justify-content-center'>
-                                    {numBet > 0 && index === 2 ?
-                                        <span onClick={openModal} className='bet-slip-active'>{numBet}</span> :
-                                        <i onClick={() => goTo(item.title)} className={localStorage.getItem('path') === item.title ? `footer-active ${item.icon}` : item.icon} ></i>
+                                    {slipNum > 0 && index === 2 ?
+                                        <span onClick={openModal} className='bet-slip-active'>{slipNum}</span> :
+                                        <i className={localStorage.getItem('path') === item.title ? `footer-active ${item.icon}` : item.icon} ></i>
                                     }
                                 </div>
                                 <div className='d-flex justify-content-center'>

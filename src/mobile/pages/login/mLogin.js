@@ -8,7 +8,7 @@ function MLogin() {
     const dispatch = useDispatch();
     const [name, setName] = useState();
     const [pass, setPass] = useState();
-    useEffect(()=> {
+    useEffect(() => {
         dispatch(getTypeList())
     })
     useSelector(state => state.mobileSportsReducers.getTypeList)

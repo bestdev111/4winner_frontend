@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, MobileFooter } from '../../../mobile/components'
 import { getMyBet } from '../../../store/actions/betActions'
@@ -7,13 +7,11 @@ import './myBets.css'
 
 function MyBets() {
     const dispatch = useDispatch()
-    const [openBetModal, setOpenBetModal] = useState(true);
     const [detailOpen, setDetailOpen] = useState(true);
     const myBetData = useSelector(state => state.betReducers.myBetData);
     useEffect(() => {
         dispatch(getMyBet());
     }, [])
-    console.log('myBetData', myBetData);
     return (
         <>
             <MobileNavbar />
@@ -37,7 +35,7 @@ function MyBets() {
                             <option value='5'>Payed Out</option>
                         </select>
                     </div>
-                    {detailOpen ? 
+                    {detailOpen ?
                         <div className='myaccount-table'>
                             <div className='match-header'>
                                 <div className='col-3 text-center'>Type</div>
@@ -48,29 +46,29 @@ function MyBets() {
                             <div className='match-body'>
                                 {myBetData !== null && myBetData.length > 0 ?
                                     myBetData.map((item, index) =>
-                                        <div key={index} onClick={()=>setDetailOpen(false)} className={item.state === 0 ? 'bet-result-wait' : item.state === 1 ? 'bet-result-win' : 'bet-result-lose'}>
+                                        <div key={index} onClick={() => setDetailOpen(false)} className={item.state === 0 ? 'bet-result-wait' : item.state === 1 ? 'bet-result-win' : 'bet-result-lose'}>
                                             <div className='col-3 text-center p-2'>{item.betSystem}</div>
                                             <div className='col-4 text-center p-2'>{GetTime(item.date)}</div>
                                             <div className='col-2 text-center p-2'>{item.initialStake.toFixed(2)}</div>
                                             <div className='col-3 text-center p-2'>
                                                 {item.state === 0 ? <p>Result Awaited</p>
                                                     : item.state === 1 ?
-                                                    <>
-                                                        <div className='d-flex justify-content-center'>
-                                                            <p>{item.maxWinning}</p>
-                                                        </div>
-                                                        <div className='d-flex justify-content-center'>
-                                                            <p>Win</p>
-                                                        </div>
-                                                    </>
-                                                    : <>
-                                                        <div className='d-flex justify-content-center'>
-                                                            <p>{item.maxWinning}</p>
-                                                        </div>
-                                                        <div className='d-flex justify-content-center'>
-                                                            <p>Lose</p>
-                                                        </div>
-                                                    </>
+                                                        <>
+                                                            <div className='d-flex justify-content-center'>
+                                                                <p>{item.maxWinning}</p>
+                                                            </div>
+                                                            <div className='d-flex justify-content-center'>
+                                                                <p>Win</p>
+                                                            </div>
+                                                        </>
+                                                        : <>
+                                                            <div className='d-flex justify-content-center'>
+                                                                <p>{item.maxWinning}</p>
+                                                            </div>
+                                                            <div className='d-flex justify-content-center'>
+                                                                <p>Lose</p>
+                                                            </div>
+                                                        </>
                                                 }
                                             </div>
                                         </div>
@@ -79,7 +77,7 @@ function MyBets() {
                             </div>
                             <div className='match-footer text-center'></div>
                         </div>
-                    :
+                        :
                         <div className='myaccount-table'>
                             <div></div>
                         </div>

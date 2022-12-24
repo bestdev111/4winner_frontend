@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'usehooks-ts';
 import { MobileNavbar, MobileFooter } from '../../components'
@@ -15,11 +15,6 @@ function MResults() {
     const [leagueList, setLeagueList] = useState([]);
 
     const getResultList = useSelector(state => state.mobileSportsReducers.getResult);
-    // const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
-    // const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
-    // let availableSportTypes = '';
-    // if (get_AllMatches.data) { availableSportTypes = get_AllMatches.data.availableSportTypes }
-
     const dateSet = e => {
         setDate(e.target.value)
     }
@@ -48,7 +43,7 @@ function MResults() {
         setLeagueList(temp);
     }, [getResultList])
     const getResultData = () => {
-        if(date === undefined) {
+        if (date === undefined) {
             const todayDay = new Date()
             setDate(todayDay.getFullYear() + '-' + (todayDay.getMonth() + 1) + '-' + todayDay.getDate());
         }
@@ -90,9 +85,6 @@ function MResults() {
                         ) : null}
                     </select>
                     <select onChange={sportsTypeSet}>
-                        {/* {availableSportTypes ? availableSportTypes.map((item, index)=> 
-                            <option key={index} value={item}>{SportTypeList[item - 1] ? SportTypeList[item - 1].name : ''}</option>
-                        ) : null} */}
                         <option value='1'>Football</option>
                         <option value='2'>Basketball</option>
                         <option value='3'>Baseball</option>
