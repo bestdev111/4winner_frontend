@@ -252,19 +252,11 @@ function MHome(props) {
                                                 tipTypes={tipTypes}
                                                 openDetailOdd={openDetailOdd}
                                                 matchId={match.id}
-                                                homeTeam={
-                                                    match.match.homeTeam
-                                                }
-                                                awayTeam={
-                                                    match.match.awayTeam
-                                                }
-                                                matchResults={
-                                                    match.matchResults
-                                                }
+                                                homeTeam={match.match.homeTeam}
+                                                awayTeam={match.match.awayTeam}
+                                                matchResults={match.matchResults}
                                                 score={match.scoreCache}
-                                                matchState={
-                                                    match.betState.matchState
-                                                }
+                                                matchState={match.betState.matchState}
                                                 redCard={match.redCards}
                                                 betState={match.betState}
                                                 isTop={match.isTop}
@@ -297,24 +289,14 @@ function MHome(props) {
                                                 tipTypes={tipTypes}
                                                 openDetailOdd={openDetailOdd}
                                                 matchId={match.id}
-                                                homeTeam={
-                                                    match.match.homeTeam
-                                                }
-                                                awayTeam={
-                                                    match.match.awayTeam
-                                                }
-                                                matchResults={
-                                                    match.matchResults
-                                                }
+                                                homeTeam={match.match.homeTeam}
+                                                awayTeam={match.match.awayTeam}
+                                                matchResults={match.matchResults}
                                                 score={match.scoreCache}
                                                 redCard={match.redCards}
                                                 betState={match.betState}
-                                                willBeLive={
-                                                    match.match.willBeLive
-                                                }
-                                                matchState={
-                                                    match.betState.matchState
-                                                }
+                                                willBeLive={match.match.willBeLive}
+                                                matchState={match.betState.matchState}
                                                 isTop={match.isTop}
                                                 time={getTime(match)}
                                                 date={getDate(match)}

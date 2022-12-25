@@ -167,8 +167,8 @@ function MobileFooter(props) {
         }
         return null
     }
-    const calcMaxWinnings = (betCollectList, index = numBet) => {
-
+    const calcMaxWinnings = (betCollectList, index) => {
+        console.log('calcMaxWinnings==>',betCollectList, index);
     }
     return (
         <>
