@@ -75,6 +75,58 @@ function LeagueContent(props) {
                 }
             }
         }
+        if (props.sportTypeId === 4) {
+            if (matchData.betState.betradarMatchState > 10) { // pause match
+                return (<>
+                    <span className="halftime">{matchData.betState.betradarMatchState - 12}{". "}Pause</span>
+                    <span className="live-time">{matchData.betState.betradarMatchState - 12}{". "}Pause</span>
+                </>)
+            }
+            else{
+                if (matchData.betState.betradarMatchState > 0) { // Quarter Match
+                    return (<>
+                        <span className="live">Live</span>
+                        <span className="live-time">{matchData.betState.betradarMatchState - 3}{". "}Quarter</span>
+                    </>)
+                }
+                if (matchData.betState.betradarMatchState === 0) { // will live match
+                    return (<>
+                        <span className="will-live">{matchData.date} {matchData.time}</span>
+                    </>)
+                }
+                else{ // will not live match
+                    return (<>
+                        <span className="not-will-live">{matchData.date} {matchData.time}</span>
+                    </>)
+                }
+            }
+        }
+        if (props.sportTypeId === 16) {
+            if (matchData.betState.betradarMatchState > 10) { // pause match
+                return (<>
+                    <span className="halftime">{matchData.betState.betradarMatchState - 12}{". "}Pause</span>
+                    <span className="live-time">{matchData.betState.betradarMatchState - 12}{". "}Pause</span>
+                </>)
+            }
+            else{
+                if (matchData.betState.betradarMatchState > 0) { // Quarter Match
+                    return (<>
+                        <span className="live">Live</span>
+                        <span className="live-time">{matchData.betState.betradarMatchState - 3}{". "}Quarter</span>
+                    </>)
+                }
+                if (matchData.betState.betradarMatchState === 0) { // will live match
+                    return (<>
+                        <span className="will-live">{matchData.date} {matchData.time}</span>
+                    </>)
+                }
+                else{ // will not live match
+                    return (<>
+                        <span className="not-will-live">{matchData.date} {matchData.time}</span>
+                    </>)
+                }
+            }
+        }
         else {
             switch (matchData.matchState) {
                 case 1:
@@ -807,95 +859,314 @@ function LeagueContent(props) {
                         )
                     )
                     : props.sportTypeId === 4 ?
-                    <>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o1')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o1')
-                                    ? (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o1) : '-'}
+                        matchData.betState.betradarMatchState > 0 ?
+                            <>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o2')
+                                            ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][1][1][0][1] ? calcOdd(item[1][2][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                            </>
+                        :
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 381) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o0')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o0')
-                                    ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o0) === 0.00 ? '-' : calcOdd(matchData.betState.matchOdds102.o0) : null}
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 381) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o2')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o2')
-                                    ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o2) : '-'}
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 381) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][2][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    </>
-                    : props.sportTypeId === 6 ?
-                    <>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o1')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o1')
-                                    ? (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o1) : '-'}
+                        </>
+                    : props.sportTypeId === 6 ? 
+                        matchData.betState.betradarMatchState > 0 ?
+                            <>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o2')
+                                            ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][1][1][0][1] ? calcOdd(item[1][2][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                            </>
+                        :
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 381) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o0')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o0')
-                                    ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o0) === 0.00 ? '-' : calcOdd(matchData.betState.matchOdds102.o0) : null}
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 381) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o2')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o2')
-                                    ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o2) : '-'}
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 381) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][2][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    </>
-                    : props.sportTypeId === 12 ?
-                    <>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o1')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o1')
-                                    ? (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u1 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u1 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o1) : '-'}
-                            </div>
-                        </div>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o0')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o0')
-                                    ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o0) === 0.00 ? '-' : calcOdd(matchData.betState.matchOdds102.o0) : null}
-                            </div>
-                        </div>
-                        <div className="o3" onClick={(e) => betOddSelect(e, 'o2')}>
-                            <div className={
-                                odds.length > 0 && odds.includes('o2')
-                                    ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                    : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                            }>
-                                {matchData.betState ? calcOdd(matchData.betState.matchOdds102.o2) : '-'}
-                            </div>
-                        </div>
-                    </>
+                        </>
+                    : props.sportTypeId === 12 ? // rugby
+                        matchData.betState.betradarMatchState > 0 ?
+                            <>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o2')
+                                            ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                    return item[1][1][1][0][1] ? calcOdd(item[1][2][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                            </>
+                            :
+                            <>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === 381) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o0')
+                                            ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === 381) {
+                                                    return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                                <div className="o3">
+                                    <div className={
+                                        odds.length > 0 && odds.includes('o2')
+                                            ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                            : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                    }>
+                                        {matchData.betState ?
+                                            matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                                if (item[0].oddsType === 381) {
+                                                    return item[1][1][1][0][1] ? calcOdd(item[1][2][1][0][1]) : '-'
+                                                }
+                                            })
+                                            : null
+                                        }
+                                    </div>
+                                </div>
+                            </>
                     : props.sportTypeId === 5 ?
                     <>
                         <div className="o3">
@@ -917,7 +1188,7 @@ function LeagueContent(props) {
                             </div>
                         </div>
                     </>
-                    : props.sportTypeId === 2 ?
+                    : props.sportTypeId === 2 ? //basketball
                         matchData.betState.betradarMatchState > 0 ?
                         <>
                             <div className="o3">
@@ -929,7 +1200,7 @@ function LeagueContent(props) {
                                     {matchData.betState ? 
                                         matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
                                             if (item[0].oddsType === -2007 && item[0].subType === 37) {
-                                                return calcOdd(item[1][0][1][0][1])
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
                                             }
                                         })
                                         :null
@@ -945,7 +1216,7 @@ function LeagueContent(props) {
                                     {matchData.betState ?
                                         matchData.betState.betradarOdds.releasedBetradarOdds.map(item =>{
                                             if (item[0].oddsType === -2007 && item[0].subType === 37) {
-                                                return calcOdd(item[1][1][1][0][1])
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
                                             }
                                         })
                                         : null
@@ -964,7 +1235,7 @@ function LeagueContent(props) {
                                     {matchData.betState ?
                                         matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
                                             if (item[0].oddsType === 382) {
-                                                return calcOdd(item[1][0][1][0][1])
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
                                             }
                                         })
                                         : null
@@ -980,7 +1251,7 @@ function LeagueContent(props) {
                                     {matchData.betState ?
                                         matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
                                             if (item[0].oddsType === 382) {
-                                                return calcOdd(item[1][1][1][0][1])
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
                                             }
                                         })
                                         : null
@@ -988,29 +1259,218 @@ function LeagueContent(props) {
                                 </div>
                             </div>
                         </>
-                    : <>
-                                            <div className="o3">
-                                                <div className={
-                                                    odds.length > 0 && odds.includes('o0')
-                                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                                                }>
-                                                    {/* {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds ? matchData.betState.betradarOdds.releasedBetradarOdds.map((item, index)=>
-                                        item[0] && item[0].oddsType === 382 ? item.
-                                    )matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length - 1][1][1][0][1] : null) : '-'} */}
-                                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0] ? matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length - 1][1][1][0][1] : null) : '-'}
-                                                </div>
-                                            </div>
-                                            <div className="o3">
-                                                <div className={
-                                                    odds.length > 0 && odds.includes('o2')
-                                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
-                                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
-                                                }>
-                                                    {matchData.betState ? calcOdd(matchData.betState.betradarOdds.releasedBetradarOdds[0] ? matchData.betState.betradarOdds.releasedBetradarOdds[0][matchData.betState.betradarOdds.releasedBetradarOdds[0].length - 1][0][1][0][1] : null) : '-'}
-                                                </div>
-                                            </div>
-                    </>
+                    : props.sportTypeId === 23 ? // volleyball
+                        matchData.betState.betradarMatchState > 0 ?
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ? 
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        :null
+                                    }
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item =>{
+                                            if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 382) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 382) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                        </>
+                    : props.sportTypeId === 10 ? // boxing
+                        matchData.betState.betradarMatchState > 0 ?
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === -2007 && item[0].subType === 102) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 20) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 20) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                        </>
+                    : matchData.betState.betradarMatchState > 0 ?
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === -2007 && item[0].subType === 37) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === -2007 && item[0].subType === 37) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o0')
+                                        ? (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u0 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u0 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 382) {
+                                                return item[1][0][1][0][1] ? calcOdd(item[1][0][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="o3">
+                                <div className={
+                                    odds.length > 0 && odds.includes('o2')
+                                        ? (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-selected odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-selected odd-decreased' : 'changeable-odd odd-selected')
+                                        : (matchData.betState.matchOdds102.u2 === 1 ? 'changeable-odd odd-increased' : matchData.betState.matchOdds102.u2 === -1 ? 'changeable-odd odd-decreased' : 'changeable-odd')
+                                }>
+                                    {matchData.betState ?
+                                        matchData.betState.betradarOdds.releasedBetradarOdds.map(item => {
+                                            if (item[0].oddsType === 382) {
+                                                return item[1][1][1][0][1] ? calcOdd(item[1][1][1][0][1]) : '-'
+                                            }
+                                        })
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                        </>
                 }
             </div>
         </div>

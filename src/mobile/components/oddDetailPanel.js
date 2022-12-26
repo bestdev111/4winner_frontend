@@ -16,7 +16,7 @@ const OddDetailPanel = (props) => {
         }
     }, [props.matchId]);
     const calcOdd = (param) => {
-        let value = param / 100;
+        let value = Number(param) / 100;
         return value.toFixed(2)
     }
     const handleChange = e => {

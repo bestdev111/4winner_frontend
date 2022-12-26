@@ -35,6 +35,8 @@ function MHome(props) {
     const [isMounted, setIsMounted] = useState(false);
     const [liveMatches, setLiveMatches] = useState(null);
     const [willMatches, setWillMatches] = useState(null);
+    const [liveBetRadarName, setLiveBetRadarName] = useState(null);
+    const [willBetRadarName, setWillBetRadarName] = useState(null);
     const [onlyLive, setOnlyLive] = useState(false);
 
     const [sportTypeId, setSportTypeId] = useState(1);
@@ -91,7 +93,9 @@ function MHome(props) {
     };
     useEffect(() => {
         let tempType1 = [];
+        let tempBetRadar1 = [];
         let tempType2 = [];
+        let tempBetRadar2 = [];
         if (get_Matches && get_Matches.length !== 0) {
             let live_leagues = get_Matches.data.matches.filter(
                 (item) => item.betState.matchState >= 3
@@ -104,15 +108,19 @@ function MHome(props) {
             live_leagues.forEach((item) => {
                 if (!tempType1.includes(item.match.league)) {
                     tempType1.push(item.match.league);
+                    tempBetRadar1.push(item.match.betradarCategory.name)
                 }
             });
             will_leagues.forEach((item) => {
                 if (!tempType2.includes(item.match.league)) {
                     tempType2.push(item.match.league);
+                    tempBetRadar2.push(item.match.betradarCategory.name)
                 }
             });
             setLiveLeagueType(tempType1);
+            setLiveBetRadarName(tempBetRadar1)
             setWillLeagueType(tempType2);
+            setWillBetRadarName(tempBetRadar2);
         }
     }, [get_Matches]);
     useEffect(() => {
@@ -188,8 +196,8 @@ function MHome(props) {
         );
 
         const todayDay = new Date().getDate();
-        const matchDay = new Date(utcDate).getDate();
-        const matchMonth = new Date(utcDate).getMonth();
+        let matchDay = new Date(utcDate).getDate();
+        let matchMonth = new Date(utcDate).getMonth() + 1;
         if (todayDay === matchDay) {
             date = "Today";
         }
@@ -197,6 +205,12 @@ function MHome(props) {
             date = "Tomorrow";
         }
         if (matchDay > todayDay + 1) {
+            if (matchDay < 10) {
+                matchDay = '0' + matchDay
+            }
+            if (matchMonth < 10) {
+                matchMonth = '0' + matchMonth
+            }
             date = matchDay + "." + matchMonth;
         }
         return date;
@@ -241,7 +255,8 @@ function MHome(props) {
                                         item.sportTypeId === sportTypeId
                                             ? item.name
                                             : null
-                                    )}
+                                    )}/
+                                    {liveBetRadarName ? liveBetRadarName[index1] : null}
                                     /{league}
                                 </div>
                                 {liveMatches.map((match, i) =>
@@ -271,14 +286,15 @@ function MHome(props) {
                         ))
                         : null}
                     {!onlyLive && willLeagueType
-                        ? willLeagueType.map((league, index1) => (
-                            <div key={index1}>
+                        ? willLeagueType.map((league, index2) => (
+                            <div key={index2}>
                                 <div className="league-content">
                                     {SportTypeList.map((item) =>
                                         item.sportTypeId === sportTypeId
                                             ? item.name
                                             : null
-                                    )}
+                                    )}/
+                                    {willBetRadarName ? willBetRadarName[index2] : null}
                                     /{league}
                                 </div>
                                 {willMatches.map((match, i) =>
