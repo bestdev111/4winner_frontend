@@ -101,8 +101,8 @@ function MobileFooter(props) {
         }
         let tempStack = totalStake / tempVal
         setStakeBet(tempStack.toFixed(2));
-        calcMaxWinnings(betCollectList, )
-    }, [betCollectList])
+        calcMaxWinnings(betCollectList, tempVal)
+    }, [betCollectList, totalStake])
 
     useEffect(() => {
         let tempStack = totalStake / numBet
@@ -168,7 +168,25 @@ function MobileFooter(props) {
         return null
     }
     const calcMaxWinnings = (betCollectList, index) => {
-        console.log('calcMaxWinnings==>',betCollectList, index);
+        let temp = 1;
+        let tempList = [];
+        let tempMatchIds = [];
+        betCollectList.forEach(item => {
+            if(!tempMatchIds.includes(item.matchId)){
+                tempMatchIds.push(item.matchId);
+            }
+        })
+        for (let index = 0; index < tempMatchIds.length; index++) {
+            let sum = 0
+            betCollectList.forEach(item => {
+                if (item.matchId === tempMatchIds[index]){
+                    sum = sum + item.odds[0][item.selectedOdds]/100
+                }
+            })
+            temp = temp * sum;
+        }
+        const value = parseFloat(temp) * totalStake / index;
+        setMaxWinning(value.toFixed(2))
     }
     return (
         <>
@@ -297,7 +315,7 @@ function MobileFooter(props) {
                     </div>
                 </FadeInOut>
                 : null}
-            <Calculator show={openCalc} onClickOutside={onClickOutside} />
+            <Calculator show={openCalc} onClickOutside={onClickOutside} maxWinning={maxWinning}/>
             {/* main footer bar */}
             <div className="m-footer px-2">
                 <div className='d-flex justify-content-around'>

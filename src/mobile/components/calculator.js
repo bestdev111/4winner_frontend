@@ -57,7 +57,7 @@ function Calculator(props) {
                         <div className="modal-body">
                             <div className="d-flex">
                                 <span className="possible-winning-text">Max Winning</span>
-                                <span className="possible-winning-value text-right">0.00</span>
+                                <span className="possible-winning-value text-right">{props.maxWinning}</span>
                             </div>
                             <div className="col-xs-12">
                                 <span className="form-control text-right numpet-input">{showNum}</span>

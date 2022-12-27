@@ -367,8 +367,7 @@ function LeagueContent(props) {
                                     >
                                         {matchData.betState
                                             ? calcOdd(
-                                                matchData.betState
-                                                    .matchWinnerOdds102.o1
+                                                matchData.betState.matchOdds102.o1
                                             )
                                             : "-"}
                                     </div>
@@ -398,8 +397,7 @@ function LeagueContent(props) {
                                     >
                                         {matchData.betState
                                             ? calcOdd(
-                                                matchData.betState
-                                                    .matchWinnerOdds102.o0
+                                                matchData.betState.matchOdds102.o0
                                             )
                                             : "-"}
                                     </div>
@@ -429,8 +427,7 @@ function LeagueContent(props) {
                                     >
                                         {matchData.betState
                                             ? calcOdd(
-                                                matchData.betState
-                                                    .matchWinnerOdds102.o2
+                                                matchData.betState.matchOdds102.o2
                                             )
                                             : "-"}
                                     </div>
