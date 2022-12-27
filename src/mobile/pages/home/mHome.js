@@ -54,12 +54,12 @@ function MHome(props) {
         (state) => state.mobileSportsReducers.getTypeList
     );
     const categorySet = useSelector(
-        (state) => state.settingReducers.categorySet
+        (state) => state.settingReducers
     );
     const dataFetch = () => {
-        let sportTypeId1 = localStorage.getItem("sportTypeId") ? localStorage.getItem("sportTypeId"): categorySet.sportTypeId;
-        let betradarCategoryId1 = localStorage.getItem("betradarCategoryId") ? localStorage.getItem("betradarCategoryId"): categorySet.letbetradarCategoryId;
-        let leagueName1 = localStorage.getItem("leagueName") ? localStorage.getItem("leagueName"): categorySet.leagueName;
+        let sportTypeId1 = localStorage.getItem("sportTypeId") ? localStorage.getItem("sportTypeId") : categorySet.sportTypeId;
+        let betradarCategoryId1 = localStorage.getItem("betradarCategoryId") ? localStorage.getItem("betradarCategoryId") : categorySet ? categorySet.betradarCategoryId : null;
+        let leagueName1 = localStorage.getItem("leagueName") ? localStorage.getItem("leagueName") : categorySet.leagueName;
         let obj = {
             sportTypeId: sportTypeId1,
             betradarCategoryId: betradarCategoryId1,
@@ -144,16 +144,16 @@ function MHome(props) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [hideSubNav]);
     useEffect(() => {
-        if(categorySet.sportTypeId !== null && categorySet.sportTypeId !== undefined)
+        if (categorySet.sportTypeId !== null && categorySet.sportTypeId !== undefined)
             localStorage.setItem("sportTypeId", categorySet.sportTypeId)
-        if(categorySet.betradarCategoryId !== null && categorySet.betradarCategoryId !== undefined)
+        if (categorySet.betradarCategoryId !== null && categorySet.betradarCategoryId !== undefined)
             localStorage.setItem("betradarCategoryId", categorySet.betradarCategoryId)
-        if(categorySet.leagueName !== null && categorySet.leagueName !== undefined)
+        if (categorySet.leagueName !== null && categorySet.leagueName !== undefined)
             localStorage.setItem("leagueName", categorySet.leagueName)
-        
-        let sportTypeId1 = localStorage.getItem("sportTypeId") ? localStorage.getItem("sportTypeId"): categorySet.sportTypeId;
-        let betradarCategoryId1 = localStorage.getItem("betradarCategoryId") ? localStorage.getItem("betradarCategoryId"): categorySet.letbetradarCategoryId;
-        let leagueName1 = localStorage.getItem("leagueName") ? localStorage.getItem("leagueName"): categorySet.leagueName;
+
+        let sportTypeId1 = localStorage.getItem("sportTypeId") ? localStorage.getItem("sportTypeId") : categorySet.sportTypeId;
+        let betradarCategoryId1 = localStorage.getItem("betradarCategoryId") ? localStorage.getItem("betradarCategoryId") : categorySet.letbetradarCategoryId;
+        let leagueName1 = localStorage.getItem("leagueName") ? localStorage.getItem("leagueName") : categorySet.leagueName;
         let obj = {
             sportTypeId: sportTypeId1,
             betradarCategoryId: betradarCategoryId1,

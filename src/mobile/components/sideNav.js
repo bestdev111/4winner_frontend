@@ -94,6 +94,7 @@ function SideNav(props) {
         e.stopPropagation();
     }
     const onClickSideItem = (sportType, leagues, subLeague, index) => {
+        collapseFunc1()
         onClickOutside()
         setIsCollapse3(index)
         dispatch(setCategorySet(sportType.sportTypeId, leagues.betradarCategoryId, subLeague.name))
@@ -140,7 +141,7 @@ function SideNav(props) {
                                                 <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
                                                     {league.leagueList.map((league1, index3) =>
                                                         <li key={index3}>
-                                                            <p onClick={()=>onClickSideItem(item, league, league1, index3)} className={isCollapse3 === index3 ? 'collapse' : ''} >
+                                                            <p onClick={() => onClickSideItem(item, league, league1, index3)} className={isCollapse3 === index3 ? 'collapse' : ''} >
                                                                 {league1.name}<span className="match-count">{league1.leagueMatchCount}</span>
                                                             </p>
                                                         </li>
