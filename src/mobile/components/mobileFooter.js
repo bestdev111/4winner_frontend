@@ -188,7 +188,6 @@ function MobileFooter(props) {
         const value = parseFloat(temp) * totalStake / index;
         setMaxWinning(value.toFixed(2))
     }
-    // console.log('betCollectList=>',betCollectList);
     return (
         <>
             {!openBetModal ?

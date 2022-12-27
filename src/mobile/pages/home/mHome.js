@@ -68,7 +68,6 @@ function MHome(props) {
             startIndex: startIndex,
             orderByLeague: orderByLeague,
         };
-        console.log(obj)
         dispatch(getMatches(obj));
         dispatch(getAllMatches());
         dispatch(getTopLeague());
@@ -162,7 +161,6 @@ function MHome(props) {
             startIndex: startIndex,
             orderByLeague: orderByLeague,
         };
-        console.log(obj)
         dispatch(getMatches(obj));
     }, [categorySet])
 
