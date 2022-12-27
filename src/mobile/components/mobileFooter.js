@@ -236,7 +236,9 @@ function MobileFooter(props) {
                                                 <div className='tip-row'>
                                                     <div className="tip-col middle-col">{item.homeTeam} - {item.awayTeam}</div>
                                                     <div className="tip-col right-col bold">
-                                                        <div className=" currentscore-green">{item.matchTime}</div>
+                                                        <div className=" currentscore-green">
+                                                            {item.matchState > 2 ? item.matchTime + "'" : item.matchDate + " " + item.matchTime}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
