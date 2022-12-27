@@ -175,7 +175,11 @@ function LeagueContent(props) {
             betType: props.tipTypes,
             odds: [matchData.betState.matchOdds102],
             selectedOdds: param,
-            betSystem: 'Single/Multiple'
+            betSystem: 'Single/Multiple',
+            matchTime: matchData.time,
+            homeScore: matchData.score.history[0][0].home,
+            awayScore: matchData.score.history[0][0].away,
+
         }
         dispatch(betOddSelectAction(betCollectList, obj));
     }
