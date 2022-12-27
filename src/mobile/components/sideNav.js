@@ -92,6 +92,12 @@ function SideNav(props) {
     const onHandleChange = e => {
         e.stopPropagation();
     }
+    const onClickSideItem = (sportType, leagues, subLeague, index) => {
+        onClickOutside()
+        setIsCollapse3(index)
+        
+        console.log(sportType.name, leagues.name, subLeague.name)
+    }
     return (
         <div className='opacity-back' onScroll={onHandleChange}>
             <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
@@ -132,10 +138,10 @@ function SideNav(props) {
                                                     <span className="match-count">{league.leagueMatchCount}</span>
                                                 </p>
                                                 <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
-                                                    {league.leagueList.map((league, index3) =>
+                                                    {league.leagueList.map((league1, index3) =>
                                                         <li key={index3}>
-                                                            <p className={isCollapse3 === index3 ? 'collapse' : ''} onClick={() => setIsCollapse3(index3)}>
-                                                                {league.name}<span className="match-count">{league.leagueMatchCount}</span>
+                                                            <p onClick={()=>onClickSideItem(item, league, league1, index3)} className={isCollapse3 === index3 ? 'collapse' : ''} >
+                                                                {league1.name}<span className="match-count">{league1.leagueMatchCount}</span>
                                                             </p>
                                                         </li>
                                                     )}
