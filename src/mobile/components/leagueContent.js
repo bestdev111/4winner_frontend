@@ -177,8 +177,10 @@ function LeagueContent(props) {
             selectedOdds: param,
             betSystem: 'Single/Multiple',
             matchTime: matchData.time,
+            matchDate: matchData.date,
             homeScore: matchData.score.history[0][0].home,
             awayScore: matchData.score.history[0][0].away,
+            matchState: matchData.matchState
 
         }
         dispatch(betOddSelectAction(betCollectList, obj));
