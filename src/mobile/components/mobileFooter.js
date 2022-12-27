@@ -157,16 +157,16 @@ function MobileFooter(props) {
         setOpenCalc(false);
         if (param) setTotalStake(param);
     }
-    const objFunc = (obj, index, betType) => {
-        for (let key in obj) {
-            if (key === index && obj.hasOwnProperty(index)) {
-                var value = obj[index];
-                value = value / 100
-                return value.toFixed(2);
-            }
-        }
-        return null
-    }
+    // const objFunc = (obj, index, betType) => {
+    //     for (let key in obj) {
+    //         if (key === index && obj.hasOwnProperty(index)) {
+    //             var value = obj[index];
+    //             value = value / 100
+    //             return value.toFixed(2);
+    //         }
+    //     }
+    //     return null
+    // }
     const calcMaxWinnings = (betCollectList, index) => {
         let temp = 1;
         let tempList = [];
@@ -188,6 +188,7 @@ function MobileFooter(props) {
         const value = parseFloat(temp) * totalStake / index;
         setMaxWinning(value.toFixed(2))
     }
+    console.log('betCollectList=>',betCollectList);
     return (
         <>
             {!openBetModal ?
@@ -223,7 +224,8 @@ function MobileFooter(props) {
                                             <div className='tip-body'>
                                                 <div className='tip-row'>
                                                     <div className="tip-col middle-col bold">{item.selectedOdds === 'o0' ? 'Draw' : item.selectedOdds === 'o1' ? item.homeTeam : item.awayTeam}</div>
-                                                    <div className="tip-col right-col bold">{objFunc(item.odds[0], item, item.betType)}</div>
+                                                    <div className="tip-col right-col bold">{(item.odds[0][item.selectedOdds] / 100).toFixed(2)}</div>
+                                                    {/* <div className="tip-col right-col bold">{objFunc(item.odds[0], item, item.betType)}</div> */}
                                                 </div>
                                                 <div className='tip-row'>
                                                     <div className="tip-col middle-col">{betTypesList[item.betType].title}</div>
@@ -234,7 +236,7 @@ function MobileFooter(props) {
                                                 <div className='tip-row'>
                                                     <div className="tip-col middle-col">{item.homeTeam} - {item.awayTeam}</div>
                                                     <div className="tip-col right-col bold">
-                                                        <div className=" currentscore-green"> 86'</div>
+                                                        <div className=" currentscore-green">{item.matchTime}</div>
                                                     </div>
                                                 </div>
                                             </div>
