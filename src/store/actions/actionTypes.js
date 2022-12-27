@@ -28,6 +28,7 @@ export const MOBILE_GET_RESULT = 'MOBILE_GET_RESULT';
 
 //settings
 export const SET_LOCALIZE = 'SET_LOCALIZE';
+export const SET_CATEGORY_SET = 'SET_CATEGORY_SET';
 
 //betActions
 export const BET_SELECT = 'BET_SELECT';

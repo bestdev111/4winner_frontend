@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllMatches, getTypeList } from '../../store/actions/mobileSportsActions'
 import { logoutUser } from '../../store/actions/authActions'
+import { setCategorySet } from '../../store/actions/settingActions'
 import { Language } from '../../utils';
 
 function SideNav(props) {
@@ -95,8 +96,7 @@ function SideNav(props) {
     const onClickSideItem = (sportType, leagues, subLeague, index) => {
         onClickOutside()
         setIsCollapse3(index)
-        
-        console.log(sportType.name, leagues.name, subLeague.name)
+        dispatch(setCategorySet(sportType.sportTypeId, leagues.betradarCategoryId, subLeague.name))
     }
     return (
         <div className='opacity-back' onScroll={onHandleChange}>

@@ -16,6 +16,7 @@ import {
     getLeagueSorts,
     getTypeList,
 } from "../../../store/actions/mobileSportsActions";
+import { setCategorySet } from '../../../store/actions/settingActions'
 import { FadeInOut } from "../../../utils";
 import { tipTypesList, leagueNameRadarId } from "../../../utils/dataUtils";
 import "./mHome.css";
@@ -52,24 +53,22 @@ function MHome(props) {
     const SportTypeList = useSelector(
         (state) => state.mobileSportsReducers.getTypeList
     );
+    const categorySet = useSelector(
+        (state) => state.settingReducers.categorySet
+    );
     const dataFetch = () => {
-        let id = localStorage.getItem("sportTypeId");
-        let betradarCategoryId1 = betradarCategoryId;
-        id = id === undefined ? 1 : id;
-        if (id !== '1') {
-            localStorage.setItem("leagueName", '');
-        }
-        let leagueName = localStorage.getItem("leagueName");
-        if (leagueName !== null || leagueName !== undefined)
-            betradarCategoryId1 = leagueNameRadarId[leagueName];
+        let sportTypeId1 = localStorage.getItem("sportTypeId") ? localStorage.getItem("sportTypeId"): categorySet.sportTypeId;
+        let betradarCategoryId1 = localStorage.getItem("betradarCategoryId") ? localStorage.getItem("betradarCategoryId"): categorySet.letbetradarCategoryId;
+        let leagueName1 = localStorage.getItem("leagueName") ? localStorage.getItem("leagueName"): categorySet.leagueName;
         let obj = {
-            sportTypeId: id,
+            sportTypeId: sportTypeId1,
             betradarCategoryId: betradarCategoryId1,
-            leagueName: leagueName,
+            leagueName: leagueName1,
             matchState: matchState,
             startIndex: startIndex,
             orderByLeague: orderByLeague,
         };
+        console.log(obj)
         dispatch(getMatches(obj));
         dispatch(getAllMatches());
         dispatch(getTopLeague());
@@ -144,16 +143,38 @@ function MHome(props) {
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, [hideSubNav]);
+    useEffect(() => {
+        if(categorySet.sportTypeId !== null && categorySet.sportTypeId !== undefined)
+            localStorage.setItem("sportTypeId", categorySet.sportTypeId)
+        if(categorySet.betradarCategoryId !== null && categorySet.betradarCategoryId !== undefined)
+            localStorage.setItem("betradarCategoryId", categorySet.betradarCategoryId)
+        if(categorySet.leagueName !== null && categorySet.leagueName !== undefined)
+            localStorage.setItem("leagueName", categorySet.leagueName)
+        
+        let sportTypeId1 = localStorage.getItem("sportTypeId") ? localStorage.getItem("sportTypeId"): categorySet.sportTypeId;
+        let betradarCategoryId1 = localStorage.getItem("betradarCategoryId") ? localStorage.getItem("betradarCategoryId"): categorySet.letbetradarCategoryId;
+        let leagueName1 = localStorage.getItem("leagueName") ? localStorage.getItem("leagueName"): categorySet.leagueName;
+        let obj = {
+            sportTypeId: sportTypeId1,
+            betradarCategoryId: betradarCategoryId1,
+            leagueName: leagueName1,
+            matchState: matchState,
+            startIndex: startIndex,
+            orderByLeague: orderByLeague,
+        };
+        console.log(obj)
+        dispatch(getMatches(obj));
+    }, [categorySet])
+
+    // useEffect(() => {
+    //     dataFetch()
+    // }, [leagueName, betradarCategoryId, sportTypeId])
 
     const getTipTypes = (index) => {
         setTipTypes(index);
     };
     const getLeagueName = (leagueName) => {
-        leagueName = leagueName.replaceAll(" ", "%20");
-        if (localStorage.getItem('sportTypeId') === '1') {
-            localStorage.setItem("leagueName", leagueName);
-            setLeagueName(leagueName);
-        }
+        dispatch(setCategorySet(1, leagueNameRadarId[leagueName.replaceAll(" ", "%20")], leagueName));
     };
     const openDetailOdd = (index, id, date, time) => {
         setOpenOddDetailVal(index);
