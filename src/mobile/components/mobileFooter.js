@@ -136,7 +136,8 @@ function MobileFooter(props) {
                 tax: tax,
                 stakeBet: (totalStake / numBet).toFixed(2),
                 maxWinning: maxWinning,
-                numBet: numBet
+                numBet: numBet,
+                betSystem: 'Single/Multiple',
             }
             dispatch(placeMyBet(betCollectList, betState));
             setConfirmVal(false);

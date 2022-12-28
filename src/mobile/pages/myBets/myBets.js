@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, MobileFooter } from '../../../mobile/components'
 import { getMyBet } from '../../../store/actions/betActions'
 import { GetTime } from '../../../utils';
+import { betTypesList } from '../../../utils/dataUtils';
 import './myBets.css'
 function MyBets() {
     const dispatch = useDispatch()
@@ -99,7 +100,7 @@ function MyBets() {
                                     </div>
                                     <div className='pt-1 row row-data'>
                                         <div className='yellow-text col-6'>Number of bets:</div>
-                                        <div className='col-6'></div>
+                                        <div className='col-6'>{myBetData[detailOpen].numBet}</div>
                                     </div>
                                     <div className='pt-1 row row-data'>
                                         <div className='yellow-text col-6'>Stake per bet:</div>
@@ -124,15 +125,15 @@ function MyBets() {
                                 </div>
                                 <div className='betslip-detail-rows mt-3'>
                                     <div className='betslip-detail-row text-center'>Betting Events</div>
-                                    {myBetData[detailOpen].bettingEvent.length > 0 ?
-                                        myBetData[detailOpen].bettingEvent.map((item, index) => {
+                                    {myBetData[detailOpen].bettingEvents.length > 0 ?
+                                        myBetData[detailOpen].bettingEvents.map((item, index) => 
                                             <div key={index} className='betslip-detail-row' onClick={() => funcHold(index)}>
                                                 <div className='d-flex pt-2'>
                                                     <div className='col-4'>Date</div>
-                                                    <div className='col-5'>date</div>
+                                                    <div className='col-5'>{item.matchDate}</div>
                                                     <div className='bet-detail-icon bets-waiting col-3 d-flex justify-content-end'>
-                                                        <p className={myBetData[detailOpen].state === 0 ? 'result-awaited' : myBetData[detailOpen].state === 1 ? 'win' : 'lost'}>
-                                                            <svg aria-hidden="true" data-fa-processed="" data-prefix="far" data-icon="arrow-alt-circle-down" className="svg-inline--fa fa-arrow-alt-circle-down fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm-32-316v116h-67c-10.7 0-16 12.9-8.5 20.5l99 99c4.7 4.7 12.3 4.7 17 0l99-99c7.6-7.6 2.2-20.5-8.5-20.5h-67V140c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12z"></path></svg>
+                                                        <p className={item.state === 0 ? 'result-awaited' : item.state === 1 ? 'win' : 'lost'}>
+                                                            <svg className={hold !== index ? "svg-inline--fa fa-arrow-alt-circle-down fa-w-16 direction-rotate" : "svg-inline--fa fa-arrow-alt-circle-down fa-w-16"} aria-hidden="true" data-fa-processed="" data-prefix="far" data-icon="arrow-alt-circle-down"  role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm-32-316v116h-67c-10.7 0-16 12.9-8.5 20.5l99 99c4.7 4.7 12.3 4.7 17 0l99-99c7.6-7.6 2.2-20.5-8.5-20.5h-67V140c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12z"></path></svg>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -145,71 +146,30 @@ function MyBets() {
                                                         <div className='col-4'>Score</div>
                                                         <div className='col-8'>{item.homeTeamScore}{":"}{item.awayTeamScore}</div>
                                                     </div>
-                                                    <div className='d-flex'>
+                                                    {/* <div className='d-flex'>
                                                         <div className='col-4'>Bank</div>
-                                                        <div className='col-8'>xx</div>
-                                                    </div>
+                                                        <div className='col-8'></div>
+                                                    </div> */}
                                                     <div className='d-flex'>
                                                         <div className='col-4'>Result</div>
-                                                        <div className='col-8'>xx</div>
+                                                        <div className='col-8'></div>
                                                     </div>
                                                     <div className='d-flex'>
                                                         <div className='col-4'>Tip</div>
-                                                        <div className='col-8'>{item.betType}</div>
+                                                        <div className='col-8'>{item.selectedOdds === 'o1' ? item.homeTeam : item.selectedOdds === 'o2' ? item.awayTeam : 'Draw' }{'('}{betTypesList[item.betType].title}{')'}</div>
                                                     </div>
                                                     <div className='d-flex'>
                                                         <div className='col-4'>Odds</div>
-                                                        <div className='col-8'>xx</div>
+                                                        <div className='col-8'>{item.odd}</div>
                                                     </div>
                                                     <div className='d-flex'>
                                                         <div className='col-4'>Winnings</div>
-                                                        <div className={myBetData[detailOpen].state === 0 ? 'result-awaited col-8 status' : myBetData[detailOpen].state === 1 ? 'win col-8 status' : 'lost col-8 status'}></div>
+                                                        <div className={item.state === 0 ? 'result-awaited col-8 status' : item.state === 1 ? 'win col-8 status' : 'lost col-8 status'}></div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        })
+                                        )
                                     : null}
-                                    {/* <div className='betslip-detail-row' onClick={() => funcHold(1)}>
-                                        <div className='d-flex pt-2'>
-                                            <div className='col-4'>Date</div>
-                                            <div className='col-5'>date</div>
-                                            <div className='bet-detail-icon bets-waiting col-3 d-flex justify-content-end'>
-                                                <p className={myBetData[detailOpen].state === 0 ? 'result-awaited' : myBetData[detailOpen].state === 1 ? 'win' : 'lost'}>
-                                                    <svg aria-hidden="true" data-fa-processed="" data-prefix="far" data-icon="arrow-alt-circle-down" className="svg-inline--fa fa-arrow-alt-circle-down fa-w-16 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm-32-316v116h-67c-10.7 0-16 12.9-8.5 20.5l99 99c4.7 4.7 12.3 4.7 17 0l99-99c7.6-7.6 2.2-20.5-8.5-20.5h-67V140c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12z"></path></svg>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className='d-flex'>
-                                            <div className='col-4'>Betting Event</div>
-                                            <div className='col-8'>home team : away team</div>
-                                        </div>
-                                        <div className={hold === 1 ? '' : 'hold'}>
-                                            <div className='d-flex'>
-                                                <div className='col-4'>Score</div>
-                                                <div className='col-8'>xx</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div className='col-4'>Bank</div>
-                                                <div className='col-8'>xx</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div className='col-4'>Result</div>
-                                                <div className='col-8'>xx</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div className='col-4'>Tip</div>
-                                                <div className='col-8'>xx</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div className='col-4'>Odds</div>
-                                                <div className='col-8'>xx</div>
-                                            </div>
-                                            <div className='d-flex'>
-                                                <div className='col-4'>Winnings</div>
-                                                <div className={myBetData[detailOpen].state === 0 ? 'result-awaited col-8 status' : myBetData[detailOpen].state === 1 ? 'win col-8 status' : 'lost col-8 status'}></div>
-                                            </div>
-                                        </div>
-                                    </div> */}
                                 </div>
                             </div>
                         }

@@ -9,6 +9,12 @@
     padding: 10px;
 }
 
+.transactions>.status>label {
+    color: black;
+    font-weight: 500;
+    text-align: start;
+}
+
 .transactions>.status>* {
     width: 100%;
     font-size: 14px;
@@ -121,14 +127,22 @@
 .betslip-detail-row,
 .betslip-detail-row-title {
     border-bottom: 1px solid #ccc;
+    padding: 3px;
 }
-.bets-waiting > p {
+
+.bets-waiting>p {
     padding-top: 3px;
 }
+
 .bet-detail-icon svg {
     width: 15px;
     order: 1;
 }
+
 .hold {
     display: none;
+}
+
+.direction-rotate {
+    transform: rotateZ(90deg);
 }

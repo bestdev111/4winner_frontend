@@ -175,7 +175,6 @@ function LeagueContent(props) {
             betType: props.tipTypes,
             odds: [matchData.betState.matchOdds102],
             selectedOdds: param,
-            betSystem: 'Single/Multiple',
             matchTime: matchData.time,
             matchDate: matchData.date,
             homeScore: matchData.score.history[0][0].home,
