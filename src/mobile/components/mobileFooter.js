@@ -19,6 +19,7 @@ function MobileFooter(props) {
         { icon: 'fa fa-clock-o', title: 'Live' },
         { icon: 'fa fa-file-o', title: 'Bet Slip' },
         { icon: 'fa fa-heartbeat', title: 'My Bets' },
+        { icon: 'fa fa-list-alt', title: 'Results' },
     ]
     const dispatch = useDispatch()
     const [openCalc, setOpenCalc] = useState(false);
