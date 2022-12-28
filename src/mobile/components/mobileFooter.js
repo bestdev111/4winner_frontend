@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-
-import './styles/mobileFooter.css'
 import ToastService from '../../service/toast.service';
 import Calculator from './calculator';
 import BarcodeContainer from './barcode';
-import { betRemoveOddsAction, removeAllBet, placeMyBet } from "../../store/actions/betActions";
+import { betRemoveOddsAction, removeAllBet, placeMyBet, generateBarcode } from "../../store/actions/betActions";
 import { FadeInOut } from '../../utils';
 import { betTypesList } from '../../utils/dataUtils'
-import { ServerURL } from '../../utils'
+import './styles/mobileFooter.css'
 
 function MobileFooter(props) {
     const mFooterList = [
@@ -30,9 +27,12 @@ function MobileFooter(props) {
     const [openCalc, setOpenCalc] = useState(false);
     const [numActive, setNumActive] = useState(0);
     const [openBetModal, setOpenBetModal] = useState(true);
+    const [barCodeShow, setBarCodeShow] = useState(false);
     const betCollectList = useSelector((state) => state.betReducers.betCollectList)
+    const getBarCodeJson = useSelector(state => state.betReducers.getBarCodeJson)
     const userData = useSelector(state => state.authReducers)
     const get_Matches = useSelector(state => state.mobileSportsReducers.getMatches)
+
     const isAuth = userData.isAuthenticated;
     var temp1 = 5
     var temp2 = 0
@@ -91,12 +91,12 @@ function MobileFooter(props) {
             let matchList = [];
             let matchCounts = [];
             betCollectList.forEach(item => {
-                if (!matchList.includes(item.matchId)){
+                if (!matchList.includes(item.matchId)) {
                     matchList.push(item.matchId);
                 }
             });
             for (let index = 0; index < matchList.length; index++) {
-                let matchCount=0
+                let matchCount = 0
                 betCollectList.forEach(item => {
                     if (item.matchId === matchList[index]) matchCount++
                 });
@@ -185,15 +185,15 @@ function MobileFooter(props) {
         let tempList = [];
         let tempMatchIds = [];
         betCollectList.forEach(item => {
-            if(!tempMatchIds.includes(item.matchId)){
+            if (!tempMatchIds.includes(item.matchId)) {
                 tempMatchIds.push(item.matchId);
             }
         })
         for (let index = 0; index < tempMatchIds.length; index++) {
             let sum = 0
             betCollectList.forEach(item => {
-                if (item.matchId === tempMatchIds[index]){
-                    sum = sum + item.odds[0][item.selectedOdds]/100
+                if (item.matchId === tempMatchIds[index]) {
+                    sum = sum + item.odds[0][item.selectedOdds] / 100
                 }
             })
             temp = temp * sum;
@@ -202,31 +202,27 @@ function MobileFooter(props) {
         setMaxWinning(value.toFixed(2))
     }
     const clickCreateBarcode = () => {
+        setBarCodeShow(true)
         barCodeJson = {
             userData: userData,
             betCollectList: betCollectList
         }
         let JsonString = JSON.stringify(barCodeJson)
-        if(barCodeJson.userData === null || barCodeJson.betCollectList.length === 0){}
+        if (barCodeJson.userData === null || barCodeJson.betCollectList.length === 0) { }
         else {
-            let postData = {
-                barcodeJsonString: JsonString
-            }
-            axios.post(ServerURL + '/betting/barcode', postData)
-                .then(res => {
-                    setBarCodeJsonString(res.data.barcode)
-                })
-                .catch(err => {
-                    console.log(err, err);
-                })
+            let postData = { barcodeJsonString: JsonString }
+            dispatch(generateBarcode(postData));
         }
     }
+    useEffect(() => {
+        if (getBarCodeJson) setBarCodeJsonString(getBarCodeJson.barcode)
+    }, [getBarCodeJson])
     const onClickConfirm = () => {
         setBarCodeJsonString('')
     }
     return (
         <>
-            {!openBetModal && barCodeJsonString === ''?
+            {!openBetModal && barCodeJsonString === '' ?
                 <div className='bet-pan'>
                     <div className='oddmodal-header'>
                         <div className='title d-flex justify-content-between'>
@@ -342,17 +338,17 @@ function MobileFooter(props) {
                 </div>
                 : null
             }
-            {barCodeJsonString !== ''?
-                <BarcodeContainer 
+            {barCodeShow && barCodeJsonString !== '' ?
+                <BarcodeContainer
                     barCodeJsonString={barCodeJsonString}
-                    totalStake={totalStake} 
-                    maxWinning={maxWinning} 
-                    betCollectList={betCollectList} 
+                    totalStake={totalStake}
+                    maxWinning={maxWinning}
+                    betCollectList={betCollectList}
                     onClickConfirm={onClickConfirm}
                 />
-                :null
+                : null
             }
-            {confirmVal  && barCodeJsonString === ''?
+            {confirmVal && barCodeJsonString === '' ?
                 <FadeInOut show="true" duration={800}>
                     <div className='bet-confirm-modal'>
                         <div className='opacity-back'>
@@ -364,7 +360,7 @@ function MobileFooter(props) {
                     </div>
                 </FadeInOut>
                 : null}
-            <Calculator show={openCalc} onClickOutside={onClickOutside} maxWinning={maxWinning}/>
+            <Calculator show={openCalc} onClickOutside={onClickOutside} maxWinning={maxWinning} />
             {/* main footer bar */}
             <div className="m-footer px-2">
                 <div className='d-flex justify-content-around'>

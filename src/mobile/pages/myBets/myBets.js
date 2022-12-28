@@ -1,24 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, MobileFooter } from '../../../mobile/components'
-import { getMyBet } from '../../../store/actions/betActions'
+import { getMyBet, generateBarcode } from '../../../store/actions/betActions'
 import { GetTime } from '../../../utils';
 import { betTypesList } from '../../../utils/dataUtils';
+import BarcodeContainer from '../../components/barcode';
 import './myBets.css'
 function MyBets() {
     const dispatch = useDispatch()
     const [detailOpen, setDetailOpen] = useState(null);
     const [hold, setHold] = useState(null);
+    const [barCodeShow, setBarCodeShow] = useState(false);
+    const [barCodeJsonString, setBarCodeJsonString] = useState('');
     const myBetData = useSelector(state => state.betReducers.myBetData);
+    const getBarCodeJson = useSelector(state => state.betReducers.getBarCodeJson)
+    const userData = useSelector(state => state.authReducers)
+    let barCodeJson = {
+        userData: '',
+        barCodeJson: ''
+    }
     useEffect(() => {
         dispatch(getMyBet());
     }, [])
     const funcHold = (index) => {
         index === hold ? setHold(null) : setHold(index);
     }
+    useEffect(() => {
+        if (getBarCodeJson) setBarCodeJsonString(getBarCodeJson.barcode)
+    }, [getBarCodeJson])
+    const createBarcode = (index) => {
+        if (myBetData){
+            setBarCodeShow(true)
+            barCodeJson = {
+                userData: userData,
+                betCollectList: myBetData[detailOpen].bettingEvents
+            }
+            let JsonString = JSON.stringify(barCodeJson)
+            if (barCodeJson.userData === null || barCodeJson.betCollectList.length === 0) { }
+            else {
+                let postData = { barcodeJsonString: JsonString }
+                dispatch(generateBarcode(postData));
+            }
+        }
+    }
+    const onClickConfirm = () => {
+        setBarCodeJsonString('')
+    }
     console.log('=>',myBetData);
     return (
         <>
+            {barCodeShow && barCodeJsonString !== '' && myBetData ?
+                <BarcodeContainer
+                    barCodeJsonString={barCodeJsonString}
+                    totalStake={myBetData[detailOpen].initialStake}
+                    maxWinning={myBetData[detailOpen].maxWinning}
+                    betCollectList={myBetData[detailOpen].bettingEvents}
+                    onClickConfirm={onClickConfirm}
+                />
+                : null
+            }
             <MobileNavbar />
             <div className='m-body'>
                 <div className='transactions'>
@@ -82,7 +122,7 @@ function MyBets() {
                             <div className='p-3 pt-3'>
                                 <div className='d-flex justify-content-between'>
                                     <div className='back-button' onClick={() => setDetailOpen(null)}>Back</div>
-                                    <div className='betslip-createbarcode-button'>Create Barcode</div>
+                                    <div className='betslip-createbarcode-button' onClick={() => createBarcode(detailOpen)}>Create Barcode</div>
                                 </div>
                                 <div className='d-flex status mt-3'>
                                     <div className={myBetData[detailOpen].state === 0 ? 'result-awaited' : myBetData[detailOpen].state === 1 ? 'win' : 'lost'}>

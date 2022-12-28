@@ -385,7 +385,7 @@
     top:0px;
     padding: 20px;
     position:fixed;
-    z-index: 9;
+    z-index: 12;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -404,6 +404,6 @@
     width: 100vw;
 }
 .confirm{
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
 }

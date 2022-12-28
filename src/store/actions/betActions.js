@@ -1,5 +1,5 @@
 import {
-    BET_SELECT, GET_MY_BETS, NEW_BETS, GET_ERRORS
+    BET_SELECT, GET_MY_BETS, NEW_BETS, GENERATE_BARCODE, GET_ERRORS
 } from '../../store/actions/actionTypes';
 import axios from 'axios';
 import { ServerURL } from '../../utils'
@@ -97,6 +97,23 @@ export const placeMyBet = (betsData, betState) => {
             return dispatch({
                 type: GET_ERRORS,
                 payload: error
+            });
+        }
+    }
+}
+
+export const generateBarcode = postData => {
+    return async dispatch => {
+        try {
+            const response = await axios.post(ServerURL + '/betting/barcode', postData);
+            return dispatch({
+                type: GENERATE_BARCODE,
+                payload: response.data
+            });
+        }catch(err){
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err
             });
         }
     }

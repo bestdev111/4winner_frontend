@@ -21,7 +21,9 @@
     padding: 3px;
     margin-bottom: 0px;
 }
-
+.myaccount-table {
+    margin-bottom: 100px;
+}
 #bets_period {
     margin-bottom: 10px;
 }
