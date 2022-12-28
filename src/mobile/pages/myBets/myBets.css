@@ -57,17 +57,17 @@
     padding: 3px;
 }
 
-.bet-result-lose {
+.bet-result-lost {
     display: flex;
     justify-content: space-between;
     font-size: 12px;
     color: white;
-    background-color: #702c2c;
+    background-color: red;
     padding: 3px;
 }
 
 .bet-result-win>div,
-.bet-result-lose>div {
+.bet-result-lost>div {
     font-weight: 700;
     font-size: 13px;
 }
@@ -101,7 +101,7 @@
     background: linear-gradient(180deg, #6bba70 0, #6bba70);
 }
 
-.lose {
+.lost {
     background: linear-gradient(180deg, #a90329 0, #8f0222 44%, #6d0019);
 }
 
