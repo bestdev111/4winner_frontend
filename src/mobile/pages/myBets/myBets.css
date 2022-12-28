@@ -2,14 +2,18 @@
     overflow-y: auto;
     margin-top: 50px;
     height: calc(100vh - 120px);
+    font-size: 13px;
 }
+
 .transactions>.status {
     padding: 10px;
 }
+
 .transactions>.status>* {
     width: 100%;
     font-size: 14px;
     padding: 3px;
+    margin-bottom: 0px;
 }
 
 #bets_period {
@@ -19,7 +23,7 @@
 .match-header {
     display: flex;
     font-size: 14px;
-    margin-top: 20px;
+    margin-top: 10px;
     background: linear-gradient(180deg, #b5bdc8 0, #828c95 36%, #28343b);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b5bdc8", endColorstr="#28343b", GradientType=0);
     width: 100%;
@@ -27,12 +31,15 @@
     font-weight: 700;
     padding: 5px 0;
 }
+
 .match-header div {
     padding: 3px;
 }
-.match-body > div {
+
+.match-body>div {
     border-bottom: solid 1px #28343b;
 }
+
 .bet-result-wait {
     display: flex;
     justify-content: space-between;
@@ -40,6 +47,7 @@
     font-weight: 700;
     padding: 3px;
 }
+
 .bet-result-win {
     display: flex;
     justify-content: space-between;
@@ -48,6 +56,7 @@
     background-color: #0b7029;
     padding: 3px;
 }
+
 .bet-result-lose {
     display: flex;
     justify-content: space-between;
@@ -56,7 +65,70 @@
     background-color: #702c2c;
     padding: 3px;
 }
-.bet-result-win>div, .bet-result-lose>div {
+
+.bet-result-win>div,
+.bet-result-lose>div {
     font-weight: 700;
     font-size: 13px;
+}
+
+.back-button,
+.betslip-createbarcode-button {
+    border: 0;
+    background-color: gray;
+    padding: 7px 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.status {
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    font-size: 14px;
+}
+
+.status>div {
+    width: 100%;
+    padding: 10px;
+}
+
+.result-awaited {
+    background: linear-gradient(180deg, #606c88 0, #3f4c6b);
+}
+
+.win {
+    background: linear-gradient(180deg, #6bba70 0, #6bba70);
+}
+
+.lose {
+    background: linear-gradient(180deg, #a90329 0, #8f0222 44%, #6d0019);
+}
+
+.row-data {
+    font-size: 14px;
+}
+
+.yellow-text {
+    color: #f3a038;
+    font-weight: 700;
+}
+
+.betslip-detail-rows {
+    border: 1px solid #ccc;
+}
+
+.betslip-detail-row,
+.betslip-detail-row-title {
+    border-bottom: 1px solid #ccc;
+}
+.bets-waiting > p {
+    padding-top: 3px;
+}
+.bet-detail-icon svg {
+    width: 15px;
+    order: 1;
+}
+.hold {
+    display: none;
 }
