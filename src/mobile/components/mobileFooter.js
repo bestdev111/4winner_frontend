@@ -343,15 +343,14 @@ function MobileFooter(props) {
                 : null
             }
             {barCodeJsonString !== ''?
-                <>
-                    <BarcodeContainer 
-                        barCodeJsonString={barCodeJsonString}
-                        totalStake={totalStake} 
-                        maxWinning={maxWinning} 
-                        betCollectList={betCollectList} 
-                        onClickConfirm={onClickConfirm}
-                    />
-                </>:<></>
+                <BarcodeContainer 
+                    barCodeJsonString={barCodeJsonString}
+                    totalStake={totalStake} 
+                    maxWinning={maxWinning} 
+                    betCollectList={betCollectList} 
+                    onClickConfirm={onClickConfirm}
+                />
+                :null
             }
             {confirmVal  && barCodeJsonString === ''?
                 <FadeInOut show="true" duration={800}>
