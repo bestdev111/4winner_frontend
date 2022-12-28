@@ -6,6 +6,7 @@ import Calculator from './calculator';
 import { betRemoveOddsAction, removeAllBet, placeMyBet } from "../../store/actions/betActions";
 import { FadeInOut } from '../../utils';
 import { betTypesList } from '../../utils/dataUtils'
+import Barcode from 'react-barcode';
 function MobileFooter(props) {
     const mFooterList = [
         { icon: 'fa fa-home', title: 'Home', },
@@ -32,6 +33,7 @@ function MobileFooter(props) {
     var temp1 = 5
     var temp2 = 0
     const [tab, setTab] = useState(true);
+    const [barCodeJsonString, setBarCodeJsonString] = useState('');
     const amountRef = useRef(Number(5));
     const [totalStake, setTotalStake] = useState(temp1.toFixed(2));
     const [tax, setTax] = useState(temp2.toFixed(2));
@@ -41,6 +43,10 @@ function MobileFooter(props) {
     const [maxWinning, setMaxWinning] = useState(temp2.toFixed(2));
     const [confirmVal, setConfirmVal] = useState(false);
     let footerList = isAuth ? mFooterListAuthor : mFooterList;
+    let barCodeJson = {
+        userData: '',
+        barCodeJson: ''
+    }
 
     const openModal = () => {
         setOpenBetModal(false)
@@ -125,7 +131,8 @@ function MobileFooter(props) {
                 initialStake: totalStake,
                 tax: tax,
                 stakeBet: (totalStake / numBet).toFixed(2),
-                maxWinning: maxWinning
+                maxWinning: maxWinning,
+                numBet: numBet
             }
             dispatch(placeMyBet(betCollectList, betState));
             setConfirmVal(false);
@@ -189,9 +196,22 @@ function MobileFooter(props) {
         const value = parseFloat(temp) * totalStake / index;
         setMaxWinning(value.toFixed(2))
     }
+    const clickCreateBarcode = () => {
+        barCodeJson = {
+            userData: userData,
+            betCollectList: betCollectList
+        }
+        let JsonString = JSON.stringify(barCodeJson)
+        if(barCodeJson.userData === null || barCodeJson.betCollectList.length === 0){}
+        else {
+            // JsonString = btoa(JsonString);
+            console.log('Setting barcodeJsonString', JsonString);
+            setBarCodeJsonString(JsonString)
+        }
+    }
     return (
         <>
-            {!openBetModal ?
+            {!openBetModal && barCodeJsonString === ''?
                 <div className='bet-pan'>
                     <div className='oddmodal-header'>
                         <div className='title d-flex justify-content-between'>
@@ -278,7 +298,7 @@ function MobileFooter(props) {
                             <p className="stake-button" onClick={() => calcStake(1)}>+</p>
                         </div>
                         <div>
-                            <p className="place-bet bold">Create Barcode</p>
+                            <p onClick={() => clickCreateBarcode()} className="place-bet bold">Create Barcode</p>
                             <div className="summary">
                                 <div className="summary-row">
                                     <span>Total stake:</span>
@@ -307,7 +327,22 @@ function MobileFooter(props) {
                 </div>
                 : null
             }
-            {confirmVal ?
+            {barCodeJsonString !== ''?
+                <>
+                    <div className='barCodePan'>
+                        <Barcode className='barCode' value={/*barCodeJsonString*/"85181545558008340267"} width="2px" height={100} format="CODE128" displayValue={true} fontOptions="" font="monospace" textAlign="center" textPosition="top" textMargin={2} fontSize={20} background= "#ffffff" lineColor="#000000" margin={10} marginTop={undefined} marginBottom={undefined} marginLeft={undefined} marginRight={undefined}/>
+                        <h1>Total stake: {totalStake}</h1>
+                        <h1>Max Winning: {maxWinning}</h1>
+                        {betCollectList.map((item, index) => 
+                            <h3 key={index}>{item.homeTeam} : {item.awayTeam}</h3>)
+                        }
+                        <div className='confirmPan'>
+                            <p className='confirm'>Confirm</p>
+                        </div>
+                    </div>
+                </>:<></>
+            }
+            {confirmVal  && barCodeJsonString === ''?
                 <FadeInOut show="true" duration={800}>
                     <div className='bet-confirm-modal'>
                         <div className='opacity-back'>
