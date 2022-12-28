@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+
 import './styles/mobileFooter.css'
 import ToastService from '../../service/toast.service';
 import Calculator from './calculator';
+import BarcodeContainer from './barcode';
 import { betRemoveOddsAction, removeAllBet, placeMyBet } from "../../store/actions/betActions";
 import { FadeInOut } from '../../utils';
 import { betTypesList } from '../../utils/dataUtils'
-import Barcode from 'react-barcode';
+import { ServerURL } from '../../utils'
+
 function MobileFooter(props) {
     const mFooterList = [
         { icon: 'fa fa-home', title: 'Home', },
@@ -204,10 +208,20 @@ function MobileFooter(props) {
         let JsonString = JSON.stringify(barCodeJson)
         if(barCodeJson.userData === null || barCodeJson.betCollectList.length === 0){}
         else {
-            // JsonString = btoa(JsonString);
-            console.log('Setting barcodeJsonString', JsonString);
-            setBarCodeJsonString(JsonString)
+            let postData = {
+                barcodeJsonString: JsonString
+            }
+            axios.post(ServerURL + '/betting/barcode', postData)
+                .then(res => {
+                    setBarCodeJsonString(res.data.barcode)
+                })
+                .catch(err => {
+                    console.log(err, err);
+                })
         }
+    }
+    const onClickConfirm = () => {
+        setBarCodeJsonString('')
     }
     return (
         <>
@@ -329,17 +343,13 @@ function MobileFooter(props) {
             }
             {barCodeJsonString !== ''?
                 <>
-                    <div className='barCodePan'>
-                        <Barcode className='barCode' value={/*barCodeJsonString*/"85181545558008340267"} width="2px" height={100} format="CODE128" displayValue={true} fontOptions="" font="monospace" textAlign="center" textPosition="top" textMargin={2} fontSize={20} background= "#ffffff" lineColor="#000000" margin={10} marginTop={undefined} marginBottom={undefined} marginLeft={undefined} marginRight={undefined}/>
-                        <h1>Total stake: {totalStake}</h1>
-                        <h1>Max Winning: {maxWinning}</h1>
-                        {betCollectList.map((item, index) => 
-                            <h3 key={index}>{item.homeTeam} : {item.awayTeam}</h3>)
-                        }
-                        <div className='confirmPan'>
-                            <p className='confirm'>Confirm</p>
-                        </div>
-                    </div>
+                    <BarcodeContainer 
+                        barCodeJsonString={barCodeJsonString}
+                        totalStake={totalStake} 
+                        maxWinning={maxWinning} 
+                        betCollectList={betCollectList} 
+                        onClickConfirm={onClickConfirm}
+                    />
                 </>:<></>
             }
             {confirmVal  && barCodeJsonString === ''?
