@@ -382,6 +382,9 @@
     vertical-align: middle;
 }
 .barCodePan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     top:0px;
     padding: 20px;
     position:fixed;
@@ -393,17 +396,23 @@
     height: 100vh;
     background-color: white;
 }
+.barCodePan h1 {
+    font-weight: 700;
+}
 .confirmPan{
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 90vh;
+    top: 93vh;
     border-top: 1px solid;
-    height: 10vh;
+    height: 6vh;
     width: 100vw;
 }
 .confirm{
     font-size: 20px;
     font-weight: bold;
+}
+.barcode-overflow {
+    overflow: scroll;
 }
