@@ -18,7 +18,7 @@ function BarcodeContainer(props) {
                 <div className='tip-row'>
                   <div className="tip-col middle-col">{betTypesList[item.betType].title}</div>
                   <div className="tip-col right-col bold">
-                    <div className=" currentscore-green">{item.homeScore}:{item.awayScore}</div>
+                    <div className=" currentscore-green">{item.homeScore ? item.homeScore : item.homeTeamScore !== null ? item.homeTeamScore : null}:{item.awayScore ? item.awayScore : item.awayTeamScore !== null? item.awayTeamScore : null}</div>
                   </div>
                 </div>
                 <div className='tip-row'>
