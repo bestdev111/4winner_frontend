@@ -204,7 +204,6 @@ function MobileFooter(props) {
     const clickCreateBarcode = () => {
         if (!isAuth) {
             ToastService("Please Login", 'error');
-            setConfirmVal(false);
         }else {
             setBarCodeShow(true)
             barCodeJson = {

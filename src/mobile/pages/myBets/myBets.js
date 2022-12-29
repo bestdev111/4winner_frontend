@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MobileNavbar, MobileFooter } from '../../../mobile/components'
 import { getMyBet, generateBarcode } from '../../../store/actions/betActions'
 import { GetTime } from '../../../utils';
+import ToastService from '../../../service/toast.service';
 import { betTypesList } from '../../../utils/dataUtils';
 import BarcodeContainer from '../../components/barcode';
 import './myBets.css'
@@ -19,6 +20,7 @@ function MyBets() {
         userData: '',
         barCodeJson: ''
     }
+    const isAuth = userData.isAuthenticated;
     useEffect(() => {
         dispatch(getMyBet());
     }, [])
@@ -31,7 +33,6 @@ function MyBets() {
     const createBarcode = (index) => {
         if (!isAuth) {
             ToastService("Please Login", 'error');
-            setConfirmVal(false);
         } else {
             if (myBetData){
                 setBarCodeShow(true)
