@@ -202,16 +202,21 @@ function MobileFooter(props) {
         setMaxWinning(value.toFixed(2))
     }
     const clickCreateBarcode = () => {
-        setBarCodeShow(true)
-        barCodeJson = {
-            userData: userData,
-            betCollectList: betCollectList
-        }
-        let JsonString = JSON.stringify(barCodeJson)
-        if (barCodeJson.userData === null || barCodeJson.betCollectList.length === 0) { }
-        else {
-            let postData = { barcodeJsonString: JsonString }
-            dispatch(generateBarcode(postData));
+        if (!isAuth) {
+            ToastService("Please Login", 'error');
+            setConfirmVal(false);
+        }else {
+            setBarCodeShow(true)
+            barCodeJson = {
+                userData: userData,
+                betCollectList: betCollectList
+            }
+            let JsonString = JSON.stringify(barCodeJson)
+            if (barCodeJson.userData === null || barCodeJson.betCollectList.length === 0) { }
+            else {
+                let postData = { barcodeJsonString: JsonString }
+                dispatch(generateBarcode(postData));
+            }
         }
     }
     useEffect(() => {

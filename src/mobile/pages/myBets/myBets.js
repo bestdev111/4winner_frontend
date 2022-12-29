@@ -29,17 +29,22 @@ function MyBets() {
         if (getBarCodeJson) setBarCodeJsonString(getBarCodeJson.barcode)
     }, [getBarCodeJson])
     const createBarcode = (index) => {
-        if (myBetData){
-            setBarCodeShow(true)
-            barCodeJson = {
-                userData: userData,
-                betCollectList: myBetData[detailOpen].bettingEvents
-            }
-            let JsonString = JSON.stringify(barCodeJson)
-            if (barCodeJson.userData === null || barCodeJson.betCollectList.length === 0) { }
-            else {
-                let postData = { barcodeJsonString: JsonString }
-                dispatch(generateBarcode(postData));
+        if (!isAuth) {
+            ToastService("Please Login", 'error');
+            setConfirmVal(false);
+        } else {
+            if (myBetData){
+                setBarCodeShow(true)
+                barCodeJson = {
+                    userData: userData,
+                    betCollectList: myBetData[detailOpen].bettingEvents
+                }
+                let JsonString = JSON.stringify(barCodeJson)
+                if (barCodeJson.userData === null || barCodeJson.betCollectList.length === 0) { }
+                else {
+                    let postData = { barcodeJsonString: JsonString }
+                    dispatch(generateBarcode(postData));
+                }
             }
         }
     }
