@@ -184,7 +184,7 @@ function SideNav(props) {
                         <div className='account'>
                             <p onClick={changePassword}>Change Password</p>
                             <p onClick={() => window.location.href = '/mybets'}>My Bets</p>
-                            <p>Transactions</p>
+                            <p onClick={() => window.location.href = '/m_transactions'}>Transactions</p>
                             <p onClick={() => dispatch(logoutUser())}>Logout</p>
                         </div>
                     </>

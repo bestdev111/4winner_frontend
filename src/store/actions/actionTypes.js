@@ -35,3 +35,4 @@ export const BET_SELECT = 'BET_SELECT';
 export const GET_MY_BETS = 'GET_MY_BETS';
 export const NEW_BETS = 'NEW_BETS';
 export const GENERATE_BARCODE = 'GENERATE_BARCODE';
+export const TRANSACTION_LIST = 'TRANSACTION_LIST';

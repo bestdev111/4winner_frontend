@@ -1,10 +1,10 @@
 import {
-    BET_SELECT, GET_MY_BETS, NEW_BETS, GENERATE_BARCODE, GET_ERRORS
+    BET_SELECT, GET_MY_BETS, NEW_BETS, GENERATE_BARCODE, TRANSACTION_LIST, GET_ERRORS
 } from '../../store/actions/actionTypes';
 import axios from 'axios';
 import { ServerURL } from '../../utils'
 import ToastService from '../../service/toast.service';
-
+import {transactions} from '../../utils/dataUtils';
 export const betOddSelectAction = (betCollectList, obj) => {
 
     return async dispatch => {
@@ -86,7 +86,9 @@ export const placeMyBet = (betsData, betState) => {
     return async dispatch => {
         try {
             const response = await axios.post(ServerURL + '/betting/newbet', {betsData, betState});
-            ToastService('Successfully Bet!', 'success')
+            if(response) {
+                ToastService('Successfully Bet!', 'success')
+            }
             return dispatch({
                 type: NEW_BETS,
                 payload: {
@@ -108,6 +110,25 @@ export const generateBarcode = postData => {
             const response = await axios.post(ServerURL + '/betting/barcode', postData);
             return dispatch({
                 type: GENERATE_BARCODE,
+                payload: response.data
+            });
+        }catch(err){
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err
+            });
+        }
+    }
+}
+export const getMyTransactions = data => {
+    return async dispatch => {
+        try {
+            // const response = await axios.post(ServerURL + '/transactions/mytransactions', data);
+            const response = {
+                data: transactions
+            }
+            return dispatch({
+                type: TRANSACTION_LIST,
                 payload: response.data
             });
         }catch(err){

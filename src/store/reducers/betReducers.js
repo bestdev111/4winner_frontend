@@ -1,4 +1,4 @@
-import { BET_SELECT, GET_MY_BETS, NEW_BETS, GENERATE_BARCODE } from '../../store/actions/actionTypes';
+import { BET_SELECT, GET_MY_BETS, NEW_BETS, GENERATE_BARCODE, TRANSACTION_LIST } from '../../store/actions/actionTypes';
 
 const initialState = { betCollectList: [], myBetData: [], isLoading: true }
 
@@ -24,7 +24,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 getBarCodeJson: action.payload
-                // isLoading: false
+            };
+        case TRANSACTION_LIST:
+            return {
+                ...state,
+                transactionsList: action.payload
             };
         default:
             return state;

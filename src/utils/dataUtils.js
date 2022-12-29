@@ -241,4 +241,72 @@ export const leagueNameRadarId = {
     Eredivisie: 35,
     "Primeira%20Liga": 44,
 };
+
+export const transactions = [
+    {
+        "id": 0,
+        "date": "2022-12-28T14:50:11.832672Z",
+        "type": 4,
+        "amount": 362,
+        "balanceAfter": 9862,
+        "betAPIId": "670-1-888-L-4"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-28T06:52:37.042813Z",
+        "type": 3,
+        "amount": 190,
+        "balanceAfter": 9500,
+        "betAPIId": "670-1-888-L-4"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-26T18:17:49.873955Z",
+        "type": 3,
+        "amount": 500,
+        "balanceAfter": 9690,
+        "betAPIId": "670-1-888-L-3"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-13T08:09:07.470153Z",
+        "type": 4,
+        "amount": 190,
+        "balanceAfter": 10190,
+        "betAPIId": "670-1-888-L-2"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-13T07:31:19.221123Z",
+        "type": 3,
+        "amount": 100,
+        "balanceAfter": 10000,
+        "betAPIId": "670-1-888-L-2"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-12T08:15:07.641681Z",
+        "type": 4,
+        "amount": 1100,
+        "balanceAfter": 10100,
+        "betAPIId": "670-1-888-L-1"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-12T07:33:33.326579Z",
+        "type": 3,
+        "amount": 1000,
+        "balanceAfter": 9000,
+        "betAPIId": "670-1-888-L-1"
+    },
+    {
+        "id": 0,
+        "date": "2022-12-10T01:36:37.968852Z",
+        "type": 1,
+        "amount": 10000,
+        "balanceAfter": 10000,
+        "betAPIId": ""
+    }
+]
+
 export default SportTypeList;
