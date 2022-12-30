@@ -1,4 +1,4 @@
-import { MOBILE_GET_ALL_MATCHES, MOBILE_GET_MATCHES, MOBILE_GET_TOP_LEAGUE, MOBILE_GET_LEAGUE_SORTS, MOBILE_GET_TYPE_LIST, MOBILE_GET_RESULT } from '../actions/actionTypes';
+import { MOBILE_GET_ALL_MATCHES, MOBILE_GET_MATCHES, MOBILE_GET_TOP_LEAGUE, MOBILE_GET_LEAGUE_SORTS, MOBILE_GET_TYPE_LIST, MOBILE_GET_RESULT, GET_NORMAL_TABLE, GET_FORM_TABLE } from '../actions/actionTypes';
 import { OddCompareFunctions, isEmpty } from '../../utils'
 const initialState = {
     getAllMatches: [],
@@ -7,6 +7,8 @@ const initialState = {
     getTopLeague: [],
     getTypeList: [],
     getResult: [],
+    getNormalTable: [],
+    getFormTable: [],
     isLoading: true
 };
 export default function (state = initialState, action) {
@@ -47,6 +49,16 @@ export default function (state = initialState, action) {
                 ...state,
                 getResult: action.payload.data,
                 isLoading: isEmpty(action.payload.data)
+            };
+        case GET_NORMAL_TABLE:
+            return {
+                ...state,
+                getNormalTable: action.payload.data,
+            };
+        case GET_FORM_TABLE:
+            return {
+                ...state,
+                getFormTable: action.payload.data,
             };
         default:
             return state;

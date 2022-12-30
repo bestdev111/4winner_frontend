@@ -5,8 +5,9 @@
     overflow-y: scroll;
     z-index: 5;
     width: 100%;
-    min-height: 100vh;
     top: 104px;
+    overflow-x: clip;
+    bottom: 40px;
 }
 
 .openDetailOdd * {
@@ -120,12 +121,114 @@ img.stadium {
     background: linear-gradient(180deg, #fff 0, #f1f1f1 50%, #e1e1e1 51%, #f6f6f6);
     padding: 5px 20px;
 }
+
 .bet-name {
     color: #25851f;
     text-align: center;
     font-size: 12px;
     font-weight: 700;
 }
+
 .margin-bottom-30 {
     margin-bottom: 50px;
+}
+
+.league-table * {
+    font-size: 10px;
+}
+
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
+}
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        border: 1px solid #ddd;
+    }
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+.nav>li,
+.nav>li>p {
+    position: relative;
+    display: block;
+}
+
+.nav>li>p {
+    padding: 10px 15px;
+}
+
+.nav-tabs>li>p {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+.active {
+    border-bottom: solid 1px #25851f;
+}
+.nav-tabs>li.active>p,
+.nav-tabs>li.active>p:focus,
+.nav-tabs>li.active>p:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+.table-fixed tbody {
+    /* display: block; */
+    height: 150px;
+    overflow-y: auto;
+    width: 100%;
+}
+.w-10 {
+    width: 10%;
+}
+.w-20 {
+    width: 20%;
+}
+.w-40 {
+    width: 40%;
+}
+.win {
+    background: #00d900;
+}
+.loss {
+    background: #ff2300;
+}
+.draw {
+    background: #ffff35;
+}
+.tendency {
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    display: inline;
+    padding: 4px !important;
+}
+.tendency-title {
+    display: inline;
+    float: left;
+    margin-right: 10px;
+    padding: 0 4px !important;
 }

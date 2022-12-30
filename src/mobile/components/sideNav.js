@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllMatches, getTypeList } from '../../store/actions/mobileSportsActions'
-import { logoutUser } from '../../store/actions/authActions'
+import { logoutUser, updateCurrentUser } from '../../store/actions/authActions'
 import { setCategorySet } from '../../store/actions/settingActions'
 import { Language } from '../../utils';
+import { useTranslation } from 'react-i18next';
+import { setLocalize } from '../../store/actions/settingActions'
+import { Trans } from 'react-i18next';
 
 function SideNav(props) {
     const ref = useRef(null);
@@ -14,7 +17,7 @@ function SideNav(props) {
     const [isCollapse1, setIsCollapse1] = useState([]);
     const [isCollapse2, setIsCollapse2] = useState([]);
     const [isCollapse3, setIsCollapse3] = useState(undefined);
-
+    const { i18n } = useTranslation();
     const SportTypeList = useSelector(state => state.mobileSportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const userData = useSelector(state => state.authReducers)
@@ -99,24 +102,43 @@ function SideNav(props) {
         setIsCollapse3(index)
         dispatch(setCategorySet(sportType.sportTypeId, leagues.betradarCategoryId, subLeague.name))
     }
+    const changeLanguage = (param, index) => {
+        setSiteLang(index)
+        // setOpenModal(false)
+        i18n.changeLanguage(param);
+        // setCurrentLang(Language[index])
+        if (userData && userData.user) {
+            let userId = userData.user.userId;
+            const data = {
+                userId: userId,
+                lang: index
+            }
+            dispatch(updateCurrentUser(data))
+        }
+        else {
+            dispatch(setLocalize(param));
+        }
+        onClickOutside(true)
+        setLangOpen(false)
+    }
     return (
         <div className='opacity-back' onScroll={onHandleChange}>
             <div id="mySidenav" className={!props.show ? 'sidenav' : 'sidenav openside'} ref={ref}>
                 <div className='p-3'>
-                    {!isAuth ? <div className='login d-flex justify-content-center p-2'><a href='/m_login'>Login</a></div> : <></>}
+                    {!isAuth ? <div className='login d-flex justify-content-center p-2'><a href='/m_login'><Trans>Login</Trans></a></div> : <></>}
                 </div>
                 <div className='pan'>
-                    <div>Bets</div>
+                    <div><Trans>Bets</Trans></div>
                 </div>
                 <div className='sidenav_lists'>
                     <p>
-                        Outrights
+                        <Trans>Outrights</Trans>
                         <span className="match-count">
                             {get_AllMatches && get_AllMatches.data ? get_AllMatches.data.totalOutrightsCount : ''}
                         </span>
                     </p>
                     <p onClick={() => goTo('Highlights')}>
-                        Highlights
+                        <Trans>Highlights</Trans>
                         <span className="match-count">
                             {get_AllMatches && get_AllMatches.data ? get_AllMatches.data.totalHighLightsCount : ''}
                         </span>
@@ -154,7 +176,7 @@ function SideNav(props) {
                             </div>
                             : null : null
                     )}
-                    <p onClick={() => goTo('Results')}>Results</p>
+                    <p onClick={() => goTo('Results')}><Trans>Results</Trans></p>
                 </div>
                 <div className='pan'>
                     <div>Language Selection</div>
@@ -169,7 +191,7 @@ function SideNav(props) {
                     </p>
                     <div className={langOpen ? 'lang_list lang_list_expand' : 'lang_list'}>
                         {Language.map((lang, key) =>
-                            <div className='d-flex align-items-center' key={key} onClick={() => setSiteLang(key)}>
+                            <div className='d-flex align-items-center' key={key} onClick={() => changeLanguage(lang.name, key)}>
                                 <img src={lang.icon} alt={lang.title} />
                                 <p>{lang.title}</p>
                             </div>
