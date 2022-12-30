@@ -1,12 +1,7 @@
 import axios from 'axios';
 import { GET_ALL_MATCHES, GET_MATCHES, GET_TYPE_LIST, GET_TOP_LEAGUE, GET_FINISHED_MATCHES, GET_ERRORS } from './actionTypes';
 import { SportTypeList, ServerURL } from '../../utils'
-// const config = {
-//     headers: {
-//         "Access-Control-Allow-Origin": "*",
-//         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-//     }
-// };
+
 export const getAllMatches = () => {
     return async dispatch => {
         try {
@@ -42,7 +37,7 @@ export const getMatches = () => {
 export const getTypeList = () => {
     return async dispatch => {
         try {
-            const response = await axios.post(ServerURL + '/sports/getMatches');
+            // const response = await axios.post(ServerURL + '/sports/getMatches');
             return dispatch({
                 type: GET_TYPE_LIST,
                 payload: SportTypeList

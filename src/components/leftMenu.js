@@ -57,6 +57,7 @@ function LeftMenu() {
         setIsCollapse3(index)
         dispatch(setCategorySet(sportType.sportTypeId, leagues.betradarCategoryId, subLeague.name))
     }
+    console.log('SportTypeList=>',SportTypeList);
     return (
         <div>
             <div className='menu-header'>
