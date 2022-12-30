@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTypeList, getAllMatches } from '../store/actions/sportsActions'
+import { setCategorySet } from '../store/actions/settingActions'
 import { Trans } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
 import './styles/leftMenu.css'
 
-function LeftMenu(props) {
+function LeftMenu() {
     const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
     const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
     const dispatch = useDispatch();
@@ -51,6 +52,11 @@ function LeftMenu(props) {
             return SportTypeList[index].icon;
         return ''
     }
+    const onClickSideItem = (sportType, leagues, subLeague, index) => {
+        collapseFunc1()
+        setIsCollapse3(index)
+        dispatch(setCategorySet(sportType.sportTypeId, leagues.betradarCategoryId, subLeague.name))
+    }
     return (
         <div>
             <div className='menu-header'>
@@ -58,37 +64,37 @@ function LeftMenu(props) {
             </div>
             <div className='menu-content bordered-top'>
                 <div className='menu_main'>
-                    {availableSportTypes && availableSportTypes.map((availableSportType, index1) =>
-                        availableSportType && SportTypeList ?
-                            <div key={index1} className="sportstypes">
-                                <p className={isCollapse1[index1] ? 'collapsed first-lists' : 'first-lists'} onClick={() => collapseFunc1(index1)}>
-                                    <img className='leftmenu-icon' src={isCollapse1[index1] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'} alt=''/>
-                                    <img className='sport-icon' src={iconGet(availableSportType - 1)} alt='' />
-                                    {SportTypeList[availableSportType - 1] ? SportTypeList[availableSportType - 1].name : ''}
+                    {SportTypeList && SportTypeList.map((item, index) =>
+                        availableSportTypes ? availableSportTypes.includes(item.sportTypeId) ?
+                            <div key={index} className="sportstypes">
+                                <p className={isCollapse1[index] ? 'collapsed first-lists' : 'first-lists'} onClick={() => collapseFunc1(index)}>
+                                    <img className='leftmenu-icon' src={isCollapse1[index] ? 'assets/images/icons/caret-down-solid-yellow.svg' : 'assets/images/icons/caret-right-solid-black.svg'} alt='' />
+                                    <img className='sport-icon' src={iconGet(index)} alt='' />
+                                    {item.name}
                                 </p>
-                                <ul className={isCollapse1[index1] ? 'show' : 'hide'}>
-                                    {get_AllMatches.data.leagues && get_AllMatches.data.leagues.map((item, index2) =>
-                                        item.betradarSportId === availableSportType ?
+                                <ul className={isCollapse1[index] ? 'show' : 'hide'}>
+                                    {get_AllMatches.data.leagues && get_AllMatches.data.leagues.map((league, index2) =>
+                                        league.betradarSportId === item.sportTypeId ?
                                             <li key={index2}>
                                                 <p className={isCollapse2[index2] ? 'collapsed lists' : 'lists'} onClick={() => collapseFunc2(index2)}>
-                                                    <img className='leftmenu-icon' src={isCollapse2[index2] ? 'assets/images/icons/caret-down-solid-white.svg' : 'assets/images/icons/caret-right-solid-white.svg'} alt=''/>
-                                                    {item.name}
+                                                    <img className='leftmenu-icon' src={isCollapse2[index2] ? 'assets/images/icons/caret-down-solid-white.svg' : 'assets/images/icons/caret-right-solid-white.svg'} alt='' />
+                                                    {league.name}
                                                 </p>
                                                 <ul className={isCollapse2[index2] ? 'show' : 'hide'}>
-                                                    {item.leagueList.map((league, index3) =>
+                                                    {league.leagueList.map((league1, index3) =>
                                                         <li key={index3}>
-                                                            <p className={isCollapse3 === index3 ? 'collapsed lists last-lists' : 'lists last-lists'} onClick={() => setIsCollapse3(index3)}>
-                                                                {league.name}
+                                                            <p onClick={() => onClickSideItem(item, league, league1, index3)} className={isCollapse3 === index3 ? 'collapsed lists last-lists' : 'lists last-lists'} >
+                                                                {league1.name}
                                                             </p>
                                                         </li>
                                                     )}
                                                 </ul>
                                             </li>
-                                            : <div key={index2}></div>
+                                            : <li key={index2}></li>
                                     )}
                                 </ul>
                             </div>
-                            : <div key={index1}></div>
+                            : null : null
                     )}
                 </div>
             </div>

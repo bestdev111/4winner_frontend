@@ -7,6 +7,7 @@ import { SportsBettingConfig } from '../main/sportsBetting/sportsBettingConfig'
 import { InPlayConfig } from '../main/inPlay/inPlayConfig'
 import { OutRightsConfig } from '../main/outRights/outRightsConfig'
 import { ResultsConfig } from '../main/results/resultsConfig'
+import { ChangePasswordConfig } from '../main/changePassword/changePasswordConfig'
 // mobile view
 import { MHomeConfig } from '../mobile/pages/home/mHomeConfig'
 import { MHighlightsConfig } from "../mobile/pages/highlights/mHighlightsConfig";
@@ -23,6 +24,7 @@ const routeConfigs = [
     InPlayConfig,
     OutRightsConfig,
     ResultsConfig,
+    ChangePasswordConfig
 ];
 //mobile case
 const m_routeConfigs = [

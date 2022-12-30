@@ -372,7 +372,7 @@ function LeagueContent(props) {
                                     >
                                         {matchData.betState
                                             ? calcOdd(
-                                                matchData.betState.matchOdds102.o1
+                                                matchData.betState.matchWinnerOdds102.o1 === 0.00 ? matchData.betState.matchOdds102.o1 : matchData.betState.matchWinnerOdds102.o1
                                             )
                                             : "-"}
                                     </div>
@@ -402,7 +402,7 @@ function LeagueContent(props) {
                                     >
                                         {matchData.betState
                                             ? calcOdd(
-                                                matchData.betState.matchOdds102.o0
+                                                matchData.betState.matchWinnerOdds102.o0 === 0.00 ? matchData.betState.matchOdds102.o0 : matchData.betState.matchWinnerOdds102.o0
                                             )
                                             : "-"}
                                     </div>
@@ -432,7 +432,7 @@ function LeagueContent(props) {
                                     >
                                         {matchData.betState
                                             ? calcOdd(
-                                                matchData.betState.matchOdds102.o2
+                                                matchData.betState.matchWinnerOdds102.o2 === 0.00 ? matchData.betState.matchOdds102.o2 : matchData.betState.matchWinnerOdds102.o2
                                             )
                                             : "-"}
                                     </div>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './results.css'
 import { Navbar, RightPanel } from '../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllMatches, getFinishedMatches } from '../../store/actions/sportsActions'
 const sportslist = [
     { sportsname: 'Football', value: 1 },
     { sportsname: 'Basketball', value: 2 },
@@ -60,7 +62,12 @@ const leagues = [
     },
 ]
 function Results() {
-
+    const get_AllMatches = useSelector((state) => state.sportsReducers.getAllMatches)
+    const dispatch = useDispatch()
+    useEffect(()=> {
+        dispatch(getAllMatches())
+        dispatch(getFinishedMatches())
+    },[])
     return (
         <>
             <Navbar/>

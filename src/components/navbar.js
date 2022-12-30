@@ -6,8 +6,8 @@ import { loginUser, logoutUser, updateCurrentUser } from '../store/actions/authA
 import { setLocalize } from '../store/actions/settingActions'
 import { Trans } from 'react-i18next';
 import { Language } from '../utils';
-import './styles/navbar.css'
 import { useEffectOnce } from 'usehooks-ts'
+import './styles/navbar.css'
 let menu = [
     { url: '/sportsbetting', title: 'Sports Betting' },
     { url: '/inplay', title: 'In-Play' },
@@ -31,7 +31,7 @@ const customStyles = {
 const onClick = (e) => {
     localStorage.setItem('path', window.location.pathname);
 }
-function Navbar(props) {
+function Navbar() {
     const dispatch = useDispatch();
     const [inputName, setInputName] = useState('');
     const [inputPass, setInputPass] = useState('');
@@ -39,7 +39,7 @@ function Navbar(props) {
     const [currentLang, setCurrentLang] = useState();
     const { i18n } = useTranslation();
     const userData = useSelector(state => state.authReducers)
-    useEffectOnce(()=>{
+    useEffectOnce(() => {
         if (localStorage.lang) {
             let lang = localStorage.getItem('lang')
             Language.forEach(item => {
@@ -61,13 +61,13 @@ function Navbar(props) {
             }
             dispatch(updateCurrentUser(data))
         }
-        else{
+        else {
             dispatch(setLocalize(param));
         }
     }
     const login = () => {
         const user = {
-            name: inputName,
+            userName: inputName,
             password: inputPass
         };
         dispatch(loginUser(user));
@@ -76,12 +76,6 @@ function Navbar(props) {
     if (userData && userData.user !== null) {
         userRole = userData.user.role;
     }
-    // if (authRoles.cashier.includes(userRole)) {
-    //     menu = [
-    //         { url: '/adminpanel', title: 'Admin Panel' },
-    //     ]
-    // }
-    
     return (
         <div className='header'>
             <div className='top'>

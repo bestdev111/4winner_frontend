@@ -24,7 +24,7 @@ import "./mHome.css";
 function MHome(props) {
     const dispatch = useDispatch();
     const prevScrollY = useRef(0);
-    const [tipTypes, setTipTypes] = useState();
+    const [tipTypes, setTipTypes] = useState(0);
     const [liveLeagueType, setLiveLeagueType] = useState([]);
     const [willLeagueType, setWillLeagueType] = useState([]);
     const [openOddDetailVal, setOpenOddDetailVal] = useState(false);
@@ -84,6 +84,11 @@ function MHome(props) {
     });
     useEffectOnce(() => {
         dataFetch();
+        let index = localStorage.getItem("tipTypes");
+        if (index === undefined || index === null) {
+            index = 0
+        }
+        setTipTypes(index);
     });
     const sportActiveFunc = (index) => {
         setSportTypeId(index);
@@ -169,6 +174,7 @@ function MHome(props) {
     // }, [leagueName, betradarCategoryId, sportTypeId])
 
     const getTipTypes = (index) => {
+        localStorage.setItem("tipTypes", index);
         setTipTypes(index);
     };
     const getLeagueName = (leagueName) => {
@@ -241,16 +247,14 @@ function MHome(props) {
                 sportActiveFunc={(index) => sportActiveFunc(index)}
             />
             {sportTypeId === 1 && hideSubNav ? (
-                <FadeInOut show="true" duration={400}>
+                <FadeInOut show='true' duration={400}>
                     <FootballLeagueNavbar
                         parentCallback={getTipTypes}
                         tipTypes={getTipTypes}
                         leagueName={getLeagueName}
                     />
                 </FadeInOut>
-            ) : (
-                <></>
-            )}
+            ) : <></>}
             <div
                 className={
                     sportTypeId === 1 ? "m_content custom-top" : "m_content"

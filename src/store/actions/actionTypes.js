@@ -17,6 +17,7 @@ export const GET_ALL_MATCHES = 'GET_ALL_MATCHES';
 export const GET_MATCHES = 'GET_MATCHES';
 export const GET_TYPE_LIST = 'GET_TYPE_LIST';
 export const GET_TOP_LEAGUE = 'GET_TOP_LEAGUE';
+export const GET_FINISHED_MATCHES = 'GET_FINISHED_MATCHES';
 
 //mobile sportsActions
 export const MOBILE_GET_ALL_MATCHES = 'MOBILE_GET_ALL_MATCHES';
