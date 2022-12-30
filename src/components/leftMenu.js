@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypeList, getAllMatches } from '../store/actions/sportsActions'
+import { getTypeList } from '../store/actions/sportsActions'
+import { getAllMatches } from '../store/actions/mobileSportsActions'
 import { setCategorySet } from '../store/actions/settingActions'
 import { Trans } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +9,7 @@ import './styles/leftMenu.css'
 
 function LeftMenu() {
     const SportTypeList = useSelector(state => state.sportsReducers.getTypeList);
-    const get_AllMatches = useSelector(state => state.sportsReducers.getAllMatches);
+    const get_AllMatches = useSelector(state => state.mobileSportsReducers.getAllMatches);
     const dispatch = useDispatch();
     const { i18n } = useTranslation();
     useEffect(() => {
@@ -57,7 +58,6 @@ function LeftMenu() {
         setIsCollapse3(index)
         dispatch(setCategorySet(sportType.sportTypeId, leagues.betradarCategoryId, subLeague.name))
     }
-    console.log('SportTypeList=>',SportTypeList);
     return (
         <div>
             <div className='menu-header'>
